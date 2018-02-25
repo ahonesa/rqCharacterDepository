@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import Header from "./Header";
 import Landing from "./Landing";
+import CharacterListView from "./CharacterListView";
+import CharacterDetailsView from "./CharacterDetailsView";
 
-const Dashboard = () => <h2>Dashboard</h2>;
 const CharacterNew = () => <h2>CharacterNew</h2>;
 
 class App extends Component {
@@ -20,8 +21,9 @@ class App extends Component {
           <div>
             <Header />
             <Route exact path="/" component={Landing} />
-            <Route exact path="/chars" component={Dashboard} />
-            <Route exact path="/chars/new" component={CharacterNew} />
+            <Route exact path="/chars" component={CharacterListView} />
+            <Route exact path="/chars/:characterId" component={CharacterDetailsView} />
+            <Route exact path="/new" component={CharacterNew} />
           </div>
         </BrowserRouter>
       </div>
