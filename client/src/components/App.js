@@ -6,8 +6,7 @@ import Header from "./Header";
 import Landing from "./Landing";
 import CharacterListView from "./CharacterListView";
 import CharacterDetailsView from "./CharacterDetailsView";
-
-const CharacterNew = () => <h2>CharacterNew</h2>;
+import CharacterNew from './characters/CharacterNew';
 
 class App extends Component {
   componentDidMount() {
@@ -18,12 +17,12 @@ class App extends Component {
     return (
       <div className="container">
         <BrowserRouter>
-          <div>
+          <div className="container">
             <Header />
             <Route exact path="/" component={Landing} />
             <Route exact path="/chars" component={CharacterListView} />
             <Route exact path="/chars/:characterId" component={CharacterDetailsView} />
-            <Route exact path="/new" component={CharacterNew} />
+            <Route exact path="/new_char" component={CharacterNew} />
           </div>
         </BrowserRouter>
       </div>

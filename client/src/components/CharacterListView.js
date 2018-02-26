@@ -9,17 +9,25 @@ class CharacterListView extends Component {
   }
 
   rivit = () => this.props.characters && this.props.characters.map(char =>
-    <Link className="collection-item" to={"/chars/" + char.characterId} key={char.characterId}>
+    <Link className="collection-item" 
+          to={"/chars/" + char.characterId} 
+          key={char.characterId}>
      {char.name}
     </Link>
   )
 
   render() {
-    console.log(this.props.characters)
     return(
-      <ul className="collection">
-        {this.rivit()}
-      </ul>
+      <div>
+        <ul className="collection">
+          {this.rivit()}
+        </ul>
+        <div className="fixed-action-btn">
+          <Link to="/new_char" className="btn-floating btn-large red">
+            <i className="material-icons">add</i>
+          </Link>
+        </div>
+      </div>
     )
   }
 }

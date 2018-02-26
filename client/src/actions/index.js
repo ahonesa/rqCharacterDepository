@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_USER, GET_ALL_CHARS } from "./types";
+import { FETCH_USER, GET_ALL_CHARS, GET_ONE_CHAR } from "./types";
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/current_user");
@@ -9,4 +9,9 @@ export const fetchUser = () => async dispatch => {
 export const getAllChars = () => async dispatch => {
   const res = await axios.get("/api/chars");
   dispatch({ type: GET_ALL_CHARS, payload: res.data });
+};
+
+export const getOneChar = (characterId) => async dispatch => {
+  const res = await axios.get("/api/chars/" + characterId);
+  dispatch({ type: GET_ONE_CHAR, payload: res.data });
 };

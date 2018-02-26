@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-import characterReducer from './characterReducer';
+import * as characterReducer from './characterReducer';
+import { reducer as reduxForm } from 'redux-form';
 
 export default combineReducers({
   auth: authReducer,
-  characters: characterReducer        
+  characters: characterReducer.allCharsReducer,        
+  selectedChar: characterReducer.oneCharReducer,
+  form: reduxForm
 });
