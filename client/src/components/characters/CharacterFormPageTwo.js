@@ -30,7 +30,7 @@ class CharacterFormPageTwo extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+        <form onSubmit={this.props.handleSubmit}>
           <Field key="name" component={TextField} type="text" label="Character Name" name="name" />            
           {this.renderFields()}
           <Link to="/chars" className="red btn-flat left white-text">

@@ -21,7 +21,7 @@ class CharacterForm extends Component {
   }
 
   render() {
-    const { onSubmit } = this.props
+    const onSubmit = (values) => (console.log(values));
     const { page } = this.state
     return (
       <div>
@@ -37,8 +37,10 @@ class CharacterForm extends Component {
   }
 }
 
+/*
 CharacterForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
+*/
 
 export default CharacterForm
