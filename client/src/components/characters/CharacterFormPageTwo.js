@@ -15,6 +15,20 @@ const CHARACTERISTICS_FIELDS = [
   { label: "APP", name: "app"}
 ]
 
+const CharacteristicField = ({ name, label }) => {
+  return (
+    <div className="row">
+      <div className="col s4">
+        <Field key={name} component={TextField} type="text" label={label} name={name} />
+      </div>
+      <div className="col s4">
+        <Field key={name+"_max"} component={TextField} type="text" label={label+" max"} name={name+"_max"} />
+      </div>
+    </div>
+  );
+}
+
+
 class CharacterFormPageTwo extends Component {
   constructor(props) {
     super(props)
@@ -23,15 +37,14 @@ class CharacterFormPageTwo extends Component {
 
   renderFields() {
     return _.map(CHARACTERISTICS_FIELDS, ({label, name}) => {
-      return <Field key={name} component={TextField} type="text" label={label} name={name} /> 
+      return <CharacteristicField label={label} name={name} /> 
     });
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit}>
-          <Field key="name" component={TextField} type="text" label="Character Name" name="name" />            
+        <form onSubmit={this.props.handleSubmit}>           
           {this.renderFields()}
           <Link to="/chars" className="red btn-flat left white-text">
             Cancel
