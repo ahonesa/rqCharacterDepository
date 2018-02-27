@@ -6,7 +6,7 @@ import Header from "./Header";
 import Landing from "./Landing";
 import CharacterListView from "./CharacterListView";
 import CharacterDetailsView from "./CharacterDetailsView";
-import CharacterForm from './characters/CharacterForm';
+import CharacterForm from './character-form/CharacterForm';
 
 class App extends Component {
   componentDidMount() {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import CharacterFormPageOne from './CharacterFormPageOne'
 import CharacterFormPageTwo from './CharacterFormPageTwo'
 
@@ -38,10 +37,11 @@ class CharacterForm extends Component {
   }
 }
 
-/*
-CharacterForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-}
-*/
-
 export default CharacterForm
+
+   /*   {page === 3 && (
+          <CharacterFormPageThree
+            previousPage={this.previousPage}
+            onSubmit={onSubmit}
+          />
+        )} */
