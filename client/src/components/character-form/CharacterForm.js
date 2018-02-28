@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import CharacterFormPageOne from './CharacterFormPageOne'
 import CharacterFormPageTwo from './CharacterFormPageTwo'
+import CharacterFormPageThree from './CharacterFormPageThree'
+import calculateBonuses from '../characters/StatBonuses'
 
 class CharacterForm extends Component {
   constructor(props) {
@@ -12,7 +14,10 @@ class CharacterForm extends Component {
     }
   }
   
-  nextPage() {
+  nextPage(values) {
+    console.log(values)
+    console.log(this.state)
+    if(this.state.page === 2) this.setState(calculateBonuses(values))
     this.setState({ page: this.state.page + 1 })
   }
 
@@ -29,7 +34,13 @@ class CharacterForm extends Component {
         {page === 2 && (
           <CharacterFormPageTwo
             previousPage={this.previousPage}
-            onSubmit={onSubmit}
+            onSubmit={this.nextPage}
+          />
+        )}
+        {page === 3 && (
+          <CharacterFormPageTwo
+            previousPage={this.previousPage}
+            onSubmit={this.nextPage}
           />
         )}
       </div>
@@ -38,10 +49,3 @@ class CharacterForm extends Component {
 }
 
 export default CharacterForm
-
-   /*   {page === 3 && (
-          <CharacterFormPageThree
-            previousPage={this.previousPage}
-            onSubmit={onSubmit}
-          />
-        )} */
