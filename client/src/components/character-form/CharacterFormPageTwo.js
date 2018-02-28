@@ -37,14 +37,15 @@ class CharacterFormPageTwo extends Component {
 
   renderFields() {
     return _.map(CHARACTERISTICS_FIELDS, ({label, name}) => {
-      return <CharacteristicField label={label} name={name} /> 
+      return <CharacteristicField key={name} label={label} name={name} /> 
     });
   }
 
   render() {
+    const { handleSubmit, reset } = this.props
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit}>           
+        <form onSubmit={handleSubmit}>           
           {this.renderFields()}
           <Link to="/chars" className="red btn-flat left white-text">
             Cancel

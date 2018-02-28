@@ -5,24 +5,16 @@ import TextField from '../fields/TextField';
 import RadioButton from '../fields/RadioButton';
 import { Link } from 'react-router-dom';
 
-const CHARACTERISTICS_FIELDS = [
-  { label: "STR", name: "str"},
-  { label: "CON", name: "con"},
-  { label: "SIZ", name: "siz"},
-  { label: "INT", name: "int"},
-  { label: "DEX", name: "dex"},
-  { label: "POW", name: "pow"},
-  { label: "APP", name: "app"}
+const DEXTERITY_SKILLS = [
+  { label: "Swim", basic: 10 },
+  { label: "Ride", basic: 20 }
 ]
 
-const SkillField = ({ name, label }) => {
+const SkillField = ({ label, basic }) => {
   return (
     <div className="row">
       <div className="col s4">
-        <Field key={name} component={TextField} type="text" label={label} name={name} />
-      </div>
-      <div className="col s4">
-        <Field key={name+"_max"} component={TextField} type="text" label={label+" max"} name={name+"_max"} />
+        <Field key={label} component={TextField} type="text" label={label+" (" + basic + ")"} name={label} />
       </div>
     </div>
   );
@@ -32,20 +24,41 @@ const SkillField = ({ name, label }) => {
 class CharacterFormPageThree extends Component {
   constructor(props) {
     super(props)
+    console.log(props)
     this.previousPage = props.previousPage.bind(this)
   }
 
-  renderFields() {
-    return _.map(CHARACTERISTICS_FIELDS, ({label, name}) => {
-      return <SkillField label={label} name={name} /> 
+  renderDexterityFields() {
+    return _.map(DEXTERITY_SKILLS, ({label, basic}) => {
+      return <SkillField key={label} label={label} basic={basic} /> 
     });
   }
 
   render() {
+    const { handleSubmit, reset } = this.props
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit}>           
-          {this.renderFields()}
+        <form onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col s4">
+              <div>
+                Dexterity bonus: {this.props.character.bonuses.dexterityBonus}
+              </div>             
+              {this.renderDexterityFields()}
+            </div>
+            <div className="col s4">
+              <div>
+                Dexterity bonus: {this.props.character.bonuses.dexterityBonus}
+              </div>             
+              {this.renderDexterityFields()}
+            </div>
+            <div className="col s4">
+              <div>
+                Dexterity bonus: {this.props.character.bonuses.dexterityBonus}
+              </div>             
+              {this.renderDexterityFields()}
+            </div>
+          </div>
           <Link to="/chars" className="red btn-flat left white-text">
             Cancel
           </Link>
