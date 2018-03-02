@@ -30,7 +30,7 @@ class CharacterForm extends Component {
     const onSubmit = (values) => (console.log(values));
     const { page } = this.state
     return (
-      <div>
+      <div className="container">
         {page === 1 && <CharacterFormPageOne onSubmit={this.nextPage} />}
         {page === 2 && (
           <CharacterFormPageTwo

@@ -6,13 +6,13 @@ import RadioButton from '../fields/RadioButton';
 import { Link } from 'react-router-dom';
 
 const ADDITIONAL_FIELDS = [
-  { label: "Species", name: "species"},
-  { label: "Homeland/Clan", name: "clan"},
-  { label: "Age", name: "age"},
-  { label: "Culture", name: "culture"},
-  { label: "Religion", name: "religion"},
-  { label: "Parent Occupation", name: "parent"},
-  { label: "Adventurer Occupation", name: "occupation"}
+  { label: "Species", name: "species" },
+  { label: "Homeland/Clan", name: "clan" },
+  { label: "Age", name: "age" },
+  { label: "Culture", name: "culture" },
+  { label: "Religion", name: "religion" },
+  { label: "Parent Occupation", name: "parent" },
+  { label: "Adventurer Occupation", name: "occupation" }
 ]
 
 class CharacterFormPageOne extends Component {
@@ -21,8 +21,8 @@ class CharacterFormPageOne extends Component {
   }
 
   renderAdditionalFields() {
-    return _.map(ADDITIONAL_FIELDS, ({label, name}) => {
-      return <Field key={name} component={TextField} type="text" label={label} name={name} /> 
+    return _.map(ADDITIONAL_FIELDS, ({ label, name }) => {
+      return <Field key={name} component={TextField} type="text" label={label} name={name} />
     });
   }
 
@@ -31,27 +31,34 @@ class CharacterFormPageOne extends Component {
     return (
       <div>
         <form onSubmit={handleSubmit}>
-          <Field key="name" component={TextField} type="text" label="Character Name" name="name" />            
-          <div>
-            <label>Sex</label>
-            <Field name="sex" component={RadioButton} type="radio" label="male" value="male" />
-            <Field name="sex" component={RadioButton} type="radio" label="female" value="female" />
+          <div className="row">
+            <div className="col s12">
+              <div className="card-panel teal lighten-5">
+                <Field key="name" component={TextField} type="text" label="Character Name" name="name" />
+                <div>
+                  <label>Sex</label>
+                  <Field name="sex" component={RadioButton} type="radio" label="male" value="male" />
+                  <Field name="sex" component={RadioButton} type="radio" label="female" value="female" />
+                </div>
+                {this.renderAdditionalFields()}
+                <Link to="/chars" className="red btn-flat left white-text" onClick={reset}>
+                  Cancel
+                </Link>
+                <button type="submit" className="teal btn-flat right white-text">
+                  Next
+                  <i className="material-icons right">done</i>
+                </button>
+              </div>
+            </div>
           </div>
-          {this.renderAdditionalFields()}
-          <Link to="/chars" className="red btn-flat left white-text" onClick={reset}>
-            Cancel
-          </Link>
-          <button type="submit" className="teal btn-flat right white-text">
-            Next
-            <i className="material-icons right">done</i>
-          </button>
         </form>
-      </div>);
+      </div>
+    );
   }
 }
 
 export default reduxForm({
   form: "characterForm",
-  destroyOnUnmount: false, 
+  destroyOnUnmount: false,
   forceUnregisterOnUnmount: true
 })(CharacterFormPageOne);

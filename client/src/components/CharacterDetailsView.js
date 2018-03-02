@@ -13,18 +13,20 @@ class CharacterDetailsView extends Component {
   }
 
   render() {
-    return(
-      <div className="row">
-        <div className="col s3"><CharacterListView /></div>
-        <div className="col s9">
-          <CharacterDetails char={this.props.selectedChar}/>
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col s3"><CharacterListView /></div>
+          <div className="col s9">
+            <CharacterDetails char={this.props.selectedChar} />
+          </div>
         </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({selectedChar}) {
+function mapStateToProps({ selectedChar }) {
 
   return { selectedChar }
 }

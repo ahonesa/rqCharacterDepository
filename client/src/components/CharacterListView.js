@@ -18,7 +18,7 @@ class CharacterListView extends Component {
 
   render() {
     return(
-      <div>
+      <div className="container">
         <ul className="collection">
           {this.rivit()}
         </ul>

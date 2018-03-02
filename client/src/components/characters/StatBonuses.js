@@ -42,8 +42,7 @@ export default ({str, str_max, con, con_max, siz, siz_max, int, int_max, pow, po
     perceptionBonus,
     stealthBonus
   }
-
-
+  
   console.log( bonuses )
 
   return ( {

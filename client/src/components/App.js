@@ -15,7 +15,6 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
         <BrowserRouter>
           <div className="container">
             <Header />
@@ -25,7 +24,6 @@ class App extends Component {
             <Route exact path="/new_char" component={CharacterForm} />
           </div>
         </BrowserRouter>
-      </div>
     );
   }
 }
