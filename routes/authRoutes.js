@@ -1,4 +1,8 @@
 const passport = require("passport");
+const mongoose = require("mongoose");
+
+const User = mongoose.model("users");
+
 
 module.exports = (app) => {
   app.get(
@@ -23,6 +27,15 @@ module.exports = (app) => {
 
   app.get("/api/current_user", (req, res) => {
     res.send(req.user);
+  });
+
+  app.post("/api/user", async (req, res) => {
+    console.log(req.body)
+    const existingUser = await User.findOne({ googleId: req.body.googleId });
+    existingUser.userName = req.body.userName
+    console.log(existingUser)
+    const user = await User(existingUser).save();
+    res.end("OK");
   });
 
 };
