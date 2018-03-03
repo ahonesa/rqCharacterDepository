@@ -7,6 +7,7 @@ import Landing from "./Landing";
 import CharacterListView from "./CharacterListView";
 import CharacterDetailsView from "./CharacterDetailsView";
 import CharacterForm from './character-form/CharacterForm';
+import UserForm from './user-form/UserForm'
 
 class App extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path="/chars" component={CharacterListView} />
             <Route exact path="/chars/:characterId" component={CharacterDetailsView} />
             <Route exact path="/new_char" component={CharacterForm} />
+            <Route exact path="/user" component={UserForm} />
           </div>
         </BrowserRouter>
     );

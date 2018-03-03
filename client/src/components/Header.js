@@ -9,10 +9,19 @@ class Header extends Component {
         return;
       case false:
         return (
+          <ul className="right">
           <li><a href="/auth/google">Login with Google</a></li>
+          </ul>
         );
       default:
-        return (<li><a href="/api/logout">Logout</a></li>);
+        return (
+        <ul className="right">
+        <li><Link to="/chars">Characters</Link></li> 
+        <li><Link to="/diceroom">Diceroom</Link></li>  
+        <li><Link to="/user">User</Link></li>
+        <li><a href="/api/logout">Logout</a></li>
+        </ul>
+        );
     }
 
   }
@@ -27,9 +36,7 @@ class Header extends Component {
           >
             RQ Character Deposit
           </Link>
-          <ul className="right">
-            {this.renderContent()}
-          </ul>  
+          {this.renderContent()}
         </div>  
       </nav>  
     )
