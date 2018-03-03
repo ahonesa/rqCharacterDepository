@@ -25,7 +25,7 @@ class Header extends Component {
     }
 
   }
-
+//       <img src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50' className="circle" />  
   render() {
     return(
       <nav>

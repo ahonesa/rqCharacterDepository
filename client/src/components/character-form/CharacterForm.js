@@ -13,11 +13,11 @@ class CharacterForm extends Component {
       page: 1
     }
   }
-  
+
   nextPage(values) {
     console.log(values)
     console.log(this.state)
-    if(this.state.page === 2) this.setState( { character: calculateBonuses(values) } )
+    if (this.state.page === 2) this.setState({ character: calculateBonuses(values) })
     this.setState({ page: this.state.page + 1 })
   }
 
@@ -42,7 +42,7 @@ class CharacterForm extends Component {
           <CharacterFormPageThree
             character={this.state.character}
             previousPage={this.previousPage}
-            onSubmit={this.nextPage}
+            onSubmit={onSubmit}
           />
         )}
       </div>

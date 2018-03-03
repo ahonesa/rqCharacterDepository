@@ -4,37 +4,44 @@ import { reduxForm, Field, FieldArray } from "redux-form";
 import TextField from '../fields/TextField';
 import RadioButton from '../fields/RadioButton';
 import { Link } from 'react-router-dom';
-import * as skills from '../characters/Skills';
+import SKILLS from '../characters/Skills';
 
-const SkillField = ({ label, basic }) => {
+const SkillField = ({ label, basic, group }) => {
   return (
-    <Field key={label} component={TextField} type="text" label={label + " (" + basic + ")"} name={label} />
+    <Field key={label} component={TextField} type="text" label={label + " (" + basic + ")"} name={group+"."+label} />
   );
 }
 
 class CharacterFormPageThree extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
+    this.state = {value: ''};
+    this.handleChange = this.handleChange.bind(this)
     this.previousPage = props.previousPage.bind(this)
+    this.additionalFields = this.additionalFields.bind(this)
   }
 
-  renderFields(skills) {
-    return (
-    <div className="card-panel teal lighten-5">
-      {this.addFields(skills)}
-    </div>);
+  renderFields(skillGroup) {
+    return ( <ul>{this.addFields(skillGroup)}</ul>);
   }
 
-  addFields(skills) {
-    return ( _.map(skills, ({ label, basic }) => {
-      return <SkillField key={label} label={label} basic={basic} />
+  addFields(skillGroup) {
+    return ( _.map(SKILLS, (stuff) => { 
+      if(stuff.group === skillGroup) {
+        return <li key={stuff.group+stuff.label}><SkillField {...stuff} /></li>
+      } else return;  
     }));
   }
 
-  additionalFields() {
+  additionalFields(skillGroup) {
+      const test = this.state.value
+      const basic = parseInt(test.slice(test.indexOf("(") +1, test.indexOf(")"))) 
+      SKILLS.push({ label: this.state.value, basic: basic, group: skillGroup })
+      this.setState({value: ""});
+  }
 
-
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
 
   render() {
@@ -43,35 +50,53 @@ class CharacterFormPageThree extends Component {
       <div>
         <form onSubmit={handleSubmit}>
           <div className="row">
-            <div className="col s4">
+            <div className="col s4 teal lighten-5">
               <div className="card-panel teal lighten-2">
                 Dexterity bonus: {this.props.character.bonuses.dexterityBonus}
               </div>
-              {this.renderFields(skills.DEXTERITY_SKILLS)}
+              {this.renderFields("dexterity")}
               <div className="card-panel teal lighten-2">
                 Communication bonus: {this.props.character.bonuses.communicationBonus}
               </div>
-              {this.renderFields(skills.COMMUNICATION_SKILLS)}
+              {this.renderFields("communication")}
+              <div>
+                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                <button type="button" className="teal btn-flat middle white-text" onClick={() => this.additionalFields("communication")}>
+                  <i className="material-icons">add</i>
+                </button>
+              </div>
             </div>
-            <div className="col s4">
+            <div className="col s4 teal lighten-5">
               <div className="card-panel teal lighten-2">
                 Knowledge bonus: {this.props.character.bonuses.knowledgeBonus}
               </div>
-              {this.renderFields(skills.KNOWLEDGE_SKILLS)}
+              {this.renderFields("knowledge")}
+              <div>
+                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                <button type="button" className="teal btn-flat middle white-text" onClick={() => this.additionalFields("knowledge")}>
+                  <i className="material-icons">add</i>
+                </button>
+              </div>
             </div>
-            <div className="col s4">
+            <div className="col s4 teal lighten-5">
               <div className="card-panel teal lighten-2">
                 Manipulation bonus: {this.props.character.bonuses.manipulationBonus}
               </div>
-              {this.renderFields(skills.MANIPULATION_SKILLS)}
+              {this.renderFields("manipulation")}
+              <div>
+                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                <button type="button" className="teal btn-flat middle white-text" onClick={() => this.additionalFields("manipulation")}>
+                  <i className="material-icons">add</i>
+                </button>
+              </div>
               <div className="card-panel teal lighten-2">
                 Perception bonus: {this.props.character.bonuses.perceptionBonus}
               </div>
-              {this.renderFields(skills.PERCEPTION_SKILLS)}
+              {this.renderFields("perception")}
               <div className="card-panel teal lighten-2">
                 Stealth bonus: {this.props.character.bonuses.stealthBonus}
               </div>
-              {this.renderFields(skills.STEALTH_SKILLS)}
+              {this.renderFields("stealth")}
             </div>
           </div>
           <Link to="/chars" className="red btn-flat left white-text">

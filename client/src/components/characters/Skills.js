@@ -1,47 +1,32 @@
-export const DEXTERITY_SKILLS = [
-  { label: "Boat", basic: 5 },
-  { label: "Climb", basic: 40 },
-  { label: "Dodge", basic: 5 },
-  { label: "Jump", basic: 25 },
-  { label: "Ride", basic: 5 },
-  { label: "Swim", basic: 15 },
-  { label: "Throw", basic: 25 }
-]
-
-export const COMMUNICATION_SKILLS = [
-  { label: "Fast talk", basic: 5 },
-  { label: "Orate", basic: 5 },
-  { label: "Sing", basic: 5 },
-  { label: "Speak Language: Own", basic: 30 }
-]
-
-export const KNOWLEDGE_SKILLS = [
-  { label: "Animal lore", basic: 5 },
-  { label: "Craft", basic: 10 },
-  { label: "Evaluate", basic: 5 },
-  { label: "First aid", basic: 10 },
-  { label: "Human lore", basic: 5 },
-  { label: "Martial arts", basic: 0 },
-  { label: "Mineral lore", basic: 5 },
-  { label: "Plant Lore", basic: 5 },
-  { label: "Shiphandling", basic: 0 },
-  { label: "World Lore", basic: 5 }
-]
-
-export const MANIPULATION_SKILLS = [
-  { label: "Conceal", basic: 5 },
-  { label: "Devise", basic: 5 },
-  { label: "Sleight", basic: 5 }
-]
-
-export const PERCEPTION_SKILLS = [
-  { label: "Listen", basic: 25 },
-  { label: "Scan", basic: 25 },
-  { label: "Search", basic: 25 },
-  { label: "Track", basic: 5 }
-]
-
-export const STEALTH_SKILLS = [
-  { label: "Hide", basic: 10 },
-  { label: "Sneak", basic: 10 }
+export default [
+  { label: "Boat", basic: 5, group: "dexterity" },
+  { label: "Climb", basic: 40, group: "dexterity" },
+  { label: "Dodge", basic: 5, group: "dexterity" },
+  { label: "Jump", basic: 25, group: "dexterity" },
+  { label: "Ride", basic: 5, group: "dexterity" },
+  { label: "Swim", basic: 15, group: "dexterity" },
+  { label: "Throw", basic: 25, group: "dexterity" },
+  { label: "Fast talk", basic: 5, group: "communication" },
+  { label: "Orate", basic: 5, group: "communication" },
+  { label: "Sing", basic: 5, group: "communication" },
+  { label: "Speak Language: Own", basic: 30, group: "communication" },
+  { label: "Animal lore", basic: 5, group: "knowledge" },
+  { label: "Craft", basic: 10, group: "knowledge" },
+  { label: "Evaluate", basic: 5, group: "knowledge" },
+  { label: "First aid", basic: 10, group: "knowledge" },
+  { label: "Human lore", basic: 5, group: "knowledge" },
+  { label: "Martial arts", basic: 0, group: "knowledge" },
+  { label: "Mineral lore", basic: 5, group: "knowledge" },
+  { label: "Plant Lore", basic: 5, group: "knowledge" },
+  { label: "Shiphandling", basic: 0, group: "knowledge" },
+  { label: "World Lore", basic: 5, group: "knowledge" },
+  { label: "Conceal", basic: 5, group: "manipulation" },
+  { label: "Devise", basic: 5, group: "manipulation" },
+  { label: "Sleight", basic: 5, group: "manipulation" },
+  { label: "Listen", basic: 25, group: "perception" },
+  { label: "Scan", basic: 25, group: "perception" },
+  { label: "Search", basic: 25, group: "perception" },
+  { label: "Track", basic: 5, group: "perception" },
+  { label: "Hide", basic: 10, group: "stealth" },
+  { label: "Sneak", basic: 10, group: "stealth" }
 ]
