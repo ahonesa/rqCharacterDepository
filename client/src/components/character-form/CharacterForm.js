@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CharacterFormPageOne from './CharacterFormPageOne'
 import CharacterFormPageTwo from './CharacterFormPageTwo'
 import CharacterFormPageThree from './CharacterFormPageThree'
+import CharacterFormPageFour from './CharacterFormPageFour'
 import calculateBonuses from '../characters/StatBonuses'
 
 class CharacterForm extends Component {
@@ -40,6 +41,13 @@ class CharacterForm extends Component {
         )}
         {page === 3 && (
           <CharacterFormPageThree
+            character={this.state.character}
+            previousPage={this.previousPage}
+            onSubmit={this.nextPage}
+          />
+        )}
+        {page === 4 && (
+          <CharacterFormPageFour
             character={this.state.character}
             previousPage={this.previousPage}
             onSubmit={onSubmit}
