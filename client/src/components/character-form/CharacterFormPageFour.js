@@ -25,10 +25,6 @@ class CharacterFormPageFour extends Component {
         {fields.map((member, index) => {
           return (
             <li key={index}>
-              <button type="button" title="Remove stuff" className="red btn-flat right white-text" onClick={() => fields.remove(index)}>
-                Remove
-              <i className="material-icons right">remove</i>
-              </button>
               <p>Item #{index + 1}</p>
               <div className="row">
                 <div className="col s4">
@@ -39,7 +35,7 @@ class CharacterFormPageFour extends Component {
                     label="Item"
                   />
                 </div>
-                <div className="col s4">
+                <div className="col s1">
                   <Field
                     name={`${member}.quantity`}
                     type="text"
@@ -47,13 +43,26 @@ class CharacterFormPageFour extends Component {
                     label="Quantity"
                   />
                 </div>
-                <div className="col s4">
+                <div className="col s1">
                   <Field
                     name={`${member}.weight`}
                     type="text"
                     component={TextField}
                     label="Weight"
                   />
+                </div>
+                <div className="col s5">
+                  <Field
+                    name={`${member}.effects`}
+                    type="text"
+                    component={TextField}
+                    label="Effects"
+                  />
+                </div>
+                <div className="col s1">
+                <button type="button" title="Remove stuff" className="red btn-flat right white-text" onClick={() => fields.remove(index)}>
+                  <i className="material-icons">remove</i>
+                  </button>
                 </div>
               </div>
             </li>
