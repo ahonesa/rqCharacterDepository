@@ -22,61 +22,61 @@ class CharacterFormPageFour extends Component {
   renderStuffFields({ fields, meta: { error, submitFailed } }) {
     return (
       <ul>
+        {fields.map((member, index) => {
+          return (
+            <li key={index}>
+              <button type="button" title="Remove stuff" className="red btn-flat right white-text" onClick={() => fields.remove(index)}>
+                Remove
+              <i className="material-icons right">remove</i>
+              </button>
+              <p>Item #{index + 1}</p>
+              <div className="row">
+                <div className="col s4">
+                  <Field
+                    name={`${member}.item`}
+                    type="text"
+                    component={TextField}
+                    label="Item"
+                  />
+                </div>
+                <div className="col s4">
+                  <Field
+                    name={`${member}.quantity`}
+                    type="text"
+                    component={TextField}
+                    label="Quantity"
+                  />
+                </div>
+                <div className="col s4">
+                  <Field
+                    name={`${member}.weight`}
+                    type="text"
+                    component={TextField}
+                    label="Weight"
+                  />
+                </div>
+              </div>
+            </li>
+          );
+        })}
         <li>
-          <button type="button" className="teal teal btn-flat right white-text" onClick={() => fields.push({})}>
+          <button type="button" className="teal btn-flat right white-text" onClick={() => fields.push({})}>
             Add
             <i className="material-icons right">add</i>
           </button>
           {submitFailed && error && <span>{error}</span>}
         </li>
-        {fields.map((member, index) => {
-          return (
-          <li key={index}>
-            <button type="button" title="Remove stuff" className="teal teal btn-flat right white-text" onClick={() => fields.remove(index)}>
-              Remove
-              <i className="material-icons right">remove</i>
-            </button>
-            <p>Item #{index + 1}</p>
-            <div className="row">
-            <div className="col s4">
-            <Field
-              name={`${member}.item`}
-              type="text"
-              component={TextField}
-              label="Item"
-            />
-            </div>
-            <div className="col s4">
-            <Field
-              name={`${member}.quantity`}
-              type="text"
-              component={TextField}
-              label="Quantity"
-            />
-            </div>
-            <div className="col s4">
-            <Field
-              name={`${member}.weight`}
-              type="text"
-              component={TextField}
-              label="Weight"
-            />
-            </div>
-            </div>
-          </li>
-        );
-      })}
-    </ul>
-    ); 
+      </ul>
+    );
   }
 
   render() {
     const { handleSubmit, reset } = this.props
     return (
-      <div style={{padding: 30}}>
+      <div style={{ padding: 30 }}>
         <form onSubmit={handleSubmit}>
           <div className="row">
-          <FieldArray name="stuff" component={this.renderStuffFields} />
+            <FieldArray name="stuff" component={this.renderStuffFields} />
           </div>
           <Link to="/chars" className="red btn-flat left white-text">
             Cancel
