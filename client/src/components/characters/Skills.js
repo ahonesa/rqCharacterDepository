@@ -28,5 +28,12 @@ export default [
   { label: "Search", basic: 25, group: "perception" },
   { label: "Track", basic: 5, group: "perception" },
   { label: "Hide", basic: 10, group: "stealth" },
-  { label: "Sneak", basic: 10, group: "stealth" }
+  { label: "Sneak", basic: 10, group: "stealth" },
+  { label: "Ceremony", basic: 5, group: "magic" },
+  { label: "Enchant", basic: 0, group: "magic" },
+  { label: "Summon", basic: 0, group: "magic" },
+  { label: "Duration", basic: 0, group: "magic" },
+  { label: "Intensity", basic: 0, group: "magic" },
+  { label: "Multispell", basic: 0, group: "magic" },
+  { label: "Range", basic: 0, group: "magic" }
 ]

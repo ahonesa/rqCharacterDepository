@@ -29,28 +29,22 @@ class CharacterFormPageOne extends Component {
   render() {
     const { handleSubmit, reset } = this.props
     return (
-      <div>
+      <div style={{padding: 40}}>
         <form onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col s12">
-              <div className="card-panel teal lighten-5">
-                <Field key="name" component={TextField} type="text" label="Character Name" name="name" />
-                <div>
-                  <label>Sex</label>
-                  <Field name="sex" component={RadioButton} type="radio" label="male" value="male" />
-                  <Field name="sex" component={RadioButton} type="radio" label="female" value="female" />
-                </div>
-                {this.renderAdditionalFields()}
-                <Link to="/chars" className="red btn-flat left white-text" onClick={reset}>
-                  Cancel
-                </Link>
-                <button type="submit" className="teal btn-flat right white-text">
-                  Next
-                  <i className="material-icons right">done</i>
-                </button>
-              </div>
-            </div>
+          <Field key="name" component={TextField} type="text" label="Character Name" name="name" />
+          <div>
+            <label>Sex</label>
+            <Field name="sex" component={RadioButton} type="radio" label="male" value="male" />
+            <Field name="sex" component={RadioButton} type="radio" label="female" value="female" />
           </div>
+          {this.renderAdditionalFields()}
+          <Link to="/chars" className="red btn-flat left white-text" onClick={reset}>
+            Cancel
+            </Link>
+          <button type="submit" className="teal btn-flat right white-text">
+            Next
+              <i className="material-icons right">done</i>
+          </button>
         </form>
       </div>
     );

@@ -6,12 +6,13 @@ const CharacterDetails = ({char}) => {
   console.log(char);
   switch(char) {
     case null:
-      return (<div className="teal lighten-5">
+      return (<div>
         <span>Loading</span>
       </div>);  
     default:
       return (
         <div className="row">
+          <img src="https://drive.google.com/open?id=1QGznNQZZtXx8RhH3ef-hbtix57oD4knd"/>
         </div>  
       );
     }
