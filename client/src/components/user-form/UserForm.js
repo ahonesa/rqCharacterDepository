@@ -15,10 +15,10 @@ class UserForm extends Component {
     };
     const { handleSubmit, reset } = this.props
     return (
-      <div>
+      <div style={{ padding: 30}}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
-            <div className="card-panel teal lighten-5 col s12">
+            <div className="col s12">
               <Field key="name" component={TextField} type="text" label="User Name" name="userName" />
               <Link to="/" className="red btn-flat left white-text" onClick={reset}>
                 Cancel
