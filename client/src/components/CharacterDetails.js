@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Panel } from 'react-bootstrap';
 
 const CharacterDetails = ({char}) => {
   console.log(char);
@@ -11,9 +12,11 @@ const CharacterDetails = ({char}) => {
       </div>);  
     default:
       return (
-        <div className="row">
-          <img src="https://drive.google.com/open?id=1QGznNQZZtXx8RhH3ef-hbtix57oD4knd"/>
-        </div>  
+        <Panel>
+          Character details here
+
+
+        </Panel>  
       );
     }
 

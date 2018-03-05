@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as actions from "../actions";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Panel, Button, ListGroup, ListGroupItem, Grid } from 'react-bootstrap';
 
 class CharacterListView extends Component {
   componentDidMount() {
@@ -9,30 +10,26 @@ class CharacterListView extends Component {
   }
 
   rivit = () => this.props.characters && this.props.characters.map(char =>
-    <Link className="collection-item" 
-          to={"/chars/" + char.characterId} 
-          key={char.characterId}>
-     {char.name}
-    </Link>
+    <ListGroupItem key={char.characterId} href={"/chars/" + char.characterId}>
+      {char.name}
+    </ListGroupItem>
   )
 
   render() {
-    return(
-      <div>
-        <ul className="collection">
+    return (
+      <Grid>
+        <ListGroup>
           {this.rivit()}
-        </ul>
-        <div className="fixed-action-btn">
-          <Link to="/new_char" className="btn-floating btn-large red">
-            <i className="material-icons">add</i>
-          </Link>
-        </div>
-      </div>
+        </ListGroup>
+
+        <Button href="/new_char">Create new character
+        </Button>
+      </Grid>
     )
   }
 }
 
-function mapStateToProps({characters}) {
+function mapStateToProps({ characters }) {
   return { characters }
 }
 

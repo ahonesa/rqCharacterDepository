@@ -6,56 +6,58 @@ import RadioButton from '../fields/RadioButton';
 import { Link } from 'react-router-dom';
 import SKILLS from '../characters/Skills';
 
-class CharacterFormPageFour extends Component {
+const SkillField = ({ label, basic, group }) => {
+  return (
+    <Field key={label} component={TextField} type="text" label={label + " (" + basic + ")"} name={group + "." + label} />
+  );
+}
+
+class CharacterFormPageThree extends Component {
   constructor(props) {
     super(props)
     this.previousPage = props.previousPage.bind(this)
-    this.renderStuffFields = this.renderStuffFields.bind(this)
+    this.renderSkillFields = this.renderSkillFields.bind(this)
+    this.renderSkillSelect = this.renderSkillSelect.bind(this)
   }
 
-  renderStuffFields({ fields, meta: { error, submitFailed } }) {
+  renderSkillSelect() {
+    return (
+      <Field name="skillSelect" component="select">
+        <option />
+        {
+          SKILLS.map(({label, basic, group}) => (
+            <option key={group + "." + label} value={group + "." + label}>{label}</option>
+          ))
+        }
+      </Field>
+    );
+  }
+
+  renderSkillFields({ fields, meta: { error, submitFailed } }) {
     return (
       <ul>
         {fields.map((member, index) => {
           return (
             <li key={index}>
-              <p>Item #{index + 1}</p>
+              <p>Skill #{index + 1}</p>
               <div className="row">
+                <div className="input-field col s4">
+                  <label>Select skill</label>
+                  <div>
+                    {this.renderSkillSelect()}
+                  </div>
+                </div>
                 <div className="col s4">
                   <Field
-                    name={`${member}.item`}
+                    name={`${member}.value`}
                     type="text"
                     component={TextField}
                     label="Item"
                   />
                 </div>
                 <div className="col s1">
-                  <Field
-                    name={`${member}.quantity`}
-                    type="text"
-                    component={TextField}
-                    label="Quantity"
-                  />
-                </div>
-                <div className="col s1">
-                  <Field
-                    name={`${member}.weight`}
-                    type="text"
-                    component={TextField}
-                    label="Weight"
-                  />
-                </div>
-                <div className="col s5">
-                  <Field
-                    name={`${member}.effects`}
-                    type="text"
-                    component={TextField}
-                    label="Effects"
-                  />
-                </div>
-                <div className="col s1">
-                <button type="button" title="Remove stuff" className="red btn-flat right white-text" onClick={() => fields.remove(index)}>
-                  <i className="material-icons">remove</i>
+                  <button type="button" title="Remove stuff" className="red btn-flat right white-text" onClick={() => fields.remove(index)}>
+                    <i className="material-icons">remove</i>
                   </button>
                 </div>
               </div>
@@ -79,7 +81,7 @@ class CharacterFormPageFour extends Component {
       <div style={{ padding: 30 }}>
         <form onSubmit={handleSubmit}>
           <div className="row">
-            <FieldArray name="stuff" component={this.renderStuffFields} />
+            <FieldArray name="stuff" component={this.renderSkillFields} />
           </div>
           <Link to="/chars" className="red btn-flat left white-text">
             Cancel
@@ -100,4 +102,4 @@ export default reduxForm({
   form: "characterForm",
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true
-})(CharacterFormPageFour);
+})(CharacterFormPageThree);

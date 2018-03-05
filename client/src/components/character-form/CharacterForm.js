@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CharacterFormPageOne from './CharacterFormPageOne'
 import CharacterFormPageTwo from './CharacterFormPageTwo'
-import CharacterFormPageThree from './CharacterFormPageThree'
+import CharacterFormPageThree from './CharacterFormPageThreeNew'
 import CharacterFormPageFour from './CharacterFormPageFour'
 import calculateBonuses from '../characters/StatBonuses'
 

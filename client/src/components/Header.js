@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 class Header extends Component {
   renderContent() {
@@ -9,38 +10,35 @@ class Header extends Component {
         return;
       case false:
         return (
-          <ul className="right">
-          <li><a href="/auth/google">Login with Google</a></li>
-          </ul>
+          <Nav pullRight>
+            <NavItem eventKey={5} href="/auth/google">Login with Google</NavItem>
+          </Nav>
         );
       default:
         return (
-        <ul className="right">
-        <li><Link to="/chars">Characters</Link></li> 
-        <li><Link to="/diceroom">Diceroom</Link></li>  
-        <li><Link to="/user">User</Link></li>
-        <li><a href="/api/logout">Logout</a></li>
-        </ul>
+        <Nav pullRight>
+          <NavItem eventKey={1} href="/chars">Characters</NavItem> 
+          <NavItem eventKey={2} href="/diceroom">Diceroom</NavItem>  
+          <NavItem eventKey={3} href="/user">User</NavItem>
+          <NavItem eventKey={4} href="/api/logout">Logout</NavItem>
+        </Nav>
         );
     }
 
   }
-  
 
-//       <img src='https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50' className="circle" />  
   render() {
     return(
-      <nav>
-        <div className="nav-wrapper">
-          <Link 
-            to={this.props.auth ? "/chars" : "/"} 
-            className="left brand-logo"
-          >
-            RQ Character Deposit
-          </Link>
-          {this.renderContent()}
-        </div>  
-      </nav>  
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to={this.props.auth ? "/chars" : "/"} >
+              RQ Character Deposit
+            </Link>
+          </Navbar.Brand>
+        </Navbar.Header>  
+        {this.renderContent()}
+      </Navbar>  
     )
   }
 }

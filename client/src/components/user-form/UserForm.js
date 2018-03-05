@@ -6,6 +6,12 @@ import { Link } from 'react-router-dom';
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { loadavg } from "os";
+import { Grid, FormGroup, Button, FormControl, ControlLabel, Row, Col } from "react-bootstrap";
+
+const ReduxFormControl = ({ input, meta, ...props }) => {
+  return <FormControl {...props} {...input} />
+};
+
 
 class UserForm extends Component {
 
@@ -15,27 +21,27 @@ class UserForm extends Component {
     };
     const { handleSubmit, reset } = this.props
     return (
-      <div style={{ padding: 30}}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="row">
-            <div className="col s12">
-              <Field key="name" component={TextField} type="text" label="User Name" name="userName" />
-              <Link to="/" className="red btn-flat left white-text" onClick={reset}>
-                Cancel
-              </Link>
-              <button type="submit" className="teal btn-flat right white-text">
-                Submit
-                <i className="material-icons right">done</i>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
+      <Grid>
+        <Row className="show-grid">
+          <Col xs={6} md={4} lg={12}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <FormGroup controlId="userForm">
+                <ControlLabel>Username:</ControlLabel>
+                <Field key="name" component={ReduxFormControl} type="text" label="User Name" name="userName" />
+                <Button to="/" onClick={reset}>
+                  Cancel
+              </Button>
+                <Button type="submit">Submit</Button>
+              </FormGroup>
+            </form>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
 
-function mapStateToProps({auth}) {
+function mapStateToProps({ auth }) {
   return { initialValues: auth }
 }
 

@@ -8,6 +8,7 @@ import CharacterListView from "./CharacterListView";
 import CharacterDetailsView from "./CharacterDetailsView";
 import CharacterForm from './character-form/CharacterForm';
 import UserForm from './user-form/UserForm'
+import { Grid } from 'react-bootstrap';
 
 class App extends Component {
   componentDidMount() {
@@ -17,7 +18,7 @@ class App extends Component {
   render() {
     return (
         <BrowserRouter>
-          <div className="container teal lighten-5">
+          <div>
             <Header />
             <Route exact path="/" component={Landing} />
             <Route exact path="/chars" component={CharacterListView} />
