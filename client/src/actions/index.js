@@ -9,6 +9,8 @@ export const fetchUser = () => async dispatch => {
 export const updateUser = (userName) => async dispatch => {
   const user = await axios.get("/api/current_user");
 
+  console.log(userName)
+
   const payload = {
     userName: userName,
     googleId: user.data.googleId
