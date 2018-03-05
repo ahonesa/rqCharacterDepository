@@ -1,23 +1,21 @@
 import _ from 'lodash';
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import TextField from '../fields/TextField';
 import { Link } from 'react-router-dom';
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { loadavg } from "os";
 import { Grid, FormGroup, Button, FormControl, ControlLabel, Row, Col } from "react-bootstrap";
 
-const ReduxFormControl = ({ input, meta, ...props }) => {
+const ReduxFormControl = ({input, meta, ...props}) => {
   return <FormControl {...props} {...input} />
 };
 
-
 class UserForm extends Component {
-
   render() {
     const onSubmit = (values) => {
-      this.props.updateUser(values.name)
+      console.log(values)
+      this.props.updateUser(values.userName)
     };
     const { handleSubmit, reset } = this.props
     return (
@@ -25,14 +23,12 @@ class UserForm extends Component {
         <Row className="show-grid">
           <Col xs={6} md={4} lg={12}>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <FormGroup controlId="userForm">
+              <FormGroup>
                 <ControlLabel>Username:</ControlLabel>
-                <Field key="name" component={ReduxFormControl} type="text" label="User Name" name="userName" />
-                <Button to="/" onClick={reset}>
-                  Cancel
-              </Button>
-                <Button type="submit">Submit</Button>
+                <Field component={ReduxFormControl} type="text" name="userName" />
               </FormGroup>
+              <Button type="reset" href="/" onClick={reset}>Cancel</Button>
+              <Button type="submit">Submit</Button>
             </form>
           </Col>
         </Row>

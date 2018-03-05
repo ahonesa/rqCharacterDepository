@@ -14,8 +14,6 @@ export const updateUser = (userName) => async dispatch => {
     googleId: user.data.googleId
   }
 
-  console.log(user)
-  console.log(payload)
   const res = await axios.post("/api/user", payload);
 
   dispatch({ type: UPDATE_USER, payload: res.data });
