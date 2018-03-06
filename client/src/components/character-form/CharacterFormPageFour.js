@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
 import SKILLS from '../characters/Skills';
-import { ReduxFormGroup } from '../fields/Fields';
+import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
+import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 
 class CharacterFormPageFour extends Component {
   constructor(props) {
@@ -77,19 +78,10 @@ class CharacterFormPageFour extends Component {
     return (
       <div style={{ padding: 30 }}>
         <form onSubmit={handleSubmit}>
-          <div className="row">
-            <FieldArray name="stuff" component={this.renderStuffFields} />
-          </div>
-          <Link to="/chars" className="red btn-flat left white-text">
-            Cancel
-          </Link>
-          <button type="button" className="teal btn-flat middle white-text previous" onClick={this.previousPage}>
-            Previous
-          </button>
-          <button type="submit" className="teal teal btn-flat right white-text">
-            Next
-            <i className="material-icons right">done</i>
-          </button>
+          <FieldArray name="stuff" component={this.renderStuffFields} />
+          <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
+          <Button type="button" onClick={this.previousPage}>Previous</Button>
+          <Button type="submit">Next</Button>
         </form>
       </div>);
   }

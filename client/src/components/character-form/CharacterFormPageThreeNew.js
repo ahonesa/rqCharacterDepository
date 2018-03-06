@@ -4,12 +4,13 @@ import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
 import SKILLS from '../characters/Skills';
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
-import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col } from "react-bootstrap";
+import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 
 
 class CharacterFormPageThree extends Component {
   constructor(props) {
     super(props)
+    console.log(props)
     this.previousPage = props.previousPage.bind(this)
     this.renderSkillFields = this.renderSkillFields.bind(this)
     this.renderSkillSelect = this.renderSkillSelect.bind(this)
@@ -24,7 +25,7 @@ class CharacterFormPageThree extends Component {
           <option />
           {
             SKILLS.map(({ label, basic, group }) => (
-              <option key={group + "." + label} value={group + "." + label}>{label}</option>
+              <option key={group + "." + label} value={group + "." + label}>{label} ({group})</option>
             ))
           }
         </Field>
@@ -34,11 +35,21 @@ class CharacterFormPageThree extends Component {
 
   renderSkillFields({ fields, meta: { error, submitFailed } }) {
     return (<div>
+      <label>Skillbonuses</label>
+      <ListGroup>
+        <ListGroupItem>Dexterity Bonus: {_.get(this.props, "character.bonuses.dexterityBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Communication Bonus: {_.get(this.props, "character.bonuses.communicationBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Knowledge Bonus: {_.get(this.props, "character.bonuses.knowledgeBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Magical Bonus: {_.get(this.props, "character.bonuses.magicalBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Manipulation Bonus: {_.get(this.props, "character.bonuses.manipulationBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Perception Bonus: {_.get(this.props, "character.bonuses.perceptionBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Stealth Bonus: {_.get(this.props, "character.bonuses.stealthBonus", 0)}</ListGroupItem>
+      </ListGroup>  
       <label>Select skills</label>
-      <ul>
+      <ListGroup>
         {fields.map((member, index) => {
           return (
-            <li key={index}>
+            <ListGroupItem key={index}>
               <Row>
                 <Col xs={6} md={4}>
                   {this.renderSkillSelect(member)}
@@ -47,17 +58,14 @@ class CharacterFormPageThree extends Component {
                   <ReduxFormGroup name={`${member}.value`} label="Skill" />
                 </Col>
                 <Col xs={6} md={4}>
-                <Button type="button" onClick={() => fields.remove(index)}>Remove</Button>
+                <Button type="button" style={{ marginTop: 25 }} onClick={() => fields.remove(index)}>Remove</Button>
                 </Col>
               </Row>
-            </li>
+            </ListGroupItem>
           );
         })}
-        <li>
-          <Button type="button" onClick={() => fields.push({})}>Add</Button>
-          {submitFailed && error && <span>{error}</span>}
-        </li>
-      </ul>
+        <Button type="button" onClick={() => fields.push({})}>Add</Button>
+      </ListGroup>
       </div>
     );
   }
