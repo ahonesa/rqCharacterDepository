@@ -6,6 +6,10 @@ export const ReduxFormControl = ({ input, meta, ...props }) => {
   return <FormControl {...props} {...input} />
 };
 
+export const ReduxFormSelect = ({ input, meta, ...props }) => {
+  return <FormControl componentClass="select" {...props} {...input} />
+};
+
 export const ReduxRadio = ({ label, input, meta, ...props }) => {
   return (<Radio {...props} {...input}>{label}</Radio>)
 };

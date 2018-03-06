@@ -3,13 +3,9 @@ import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
 import SKILLS from '../characters/Skills';
-import { ReduxFormGroup } from '../fields/Fields'
+import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
+import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col } from "react-bootstrap";
 
-const SkillField = ({ label, basic, group }) => {
-  return (
-    <Field key={label} component={ReduxFormGroup} type="text" label={label + " (" + basic + ")"} name={group + "." + label} />
-  );
-}
 
 class CharacterFormPageThree extends Component {
   constructor(props) {
@@ -19,81 +15,64 @@ class CharacterFormPageThree extends Component {
     this.renderSkillSelect = this.renderSkillSelect.bind(this)
   }
 
-  renderSkillSelect() {
+
+  renderSkillSelect(member) {
     return (
-      <Field name="skillSelect" component="select">
-        <option />
-        {
-          SKILLS.map(({label, basic, group}) => (
-            <option key={group + "." + label} value={group + "." + label}>{label}</option>
-          ))
-        }
-      </Field>
+      <FormGroup controlId="formControlsSelect">
+        <ControlLabel>Select</ControlLabel>
+        <Field name={`${member}.skill`} component={ReduxFormSelect} placeholder="select">
+          <option />
+          {
+            SKILLS.map(({ label, basic, group }) => (
+              <option key={group + "." + label} value={group + "." + label}>{label}</option>
+            ))
+          }
+        </Field>
+      </FormGroup>
     );
   }
 
   renderSkillFields({ fields, meta: { error, submitFailed } }) {
-    return (
+    return (<div>
+      <label>Select skills</label>
       <ul>
         {fields.map((member, index) => {
           return (
             <li key={index}>
-              <p>Skill #{index + 1}</p>
-              <div className="row">
-                <div className="input-field col s4">
-                  <label>Select skill</label>
-                  <div>
-                    {this.renderSkillSelect()}
-                  </div>
-                </div>
-                <div className="col s4">
-                  <Field
-                    name={`${member}.value`}
-                    type="text"
-                    component={ReduxFormGroup}
-                    label="Item"
-                  />
-                </div>
-                <div className="col s1">
-                  <button type="button" title="Remove stuff" className="red btn-flat right white-text" onClick={() => fields.remove(index)}>
-                    <i className="material-icons">remove</i>
-                  </button>
-                </div>
-              </div>
+              <Row>
+                <Col xs={6} md={4}>
+                  {this.renderSkillSelect(member)}
+                </Col>
+                <Col xs={6} md={4}>
+                  <ReduxFormGroup name={`${member}.value`} label="Skill" />
+                </Col>
+                <Col xs={6} md={4}>
+                <Button type="button" onClick={() => fields.remove(index)}>Remove</Button>
+                </Col>
+              </Row>
             </li>
           );
         })}
         <li>
-          <button type="button" className="teal btn-flat right white-text" onClick={() => fields.push({})}>
-            Add
-            <i className="material-icons right">add</i>
-          </button>
+          <Button type="button" onClick={() => fields.push({})}>Add</Button>
           {submitFailed && error && <span>{error}</span>}
         </li>
       </ul>
+      </div>
     );
   }
 
   render() {
     const { handleSubmit, reset } = this.props
     return (
-      <div style={{ padding: 30 }}>
+      <Row style={{ padding: 30 }}>
         <form onSubmit={handleSubmit}>
-          <div className="row">
-            <FieldArray name="stuff" component={this.renderSkillFields} />
-          </div>
-          <Link to="/chars" className="red btn-flat left white-text">
-            Cancel
-          </Link>
-          <button type="button" className="teal btn-flat middle white-text previous" onClick={this.previousPage}>
-            Previous
-          </button>
-          <button type="submit" className="teal teal btn-flat right white-text">
-            Next
-            <i className="material-icons right">done</i>
-          </button>
+          <FieldArray name="skills" component={this.renderSkillFields} />
+          <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
+          <Button type="button" onClick={this.previousPage}>Previous</Button>
+          <Button type="submit">Next</Button>
         </form>
-      </div>);
+      </Row>);
   }
 }
 
