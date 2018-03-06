@@ -4,6 +4,7 @@ import CharacterFormPageTwo from './CharacterFormPageTwo'
 import CharacterFormPageThree from './CharacterFormPageThreeNew'
 import CharacterFormPageFour from './CharacterFormPageFour'
 import calculateBonuses from '../characters/StatBonuses'
+import { Grid } from 'react-bootstrap';
 
 class CharacterForm extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class CharacterForm extends Component {
     const onSubmit = (values) => (console.log(values));
     const { page } = this.state
     return (
-      <div>
+      <Grid>
         {page === 1 && <CharacterFormPageOne onSubmit={this.nextPage} />}
         {page === 2 && (
           <CharacterFormPageTwo
@@ -53,7 +54,7 @@ class CharacterForm extends Component {
             onSubmit={onSubmit}
           />
         )}
-      </div>
+      </Grid>
     )
   }
 }

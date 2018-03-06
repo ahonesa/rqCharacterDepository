@@ -1,10 +1,9 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
-import TextField from '../fields/TextField';
-import RadioButton from '../fields/RadioButton';
 import { Link } from 'react-router-dom';
 import SKILLS from '../characters/Skills';
+import { ReduxFormGroup } from '../fields/Fields';
 
 class CharacterFormPageFour extends Component {
   constructor(props) {
@@ -25,7 +24,7 @@ class CharacterFormPageFour extends Component {
                   <Field
                     name={`${member}.item`}
                     type="text"
-                    component={TextField}
+                    component={ReduxFormGroup}
                     label="Item"
                   />
                 </div>
@@ -33,7 +32,7 @@ class CharacterFormPageFour extends Component {
                   <Field
                     name={`${member}.quantity`}
                     type="text"
-                    component={TextField}
+                    component={ReduxFormGroup}
                     label="Quantity"
                   />
                 </div>
@@ -41,7 +40,7 @@ class CharacterFormPageFour extends Component {
                   <Field
                     name={`${member}.weight`}
                     type="text"
-                    component={TextField}
+                    component={ReduxFormGroup}
                     label="Weight"
                   />
                 </div>
@@ -49,7 +48,7 @@ class CharacterFormPageFour extends Component {
                   <Field
                     name={`${member}.effects`}
                     type="text"
-                    component={TextField}
+                    component={ReduxFormGroup}
                     label="Effects"
                   />
                 </div>

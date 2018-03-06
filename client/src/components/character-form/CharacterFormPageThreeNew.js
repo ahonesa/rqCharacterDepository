@@ -1,14 +1,13 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
-import TextField from '../fields/TextField';
-import RadioButton from '../fields/RadioButton';
 import { Link } from 'react-router-dom';
 import SKILLS from '../characters/Skills';
+import { ReduxFormGroup } from '../fields/Fields'
 
 const SkillField = ({ label, basic, group }) => {
   return (
-    <Field key={label} component={TextField} type="text" label={label + " (" + basic + ")"} name={group + "." + label} />
+    <Field key={label} component={ReduxFormGroup} type="text" label={label + " (" + basic + ")"} name={group + "." + label} />
   );
 }
 
@@ -51,7 +50,7 @@ class CharacterFormPageThree extends Component {
                   <Field
                     name={`${member}.value`}
                     type="text"
-                    component={TextField}
+                    component={ReduxFormGroup}
                     label="Item"
                   />
                 </div>

@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import TextField from '../fields/TextField';
-import RadioButton from '../fields/RadioButton';
 import { Link } from 'react-router-dom';
+import { ReduxFormGroup, ReduxFormControl, ReduxRadio } from '../fields/Fields'
+import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col } from "react-bootstrap";
 
 const CHARACTERISTICS_FIELDS = [
   { label: "STR", name: "str" },
@@ -17,14 +17,14 @@ const CHARACTERISTICS_FIELDS = [
 
 const CharacteristicField = ({ name, label }) => {
   return (
-    <div className="row">
-      <div className="col s3">
-        <Field key={name} component={TextField} type="text" label={label} name={name} />
-      </div>
-      <div className="col s3">
-        <Field key={name + "_max"} component={TextField} type="text" label={label + " max"} name={name + "_max"} />
-      </div>
-    </div>
+    <Row>
+      <Col xs={6} md={4} >
+        <ReduxFormGroup key={name} label={label} name={name} />
+      </Col>
+      <Col xs={6} md={4}>
+        <ReduxFormGroup key={name + "_max"} label={label + " max"} name={name + "_max"} />
+      </Col>
+    </Row>
   );
 }
 
@@ -44,21 +44,14 @@ class CharacterFormPageTwo extends Component {
   render() {
     const { handleSubmit, reset } = this.props
     return (
-      <div style={{padding: 30}}>
+      <Row style={{padding: 30}}>
         <form onSubmit={handleSubmit}>
           {this.renderFields()}
-          <Link to="/chars" className="red btn-flat left white-text">
-            Cancel
-              </Link>
-          <button type="button" className="teal btn-flat middle white-text previous" onClick={this.previousPage}>
-            Previous
-              </button>
-          <button type="submit" className="teal teal btn-flat right white-text">
-            Next
-            <i className="material-icons right">done</i>
-          </button>
+          <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
+          <Button type="button" onClick={this.previousPage}>Previous</Button>
+          <Button type="submit">Next</Button>
         </form>
-      </div>);
+      </Row>);
   }
 }
 
