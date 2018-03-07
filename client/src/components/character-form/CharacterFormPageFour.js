@@ -14,26 +14,25 @@ class CharacterFormPageFour extends Component {
     this.previousPage = props.previousPage.bind(this)
     this.renderSkillFields = this.renderSkillFields.bind(this)
     this.renderWeaponSkillSelect = this.renderWeaponSkillSelect.bind(this)
+    this.renderWeaponFields = this.renderWeaponFields.bind(this)
   }
 
-  renderWeaponSkillSelect(member, type) {
+  renderWeaponSkillSelect(member) {
     return (
       <FormGroup controlId="formControlsSelect">
         <ControlLabel>Select</ControlLabel>
-        <Field name={`${member}.${type}.skill`} component={ReduxFormSelect} placeholder="select">
+        <Field name={`${member}.skill`} component={ReduxFormSelect} placeholder="select">
           <option />
           {
             WEAPON_SKILLS.map(({ label, group }) => {
-              if (group === type) {
-                return <option key={group + "." + label} value={group + "." + label}>{label} ({group})</option>;
-              } else return;
+              return <option key={group + "." + label} value={group + "." + label}>{label}</option>;
             })
           }
         </Field>
       </FormGroup>
     );
   }
-
+  
   renderSkillFields({ fields, meta: { error, submitFailed } }) {
     return (<div>
       <label>Skillbonuses</label>
@@ -48,20 +47,41 @@ class CharacterFormPageFour extends Component {
             <ListGroupItem key={index}>
               <Row>
                 <Col xs={6} md={4}>
-                  {this.renderWeaponSkillSelect(member, "attack")}
+                  {this.renderWeaponSkillSelect(member)}
                 </Col>
                 <Col xs={6} md={4}>
-                  <ReduxFormGroup name={`${member}.attack.value`} label="Attack skill" />
+                  <ReduxFormGroup name={`${member}.attack`} label="Attack skill" />
+                </Col>
+                <Col xs={6} md={4}>
+                  <ReduxFormGroup name={`${member}.parry`} label="Parry skill" />
                 </Col>
               </Row>  
               <Row>  
                 <Col xs={6} md={4}>
-                  {this.renderWeaponSkillSelect(member, "parry")}
-                </Col>
-                <Col xs={6} md={4}>
-                  <ReduxFormGroup name={`${member}.parry.value`} label="Parry skill" />
+                  <Button type="button" style={{ marginTop: 25 }} onClick={() => fields.remove(index)}>Remove</Button>
                 </Col>
               </Row>
+            </ListGroupItem>
+          );
+        })}
+        <Button type="button" onClick={() => fields.push({})}>Add</Button>
+      </ListGroup>
+    </div>
+    );
+  }
+
+  renderWeaponFields({ fields, meta: { error, submitFailed } }) {
+    return (<div>
+      <label>Select weapons</label>
+      <ListGroup>
+        {fields.map((member, index) => {
+          return (
+            <ListGroupItem key={index}>
+              <Row>
+                <Col xs={6} md={4}>
+                  {this.renderWeaponSkillSelect(member)}
+                </Col>
+              </Row>  
               <Row>
                 <Col xs={4} md={3} lg={3}>  
                   <ReduxFormGroup name={`${member}.weapon`} label="Weapon in use" />
@@ -93,12 +113,14 @@ class CharacterFormPageFour extends Component {
     );
   }
 
+
   render() {
     const { handleSubmit, reset } = this.props
     return (
       <Row style={{ padding: 30 }}>
         <form onSubmit={handleSubmit}>
-          <FieldArray name="weaponSkills" component={this.renderSkillFields} />
+          <FieldArray name="weaponskills" component={this.renderSkillFields} />
+          <FieldArray name="weapons" component={this.renderWeaponFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
           <Button type="button" onClick={this.previousPage}>Previous</Button>
           <Button type="submit">Next</Button>

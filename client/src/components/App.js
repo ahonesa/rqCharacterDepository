@@ -8,7 +8,6 @@ import CharacterListView from "./CharacterListView";
 import CharacterDetailsView from "./CharacterDetailsView";
 import CharacterForm from './character-form/CharacterForm';
 import UserForm from './user-form/UserForm'
-import { Grid } from 'react-bootstrap';
 
 class App extends Component {
   componentDidMount() {

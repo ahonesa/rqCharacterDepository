@@ -1,7 +1,5 @@
-import _ from 'lodash';
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import { Link } from 'react-router-dom';
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { loadavg } from "os";

@@ -39,11 +39,8 @@ export const SKILLS = [
 ]
 
 export const WEAPON_SKILLS = [
-  { label: "1h Sword Attack", group: "attack" },
-  { label: "1h Sword Parry", group: "parry" },
-  { label: "2h Sword Attack", group: "attack" },
-  { label: "2h Sword Parry", group: "parry" },  
-  { label: "Shield Attack", group: "attack" },
-  { label: "Shield Parry", group: "parry" },
-  { label: "Bow Attack", group: "attack" },
+  { label: "1h Sword", group: "weapon" },
+  { label: "2h Sword", group: "weapon" }, 
+  { label: "Shield ", group: "weapon" },
+  { label: "Bow", group: "weapon" },
 ]
