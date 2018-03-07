@@ -1,4 +1,4 @@
-export default [
+export const SKILLS = [
   { label: "Boat", basic: 5, group: "dexterity" },
   { label: "Climb", basic: 40, group: "dexterity" },
   { label: "Dodge", basic: 5, group: "dexterity" },
@@ -36,4 +36,12 @@ export default [
   { label: "Intensity", basic: 0, group: "magic" },
   { label: "Multispell", basic: 0, group: "magic" },
   { label: "Range", basic: 0, group: "magic" }
+]
+
+export const WEAPON_SKILLS = [
+  { label: "Sword Attack", basic: 5, group: "attack" },
+  { label: "Sword Parry", basic: 10, group: "parry" },
+  { label: "Shield Attack", basic: 5, group: "attack" },
+  { label: "Shield Parry", basic: 25, group: "parry" },
+  { label: "Bow Attack", basic: 5, group: "attack" }
 ]

@@ -2,88 +2,96 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
-import SKILLS from '../characters/Skills';
+import { WEAPON_SKILLS } from '../characters/Skills';
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+
 
 class CharacterFormPageFour extends Component {
   constructor(props) {
     super(props)
+    console.log(props)
     this.previousPage = props.previousPage.bind(this)
-    this.renderStuffFields = this.renderStuffFields.bind(this)
+    this.renderSkillFields = this.renderSkillFields.bind(this)
+    this.renderWeaponSkillSelect = this.renderWeaponSkillSelect.bind(this)
   }
 
-  renderStuffFields({ fields, meta: { error, submitFailed } }) {
+  renderWeaponSkillSelect(member, type) {
     return (
-      <ul>
+      <FormGroup controlId="formControlsSelect">
+        <ControlLabel>Select</ControlLabel>
+        <Field name={`${member}.${type}.skill`} component={ReduxFormSelect} placeholder="select">
+          <option />
+          {
+            WEAPON_SKILLS.map(({ label, basic, group }) => {
+              if (group === type) {
+                return <option key={group + "." + label} value={group + "." + label}>{label} ({group})</option>;
+              } else return;
+            })
+          }
+        </Field>
+      </FormGroup>
+    );
+  }
+
+  renderSkillFields({ fields, meta: { error, submitFailed } }) {
+    return (<div>
+      <label>Skillbonuses</label>
+      <ListGroup>
+        <ListGroupItem>Attack Bonus: {_.get(this.props, "character.bonuses.manipulationBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Defense Bonus: {_.get(this.props, "character.bonuses.dexterityBonus", 0)}</ListGroupItem>
+      </ListGroup>
+      <label>Select skills</label>
+      <ListGroup>
         {fields.map((member, index) => {
           return (
-            <li key={index}>
-              <p>Item #{index + 1}</p>
-              <div className="row">
-                <div className="col s4">
-                  <Field
-                    name={`${member}.item`}
-                    type="text"
-                    component={ReduxFormGroup}
-                    label="Item"
-                  />
-                </div>
-                <div className="col s1">
-                  <Field
-                    name={`${member}.quantity`}
-                    type="text"
-                    component={ReduxFormGroup}
-                    label="Quantity"
-                  />
-                </div>
-                <div className="col s1">
-                  <Field
-                    name={`${member}.weight`}
-                    type="text"
-                    component={ReduxFormGroup}
-                    label="Weight"
-                  />
-                </div>
-                <div className="col s5">
-                  <Field
-                    name={`${member}.effects`}
-                    type="text"
-                    component={ReduxFormGroup}
-                    label="Effects"
-                  />
-                </div>
-                <div className="col s1">
-                <button type="button" title="Remove stuff" className="red btn-flat right white-text" onClick={() => fields.remove(index)}>
-                  <i className="material-icons">remove</i>
-                  </button>
-                </div>
-              </div>
-            </li>
+            <ListGroupItem key={index}>
+              <Row>
+                <Col xs={6} md={4}>
+                  {this.renderWeaponSkillSelect(member, "attack")}
+                </Col>
+                <Col xs={6} md={4}>
+                  <ReduxFormGroup name={`${member}.attack.value`} label="Attack skill" />
+                </Col>
+                <Col xs={6} md={4}>
+                  {this.renderWeaponSkillSelect(member, "parry")}
+                </Col>
+                <Col xs={6} md={4}>
+                  <ReduxFormGroup name={`${member}.parry.value`} label="Parry skill" />
+                  <ReduxFormGroup name={`${member}.weapon`} label="Weapon in use" />
+                  <ReduxFormGroup name={`${member}.sr`} label="Strike rank" />
+                  <ReduxFormGroup name={`${member}.damage`} label="Damage" />
+                  <FormGroup>
+                    <label>Weapon type</label>
+                    <Field name={`${member}.type`} component={ReduxRadio} type="radio" label="crushing" value="crushing" />
+                    <Field name={`${member}.type`} component={ReduxRadio} type="radio" label="slashing" value="slashing" />
+                    <Field name={`${member}.type`} component={ReduxRadio} type="radio" label="piercing" value="piercing" />
+                  </FormGroup>
+                </Col>
+                <Col xs={6} md={4}>
+                  <Button type="button" style={{ marginTop: 25 }} onClick={() => fields.remove(index)}>Remove</Button>
+                </Col>
+              </Row>
+            </ListGroupItem>
           );
         })}
-        <li>
-          <button type="button" className="teal btn-flat right white-text" onClick={() => fields.push({})}>
-            Add
-            <i className="material-icons right">add</i>
-          </button>
-          {submitFailed && error && <span>{error}</span>}
-        </li>
-      </ul>
+        <Button type="button" onClick={() => fields.push({})}>Add</Button>
+      </ListGroup>
+    </div>
     );
   }
 
   render() {
     const { handleSubmit, reset } = this.props
     return (
-      <div style={{ padding: 30 }}>
+      <Row style={{ padding: 30 }}>
         <form onSubmit={handleSubmit}>
-          <FieldArray name="stuff" component={this.renderStuffFields} />
+          <FieldArray name="skills" component={this.renderSkillFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
           <Button type="button" onClick={this.previousPage}>Previous</Button>
           <Button type="submit">Next</Button>
         </form>
-      </div>);
+      </Row>);
   }
 }
 

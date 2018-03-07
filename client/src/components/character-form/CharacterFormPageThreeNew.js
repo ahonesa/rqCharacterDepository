@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
-import SKILLS from '../characters/Skills';
+import { SKILLS } from '../characters/Skills';
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 
