@@ -4,7 +4,7 @@ import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
 import { WEAPON_SKILLS } from '../characters/Skills';
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
-import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
 
 
 class CharacterFormPageFour extends Component {
@@ -20,7 +20,7 @@ class CharacterFormPageFour extends Component {
   renderWeaponSkillSelect(member) {
     return (
       <FormGroup controlId="formControlsSelect">
-        <ControlLabel>Select</ControlLabel>
+        <ControlLabel>Select weapon category</ControlLabel>
         <Field name={`${member}.skill`} component={ReduxFormSelect} placeholder="select">
           <option />
           {
@@ -117,7 +117,8 @@ class CharacterFormPageFour extends Component {
   render() {
     const { handleSubmit, reset } = this.props
     return (
-      <Row style={{ padding: 30 }}>
+      <Row>
+        <h2 style={{ marginBottom: 30}}><Label>Weapons</Label></h2>
         <form onSubmit={handleSubmit}>
           <FieldArray name="weaponskills" component={this.renderSkillFields} />
           <FieldArray name="weapons" component={this.renderWeaponFields} />

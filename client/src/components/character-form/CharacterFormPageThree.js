@@ -4,7 +4,7 @@ import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
 import { SKILLS } from '../characters/Skills';
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
-import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
 
 
 class CharacterFormPageThree extends Component {
@@ -73,7 +73,8 @@ class CharacterFormPageThree extends Component {
   render() {
     const { handleSubmit, reset } = this.props
     return (
-      <Row style={{ padding: 30 }}>
+      <Row>
+        <h2 style={{ marginBottom: 30}}><Label>Skills</Label></h2>
         <form onSubmit={handleSubmit}>
           <FieldArray name="skills" component={this.renderSkillFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>

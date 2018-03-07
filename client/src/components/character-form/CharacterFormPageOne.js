@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { ReduxFormControl, ReduxFormGroup, ReduxRadio } from '../fields/Fields';
 import { Link } from 'react-router-dom';
-import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col } from "react-bootstrap";
+import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, Label } from "react-bootstrap";
 
 
 const ADDITIONAL_FIELDS = [
@@ -23,21 +23,22 @@ class CharacterFormPageOne extends Component {
 
   renderAdditionalFields() {
     return _.map(ADDITIONAL_FIELDS, ({ label, name }) => {
-      return <ReduxFormGroup label={label} name={name} />
+      return <ReduxFormGroup label={label} name={"info." + name} />
     });
   }
 
   render() {
     const { handleSubmit, reset } = this.props
     return (
-      <Row style={{ padding: 40 }}>
+      <Row>
+        <h2 style={{ marginBottom: 30}}><Label>Basic information</Label></h2>
         <Col>
           <form onSubmit={handleSubmit}>
             <ReduxFormGroup label="Character Name" name="name" />
             <FormGroup>
               <label>Sex</label>
-              <Field name="sex" component={ReduxRadio} type="radio" label="male" value="male" />
-              <Field name="sex" component={ReduxRadio} type="radio" label="female" value="female" />
+              <Field name="info.sex" component={ReduxRadio} type="radio" label="male" value="male" />
+              <Field name="info.sex" component={ReduxRadio} type="radio" label="female" value="female" />
             </FormGroup>
             {this.renderAdditionalFields()}
             <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>

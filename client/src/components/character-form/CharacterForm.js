@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import CharacterFormPageOne from './CharacterFormPageOne'
 import CharacterFormPageTwo from './CharacterFormPageTwo'
-import CharacterFormPageThree from './CharacterFormPageThreeNew'
+import CharacterFormPageThree from './CharacterFormPageThree'
 import CharacterFormPageFour from './CharacterFormPageFour'
+import CharacterFormPageFive from './CharacterFormPageFive'
 import calculateBonuses from '../characters/StatBonuses'
 import { Grid } from 'react-bootstrap';
 
@@ -49,6 +50,13 @@ class CharacterForm extends Component {
         )}
         {page === 4 && (
           <CharacterFormPageFour
+            character={this.state.character}
+            previousPage={this.previousPage}
+            onSubmit={this.nextPage}
+          />
+        )}
+        {page === 5 && (
+          <CharacterFormPageFive
             character={this.state.character}
             previousPage={this.previousPage}
             onSubmit={onSubmit}
