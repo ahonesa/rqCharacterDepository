@@ -93,6 +93,9 @@ class CharacterFormPageFour extends Component {
                   <ReduxFormGroup name={`${member}.damage`} label="Damage" />
                 </Col>  
                 <Col xs={4} md={3} lg={3}>  
+                  <ReduxFormGroup name={`${member}.armor`} label="Armor points" />
+                </Col> 
+                <Col xs={4} md={3} lg={3}>  
                   <FormGroup>
                     <label>Weapon type</label>
                     <Field name={`${member}.type`} component={ReduxRadio} type="radio" label="crushing" value="crushing" />

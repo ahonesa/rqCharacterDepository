@@ -19,14 +19,12 @@ class CharacterForm extends Component {
   }
 
   nextPage(values) {
-    console.log(values.characteristics)
-    console.log(this.state)
+    console.log(values)
     if (this.state.page === 2) this.setState({ character: calculateBonuses(values.characteristics || {}) })
     this.setState({ page: this.state.page + 1 })
   }
 
   previousPage() {
-    console.log(this.state)
     this.setState({ page: this.state.page - 1 })
   }
 
