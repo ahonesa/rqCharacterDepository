@@ -29,7 +29,7 @@ export default ({str, str_max, con, con_max, siz, siz_max, int, int_max, pow, po
   const communicationBonus = calculateBonus(characteristics.INT.original, 10, characteristics.POW.original, characteristics.APP.original, 10, 10)
   const knowledgeBonus     = calculateBonus(characteristics.INT.original, 10, 10, 10, 10, 10)
   const magicalBonus       = calculateBonus(characteristics.INT.original, characteristics.POW.original, characteristics.DEX.original, 10, 10, 10)
-  const manipulationBonus  = calculateBonus(characteristics.DEX.original, characteristics.STR.original, characteristics.INT.original, 10, 10, 10)
+  const manipulationBonus  = calculateBonus(characteristics.DEX.original, characteristics.INT.original, characteristics.STR.original, 10, 10, 10)
   const perceptionBonus    = calculateBonus(characteristics.INT.original, 10, characteristics.POW.original, characteristics.CON.original, 10, 10)
   const stealthBonus       = calculateBonus(characteristics.DEX.original, 10, 10, 10, characteristics.POW.original, characteristics.SIZ.original)
   
