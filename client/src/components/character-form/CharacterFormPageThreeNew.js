@@ -24,7 +24,7 @@ class CharacterFormPageThree extends Component {
         <Field name={`${member}.skill`} component={ReduxFormSelect} placeholder="select">
           <option />
           {
-            SKILLS.map(({ label, basic, group }) => (
+            SKILLS.map(({ label, group }) => (
               <option key={group + "." + label} value={group + "." + label}>{label} ({group})</option>
             ))
           }

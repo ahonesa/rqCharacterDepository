@@ -23,7 +23,7 @@ class CharacterFormPageFour extends Component {
         <Field name={`${member}.${type}.skill`} component={ReduxFormSelect} placeholder="select">
           <option />
           {
-            WEAPON_SKILLS.map(({ label, basic, group }) => {
+            WEAPON_SKILLS.map(({ label, group }) => {
               if (group === type) {
                 return <option key={group + "." + label} value={group + "." + label}>{label} ({group})</option>;
               } else return;
@@ -41,7 +41,7 @@ class CharacterFormPageFour extends Component {
         <ListGroupItem>Attack Bonus: {_.get(this.props, "character.bonuses.manipulationBonus", 0)}</ListGroupItem>
         <ListGroupItem>Defense Bonus: {_.get(this.props, "character.bonuses.dexterityBonus", 0)}</ListGroupItem>
       </ListGroup>
-      <label>Select skills</label>
+      <label>Select weapon skills</label>
       <ListGroup>
         {fields.map((member, index) => {
           return (
@@ -53,14 +53,26 @@ class CharacterFormPageFour extends Component {
                 <Col xs={6} md={4}>
                   <ReduxFormGroup name={`${member}.attack.value`} label="Attack skill" />
                 </Col>
+              </Row>  
+              <Row>  
                 <Col xs={6} md={4}>
                   {this.renderWeaponSkillSelect(member, "parry")}
                 </Col>
                 <Col xs={6} md={4}>
                   <ReduxFormGroup name={`${member}.parry.value`} label="Parry skill" />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={4} md={3} lg={3}>  
                   <ReduxFormGroup name={`${member}.weapon`} label="Weapon in use" />
+                </Col>  
+                <Col xs={4} md={3} lg={3}>
                   <ReduxFormGroup name={`${member}.sr`} label="Strike rank" />
+                </Col>
+                <Col xs={4} md={3} lg={3}>  
                   <ReduxFormGroup name={`${member}.damage`} label="Damage" />
+                </Col>  
+                <Col xs={4} md={3} lg={3}>  
                   <FormGroup>
                     <label>Weapon type</label>
                     <Field name={`${member}.type`} component={ReduxRadio} type="radio" label="crushing" value="crushing" />
@@ -86,7 +98,7 @@ class CharacterFormPageFour extends Component {
     return (
       <Row style={{ padding: 30 }}>
         <form onSubmit={handleSubmit}>
-          <FieldArray name="skills" component={this.renderSkillFields} />
+          <FieldArray name="weaponSkills" component={this.renderSkillFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
           <Button type="button" onClick={this.previousPage}>Previous</Button>
           <Button type="submit">Next</Button>
