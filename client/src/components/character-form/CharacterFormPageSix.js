@@ -67,7 +67,7 @@ class CharacterFormPageSix extends Component {
 
   renderArmorFields({ fields, meta: { error, submitFailed } }) {
     return (<div>
-      <label>Select armor layers</label>
+      <label>Select armor layers:</label>
       <ListGroup>
         {fields.map((member, index) => {
           return (

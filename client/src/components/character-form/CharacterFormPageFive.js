@@ -74,6 +74,7 @@ class CharacterFormPageFive extends Component {
       <Row>
         <h2 style={{ marginBottom: 30}}><Label>Spells</Label></h2>
         <form onSubmit={handleSubmit}>
+          <ReduxFormGroup name="freeint" label="Free INT" />
           <FieldArray name="spells" component={this.renderSpellFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
           <Button type="button" onClick={this.previousPage}>Previous</Button>
