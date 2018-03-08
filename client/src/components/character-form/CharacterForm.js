@@ -6,7 +6,10 @@ import CharacterFormPageFour from './CharacterFormPageFour'
 import CharacterFormPageFive from './CharacterFormPageFive'
 import CharacterFormPageSix from './CharacterFormPageSix'
 import calculateBonuses from '../characters/StatBonuses'
+import { connect } from "react-redux";
+import * as actions from "../../actions";
 import { Grid } from 'react-bootstrap';
+import { reduxForm, Field } from "redux-form";
 
 class CharacterForm extends Component {
   constructor(props) {
@@ -29,7 +32,11 @@ class CharacterForm extends Component {
   }
 
   render() {
-    const onSubmit = (values) => (console.log(values));
+    const onSubmit = (values) => {
+      console.log(values)
+      this.props.createChar(values)
+      
+    };
     const { page } = this.state
     return (
       <Grid>
@@ -73,4 +80,6 @@ class CharacterForm extends Component {
   }
 }
 
-export default CharacterForm
+export default connect(null, actions)(reduxForm({
+  form: "characterForm"
+})(CharacterForm));

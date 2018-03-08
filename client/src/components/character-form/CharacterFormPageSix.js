@@ -110,7 +110,7 @@ class CharacterFormPageSix extends Component {
           <FieldArray name="stuff" component={this.renderStuffFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
           <Button type="button" onClick={this.previousPage}>Previous</Button>
-          <Button type="submit">Complete</Button>
+          <Button type="submit" href="/chars">Complete</Button>
         </form>
       </Row>);
   }

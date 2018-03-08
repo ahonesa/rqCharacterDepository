@@ -1,5 +1,6 @@
 import axios from "axios";
-import { FETCH_USER, GET_ALL_CHARS, GET_ONE_CHAR, UPDATE_USER } from "./types";
+import {reset} from "redux-form";
+import { FETCH_USER, GET_ALL_CHARS, GET_ONE_CHAR, UPDATE_USER, CREATE_CHAR } from "./types";
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/current_user");
@@ -19,6 +20,13 @@ export const updateUser = (userName) => async dispatch => {
   const res = await axios.post("/api/user", payload);
 
   dispatch({ type: UPDATE_USER, payload: res.data });
+};
+
+export const createChar = (character) => async dispatch => {
+  console.log(character)
+  const res = await axios.post("/api/chars", character);
+  dispatch(reset("characterForm"));
+  dispatch({ type: CREATE_CHAR, payload: res.data });
 };
 
 export const getAllChars = () => async dispatch => {
