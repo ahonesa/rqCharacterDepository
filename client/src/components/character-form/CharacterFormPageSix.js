@@ -2,8 +2,8 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
-import { SKILLS } from '../characters/Skills';
-import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
+import { ARMOR } from '../characters/Skills';
+import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect, ReduxCheckbox } from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
 
 class CharacterFormPageSix extends Component {
@@ -12,6 +12,7 @@ class CharacterFormPageSix extends Component {
     console.log(props)
     this.previousPage = props.previousPage.bind(this)
     this.renderStuffFields = this.renderStuffFields.bind(this)
+    this.renderArmorFields = this.renderArmorFields.bind(this)
   }
 
   renderStuffFields({ fields, meta: { error, submitFailed } }) {
@@ -48,43 +49,63 @@ class CharacterFormPageSix extends Component {
     );
   }
 
+  renderArmorSelect(member) {
+    return (
+      <FormGroup controlId="formControlsSelect">
+        <ControlLabel>Select armor type</ControlLabel>
+        <Field name={`${member}.armor.type`} component={ReduxFormSelect} placeholder="select">
+          <option />
+          {
+            ARMOR.map(({ label }) => {
+              return <option key={label} value={label}>{label}</option>;
+            })
+          }
+        </Field>
+      </FormGroup>
+    );
+  }
+
+  renderArmorFields({ fields, meta: { error, submitFailed } }) {
+    return (<div>
+      <label>Select armor layers</label>
+      <ListGroup>
+        {fields.map((member, index) => {
+          return (
+            <ListGroupItem key={index}>
+              {this.renderArmorSelect(member)}
+              <Row>
+                <Col xs={6} md={3}>
+                  <FormGroup>
+                    <label>Locations</label>
+                    <Field name={`${member}.armor.head`} component={ReduxCheckbox} type="checkbox" label="Head" value="head" />
+                    <Field name={`${member}.armor.chest`} component={ReduxCheckbox} type="checkbox" label="Chest" value="chest" />
+                    <Field name={`${member}.armor.stomach`} component={ReduxCheckbox} type="checkbox" label="Stomach" value="stomach" />
+                    <Field name={`${member}.armor.lh`} component={ReduxCheckbox} type="checkbox" label="Left hand" value="lh" />
+                    <Field name={`${member}.armor.rh`} component={ReduxCheckbox} type="checkbox" label="Right hand" value="rh" />
+                    <Field name={`${member}.armor.ll`} component={ReduxCheckbox} type="checkbox" label="Left leg" value="ll" />
+                    <Field name={`${member}.armor.rl`} component={ReduxCheckbox} type="checkbox" label="Right leg" value="rl" />
+                  </FormGroup>
+                </Col>
+                <Col xs={6} md={3}>
+                  <Button type="button" onClick={() => fields.remove(index)}>Remove</Button>
+                </Col>
+              </Row>
+            </ListGroupItem>
+          );
+        })}
+        <Button type="button" onClick={() => fields.push({})}>Add</Button>
+      </ListGroup>
+    </div>
+    );
+  }
+
   render() {
     const { handleSubmit, reset } = this.props
     return (
       <Row>
-        <h2 style={{ marginBottom: 30 }}><Label>Armor</Label></h2>
         <form onSubmit={handleSubmit}>
-          <ListGroup>
-            <Row>
-              <Col xs={2} md={2} xsOffset={3}>
-                <ListGroupItem><ReduxFormGroup name="armor.H" label="Head" /></ListGroupItem>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={2} md={2}>
-                <ListGroupItem><ReduxFormGroup name="armor.LH" label="Left Hand" /></ListGroupItem>
-              </Col>
-              <Col xs={4} md={4}>
-                <ListGroupItem><ReduxFormGroup name="armor.C" label="Chest" /></ListGroupItem>
-              </Col>
-              <Col xs={2} md={2}>
-                <ListGroupItem><ReduxFormGroup name="armor.RH" label="Right Hand" /></ListGroupItem>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={4} md={4} xsOffset={2}>
-                <ListGroupItem><ReduxFormGroup name="armor.S" label="Stomach" /></ListGroupItem>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={2} md={2} xsOffset={2}>
-                <ListGroupItem><ReduxFormGroup name="armor.LL" label="Left Leg" /></ListGroupItem>
-              </Col>
-              <Col xs={2} md={2}>
-                <ListGroupItem><ReduxFormGroup name="armor.RL" label="Right Leg" /></ListGroupItem>
-              </Col>
-            </Row>
-          </ListGroup>
+          <h2 style={{ marginBottom: 30 }}><Label>Armor</Label></h2>
+          <FieldArray name="stuff" component={this.renderArmorFields} />
           <h2 style={{ marginBottom: 30 }}><Label>Stuff</Label></h2>
           <FieldArray name="stuff" component={this.renderStuffFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>

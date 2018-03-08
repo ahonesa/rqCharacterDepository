@@ -38,9 +38,18 @@ export const SKILLS = [
   { label: "Range", group: "magic" }
 ]
 
+// TODO: populate proper values
 export const WEAPON_SKILLS = [
   { label: "1h Sword", group: "weapon" },
   { label: "2h Sword", group: "weapon" }, 
   { label: "Shield ", group: "weapon" },
   { label: "Bow", group: "weapon" },
+]
+
+// TODO: populate proper values
+export const ARMOR = [
+  { label: "Soft leather", value: 3 , weight: [3.0, 4.0, 5.0, 6.0] },
+  { label: "Cuirboul", value: 6, weight:[5.0, 6.0, 7.0, 8.0] }, 
+  { label: "Bezaint ", vakue: 7, weight:[7.0, 8.0, 9.0, 10.0] },
+  { label: "Plate", value: 10, weight:[12.0, 14.0, 15.0, 16.0] }
 ]

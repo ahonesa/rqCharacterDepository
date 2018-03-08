@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { FormGroup, Radio, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, Radio, FormControl, ControlLabel, Checkbox } from "react-bootstrap";
 
 export const ReduxFormControl = ({ input, meta, ...props }) => {
   return <FormControl {...props} {...input} />
@@ -14,6 +14,9 @@ export const ReduxRadio = ({ label, input, meta, ...props }) => {
   return (<Radio {...props} {...input}>{label}</Radio>)
 };
 
+export const ReduxCheckbox = ({ label, input, meta, ...props }) => {
+  return (<Checkbox {...props} {...input}>{label}</Checkbox>)
+};
 
 export const ReduxFormGroup = ({ name, label }) => {
   return (
