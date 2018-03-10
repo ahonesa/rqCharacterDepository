@@ -1,37 +1,37 @@
-export default ({str, str_max, con, con_max, siz, siz_max, int, int_max, pow, pow_max, dex, dex_max, app, app_max }) => {
+export default ({str, str_max, str_org, con, con_org, con_max, siz, siz_org, siz_max, int, int_org, int_max, pow, pow_org, pow_max, dex, dex_org, dex_max, app, app_org, app_max }) => {
   
   const characteristics = {
-    STR: { original: parseInt(str, 0) || 10, current: parseInt(str_max, 0) || 10 },
-    CON: { original: parseInt(con, 0) || 10, current: parseInt(con_max, 0) || 10 },
-    SIZ: { original: parseInt(siz, 0) || 10, current: parseInt(siz_max, 0) || 10 },
-    INT: { original: parseInt(int, 0) || 10, current: parseInt(int_max, 0) || 10 },
-    POW: { original: parseInt(pow, 0) || 10, current: parseInt(pow_max, 0) || 10 },
-    DEX: { original: parseInt(dex, 0) || 10, current: parseInt(dex_max, 0) || 10 },
-    APP: { original: parseInt(app, 0) || 10, current: parseInt(app_max, 0) || 10 } 
+    STR: { original: parseInt(str_org, 0) || 10, current: parseInt(str, 0) || 10, max: parseInt(str_max, 0) || 10 },
+    CON: { original: parseInt(con_org, 0) || 10, current: parseInt(con, 0) || 10, max: parseInt(con_max, 0) || 10 },
+    SIZ: { original: parseInt(siz_org, 0) || 10, current: parseInt(siz, 0) || 10, max: parseInt(siz_max, 0) || 10 },
+    INT: { original: parseInt(int_org, 0) || 10, current: parseInt(int, 0) || 10, max: parseInt(int_max, 0) || 10 },
+    POW: { original: parseInt(pow_org, 0) || 10, current: parseInt(pow, 0) || 10, max: parseInt(pow_max, 0) || 10 },
+    DEX: { original: parseInt(dex_org, 0) || 10, current: parseInt(dex, 0) || 10, max: parseInt(dex_max, 0) || 10 },
+    APP: { original: parseInt(app_org, 0) || 10, current: parseInt(app, 0) || 10, max: parseInt(app_max, 0) || 10 } 
   }  
 
   const hitPoints = {
-    base: Math.ceil( (characteristics.CON.original + characteristics.SIZ.original) / 2, 0 ),
-    current: Math.ceil( (characteristics.CON.original + characteristics.SIZ.original) / 2, 0 )
+    base: Math.ceil( (characteristics.CON.current + characteristics.SIZ.current) / 2, 0 ),
+    current: Math.ceil( (characteristics.CON.current + characteristics.SIZ.current) / 2, 0 )
   }
 
   const magicPoints = {
-    base: characteristics.POW.original,
-    current: characteristics.POW.original
+    base: characteristics.POW.current,
+    current: characteristics.POW.current
   }
 
   const fatiguePoints = {
-    base: characteristics.STR.original + characteristics.CON.original,
-    current: characteristics.STR.original + characteristics.CON.original
+    base: characteristics.STR.current + characteristics.CON.current,
+    current: characteristics.STR.current + characteristics.CON.current
   }
     
-  const dexterityBonus     = calculateBonus(characteristics.DEX.original, 10, characteristics.STR.original, 10, characteristics.SIZ.original, 10)
-  const communicationBonus = calculateBonus(characteristics.INT.original, 10, characteristics.POW.original, characteristics.APP.original, 10, 10)
-  const knowledgeBonus     = calculateBonus(characteristics.INT.original, 10, 10, 10, 10, 10)
-  const magicalBonus       = calculateBonus(characteristics.INT.original, characteristics.POW.original, characteristics.DEX.original, 10, 10, 10)
-  const manipulationBonus  = calculateBonus(characteristics.DEX.original, characteristics.INT.original, characteristics.STR.original, 10, 10, 10)
-  const perceptionBonus    = calculateBonus(characteristics.INT.original, 10, characteristics.POW.original, characteristics.CON.original, 10, 10)
-  const stealthBonus       = calculateBonus(characteristics.DEX.original, 10, 10, 10, characteristics.POW.original, characteristics.SIZ.original)
+  const dexterityBonus     = calculateBonus(characteristics.DEX.current, 10, characteristics.STR.current, 10, characteristics.SIZ.current, 10)
+  const communicationBonus = calculateBonus(characteristics.INT.current, 10, characteristics.POW.current, characteristics.APP.current, 10, 10)
+  const knowledgeBonus     = calculateBonus(characteristics.INT.current, 10, 10, 10, 10, 10)
+  const magicalBonus       = calculateBonus(characteristics.INT.current, characteristics.POW.current, characteristics.DEX.current, 10, 10, 10)
+  const manipulationBonus  = calculateBonus(characteristics.DEX.current, characteristics.INT.current, characteristics.STR.current, 10, 10, 10)
+  const perceptionBonus    = calculateBonus(characteristics.INT.current, 10, characteristics.POW.current, characteristics.CON.current, 10, 10)
+  const stealthBonus       = calculateBonus(characteristics.DEX.current, 10, 10, 10, characteristics.POW.current, characteristics.SIZ.current)
   
   const bonuses = {
     dexterityBonus,
@@ -43,8 +43,6 @@ export default ({str, str_max, con, con_max, siz, siz_max, int, int_max, pow, po
     stealthBonus
   }
   
-  console.log( bonuses )
-
   return ( {
     characteristics,
     bonuses,

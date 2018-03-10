@@ -9,9 +9,6 @@ export const fetchUser = () => async dispatch => {
 
 export const updateUser = (userName) => async dispatch => {
   const user = await axios.get("/api/current_user");
-
-  console.log(userName)
-
   const payload = {
     userName: userName,
     googleId: user.data.googleId
@@ -23,10 +20,9 @@ export const updateUser = (userName) => async dispatch => {
 };
 
 export const createChar = (character) => async dispatch => {
-  console.log(character)
   const res = await axios.post("/api/chars", character);
+  const a = await dispatch({ type: CREATE_CHAR, payload: res.data });
   dispatch(reset("characterForm"));
-  dispatch({ type: CREATE_CHAR, payload: res.data });
 };
 
 export const getAllChars = () => async dispatch => {

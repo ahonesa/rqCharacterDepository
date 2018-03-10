@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import * as actions from "../../actions";
 import { Grid } from 'react-bootstrap';
 import { reduxForm, Field } from "redux-form";
+import { prepare } from "../characters/PrepareCharacter";
 
 class CharacterForm extends Component {
   constructor(props) {
@@ -22,7 +23,6 @@ class CharacterForm extends Component {
   }
 
   nextPage(values) {
-    console.log(values)
     if (this.state.page === 2) this.setState({ character: calculateBonuses(values.characteristics || {}) })
     this.setState({ page: this.state.page + 1 })
   }
@@ -33,9 +33,9 @@ class CharacterForm extends Component {
 
   render() {
     const onSubmit = (values) => {
-      console.log(values)
+      prepare(values)
       this.props.createChar(values)
-      
+      this.props.history.push('/chars');
     };
     const { page } = this.state
     return (

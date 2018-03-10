@@ -18,11 +18,11 @@ export const ReduxCheckbox = ({ label, input, meta, ...props }) => {
   return (<Checkbox {...props} {...input}>{label}</Checkbox>)
 };
 
-export const ReduxFormGroup = ({ name, label }) => {
+export const ReduxFormGroup = ({ name, label, type }) => {
   return (
-    <FormGroup>
+    <FormGroup bsSize="small">
       <ControlLabel>{label}:</ControlLabel>
-      <Field component={ReduxFormControl} type="text" name={name} />
+      <Field component={ReduxFormControl} type={type} name={name} />
     </FormGroup>
   )
 };

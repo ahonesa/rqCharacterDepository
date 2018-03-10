@@ -12,7 +12,6 @@ const ReduxFormControl = ({input, meta, ...props}) => {
 class UserForm extends Component {
   render() {
     const onSubmit = (values) => {
-      console.log(values)
       this.props.updateUser(values.userName)
     };
     const { handleSubmit, reset } = this.props

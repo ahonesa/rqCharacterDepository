@@ -9,7 +9,6 @@ import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, Li
 class CharacterFormPageSix extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.previousPage = props.previousPage.bind(this)
     this.renderStuffFields = this.renderStuffFields.bind(this)
     this.renderArmorFields = this.renderArmorFields.bind(this)
@@ -110,7 +109,7 @@ class CharacterFormPageSix extends Component {
           <FieldArray name="stuff" component={this.renderStuffFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
           <Button type="button" onClick={this.previousPage}>Previous</Button>
-          <Button type="submit" href="/chars">Complete</Button>
+          <Button type="submit">Complete</Button>
         </form>
       </Row>);
   }

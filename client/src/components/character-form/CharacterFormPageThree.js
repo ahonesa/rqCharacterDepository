@@ -10,7 +10,6 @@ import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, Li
 class CharacterFormPageThree extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.previousPage = props.previousPage.bind(this)
     this.renderSkillFields = this.renderSkillFields.bind(this)
     this.renderSkillSelect = this.renderSkillSelect.bind(this)

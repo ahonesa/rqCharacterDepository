@@ -7,13 +7,13 @@ import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, La
 
 
 const ADDITIONAL_FIELDS = [
-  { label: "Species", name: "species" },
-  { label: "Homeland/Clan", name: "clan" },
-  { label: "Age", name: "age" },
-  { label: "Culture", name: "culture" },
-  { label: "Religion", name: "religion" },
-  { label: "Parent Occupation", name: "parent" },
-  { label: "Adventurer Occupation", name: "occupation" }
+  { label: "Species", name: "species", type: "text" },
+  { label: "Homeland/Clan", name: "clan", type: "text" },
+  { label: "Age", name: "age", type: "number" },
+  { label: "Culture", name: "culture", type: "text" },
+  { label: "Religion", name: "religion", type: "text" },
+  { label: "Parent Occupation", name: "parent", type: "text" },
+  { label: "Adventurer Occupation", name: "occupation", type: "text" }
 ]
 
 class CharacterFormPageOne extends Component {
@@ -22,8 +22,8 @@ class CharacterFormPageOne extends Component {
   }
 
   renderAdditionalFields() {
-    return _.map(ADDITIONAL_FIELDS, ({ label, name }) => {
-      return <ReduxFormGroup label={label} name={"info." + name} />
+    return _.map(ADDITIONAL_FIELDS, ({ label, name, type }) => {
+      return <ReduxFormGroup key={"info." + name} label={label} name={"info." + name} type={type} />
     });
   }
 

@@ -30,10 +30,8 @@ module.exports = (app) => {
   });
 
   app.post("/api/user", async (req, res) => {
-    console.log(req.body)
     const existingUser = await User.findOne({ googleId: req.body.googleId });
     existingUser.userName = req.body.userName
-    console.log(existingUser)
     const user = await User(existingUser).save();
     res.end("OK");
   });

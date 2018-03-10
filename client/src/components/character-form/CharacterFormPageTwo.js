@@ -18,11 +18,14 @@ const CHARACTERISTICS_FIELDS = [
 const CharacteristicField = ({ name, label }) => {
   return (
     <Row>
-      <Col xs={6} md={4} >
-        <ReduxFormGroup key={name} label={label} name={"characteristics." + name} />
+      <Col xs={4} md={3}>
+        <ReduxFormGroup type="number" key={name + "_org"} label={label + " org"} name={"characteristics." + name + "_org"} type="number"/>
       </Col>
-      <Col xs={6} md={4}>
-        <ReduxFormGroup key={name + "_max"} label={label + " max"} name={"characteristics." + name + "_max"} />
+      <Col xs={4} md={3} >
+        <ReduxFormGroup key={name} label={label} name={"characteristics." + name} type="number"/>
+      </Col>
+      <Col xs={4} md={3}>
+        <ReduxFormGroup type="number" key={name + "_max"} label={label + " max"} name={"characteristics." + name + "_max"} type="number"/>
       </Col>
     </Row>
   );

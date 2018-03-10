@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Panel } from 'react-bootstrap';
 
 const CharacterDetails = ({char}) => {
-  console.log(char);
   switch(char) {
     case null:
       return (<div>
