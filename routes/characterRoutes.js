@@ -10,10 +10,18 @@ module.exports = (app) => {
 
   app.post("/api/chars", async (req, res) => {
     console.log(req.body)
-//    const existingUser = await User.findOne({ googleId: req.body.googleId });
-//    existingUser.userName = req.body.userName
-//    console.log(existingUser)
-//    const user = await User(existingUser).save();
+    const existingCharacter = await Character.findOne({ characterId: req.body.name });
+    if(existingCharacter) {
+        existingCharacter.character = req.body
+        console.log(existingCharacter)
+        const char = await Character(existingCharacter).save();
+    } else {
+      const char = await Character({
+        characterId: req.body.name,
+        ownerId: req.user,
+        character: req.body
+      }).save();
+    }
     res.end("OK");
   });
 

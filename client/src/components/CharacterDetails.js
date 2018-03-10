@@ -10,8 +10,13 @@ const CharacterDetails = ({char}) => {
         <span>Loading</span>
       </div>);  
     default:
+
+      const testi = JSON.stringify(char)
+
+      console.log(testi)
       return (
         <Panel>
+          {testi}
           Character details here
 
 

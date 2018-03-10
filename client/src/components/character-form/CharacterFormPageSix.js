@@ -52,7 +52,7 @@ class CharacterFormPageSix extends Component {
     return (
       <FormGroup controlId="formControlsSelect">
         <ControlLabel>Select armor type</ControlLabel>
-        <Field name={`${member}.armor.type`} component={ReduxFormSelect} placeholder="select">
+        <Field name={`${member}.armorType`} component={ReduxFormSelect} placeholder="select">
           <option />
           {
             ARMOR.map(({ label }) => {
@@ -76,13 +76,13 @@ class CharacterFormPageSix extends Component {
                 <Col xs={6} md={3}>
                   <FormGroup>
                     <label>Locations</label>
-                    <Field name={`${member}.armor.head`} component={ReduxCheckbox} type="checkbox" label="Head" value="head" />
-                    <Field name={`${member}.armor.chest`} component={ReduxCheckbox} type="checkbox" label="Chest" value="chest" />
-                    <Field name={`${member}.armor.stomach`} component={ReduxCheckbox} type="checkbox" label="Stomach" value="stomach" />
-                    <Field name={`${member}.armor.lh`} component={ReduxCheckbox} type="checkbox" label="Left hand" value="lh" />
-                    <Field name={`${member}.armor.rh`} component={ReduxCheckbox} type="checkbox" label="Right hand" value="rh" />
-                    <Field name={`${member}.armor.ll`} component={ReduxCheckbox} type="checkbox" label="Left leg" value="ll" />
-                    <Field name={`${member}.armor.rl`} component={ReduxCheckbox} type="checkbox" label="Right leg" value="rl" />
+                    <Field name={`${member}.head`} component={ReduxCheckbox} type="checkbox" label="Head" value="head" />
+                    <Field name={`${member}.chest`} component={ReduxCheckbox} type="checkbox" label="Chest" value="chest" />
+                    <Field name={`${member}.stomach`} component={ReduxCheckbox} type="checkbox" label="Stomach" value="stomach" />
+                    <Field name={`${member}.lh`} component={ReduxCheckbox} type="checkbox" label="Left hand" value="lh" />
+                    <Field name={`${member}.rh`} component={ReduxCheckbox} type="checkbox" label="Right hand" value="rh" />
+                    <Field name={`${member}.ll`} component={ReduxCheckbox} type="checkbox" label="Left leg" value="ll" />
+                    <Field name={`${member}.rl`} component={ReduxCheckbox} type="checkbox" label="Right leg" value="rl" />
                   </FormGroup>
                 </Col>
                 <Col xs={6} md={3}>
@@ -104,7 +104,7 @@ class CharacterFormPageSix extends Component {
       <Row>
         <form onSubmit={handleSubmit}>
           <h2 style={{ marginBottom: 30 }}><Label>Armor</Label></h2>
-          <FieldArray name="stuff" component={this.renderArmorFields} />
+          <FieldArray name="armor" component={this.renderArmorFields} />
           <h2 style={{ marginBottom: 30 }}><Label>Stuff</Label></h2>
           <FieldArray name="stuff" component={this.renderStuffFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>

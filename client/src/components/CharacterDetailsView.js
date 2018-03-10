@@ -16,7 +16,7 @@ class CharacterDetailsView extends Component {
 
   rivit = () => this.props.characters && this.props.characters.map(char =>
     <ListGroupItem key={char.characterId} href={"/chars/" + char.characterId}>
-      {char.name}
+      {char.characterId}
     </ListGroupItem>
   )
 
