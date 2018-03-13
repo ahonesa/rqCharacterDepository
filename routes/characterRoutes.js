@@ -13,12 +13,13 @@ module.exports = (app) => {
     const existingCharacter = await Character.findOne({ characterId: req.body.name });
     if(existingCharacter) {
         existingCharacter.character = req.body
+        existingCharacter.ownerId = req.user.googleId
         console.log(existingCharacter)
         const char = await Character(existingCharacter).save();
     } else {
       const char = await Character({
         characterId: req.body.name,
-        ownerId: req.user,
+        ownerId: req.user.googleId,
         character: req.body
       }).save();
     }
