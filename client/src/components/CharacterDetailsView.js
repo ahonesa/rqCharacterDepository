@@ -28,8 +28,7 @@ class CharacterDetailsView extends Component {
             <ListGroup>
               {this.rivit()}
             </ListGroup>
-            <Button href="/new_char">Create new character
-        </Button>
+            <Button href="/new_char">Create new character</Button>
           </Col>
           <Col xs={10} md={10} lg={10}>
             <CharacterDetails char={this.props.selectedChar} />

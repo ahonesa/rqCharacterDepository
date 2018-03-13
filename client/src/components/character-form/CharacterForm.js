@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react'
 import CharacterFormPageOne from './CharacterFormPageOne'
 import CharacterFormPageTwo from './CharacterFormPageTwo'
@@ -20,8 +21,10 @@ class CharacterForm extends Component {
     this.state = {
       page: 1
     }
+    const vara = _.get(this.props, 'match.params.characterId', "")
+    vara && this.props.getOneChar(this.props.match.params.characterId);
   }
-
+ 
   nextPage(values) {
     if (this.state.page === 2) this.setState({ character: calculateBonuses(values.characteristics || {}) })
     this.setState({ page: this.state.page + 1 })
@@ -80,6 +83,12 @@ class CharacterForm extends Component {
   }
 }
 
-export default connect(null, actions)(reduxForm({
+function mapStateToProps({ selectedChar }) {
+  if(selectedChar) {
+    return { initialValues: selectedChar.character }
+  } else return {};
+}
+
+export default connect(mapStateToProps, actions)(reduxForm({
   form: "characterForm"
 })(CharacterForm));

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Row, Col, Panel } from 'react-bootstrap';
+import { Row, Col, Panel, Button } from 'react-bootstrap';
 
 const CharacterDetails = ({ char }) => {
   switch (char) {
@@ -65,6 +65,9 @@ const CharacterDetails = ({ char }) => {
                   <Panel.Body>Character details 6</Panel.Body>
                 </Panel>
               </Col>
+            </Row>
+            <Row>
+            <Button href={"/chars/" + char.characterId + "/update/"}>Update character</Button>
             </Row>
           </Panel.Body>
         </Panel>

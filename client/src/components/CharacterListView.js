@@ -24,8 +24,7 @@ class CharacterListView extends Component {
           {this.rivit()}
         </ListGroup>
 
-        <Button href="/new_char">Create new character
-        </Button>
+        <Button href="/new_char">Create new character</Button>
       </Grid>
     )
   }

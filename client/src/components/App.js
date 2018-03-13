@@ -22,6 +22,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/chars" component={CharacterListView} />
             <Route exact path="/chars/:characterId" component={CharacterDetailsView} />
+            <Route exact path="/chars/:characterId/update" component={CharacterForm} />
             <Route exact path="/new_char" component={CharacterForm} />
             <Route exact path="/user" component={UserForm} />
           </div>

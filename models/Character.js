@@ -31,13 +31,13 @@ const characterSchema = new Schema({
             dex_max: String,
             pow_max: String,
             app_max: String,
-            str_max: String,
-            con_max: String,
-            siz_max: String,
-            int_max: String,
-            dex_max: String,
-            pow_max: String,
-            app_max: String
+            str_org: String,
+            con_org: String,
+            siz_org: String,
+            int_org: String,
+            dex_org: String,
+            pow_org: String,
+            app_org: String
         },
         skills: [
             { 
