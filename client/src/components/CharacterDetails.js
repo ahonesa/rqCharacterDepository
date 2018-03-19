@@ -1,7 +1,9 @@
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Row, Col, Panel, Button } from 'react-bootstrap';
+import { Row, Col, Panel, Button, Table } from 'react-bootstrap';
+import { Characteristics } from './character-details/Characteristics';
 
 const CharacterDetails = ({ char }) => {
   switch (char) {
@@ -12,6 +14,8 @@ const CharacterDetails = ({ char }) => {
     default:
       console.log(char)
       const c = char.character
+      const characteristics = _.get(char, "character.characteristics", {})
+
       return (
         <Panel bsSize="small">
           <Panel.Heading componentClass="h4">{char.characterId}</Panel.Heading>
@@ -29,20 +33,22 @@ const CharacterDetails = ({ char }) => {
                     <b>Parents:</b>    {c.info.parent}<br />
                     <b>Religion:</b>   {c.info.religion}<br />
                     <b>Sex:</b>        {c.info.sex}<br />
-                    <b>Species:</b>4    {c.info.species}</span>
+                    <b>Species:</b>    {c.info.species}</span>
                   </Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={4} md={4} lg={4}>
+              <Col xs={3} md={3} lg={3}>
                 <Panel>
-                  <Panel.Heading>Testi 2</Panel.Heading>
-                  <Panel.Body>Character details 2</Panel.Body>
+                  <Panel.Heading>Picture</Panel.Heading>
+                  <Panel.Body></Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={4} md={4} lg={4}>
+              <Col xs={5} md={5} lg={5}>
                 <Panel>
-                  <Panel.Heading>Testi 3</Panel.Heading>
-                  <Panel.Body>Character details 3</Panel.Body>
+                  <Panel.Heading>Characteristics</Panel.Heading>
+                  <Panel.Body>
+                      <Characteristics characteristics={characteristics} />
+                  </Panel.Body>
                 </Panel>
               </Col>
             </Row>
