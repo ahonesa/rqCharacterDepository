@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Row, Col, Panel, Button, Table } from 'react-bootstrap';
 import { Characteristics } from './character-details/Characteristics';
+import { SkillsPanel } from './character-details/Skills';
 
 const CharacterDetails = ({ char }) => {
   switch (char) {
@@ -15,25 +16,29 @@ const CharacterDetails = ({ char }) => {
       console.log(char)
       const c = char.character
       const characteristics = _.get(char, "character.characteristics", {})
+      const skills = _.get(char, "character.skills", {})
 
       return (
         <Panel bsSize="small">
           <Panel.Heading componentClass="h4">{char.characterId}</Panel.Heading>
           <Panel.Body>
             <Row>
-              <Col xs={4} md={3} lg={4}>
+              <Col xs={4} md={4} lg={4}>
                 <Panel bsSize="small">
                   <Panel.Heading>Basic info</Panel.Heading>
                   <Panel.Body>
-                    <span>
-                    <b>Age:</b> {c.info.age}<br />
-                    <b>Clan:</b>       {c.info.clan}<br />
-                    <b>Culture:</b>    {c.info.culture}<br />
-                    <b>Occupation:</b> {c.info.occupation}<br />
-                    <b>Parents:</b>    {c.info.parent}<br />
-                    <b>Religion:</b>   {c.info.religion}<br />
-                    <b>Sex:</b>        {c.info.sex}<br />
-                    <b>Species:</b>    {c.info.species}</span>
+                    <Table condensed responsive>
+                      <tbody>
+                        <tr><td>Age:</td><td>{c.info.age}</td></tr>
+                        <tr><td>Clan:</td><td>{c.info.clan}</td></tr>
+                        <tr><td>Culture:</td><td>{c.info.culture}</td></tr>
+                        <tr><td>Occupation:</td><td>{c.info.occupation}</td></tr>
+                        <tr><td>Parents:</td><td>{c.info.parent}</td></tr>
+                        <tr><td>Religion:</td><td>{c.info.religion}</td></tr>
+                        <tr><td>Sex:</td><td>{c.info.sex}</td></tr>
+                        <tr><td>Species:</td><td>{c.info.species}</td></tr>
+                      </tbody>
+                    </Table>
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -47,7 +52,7 @@ const CharacterDetails = ({ char }) => {
                 <Panel>
                   <Panel.Heading>Characteristics</Panel.Heading>
                   <Panel.Body>
-                      <Characteristics characteristics={characteristics} />
+                    <Characteristics characteristics={characteristics} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -55,8 +60,10 @@ const CharacterDetails = ({ char }) => {
             <Row>
               <Col xs={4} md={3} lg={3}>
                 <Panel>
-                  <Panel.Heading>Testi 4</Panel.Heading>
-                  <Panel.Body>Character details 1</Panel.Body>
+                  <Panel.Heading>Skills</Panel.Heading>
+                  <Panel.Body>
+                    <SkillsPanel skills={skills} />
+                  </Panel.Body>
                 </Panel>
               </Col>
               <Col xs={4} md={3} lg={3}>
@@ -73,7 +80,7 @@ const CharacterDetails = ({ char }) => {
               </Col>
             </Row>
             <Row>
-            <Button href={"/chars/" + char.characterId + "/update/"}>Update character</Button>
+              <Button href={"/chars/" + char.characterId + "/update/"}>Update character</Button>
             </Row>
           </Panel.Body>
         </Panel>
