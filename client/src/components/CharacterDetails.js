@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Row, Col, Panel, Button, Table } from 'react-bootstrap';
 import { Characteristics } from './character-details/Characteristics';
 import { SkillsPanel } from './character-details/Skills';
+import { WeaponsPanel } from './character-details/Weapons';
 
 const CharacterDetails = ({ char }) => {
   switch (char) {
@@ -17,6 +18,8 @@ const CharacterDetails = ({ char }) => {
       const c = char.character
       const characteristics = _.get(char, "character.characteristics", {})
       const skills = _.get(char, "character.skills", {})
+      const weapons = _.get(char, "character.weapons", {})
+      const weaponskills = _.get(char, "character.weaponskills", {})
 
       return (
         <Panel bsSize="small">
@@ -58,7 +61,7 @@ const CharacterDetails = ({ char }) => {
               </Col>
             </Row>
             <Row>
-              <Col xs={4} md={3} lg={3}>
+              <Col xs={4} md={4} lg={4}>
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
@@ -66,21 +69,29 @@ const CharacterDetails = ({ char }) => {
                   </Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={4} md={3} lg={3}>
+              <Col xs={4} md={4} lg={4}>
                 <Panel>
                   <Panel.Heading>Testi 5</Panel.Heading>
                   <Panel.Body>Character details 5</Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={4} md={3} lg={3}>
+              <Col xs={4} md={4} lg={4}>
                 <Panel>
-                  <Panel.Heading>Testi 6</Panel.Heading>
-                  <Panel.Body>Character details 6</Panel.Body>
+                  <Panel.Heading>Weapons</Panel.Heading>
+                  <Panel.Body>
+                    <WeaponsPanel weapons={weapons} weaponskills={weaponskills} />
+                  </Panel.Body>
                 </Panel>
               </Col>
             </Row>
             <Row>
-              <Button href={"/chars/" + char.characterId + "/update/"}>Update character</Button>
+              <Col >
+              <Panel>
+                <Panel.Body>
+                <Button href={"/chars/" + char.characterId + "/update/"}>Update character</Button>
+                </Panel.Body>
+              </Panel>
+              </Col>
             </Row>
           </Panel.Body>
         </Panel>

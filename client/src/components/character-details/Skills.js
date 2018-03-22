@@ -39,6 +39,6 @@ export const SkillsPanel = (props) => {
       {SkillGroups("magic", skills)}
     </div>);
   } else {
-    return;
+    return <div />;
   }
 }
