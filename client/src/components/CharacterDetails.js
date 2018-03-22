@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Row, Col, Panel, Button, Table } from 'react-bootstrap';
 import { Characteristics } from './character-details/Characteristics';
-import { SkillsPanel } from './character-details/Skills';
+import { SkillsPanelOne, SkillsPanelTwo } from './character-details/Skills';
 import { WeaponsPanel } from './character-details/Weapons';
 
 const CharacterDetails = ({ char }) => {
@@ -65,14 +65,16 @@ const CharacterDetails = ({ char }) => {
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanel skills={skills} />
+                    <SkillsPanelOne skills={skills} />
                   </Panel.Body>
                 </Panel>
               </Col>
               <Col xs={4} md={4} lg={4}>
                 <Panel>
-                  <Panel.Heading>Testi 5</Panel.Heading>
-                  <Panel.Body>Character details 5</Panel.Body>
+                  <Panel.Heading>Skills</Panel.Heading>
+                  <Panel.Body>
+                    <SkillsPanelTwo skills={skills} />
+                  </Panel.Body>
                 </Panel>
               </Col>
               <Col xs={4} md={4} lg={4}>
