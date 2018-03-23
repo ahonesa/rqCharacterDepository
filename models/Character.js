@@ -42,13 +42,16 @@ const characterSchema = new Schema({
         skills: [
             { 
                 skill: String,
-                value: String
+                value: String,
+                lock: Boolean
             }        
         ],
         weaponskills: [{
                 skill: String, 
                 attack: String, 
-                parry: String
+                parry: String,
+                attackLock: Boolean,
+                parryLock: Boolean
         }],
         weapons: [
             {
@@ -65,7 +68,8 @@ const characterSchema = new Schema({
                 spelltype: String,
                 spell: String,
                 rank: String,
-                value: String
+                value: String,
+                lock: Boolean
         }],
         armor: [{
             armorType: String,
