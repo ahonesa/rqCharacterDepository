@@ -149,6 +149,5 @@ export const ARMOR = [
   { label: "Chainmail", value: 7 , weight: [16.0, 20.0, 24.0, 28.0] },
   { label: "Plate", value: 8, weight:[20.0, 25.0, 30.0, 35.0] },
   { label: "Steel Lamellar", value: 9 , weight: [14.0, 18.0, 21.5, 25.0] },
-  { label: "Chainmail", value: 10 , weight: [16.0, 20.0, 24.0, 28.0] },
   { label: "Steel Plate", value: 12, weight:[20.0, 25.0, 30.0, 35.0] }
 ]

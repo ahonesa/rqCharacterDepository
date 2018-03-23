@@ -33,7 +33,7 @@ module.exports = (app) => {
     res.send(character)
   });
 
-  app.get("/api/chars/:id/xp_weapon/:weaponskill/:type", async (req, res) => {
+  app.post("/api/chars/:id/xp_weapon/:weaponskill/:type", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
     const char = _.get(character, 'character')
     const weaponskills = _.get(character, 'character.weaponskills');
@@ -73,7 +73,7 @@ module.exports = (app) => {
   });
 
   
-  app.get("/api/chars/:id/xp_skill/:skill", async (req, res) => {
+  app.post("/api/chars/:id/xp_skill/:skill", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
     const char = _.get(character, 'character')
     const skills = _.get(character, 'character.skills');
