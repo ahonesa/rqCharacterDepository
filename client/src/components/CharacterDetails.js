@@ -71,7 +71,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelOne skills={skills} />
+                    <SkillsPanelOne skills={skills} owner={isOwner} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -79,7 +79,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelTwo skills={skills} />
+                    <SkillsPanelTwo skills={skills} owner={isOwner} />
                   </Panel.Body>
                 </Panel>
               </Col>

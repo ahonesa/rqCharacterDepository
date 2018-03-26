@@ -8,13 +8,12 @@ import { Button, Table, Panel } from 'react-bootstrap';
 const SkillRows = (skills, props) => skills.map(skill => {
   console.log(skill)
   return <tr key={skill.skill}><td>{skill.skill.split(".")[1]}</td><td>{skill.value}</td><td></td><td>
-    
-    <Button bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
+    <Button disabled={!props.owner} bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
 }
 )
 
-const SkillGroups = (group, skills, props) => {
-  const filtered = skills.filter(skill => {
+const SkillGroups = (group, props) => {
+  const filtered = props.skills.filter(skill => {
     return (skill.skill.split(".")[0] === group)
   })
   return (
@@ -34,7 +33,7 @@ const SkillGroups = (group, skills, props) => {
 }
 
 const mapStateToProps = ({ selectedChar }) => {
-  if(selectedChar) {
+  if (selectedChar) {
     return { selectedChar }
   } else return {};
 }
@@ -42,11 +41,10 @@ const mapStateToProps = ({ selectedChar }) => {
 export const SkillsPanelOne = connect(mapStateToProps, actions)((props) => {
   console.log(props)
   if (props.skills) {
-    const skills = props.skills;
     return (<div>
-      {SkillGroups("dexterity", skills, props)}
-      {SkillGroups("communication", skills, props)}
-      {SkillGroups("knowledge", skills, props)}
+      {SkillGroups("dexterity", props)}
+      {SkillGroups("communication", props)}
+      {SkillGroups("knowledge", props)}
     </div>);
   } else {
     return <div />;
@@ -56,12 +54,11 @@ export const SkillsPanelOne = connect(mapStateToProps, actions)((props) => {
 export const SkillsPanelTwo = connect(mapStateToProps, actions)((props) => {
   console.log(props)
   if (props.skills) {
-    const skills = props.skills;
     return (<div>
-      {SkillGroups("magic", skills)}
-      {SkillGroups("manipulation", skills)}
-      {SkillGroups("perception", skills)}
-      {SkillGroups("stealth", skills)}
+      {SkillGroups("magic", props)}
+      {SkillGroups("manipulation", props)}
+      {SkillGroups("perception", props)}
+      {SkillGroups("stealth", props)}
     </div>);
   } else {
     return <div />;
