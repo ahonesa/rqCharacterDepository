@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import { ReduxFormControl, ReduxFormGroup, ReduxRadio } from '../fields/Fields';
+import { ReduxFormControl, ReduxFormGroup, ReduxRadio, isReadOnly } from '../fields/Fields';
 import { Link } from 'react-router-dom';
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, Label } from "react-bootstrap";
 
@@ -21,26 +21,27 @@ class CharacterFormPageOne extends Component {
     super(props)
   }
 
-  renderAdditionalFields() {
+  renderAdditionalFields(oper, auth) {
     return _.map(ADDITIONAL_FIELDS, ({ label, name, type }) => {
-      return <ReduxFormGroup key={"info." + name} label={label} name={"info." + name} type={type} />
+      return <ReduxFormGroup key={"info." + name} label={label} name={"info." + name} type={type} oper={oper} auth={auth}/>
     });
   }
 
   render() {
-    const { handleSubmit, reset } = this.props
+    const { handleSubmit, reset, oper, auth } = this.props
+    console.log("oper: ", oper, auth)
     return (
       <Row>
         <h2 style={{ marginBottom: 30}}><Label>Basic information</Label></h2>
         <Col>
           <form onSubmit={handleSubmit}>
-            <ReduxFormGroup label="Character Name" name="name" />
+            <ReduxFormGroup label="Character Name" name="name" oper={oper} auth={auth}/>
             <FormGroup>
               <label>Sex</label>
-              <Field name="info.sex" component={ReduxRadio} type="radio" label="male" value="male" />
-              <Field name="info.sex" component={ReduxRadio} type="radio" label="female" value="female" />
+              <Field disabled={isReadOnly(oper, auth)} name="info.sex" component={ReduxRadio} type="radio" label="male" value="male" />
+              <Field disabled={isReadOnly(oper, auth)} name="info.sex" component={ReduxRadio} type="radio" label="female" value="female" />
             </FormGroup>
-            {this.renderAdditionalFields()}
+            {this.renderAdditionalFields(oper, auth)}
             <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
             <Button type="submit">Next</Button>
           </form>

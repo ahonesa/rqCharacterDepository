@@ -22,13 +22,24 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/chars" component={CharacterListView} />
             <Route exact path="/chars/:characterId" component={CharacterDetailsView} />
-            <Route exact path="/chars/:characterId/update" component={CharacterForm} />
-            <Route exact path="/new_char" component={CharacterForm} />
+            <Route exact path="/chars/:characterId/update" component={AddPropsToRoute(CharacterForm, { oper: "update"})} />
+            <Route exact path="/new_char" component={AddPropsToRoute(CharacterForm, { oper: "create"})} />
             <Route exact path="/user" component={UserForm} />
           </div>
         </BrowserRouter>
     );
   }
+}
+
+const AddPropsToRoute = (WrappedComponent, passedProps)=>{
+  return (
+      class Route extends Component{
+          render(){
+              let props = Object.assign({}, this.props, passedProps)
+              return  <WrappedComponent {...props} />
+          }
+      }
+  )
 }
 
 export default connect(null, actions)(App);

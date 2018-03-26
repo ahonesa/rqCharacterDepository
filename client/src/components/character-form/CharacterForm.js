@@ -41,13 +41,24 @@ class CharacterForm extends Component {
       this.props.history.push('/chars');
     };
     const { page } = this.state
+    const { auth, oper } = this.props
+    const authorizationLevel = auth && auth.authorizationLevel
+
     return (
       <Grid>
-        {page === 1 && <CharacterFormPageOne onSubmit={this.nextPage} />}
+        {page === 1 && 
+          <CharacterFormPageOne 
+            onSubmit={this.nextPage} 
+            oper={oper} 
+            auth={authorizationLevel}
+            />
+          }
         {page === 2 && (
           <CharacterFormPageTwo
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
+            auth={authorizationLevel}
+            oper={oper}
           />
         )}
         {page === 3 && (
@@ -55,6 +66,8 @@ class CharacterForm extends Component {
             character={this.state.character}
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
+            auth={authorizationLevel}
+            oper={oper}
           />
         )}
         {page === 4 && (
@@ -62,6 +75,8 @@ class CharacterForm extends Component {
             character={this.state.character}
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
+            auth={authorizationLevel}
+            oper={oper}
           />
         )}
         {page === 5 && (
@@ -69,6 +84,8 @@ class CharacterForm extends Component {
             character={this.state.character}
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
+            auth={authorizationLevel}
+            oper={oper}
           />
         )}
         {page === 6 && (
@@ -76,6 +93,8 @@ class CharacterForm extends Component {
             character={this.state.character}
             previousPage={this.previousPage}
             onSubmit={onSubmit}
+            auth={authorizationLevel}
+            oper={oper}
           />
         )}
       </Grid>
@@ -83,10 +102,10 @@ class CharacterForm extends Component {
   }
 }
 
-function mapStateToProps({ selectedChar }) {
+function mapStateToProps({ selectedChar, auth }) {
   if(selectedChar) {
-    return { initialValues: selectedChar.character }
-  } else return {};
+    return { initialValues: selectedChar.character, auth: auth }
+  } else return { auth: auth };
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({
