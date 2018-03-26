@@ -11,12 +11,10 @@ module.exports = (app) => {
   });
 
   app.post("/api/chars", async (req, res) => {
-    console.log(req.body)
     const existingCharacter = await Character.findOne({ characterId: req.body.name });
     if (existingCharacter) {
       existingCharacter.character = req.body
       existingCharacter.ownerId = req.user.googleId
-      console.log(existingCharacter)
       const char = await Character(existingCharacter).save();
     } else {
       const char = await Character({
@@ -46,20 +44,18 @@ module.exports = (app) => {
       var success = false
       if (req.params.type === 'attack') {
         var skillInt = parseInt(skill.attack || '5')
-        const skillCap = skillInt > 100 ? 100 : skillInt
-        if (roll > (skillCap - bonuses.bonuses.manipulationBonus)) {
+        const skillCap = (skillInt + bonuses.bonuses.manipulationBonus) > 100 ? (100 - bonuses.bonuses.manipulationBonus) : skillInt
+        if (roll > skillCap) {
           skillInt += increase
           skill.attack = skillInt.toString()
-          skill.attackLock = true
           success = true
         }
       } else if (req.params.type === 'parry') {
         var skillInt = parseInt(skill.parry || '5')
-        const skillCap = skillInt > 100 ? 100 : skillInt
-        if (roll > (skillCap - bonuses.bonuses.dexterityBonus)) {
+        const skillCap = (skillInt + bonuses.bonuses.dexterityBonus) > 100 ? (100 - bonuses.bonuses.dexterityBonus) : skillInt
+        if (roll > skillCap) {
           skillInt += increase
           skill.parry = skillInt.toString()
-          skill.parryLock = true
           success = true
         }
       }
@@ -86,23 +82,21 @@ module.exports = (app) => {
       
       var success = false
       var skillInt = parseInt(skill.value || '5')
-      const skillCap = skillInt > 100 ? 100 : skillInt
-
+      
       const skillGroup = skill.skill.split('.')[0] + 'Bonus'
       const statBonus = _.get(bonuses.bonuses, skillGroup, 0)     
 
-      if (roll > (skillCap - statBonus)) {
+      const skillCap = (skillInt + statBonus) > 100 ? (100 - statBonus) : skillInt
+
+      if (roll > skillCap) {
         skillInt += increase
         skill.value = skillInt.toString()
         success = true
       }
 
-      skill.lock = true
-
       _.remove(character.character.skills, { 'skill': req.params.skill })
       character.character.skills.push(skill)
       const result = await Character(character).save()
-      console.log(result.character.skills)
       res.send(result);
 
     } else res.status(400).end("NOK");

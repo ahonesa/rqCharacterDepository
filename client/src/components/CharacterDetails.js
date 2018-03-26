@@ -6,6 +6,7 @@ import { Row, Col, Panel, Button, Table } from 'react-bootstrap';
 import { Characteristics } from './character-details/Characteristics';
 import { SkillsPanelOne, SkillsPanelTwo } from './character-details/Skills';
 import { WeaponsPanel } from './character-details/Weapons';
+import calculateBonuses from './characters/StatBonuses'
 
 const CharacterDetails = ({ char, auth }) => {
   switch (char) {
@@ -14,17 +15,15 @@ const CharacterDetails = ({ char, auth }) => {
         <span>Loading</span>
       </div>);
     default:
-      console.log(char)
-      console.log(auth)
       const c = _.get(char, "character", {})
       const ownerId = _.get(char, "ownerId", {})
       const characteristics = _.get(char, "character.characteristics", {})
+      const bonuses = characteristics && calculateBonuses(characteristics)  
       const skills = _.get(char, "character.skills", {})
       const weapons = _.get(char, "character.weapons", {})
       const weaponskills = _.get(char, "character.weaponskills", {})
       const authorizationLevel = auth && auth.authorizationLevel
       const userId = auth && auth.googleId
-
       const isOwner = ownerId === userId 
 
       return (
@@ -71,7 +70,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelOne skills={skills} owner={isOwner} />
+                    <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -79,7 +78,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelTwo skills={skills} owner={isOwner} />
+                    <SkillsPanelTwo skills={skills} bonuses={bonuses} owner={isOwner} />
                   </Panel.Body>
                 </Panel>
               </Col>

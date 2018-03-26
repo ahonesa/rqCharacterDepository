@@ -10,14 +10,12 @@ class CharacterListView extends Component {
   }
 
   rivit = () => this.props.characters && this.props.characters.map(char => {
-    console.log(char)
     return <ListGroupItem key={char.characterId} href={"/chars/" + char.characterId}>
       {char.characterId}
   </ListGroupItem> }
   )
 
   render() {
-    console.log(this.props.characters)
     return (
       <Grid>
         <ListGroup>
