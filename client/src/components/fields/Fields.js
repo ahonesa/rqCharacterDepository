@@ -3,13 +3,6 @@ import { Field } from 'redux-form';
 import { FormGroup, Radio, FormControl, ControlLabel, Checkbox } from "react-bootstrap";
 
 
-export const isReadOnly = (oper, auth) => {
-  if(oper === 'create') return false;
-  else if(oper === 'update' && auth === 1) return false;
-  else if(oper === 'update' && auth === 2) return true;
-  else return false;
-}
-
 export const ReduxFormControl = ({ input, meta, ...props }) => {
   return <FormControl {...props} {...input} />
 };
@@ -30,7 +23,7 @@ export const ReduxFormGroup = ({ name, label, type, oper, auth }) => {
   return (
     <FormGroup bsSize="small">
       <ControlLabel>{label}:</ControlLabel>
-      <Field readOnly={isReadOnly(oper, auth)} component={ReduxFormControl} type={type} name={name} />
+      <Field component={ReduxFormControl} type={type} name={name} />
     </FormGroup>
   )
 };

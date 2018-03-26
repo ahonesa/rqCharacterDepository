@@ -31,7 +31,7 @@ class CharacterDetailsView extends Component {
             <Button href="/new_char">Create new character</Button>
           </Col>
           <Col xs={10} md={10} lg={10}>
-            <CharacterDetails char={this.props.selectedChar} />
+            <CharacterDetails char={this.props.selectedChar} auth={this.props.auth} />
           </Col>
         </Row>
       </Grid>
@@ -39,8 +39,8 @@ class CharacterDetailsView extends Component {
   }
 }
 
-function mapStateToProps({ selectedChar, characters }) {
-  return { selectedChar, characters }
+function mapStateToProps({ selectedChar, characters, auth }) {
+  return { selectedChar, characters, auth }
 }
 
 export default connect(mapStateToProps, actions)(CharacterDetailsView);

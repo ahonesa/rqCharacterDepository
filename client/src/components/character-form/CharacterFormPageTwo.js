@@ -15,17 +15,17 @@ const CHARACTERISTICS_FIELDS = [
   { label: "APP", name: "app" }
 ]
 
-const CharacteristicField = ({ name, label, oper, auth }) => {
+const CharacteristicField = ({ name, label }) => {
   return (
     <Row>
       <Col xs={4} md={3}>
-        <ReduxFormGroup type="number" key={name + "_org"} label={label + " org"} name={"characteristics." + name + "_org"} oper={oper} auth={auth} />
+        <ReduxFormGroup type="number" key={name + "_org"} label={label + " org"} name={"characteristics." + name + "_org"} />
       </Col>
       <Col xs={4} md={3} >
-        <ReduxFormGroup type="number" key={name} label={label} name={"characteristics." + name} oper={oper} auth={auth}/>
+        <ReduxFormGroup type="number" key={name} label={label} name={"characteristics." + name} />
       </Col>
       <Col xs={4} md={3}>
-        <ReduxFormGroup type="number" key={name + "_max"} label={label + " max"} name={"characteristics." + name + "_max"} type="number" oper={oper} auth={auth}/>
+        <ReduxFormGroup type="number" key={name + "_max"} label={label + " max"} name={"characteristics." + name + "_max"} type="number" />
       </Col>
     </Row>
   );
@@ -40,21 +40,19 @@ class CharacterFormPageTwo extends Component {
 
 
 
-  renderFields(oper, auth) {
+  renderFields() {
     return _.map(CHARACTERISTICS_FIELDS, ({ label, name }) => {
-      return <CharacteristicField key={name} label={label} name={name} oper={oper} auth={auth}/>
+      return <CharacteristicField key={name} label={label} name={name} />
     });
   }
 
   render() {
     const { handleSubmit, reset, auth, oper } = this.props
-    console.log("AUTH: ", auth)
-    console.log("OPER: ", oper)
     return (
       <Row>
         <h2 style={{ marginBottom: 30}}><Label>Characteristics</Label></h2>
         <form onSubmit={handleSubmit}>
-          {this.renderFields(oper, auth)}
+          {this.renderFields()}
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
           <Button type="button" onClick={this.previousPage}>Previous</Button>
           <Button type="submit">Next</Button>

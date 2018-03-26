@@ -7,7 +7,7 @@ import { Characteristics } from './character-details/Characteristics';
 import { SkillsPanelOne, SkillsPanelTwo } from './character-details/Skills';
 import { WeaponsPanel } from './character-details/Weapons';
 
-const CharacterDetails = ({ char }) => {
+const CharacterDetails = ({ char, auth }) => {
   switch (char) {
     case null:
       return (<div>
@@ -15,11 +15,17 @@ const CharacterDetails = ({ char }) => {
       </div>);
     default:
       console.log(char)
-      const c = char.character
+      console.log(auth)
+      const c = _.get(char, "character", {})
+      const ownerId = _.get(char, "ownerId", {})
       const characteristics = _.get(char, "character.characteristics", {})
       const skills = _.get(char, "character.skills", {})
       const weapons = _.get(char, "character.weapons", {})
       const weaponskills = _.get(char, "character.weaponskills", {})
+      const authorizationLevel = auth && auth.authorizationLevel
+      const userId = auth && auth.googleId
+
+      const isOwner = ownerId === userId 
 
       return (
         <Panel bsSize="small">
@@ -90,7 +96,7 @@ const CharacterDetails = ({ char }) => {
               <Col >
               <Panel>
                 <Panel.Body>
-                <Button href={"/chars/" + char.characterId + "/update/"}>Update character</Button>
+                <Button disabled={ authorizationLevel === 1 ? false : true  } href={"/chars/" + char.characterId + "/update/"}>Update character</Button>
                 </Panel.Body>
               </Panel>
               </Col>
