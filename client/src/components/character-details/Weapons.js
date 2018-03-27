@@ -17,8 +17,8 @@ const WeaponGroups = (skills, weapons, props) => {
             <tr><th>{weapon.skill.split(".")[1]}</th></tr>
           </thead>
           <tbody>
-            <tr><td>attack:</td><td>{skill.attack}</td><td><Button disabled={!props.owner || !props.hasXp} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill, "attack")}>XP</Button></td></tr>
-            <tr><td>parry:</td><td>{skill.parry}</td><td><Button disabled={!props.owner || !props.hasXp} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill, "parry")}>XP</Button></td></tr>
+            <tr><td>attack:</td><td>{skill.attack || ""}</td><td><Button disabled={!skill.attack || !props.owner || !props.hasXp} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill, "attack")}>XP</Button></td></tr>
+            <tr><td>parry:</td><td>{skill.parry || ""}</td><td><Button disabled={!skill.parry || !props.owner || !props.hasXp} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill, "parry")}>XP</Button></td></tr>
             <tr><td>weapon:</td><td>{weapon.weapon}</td></tr>
             <tr><td>damage:</td><td>{weapon.damage}</td></tr>
             <tr><td>sr:</td><td>{weapon.sr}</td></tr>
