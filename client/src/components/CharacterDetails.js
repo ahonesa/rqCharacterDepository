@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Row, Col, Panel, Button, Table } from 'react-bootstrap';
+import { Row, Col, Panel, Button, Table, Badge } from 'react-bootstrap';
 import { Characteristics } from './character-details/Characteristics';
 import { SkillsPanelOne, SkillsPanelTwo } from './character-details/Skills';
 import { WeaponsPanel } from './character-details/Weapons';
@@ -25,10 +25,11 @@ const CharacterDetails = ({ char, auth }) => {
       const authorizationLevel = auth && auth.authorizationLevel
       const userId = auth && auth.googleId
       const isOwner = ownerId === userId 
+      const hasXp = c.xp > 0  
 
       return (
         <Panel bsSize="small">
-          <Panel.Heading componentClass="h4">{char.characterId}</Panel.Heading>
+          <Panel.Heading componentClass="h4">{char.characterId} <Badge>{c.xp}</Badge></Panel.Heading>
           <Panel.Body>
             <Row>
               <Col xs={12} md={4} lg={4}>
@@ -70,7 +71,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner} />
+                    <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -78,7 +79,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelTwo skills={skills} bonuses={bonuses} owner={isOwner} />
+                    <SkillsPanelTwo skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -86,7 +87,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel>
                   <Panel.Heading>Weapons</Panel.Heading>
                   <Panel.Body>
-                    <WeaponsPanel weapons={weapons} weaponskills={weaponskills} />
+                    <WeaponsPanel weapons={weapons} weaponskills={weaponskills} hasXp={hasXp} />
                   </Panel.Body>
                 </Panel>
               </Col>

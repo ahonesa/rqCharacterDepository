@@ -50,9 +50,14 @@ class CharacterFormPageTwo extends Component {
     const { handleSubmit, reset, auth, oper } = this.props
     return (
       <Row>
-        <h2 style={{ marginBottom: 30}}><Label>Characteristics</Label></h2>
         <form onSubmit={handleSubmit}>
+          <h2 style={{ marginBottom: 30 }}><Label>Characteristics</Label></h2>
           {this.renderFields()}
+          <Row>
+            <Col xs={4} md={3}>
+              <ReduxFormGroup type="number" label="XP points" name="xp" />
+            </Col>
+          </Row>
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
           <Button type="button" onClick={this.previousPage}>Previous</Button>
           <Button type="submit">Next</Button>

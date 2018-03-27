@@ -7,7 +7,7 @@ import { Button, Table, Panel } from 'react-bootstrap';
 
 const SkillRows = (skills, props, bonus) => skills.map(skill => {
   return <tr key={skill.skill}><td>{skill.skill.split(".")[1]}</td><td>{parseInt(skill.value) + bonus}</td><td></td><td>
-    <Button disabled={!props.owner} bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
+    <Button disabled={!props.owner || !props.hasXp} bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
 }
 )
 

@@ -37,7 +37,7 @@ module.exports = (app) => {
     const weaponskills = _.get(character, 'character.weaponskills');
     const skill = _.find(weaponskills, { 'skill': req.params.weaponskill });
 
-    if (char && weaponskills && skill) {
+    if (char && weaponskills && skill && char.xp > 0) {
       const bonuses = statBonuses(char.characteristics)
       const roll = Math.floor((Math.random() * 100) + 1);
       const increase = Math.floor((Math.random() * 6) + 1);
@@ -62,6 +62,7 @@ module.exports = (app) => {
 
       _.remove(character.character.weaponskills, { 'skill': req.params.weaponskill })
       character.character.weaponskills.push(skill)
+      character.character.xp--;
       const result = await Character(character).save()
       res.send(result);
 
@@ -75,7 +76,7 @@ module.exports = (app) => {
     const skills = _.get(character, 'character.skills');
     const skill = _.find(skills, { 'skill': req.params.skill });
 
-    if (char && skills && skill ) {
+    if (char && skills && skill && char.xp > 0) {
       const bonuses = statBonuses(char.characteristics)
       const roll = Math.floor((Math.random() * 100) + 1);
       const increase = Math.floor((Math.random() * 6) + 1);
@@ -96,10 +97,10 @@ module.exports = (app) => {
 
       _.remove(character.character.skills, { 'skill': req.params.skill })
       character.character.skills.push(skill)
+      character.character.xp--;
       const result = await Character(character).save()
       res.send(result);
 
     } else res.status(400).end("NOK");
   });
-
 };
