@@ -20,7 +20,7 @@ const SkillGroups = (group, props, bonus) => {
       <Panel.Body>
         <Table condensed responsive>
           <thead>
-            <tr><th>{group}</th><th>{bonus}</th></tr>
+            <tr><th>{group}</th><th>{bonus > 0? "+": ""}{bonus}</th></tr>
           </thead>
           <tbody>
             {SkillRows(filtered, props, bonus)}
