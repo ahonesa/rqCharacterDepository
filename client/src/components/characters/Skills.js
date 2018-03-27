@@ -98,10 +98,33 @@ export const SKILLS = [
   { label: "Alchemy Skills (varies)", group: "magic" },
   { label: "Sense Chaos", group: "perception" },
   { label: "Understand Herd Beast", group: "perception" },
-  { label: "Sense Assassin", group: "perception" }  
+  { label: "Sense Assassin", group: "perception" },
+  { label: "Palsy ", group: "magic" },
+  { label: "Stupefaction ", group: "magic" }, 
+  { label: "Tap POW ", group: "magic" },
+  { label: "Mystic Vision ", group: "magic" }, 
+  { label: "Spell Matrix Enchantment ", group: "magic" },
+  { label: "Boost Damage ", group: "magic" }, 
+  { label: "Resist Spirit ", group: "magic" },
+  { label: "Apprentice Bonding ", group: "magic" }, 
+  { label: "Haste ", group: "magic" },
+  { label: "Animate Stone", group: "magic" }, 
+  { label: "FormSet Stone", group: "magic" },
+  { label: "Glow ", group: "magic" }, 
+  { label: "Smother ", group: "magic" },
+  { label: "Project (Sense) ", group: "magic" }, 
+  { label: "Resist Spell ", group: "magic" },
+  { label: "Resist Damage ", group: "magic" }, 
+  { label: "Telepathy ", group: "magic" },
+  { label: "Enhance STR", group: "magic" }, 
+  { label: "Enhance CON", group: "magic" },
+  { label: "Enhance SIZ", group: "magic" }, 
+  { label: "Enhance DEX", group: "magic" },
+  { label: "Undead Lore", group: "knowledge" }, 
+  { label: "Swamp Lore", group: "knowledge" }, 
+  { label: "Magic Lore", group: "knowledge" } 
 ]
 
-// TODO: populate proper values
 export const WEAPON_SKILLS = [
   { label: "Axe 1h", group: "weapon" },
   { label: "Axe 2h", group: "weapon" },
@@ -136,7 +159,6 @@ export const WEAPON_SKILLS = [
   { label: "Projectile Spell", group: "weapon" }
 ]
 
-// TODO: populate proper values
 export const ARMOR = [
   { label: "Soft leather", value: 1 , weight: [3.0, 4.0, 5.0, 6.0] },
   { label: "Hard leather", value: 2 , weight: [4.0, 5.0, 6.0, 7.0] },
