@@ -31,7 +31,7 @@ const CharacterDetails = ({ char, auth }) => {
           <Panel.Heading componentClass="h4">{char.characterId}</Panel.Heading>
           <Panel.Body>
             <Row>
-              <Col xs={4} md={4} lg={4}>
+              <Col xs={12} md={4} lg={4}>
                 <Panel bsSize="small">
                   <Panel.Heading>Basic info</Panel.Heading>
                   <Panel.Body>
@@ -50,13 +50,13 @@ const CharacterDetails = ({ char, auth }) => {
                   </Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={3} md={3} lg={3}>
+              <Col xs={12} md={3} lg={3}>
                 <Panel>
                   <Panel.Heading>Picture</Panel.Heading>
                   <Panel.Body></Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={5} md={5} lg={5}>
+              <Col xs={12} md={5} lg={5}>
                 <Panel>
                   <Panel.Heading>Characteristics</Panel.Heading>
                   <Panel.Body>
@@ -66,7 +66,7 @@ const CharacterDetails = ({ char, auth }) => {
               </Col>
             </Row>
             <Row>
-              <Col xs={4} md={4} lg={4}>
+              <Col xs={12} md={4} lg={4}>
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
@@ -74,7 +74,7 @@ const CharacterDetails = ({ char, auth }) => {
                   </Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={4} md={4} lg={4}>
+              <Col xs={12} md={4} lg={4}>
                 <Panel>
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
@@ -82,7 +82,7 @@ const CharacterDetails = ({ char, auth }) => {
                   </Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={4} md={4} lg={4}>
+              <Col xs={12} md={4} lg={4}>
                 <Panel>
                   <Panel.Heading>Weapons</Panel.Heading>
                   <Panel.Body>

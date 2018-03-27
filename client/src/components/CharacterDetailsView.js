@@ -24,13 +24,13 @@ class CharacterDetailsView extends Component {
     return (
       <Grid>
         <Row className="show-grid">
-          <Col xs={2} md={2} lg={2}>
+          <Col xs={12} md={2} lg={2}>
             <ListGroup>
               {this.rivit()}
             </ListGroup>
             <Button href="/new_char">Create new character</Button>
           </Col>
-          <Col xs={10} md={10} lg={10}>
+          <Col xs={12} md={10} lg={10}>
             <CharacterDetails char={this.props.selectedChar} auth={this.props.auth} />
           </Col>
         </Row>
