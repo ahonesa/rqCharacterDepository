@@ -87,7 +87,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel>
                   <Panel.Heading>Weapons</Panel.Heading>
                   <Panel.Body>
-                    <WeaponsPanel weapons={weapons} weaponskills={weaponskills} hasXp={hasXp} />
+                    <WeaponsPanel weapons={weapons} weaponskills={weaponskills} owner={isOwner} hasXp={hasXp} />
                   </Panel.Body>
                 </Panel>
               </Col>
