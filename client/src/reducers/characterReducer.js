@@ -1,4 +1,4 @@
-import { GET_ALL_CHARS, GET_ONE_CHAR, SKILL_XP_ROLL, WEAPON_XP_ROLL } from '../actions/types';
+import { GET_ALL_CHARS, GET_ONE_CHAR, SKILL_XP_ROLL, WEAPON_XP_ROLL, POW_XP_ROLL } from '../actions/types';
 
 export function allCharsReducer(state = null, action) {
   switch (action.type) {
@@ -16,6 +16,8 @@ export function oneCharReducer(state = null, action) {
     case SKILL_XP_ROLL: 
       return action.payload || false;      
     case WEAPON_XP_ROLL: 
+      return action.payload || false;     
+    case POW_XP_ROLL: 
       return action.payload || false;        
     default:
       return state;

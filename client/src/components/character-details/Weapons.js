@@ -15,15 +15,16 @@ const WeaponGroups = (skills, weapons, props, bonuses) => {
 
   return weapons.map(weapon => {
     const skill = _.find(skills, { 'skill': weapon.skill });
+    const xp = _.get(skill, "xp", 0)
     const attack = _.get(skill, "attack", "")
     const parry = _.get(skill, "parry", "")
-    const hasXp = props.hasXp || skill.xp > 0
+    const hasXp = props.hasXp || xp > 0
 
     return (<Panel key={weapon.skill}>
       <Panel.Body>
         <Table condensed responsive>
           <thead>
-            <tr><th>{weapon.skill.split(".")[1]} {xpBadge(skill.xp)}</th><th>A: {bonuses.manipulationBonus > 0? "+": ""}{bonuses.manipulationBonus}</th><th>P: {bonuses.dexterityBonus > 0? "+": ""}{bonuses.dexterityBonus}</th></tr>
+            <tr><th>{weapon.skill.split(".")[1]} {xpBadge(xp)}</th><th>A: {bonuses.manipulationBonus > 0? "+": ""}{bonuses.manipulationBonus}</th><th>P: {bonuses.dexterityBonus > 0? "+": ""}{bonuses.dexterityBonus}</th></tr>
           </thead>
           <tbody>
             <tr><td>attack:</td><td>{attack && (parseInt(attack) + bonuses.manipulationBonus)}</td><td><Button disabled={!attack || !props.owner || !hasXp} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill, "attack")}>XP</Button></td></tr>

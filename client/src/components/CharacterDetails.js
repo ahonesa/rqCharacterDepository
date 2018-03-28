@@ -61,7 +61,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel>
                   <Panel.Heading>Characteristics</Panel.Heading>
                   <Panel.Body>
-                    <Characteristics characteristics={characteristics} />
+                    <Characteristics characteristics={characteristics} owner={isOwner} xp={c.xp}/>
                   </Panel.Body>
                 </Panel>
               </Col>

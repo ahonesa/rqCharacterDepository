@@ -103,4 +103,31 @@ module.exports = (app) => {
 
     } else res.status(400).end("NOK");
   });
+
+
+  app.post("/api/chars/:id/pow_gain", async (req, res) => {
+    const character = await Character.findOne({ characterId: req.params.id })
+
+    console.log(character)
+    const xp = _.get(character, 'character.xp', 0)
+    const pow = _.get(character, 'character.characteristics.pow', NaN);
+    const pow_max = _.get(character, 'character.characteristics.pow_max', NaN);
+    const maxPowForGain = _.get(character, 'character.characteristics.maxPowForGain', NaN);
+
+    if (maxPowForGain && pow && pow_max && xp > 2 && pow < pow_max) {
+
+      const roll = Math.floor((Math.random() * 100) + 1);   
+      const rollCap = (maxPowForGain - pow) * 5
+
+      if (roll <= rollCap) {
+        _.set(character, "character.characteristics.pow", pow+1)
+      }
+
+      _.set(character, "character.xp", xp-3);
+
+      const result = await Character(character).save()
+      res.send(result);
+
+    } else res.status(400).end("NOK");
+  });
 };

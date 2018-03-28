@@ -1,10 +1,22 @@
 import _ from 'lodash';
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import * as actions from "../../actions";
+import { connect } from 'react-redux';
+import { Table, Button } from 'react-bootstrap';
 
-export const Characteristics = (props) => {
+const mapStateToProps = ({ selectedChar }) => {
+  if (selectedChar) {
+    return { selectedChar }
+  } else return {};
+}
+
+export const Characteristics = connect(mapStateToProps, actions)((props) => {
+
+  console.log("XP:", props.xp)
+  const hasXpForPowGain = props.xp > 2
   if (props.characteristics) {
     const characteristics = props.characteristics;
+    const canInc = characteristics.pow < characteristics.pow_max
     return (<Table condensed responsive>
       <thead>
         <tr>
@@ -44,6 +56,7 @@ export const Characteristics = (props) => {
           <td>{characteristics.pow_org}</td>
           <td>{characteristics.pow}</td>
           <td>{characteristics.pow_max}</td>
+          <td><Button disabled={!canInc || !props.owner || !hasXpForPowGain} bsSize="xsmall" onClick={() => props.powXpRoll(props.selectedChar.characterId)}>XP</Button></td>
         </tr>
         <tr>
           <td>DEX</td>
@@ -62,4 +75,4 @@ export const Characteristics = (props) => {
   } else {
     return;
   }
-}
+})

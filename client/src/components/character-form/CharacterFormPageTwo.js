@@ -58,6 +58,11 @@ class CharacterFormPageTwo extends Component {
               <ReduxFormGroup type="number" label="XP points" name="xp" />
             </Col>
           </Row>
+          <Row>
+            <Col xs={4} md={3}>
+              <ReduxFormGroup type="number" label="Max POW for gain roll" name="characteristics.maxPowForGain" />
+            </Col>
+          </Row>
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
           <Button type="button" onClick={this.previousPage}>Previous</Button>
           <Button type="submit">Next</Button>
