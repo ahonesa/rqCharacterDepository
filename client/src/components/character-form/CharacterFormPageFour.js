@@ -48,11 +48,16 @@ class CharacterFormPageFour extends Component {
                 <Col xs={6} md={4}>
                   {this.renderWeaponSkillSelect(member)}
                 </Col>
-                <Col xs={6} md={4}>
+              </Row>
+              <Row>  
+                <Col xs={4} md={4}>
                   <ReduxFormGroup name={`${member}.attack`} label="Attack skill" />
                 </Col>
-                <Col xs={6} md={4}>
+                <Col xs={4} md={4}>
                   <ReduxFormGroup name={`${member}.parry`} label="Parry skill" />
+                </Col>
+                <Col xs={4} md={4}>
+                  <ReduxFormGroup name={`${member}.xp`} label="XP" />
                 </Col>
               </Row>  
               <Row>  

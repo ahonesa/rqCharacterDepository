@@ -43,13 +43,15 @@ const characterSchema = new Schema({
         skills: [
             { 
                 skill: String,
-                value: String
+                value: String,
+                xp: Number
             }        
         ],
         weaponskills: [{
                 skill: String, 
                 attack: String, 
-                parry: String
+                parry: String,
+                xp: Number
         }],
         weapons: [
             {

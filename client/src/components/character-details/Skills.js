@@ -2,14 +2,21 @@ import _ from 'lodash';
 import React from 'react';
 import * as actions from "../../actions";
 import { connect } from 'react-redux';
-import { Button, Table, Panel } from 'react-bootstrap';
+import { Button, Table, Panel, Badge } from 'react-bootstrap';
 
 
 const SkillRows = (skills, props, bonus) => skills.map(skill => {
-  return <tr key={skill.skill}><td>{skill.skill.split(".")[1]}</td><td>{parseInt(skill.value) + bonus}</td><td></td><td>
-    <Button disabled={!props.owner || !props.hasXp} bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
+  console.log(skill)
+  const hasXp = props.hasXp || skill.xp > 0
+  return <tr key={skill.skill}><td>{skill.skill.split(".")[1] || ""}</td><td>{parseInt(skill.value) + bonus} {xpBadge(skill.xp)}</td><td></td><td>
+    <Button disabled={!props.owner || !hasXp} bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
 }
 )
+
+const xpBadge = (skillXp) => { 
+  if(skillXp < 1) return;
+  else return <Badge>{skillXp}</Badge>;
+}
 
 const SkillGroups = (group, props, bonus) => {
   const filtered = props.skills.filter(skill => {

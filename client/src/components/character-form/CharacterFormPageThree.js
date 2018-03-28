@@ -43,21 +43,26 @@ class CharacterFormPageThree extends Component {
         <ListGroupItem>Manipulation Bonus: {_.get(this.props, "character.bonuses.manipulationBonus", 0)}</ListGroupItem>
         <ListGroupItem>Perception Bonus: {_.get(this.props, "character.bonuses.perceptionBonus", 0)}</ListGroupItem>
         <ListGroupItem>Stealth Bonus: {_.get(this.props, "character.bonuses.stealthBonus", 0)}</ListGroupItem>
-      </ListGroup>  
+      </ListGroup>
       <label>Select skills</label>
       <ListGroup>
         {fields.map((member, index) => {
           return (
             <ListGroupItem key={index}>
               <Row>
-                <Col xs={6} md={4}>
+                <Col xs={4} md={4}>
                   {this.renderSkillSelect(member)}
                 </Col>
-                <Col xs={6} md={4}>
+                <Col xs={4} md={4}>
                   <ReduxFormGroup name={`${member}.value`} label="Skill" />
                 </Col>
-                <Col xs={6} md={4}>
-                <Button type="button" style={{ marginTop: 25 }} onClick={() => fields.remove(index)}>Remove</Button>
+                <Col xs={4} md={4}>
+                  <ReduxFormGroup name={`${member}.xp`} label="XP" />
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} md={12}>
+                  <Button type="button" style={{ marginTop: 25 }} onClick={() => fields.remove(index)}>Remove</Button>
                 </Col>
               </Row>
             </ListGroupItem>
@@ -65,7 +70,7 @@ class CharacterFormPageThree extends Component {
         })}
         <Button type="button" onClick={() => fields.push({})}>Add</Button>
       </ListGroup>
-      </div>
+    </div>
     );
   }
 
@@ -73,7 +78,7 @@ class CharacterFormPageThree extends Component {
     const { handleSubmit, reset } = this.props
     return (
       <Row>
-        <h2 style={{ marginBottom: 30}}><Label>Skills</Label></h2>
+        <h2 style={{ marginBottom: 30 }}><Label>Skills</Label></h2>
         <form onSubmit={handleSubmit}>
           <FieldArray name="skills" component={this.renderSkillFields} />
           <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
