@@ -16,8 +16,8 @@ const WeaponGroups = (skills, weapons, props, bonuses) => {
   return weapons.map(weapon => {
     const skill = _.find(skills, { 'skill': weapon.skill });
     const xp = _.get(skill, "xp", 0)
-    const attack = _.get(skill, "attack", "")
-    const parry = _.get(skill, "parry", "")
+    const attack = _.get(skill, "attack", null)
+    const parry = _.get(skill, "parry", null)
     const hasXp = props.hasXp || xp > 0
 
     return (<Panel key={weapon.skill}>

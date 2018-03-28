@@ -14,7 +14,6 @@ module.exports = (app) => {
     const existingCharacter = await Character.findOne({ characterId: req.body.name });
     if (existingCharacter) {
       existingCharacter.character = req.body
-      existingCharacter.ownerId = req.user.googleId
       const char = await Character(existingCharacter).save();
     } else {
       const char = await Character({
