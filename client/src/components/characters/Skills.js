@@ -120,6 +120,7 @@ export const SKILLS = [
   { label: "Enhance CON", group: "magic" },
   { label: "Enhance SIZ", group: "magic" }, 
   { label: "Enhance DEX", group: "magic" },
+  { label: "Neutralize Magic ", group: "magic" },
   { label: "Undead Lore", group: "knowledge" }, 
   { label: "Swamp Lore", group: "knowledge" }, 
   { label: "Magic Lore", group: "knowledge" } 

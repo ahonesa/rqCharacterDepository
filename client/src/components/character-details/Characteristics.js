@@ -49,8 +49,8 @@ export const Characteristics = connect(null, actions)((props) => {
           <td>POW</td>
           <td>{characteristics.pow_org}</td>
           <td>{characteristics.pow}</td>
-          <td>{characteristics.pow_max}</td>
-          <td><Button disabled={!canInc || !props.owner || !hasXpForPowGain} bsSize="xsmall" onClick={() => props.powXpRoll(props.selectedChar.characterId)}>XP</Button></td>
+          <td>{characteristics.pow_max}
+          <Button disabled={!canInc || !props.owner || !hasXpForPowGain} bsSize="xsmall" onClick={() => props.powXpRoll(props.selectedChar.characterId)}>XP</Button></td>
         </tr>
         <tr>
           <td>DEX</td>
