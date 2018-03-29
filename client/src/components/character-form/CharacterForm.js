@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 import * as actions from "../../actions";
 import { Grid } from 'react-bootstrap';
 import { reduxForm, Field } from "redux-form";
-import { prepare } from "../characters/PrepareCharacter";
 
 class CharacterForm extends Component {
   constructor(props) {
@@ -36,7 +35,6 @@ class CharacterForm extends Component {
 
   render() {
     const onSubmit = (values) => {
-      prepare(values)
       this.props.createChar(values)
       this.props.history.push('/chars');
     };

@@ -10,8 +10,6 @@ const xpBadge = (skillXp) => {
 }
 
 const WeaponGroups = (skills, weapons, props, bonuses) => {
-  console.log(skills)
-  console.log(weapons)
 
   return weapons.map(weapon => {
     const skill = _.find(skills, { 'skill': weapon.skill });
@@ -48,7 +46,6 @@ const mapStateToProps = ({ selectedChar }) => {
 }
 
 export const WeaponsPanel = connect(mapStateToProps, actions)((props) => {
-  console.log(props)
   const bonuses = _.get(props, "bonuses.bonuses", {})
   if (props.weaponskills && props.weapons) {
     const weaponskills = props.weaponskills;

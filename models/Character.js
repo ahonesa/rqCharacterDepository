@@ -6,6 +6,7 @@ const characterSchema = new Schema({
     ownerId: String,
     character: {
         name: String,
+        notes: String,
         xp: Number,
         info: {
             sex: String,
