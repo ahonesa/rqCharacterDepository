@@ -4,11 +4,17 @@ import * as actions from "../../actions";
 import { connect } from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
 
+const mapStateToProps = ({ selectedChar }) => {
+  if (selectedChar) {
+    return { selectedChar }
+  } else return {};
+}
 
-export const Characteristics = connect(null, actions)((props) => {
+export const Characteristics = connect(mapStateToProps, actions)((props) => {
 
   const hasXpForPowGain = props.xp > 2
-  if (props.characteristics) {
+  if (props.characteristics && props.selectedChar) {
+    const selectedChar = props.selectedChar;
     const characteristics = props.characteristics;
     const canInc = characteristics.pow < characteristics.pow_max
     return (<Table condensed responsive>
@@ -50,7 +56,7 @@ export const Characteristics = connect(null, actions)((props) => {
           <td>{characteristics.pow_org}</td>
           <td>{characteristics.pow}</td>
           <td>{characteristics.pow_max}
-          <Button disabled={!canInc || !props.owner || !hasXpForPowGain} bsSize="xsmall" onClick={() => props.powXpRoll(props.selectedChar.characterId)}>XP</Button></td>
+          <Button disabled={!canInc || !props.owner || !hasXpForPowGain} bsSize="xsmall" onClick={() => props.powXpRoll(selectedChar.characterId)}>XP</Button></td>
         </tr>
         <tr>
           <td>DEX</td>
