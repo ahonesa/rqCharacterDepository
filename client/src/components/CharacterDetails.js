@@ -105,7 +105,6 @@ const CharacterDetails = ({ char, auth }) => {
         </Panel>
       );
   }
-
 }
 
 export default CharacterDetails

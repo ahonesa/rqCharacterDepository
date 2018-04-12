@@ -6,6 +6,7 @@ import CharacterListView from './CharacterListView';
 import CharacterDetails from './CharacterDetails';
 import CharacterNotes from './CharacterNotes';
 import { Row, Col, Grid, ListGroup, ListGroupItem, Button, Tabs, Tab, Panel } from 'react-bootstrap';
+import CharacterStuff from './CharacterStuff';
 
 
 class CharacterDetailsView extends Component {
@@ -37,12 +38,7 @@ class CharacterDetailsView extends Component {
                 <CharacterDetails char={this.props.selectedChar} auth={this.props.auth} />
               </Tab>
               <Tab eventKey={2} title="Stuff">
-                <Panel bsSize="small">
-                  <Panel.Heading componentClass="h4">Stuff</Panel.Heading>
-                  <Panel.Body>
-                    Stuff
-                </Panel.Body>
-                </Panel>
+                <CharacterStuff char={this.props.selectedChar} auth={this.props.auth} />
               </Tab>
               <Tab eventKey={3} title="Notes">
                 <CharacterNotes char={this.props.selectedChar} auth={this.props.auth} />
