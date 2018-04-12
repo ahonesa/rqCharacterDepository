@@ -28,7 +28,7 @@ class CharacterNotes extends Component {
                   <ControlLabel>Notes:</ControlLabel>
                   <Field component={ReduxFormControl} type="textarea" name="notes" />
                 </FormGroup>
-                <Button type="reset" href="/" onClick={reset}>Cancel</Button>
+                <Button type="reset" onClick={reset}>Cancel</Button>
                 <Button type="submit">Submit</Button>
               </form>
             </Col>

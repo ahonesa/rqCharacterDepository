@@ -124,7 +124,21 @@ export const SKILLS = [
   { label: "Neutralize Magic", group: "magic" },
   { label: "Undead Lore", group: "knowledge" }, 
   { label: "Swamp Lore", group: "knowledge" }, 
-  { label: "Magic Lore", group: "knowledge" } 
+  { label: "Magic Lore", group: "knowledge" },
+  { label: "Healing Elixir Lore", group: "knowledge" }, 
+  { label: "Poison Elixir Lore", group: "knowledge" }, 
+  { label: "Poison Antidotes Lore", group: "knowledge" }, 
+  { label: "Solvent Elixir Lore", group: "knowledge" }, 
+  { label: "Confusion Elixir Lore", group: "knowledge" }, 
+  { label: "Endurance Elixir Lore", group: "knowledge" }, 
+  { label: "Fanatism Elixir Lore", group: "knowledge" },
+  { label: "Paralyzing Elixir Lore", group: "knowledge" }, 
+  { label: "Power Blasting Elixir Lore", group: "knowledge" }, 
+  { label: "Power Restoring Elixir Lore", group: "knowledge" }, 
+  { label: "Sleep Elixir Lore", group: "knowledge" }, 
+  { label: "Strength Elixir Lore", group: "knowledge" },
+  { label: "Weakness Elixir Lore", group: "knowledge" },
+  { label: "Alchemy", group: "magic" }
 ]
 
 export const WEAPON_SKILLS = [

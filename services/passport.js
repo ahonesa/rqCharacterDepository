@@ -28,7 +28,7 @@ passport.use(
       if (existingUser) {
         return done(null, existingUser);
       }
-      const user = await User({ googleId: profile.id }).save();
+      const user = await User({ googleId: profile.id, authorizationLevel: 3 }).save();
       done(null, user);  
     }
   )
