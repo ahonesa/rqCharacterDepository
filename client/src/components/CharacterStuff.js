@@ -76,7 +76,7 @@ class CharacterStuff extends Component {
                 </Panel.Body>
               </Panel>
             </Col>
-            <Col xs={12} md={4} lg={4}>
+            <Col xs={12} md={8} lg={8}>
               <Panel>
                 <Panel.Heading>Armor layers</Panel.Heading>
                 <Panel.Body>
