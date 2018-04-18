@@ -33,6 +33,8 @@ export default ({str, str_max, str_org, con, con_org, con_max, siz, siz_org, siz
   const perceptionBonus    = calculateBonus(characteristics.INT.current, 10, characteristics.POW.current, characteristics.CON.current, 10, 10)
   const stealthBonus       = calculateBonus(characteristics.DEX.current, 10, 10, 10, characteristics.POW.current, characteristics.SIZ.current)
   
+  const damageModifier = calculateDamageModifier(characteristics.STR.current, characteristics.SIZ.current)
+
   const bonuses = {
     dexterityBonus,
     communicationBonus,
@@ -48,9 +50,26 @@ export default ({str, str_max, str_org, con, con_org, con_max, siz, siz_org, siz
     bonuses,
     hitPoints,
     magicPoints,
-    fatiguePoints
+    fatiguePoints,
+    damageModifier
   } );
 }
+
+const calculateDamageModifier = (str, siz) => {
+  const total = str+siz
+
+  if(total < 13) return "- D4"
+  else if(total < 25) return ""
+  else if(total < 33) return "+ D4"
+  else if(total < 37) return "+ D6"
+  else if(total < 41) return "+ D8"
+  else if(total < 57) return "+ 2D6"
+  else {
+    const diceNumber = 2 + Math.ceil((total - 56) / 16)
+    return "+ " + diceNumber + "D6"
+  } 
+}
+
 
 const calculateBonus = (primary1, primary2, secondary1, secondary2, negative1, negative2) => (
   (primary1 - 10) +

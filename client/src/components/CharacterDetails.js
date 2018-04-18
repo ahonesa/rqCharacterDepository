@@ -27,6 +27,8 @@ const CharacterDetails = ({ char, auth }) => {
       const isOwner = ownerId === userId 
       const hasXp = c.xp > 0  
 
+      console.log(bonuses)
+
       return (
         <Panel bsSize="small">
           <Panel.Heading componentClass="h4">{char.characterId} <Badge>{c.xp}</Badge></Panel.Heading>
@@ -51,13 +53,35 @@ const CharacterDetails = ({ char, auth }) => {
                   </Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={12} md={3} lg={3}>
-                <Panel>
-                  <Panel.Heading>Picture</Panel.Heading>
-                  <Panel.Body></Panel.Body>
+              <Col xs={12} md={4} lg={4}>
+                <Panel bsSize="small">
+                  <Panel.Heading>Stats</Panel.Heading>
+                  <Panel.Body>
+                    <Table condensed responsive>
+                      <thead>
+                        <tr>
+                          <th>Stat</th>
+                          <th>Base</th>
+                          <th>Current</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>Hit points:</td><td>{bonuses.hitPoints.base}</td><td>{bonuses.hitPoints.current}</td></tr>
+                        <tr><td>Magic points:</td><td>{bonuses.magicPoints.base}</td><td>{bonuses.magicPoints.current}</td></tr> 
+                        <tr><td>Hit points:</td><td>{bonuses.fatiguePoints.base}</td><td>{bonuses.fatiguePoints.current}</td></tr>                           
+                      </tbody>
+                    </Table>
+                    <Table condensed responsive>
+                      <tbody>                         
+                        <tr><td>Damage modifier:</td><td>{bonuses.damageModifier}</td></tr>
+                        <tr><td>Strike rank:</td><td></td></tr>
+                        <tr><td>Movement:</td><td></td></tr>
+                      </tbody>
+                    </Table>
+                  </Panel.Body>
                 </Panel>
               </Col>
-              <Col xs={12} md={5} lg={5}>
+              <Col xs={12} md={4} lg={4}>
                 <Panel>
                   <Panel.Heading>Characteristics</Panel.Heading>
                   <Panel.Body>
