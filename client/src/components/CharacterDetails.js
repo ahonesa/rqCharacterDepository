@@ -68,7 +68,7 @@ const CharacterDetails = ({ char, auth }) => {
                       <tbody>
                         <tr><td>Hit points:</td><td>{bonuses.hitPoints.base}</td><td>{bonuses.hitPoints.current}</td></tr>
                         <tr><td>Magic points:</td><td>{bonuses.magicPoints.base}</td><td>{bonuses.magicPoints.current}</td></tr> 
-                        <tr><td>Hit points:</td><td>{bonuses.fatiguePoints.base}</td><td>{bonuses.fatiguePoints.current}</td></tr>                           
+                        <tr><td>Fatigue points:</td><td>{bonuses.fatiguePoints.base}</td><td>{bonuses.fatiguePoints.current}</td></tr>                           
                       </tbody>
                     </Table>
                     <Table condensed responsive>
