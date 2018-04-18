@@ -17,7 +17,7 @@ module.exports = (app) => {
       const char = await Character(existingCharacter).save();
     } else {
       const char = await Character({
-        characterId: req.body.name,
+        characterId: req.body.name.trim(),
         ownerId: req.user.googleId,
         character: req.body
       }).save();

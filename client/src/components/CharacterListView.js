@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as actions from "../actions";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Landing from './Landing';
 import { Panel, Button, ListGroup, ListGroupItem, Grid } from 'react-bootstrap';
 
 class CharacterListView extends Component {
@@ -16,20 +17,26 @@ class CharacterListView extends Component {
   )
 
   render() {
-    return (
-      <Grid>
-        <ListGroup>
-          {this.rivit()}
-        </ListGroup>
-
-        <Button href="/new_char">Create new character</Button>
-      </Grid>
-    )
+    switch(this.props.auth) {
+      case null:
+        return <Landing />;
+      case false:
+        return <Landing />;
+      default:
+        return (
+          <Grid>
+            <ListGroup>
+              {this.rivit()}
+            </ListGroup>
+            <Button href="/new_char">Create new character</Button>
+          </Grid>
+        )
+      }  
   }
 }
 
-function mapStateToProps({ characters }) {
-  return { characters }
+function mapStateToProps({ characters, auth }) {
+  return { characters, auth }
 }
 
 export default connect(mapStateToProps, actions)(CharacterListView);
