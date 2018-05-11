@@ -138,7 +138,17 @@ export const SKILLS = [
   { label: "Sleep Elixir Lore", group: "knowledge" }, 
   { label: "Strength Elixir Lore", group: "knowledge" },
   { label: "Weakness Elixir Lore", group: "knowledge" },
-  { label: "Alchemy", group: "magic" }
+  { label: "Alchemy", group: "magic" },
+  { label: "Craft Bone", group: "knowledge" },
+  { label: "Swordsmithing", group: "knowledge" },
+  { label: "Craft Armouring", group: "knowledge" },
+  { label: "Craft Tattoo", group: "knowledge" },
+  { label: "Craft Leather", group: "knowledge" },
+  { label: "Craft Wood", group: "knowledge" },
+  { label: "Craft Stone", group: "knowledge" },
+  { label: "Speak Baboon", group: "knowledge" },
+  { label: "Scent", group: "perception" },
+  { label: "Battle", group: "knowledge" }
 ]
 
 export const WEAPON_SKILLS = [
