@@ -1,8 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
-import { Link } from 'react-router-dom';
-import { SKILLS } from '../characters/Skills';
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
 
@@ -34,7 +32,7 @@ class CharacterFormPageFive extends Component {
     return (<div>
       <label>Skillbonuses</label>
       <ListGroup>
-        <ListGroupItem>Magical Bonus: {_.get(this.props, "character.bonuses.magicalBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Magic skill category modifier: {_.get(this.props, "character.bonuses.magicModifier", 0)}</ListGroupItem>
       </ListGroup>  
       <label>Select spells</label>
       <ListGroup>

@@ -36,8 +36,8 @@ class CharacterFormPageFour extends Component {
     return (<div>
       <label>Skillbonuses</label>
       <ListGroup>
-        <ListGroupItem>Attack Bonus: {_.get(this.props, "character.bonuses.manipulationBonus", 0)}</ListGroupItem>
-        <ListGroupItem>Defense Bonus: {_.get(this.props, "character.bonuses.dexterityBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Attack Bonus: {_.get(this.props, "character.bonuses.manipulationModifier", 0)}</ListGroupItem>
+        <ListGroupItem>Defense Bonus: {_.get(this.props, "character.bonuses.agilityModifier", 0)}</ListGroupItem>
       </ListGroup>
       <label>Select weapon skills</label>
       <ListGroup>

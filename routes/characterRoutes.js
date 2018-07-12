@@ -43,7 +43,7 @@ module.exports = (app) => {
       var success = false
       if (req.params.type === 'attack') {
         var skillInt = parseInt(skill.attack || '5')
-        const skillCap = (skillInt + bonuses.bonuses.manipulationBonus) > 100 ? (100 - bonuses.bonuses.manipulationBonus) : skillInt
+        const skillCap = (skillInt + bonuses.bonuses.manipulationModifier) > 100 ? (100 - bonuses.bonuses.manipulationModifier) : skillInt
         if (roll > skillCap) {
           skillInt += increase
           skill.attack = skillInt.toString()
@@ -51,7 +51,7 @@ module.exports = (app) => {
         }
       } else if (req.params.type === 'parry') {
         var skillInt = parseInt(skill.parry || '5')
-        const skillCap = (skillInt + bonuses.bonuses.dexterityBonus) > 100 ? (100 - bonuses.bonuses.dexterityBonus) : skillInt
+        const skillCap = (skillInt + bonuses.bonuses.agilityModifier) > 100 ? (100 - bonuses.bonuses.agilityModifier) : skillInt
         if (roll > skillCap) {
           skillInt += increase
           skill.parry = skillInt.toString()

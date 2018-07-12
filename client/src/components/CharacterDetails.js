@@ -6,7 +6,7 @@ import { Row, Col, Panel, Button, Table, Badge } from 'react-bootstrap';
 import { Characteristics } from './character-details/Characteristics';
 import { SkillsPanelOne, SkillsPanelTwo } from './character-details/Skills';
 import { WeaponsPanel } from './character-details/Weapons';
-import calculateBonuses from './characters/StatBonuses'
+import calculateModifiers from './characters/StatBonuses'
 
 const CharacterDetails = ({ char, auth }) => {
   switch (char) {
@@ -18,7 +18,7 @@ const CharacterDetails = ({ char, auth }) => {
       const c = _.get(char, "character", {})
       const ownerId = _.get(char, "ownerId", {})
       const characteristics = _.get(char, "character.characteristics", {})
-      const bonuses = characteristics && calculateBonuses(characteristics)  
+      const bonuses = characteristics && calculateModifiers(characteristics)
       const skills = _.get(char, "character.skills", {})
       const weapons = _.get(char, "character.weapons", {})
       const weaponskills = _.get(char, "character.weaponskills", {})

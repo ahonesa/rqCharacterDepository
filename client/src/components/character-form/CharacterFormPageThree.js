@@ -36,13 +36,13 @@ class CharacterFormPageThree extends Component {
     return (<div>
       <label>Skillbonuses</label>
       <ListGroup>
-        <ListGroupItem>Dexterity Bonus: {_.get(this.props, "character.bonuses.dexterityBonus", 0)}</ListGroupItem>
-        <ListGroupItem>Communication Bonus: {_.get(this.props, "character.bonuses.communicationBonus", 0)}</ListGroupItem>
-        <ListGroupItem>Knowledge Bonus: {_.get(this.props, "character.bonuses.knowledgeBonus", 0)}</ListGroupItem>
-        <ListGroupItem>Magical Bonus: {_.get(this.props, "character.bonuses.magicalBonus", 0)}</ListGroupItem>
-        <ListGroupItem>Manipulation Bonus: {_.get(this.props, "character.bonuses.manipulationBonus", 0)}</ListGroupItem>
-        <ListGroupItem>Perception Bonus: {_.get(this.props, "character.bonuses.perceptionBonus", 0)}</ListGroupItem>
-        <ListGroupItem>Stealth Bonus: {_.get(this.props, "character.bonuses.stealthBonus", 0)}</ListGroupItem>
+        <ListGroupItem>Agility skill category modifier: {_.get(this.props, "character.bonuses.agilityModifier", 0)}</ListGroupItem>
+        <ListGroupItem>Communication skill category modifier: {_.get(this.props, "character.bonuses.communicationModifier", 0)}</ListGroupItem>
+        <ListGroupItem>Knowledge skill category modifier: {_.get(this.props, "character.bonuses.knowledgeModifier", 0)}</ListGroupItem>
+        <ListGroupItem>Magic skill category modifier: {_.get(this.props, "character.bonuses.magicModifier", 0)}</ListGroupItem>
+        <ListGroupItem>Manipulation skill category modifier: {_.get(this.props, "character.bonuses.manipulationModifier", 0)}</ListGroupItem>
+        <ListGroupItem>Perception skill category modifier: {_.get(this.props, "character.bonuses.perceptionModifier", 0)}</ListGroupItem>
+        <ListGroupItem>Stealth skill category modifier: {_.get(this.props, "character.bonuses.stealthModifier", 0)}</ListGroupItem>
       </ListGroup>
       <label>Select skills</label>
       <ListGroup>

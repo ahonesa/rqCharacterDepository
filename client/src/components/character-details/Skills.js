@@ -47,9 +47,9 @@ export const SkillsPanelOne = connect(mapStateToProps, actions)((props) => {
   const bonuses = _.get(props, "bonuses.bonuses", {})
   if (props.skills && props.bonuses) {
     return (<div>
-      {SkillGroups("dexterity", props, bonuses.dexterityBonus)}
-      {SkillGroups("communication", props, bonuses.communicationBonus)}
-      {SkillGroups("knowledge", props, bonuses.knowledgeBonus)}
+      {SkillGroups("dexterity", props, bonuses.agilityModifier)}
+      {SkillGroups("communication", props, bonuses.communicationModifier)}
+      {SkillGroups("knowledge", props, bonuses.knowledgeModifier)}
     </div>);
   } else {
     return <div />;
@@ -60,10 +60,10 @@ export const SkillsPanelTwo = connect(mapStateToProps, actions)((props) => {
   const bonuses = _.get(props, "bonuses.bonuses", {})
   if (props.skills) {
     return (<div>
-      {SkillGroups("magic", props, bonuses.magicalBonus)}
-      {SkillGroups("manipulation", props, bonuses.manipulationBonus)}
-      {SkillGroups("perception", props, bonuses.perceptionBonus)}
-      {SkillGroups("stealth", props, bonuses.stealthBonus)}
+      {SkillGroups("magic", props, bonuses.magicModifier)}
+      {SkillGroups("manipulation", props, bonuses.manipulationModifier)}
+      {SkillGroups("perception", props, bonuses.perceptionModifier)}
+      {SkillGroups("stealth", props, bonuses.stealthModifier)}
     </div>);
   } else {
     return <div />;

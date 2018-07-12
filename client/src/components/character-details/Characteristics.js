@@ -65,10 +65,10 @@ export const Characteristics = connect(mapStateToProps, actions)((props) => {
           <td>{characteristics.dex_max}</td>
         </tr>
         <tr>
-          <td>APP</td>
-          <td>{characteristics.app_org}</td>
-          <td>{characteristics.app}</td>
-          <td>{characteristics.app_max}</td>
+          <td>CHA</td>
+          <td>{characteristics.cha_org}</td>
+          <td>{characteristics.cha}</td>
+          <td>{characteristics.cha_max}</td>
         </tr>
       </tbody>
     </Table>);

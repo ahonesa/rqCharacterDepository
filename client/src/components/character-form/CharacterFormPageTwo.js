@@ -12,7 +12,7 @@ const CHARACTERISTICS_FIELDS = [
   { label: "INT", name: "int" },
   { label: "DEX", name: "dex" },
   { label: "POW", name: "pow" },
-  { label: "APP", name: "app" }
+  { label: "CHA", name: "cha" }
 ]
 
 const CharacteristicField = ({ name, label }) => {
