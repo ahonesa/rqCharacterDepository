@@ -50,6 +50,8 @@ export const SkillsPanelOne = connect(mapStateToProps, actions)((props) => {
       {SkillGroups("dexterity", props, bonuses.agilityModifier)}
       {SkillGroups("communication", props, bonuses.communicationModifier)}
       {SkillGroups("knowledge", props, bonuses.knowledgeModifier)}
+      {SkillGroups("rune", props, 0)}
+      {SkillGroups("passion", props, 0)}
     </div>);
   } else {
     return <div />;
