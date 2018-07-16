@@ -40,7 +40,7 @@ class CharacterDetailsView extends Component {
                 <Button href="/new_char">Create new character</Button>
               </Col>
               <Col xs={12} md={10} lg={10}>
-                <Tabs defaultActiveKey={1} animation>
+                <Tabs defaultActiveKey={1} animation id="tabsMenu">
                   <Tab eventKey={1} title="Details">
                     <CharacterDetails char={this.props.selectedChar} auth={this.props.auth} />
                   </Tab>

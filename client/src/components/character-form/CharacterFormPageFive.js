@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
+import {isNumber, isRequired, isString} from "./validation";
 
 
 class CharacterFormPageFive extends Component {
@@ -18,7 +19,7 @@ class CharacterFormPageFive extends Component {
     return (
       <FormGroup controlId="formControlsSelect">
         <ControlLabel>Select</ControlLabel>
-        <Field name={`${member}.spelltype`} component={ReduxFormSelect} placeholder="select">
+        <Field name={`${member}.spelltype`} component={ReduxFormSelect} placeholder="select" validate={isRequired}>
           <option />
           <option key="spirit" value="spirit">Spirit magic</option>
           <option key="rune" value="rune">Rune magic</option>
@@ -44,10 +45,10 @@ class CharacterFormPageFive extends Component {
                   {this.renderSpellSelect(member)}
                 </Col>
                 <Col xs={6} md={3}>
-                  <ReduxFormGroup name={`${member}.spell`} label="Spell Name" />
+                  <ReduxFormGroup name={`${member}.spell`} label="Spell Name" validate={[isRequired, isString]}/>
                 </Col>
                 <Col xs={6} md={3}>
-                  <ReduxFormGroup name={`${member}.rank`} label="Spell rank" />
+                  <ReduxFormGroup name={`${member}.rank`} label="Spell rank" validate={[isRequired, isNumber]}/>
                 </Col>
                 <Col xs={6} md={3}>
                   <ReduxFormGroup name={`${member}.value`} label="Skill (only sorceries)" />

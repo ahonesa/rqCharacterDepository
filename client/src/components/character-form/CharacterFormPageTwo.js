@@ -38,8 +38,6 @@ class CharacterFormPageTwo extends Component {
     this.previousPage = props.previousPage.bind(this)
   }
 
-
-
   renderFields() {
     return _.map(CHARACTERISTICS_FIELDS, ({ label, name }) => {
       return <CharacteristicField key={name} label={label} name={name} />

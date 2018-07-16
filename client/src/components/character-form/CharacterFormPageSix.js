@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { ARMOR } from '../characters/Skills';
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect, ReduxCheckbox } from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
+import {isNumber, isRequired, isString} from "./validation";
 
 class CharacterFormPageSix extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class CharacterFormPageSix extends Component {
     this.renderArmorFields = this.renderArmorFields.bind(this)
   }
 
-  renderStuffFields({ fields, meta: { error, submitFailed } }) {
+  renderStuffFields({ fields }) {
     return (<div>
       <label>Fatigue</label>
       <ListGroup>
@@ -27,10 +28,10 @@ class CharacterFormPageSix extends Component {
             <ListGroupItem key={index}>
               <Row>
                 <Col xs={6} md={3}>
-                  <ReduxFormGroup name={`${member}.item`} label="Item" />
+                  <ReduxFormGroup name={`${member}.item`} label="Item" validate={[isRequired, isString]}/>
                 </Col>
                 <Col xs={6} md={3}>
-                  <ReduxFormGroup name={`${member}.weight`} label="Weight" />
+                  <ReduxFormGroup name={`${member}.weight`} label="Weight" validate={[isRequired, isNumber]} />
                 </Col>
                 <Col xs={6} md={3}>
                   <ReduxFormGroup name={`${member}.special`} label="Special" />
@@ -52,7 +53,7 @@ class CharacterFormPageSix extends Component {
     return (
       <FormGroup controlId="formControlsSelect">
         <ControlLabel>Select armor type</ControlLabel>
-        <Field name={`${member}.armorType`} component={ReduxFormSelect} placeholder="select">
+        <Field name={`${member}.armorType`} component={ReduxFormSelect} placeholder="select" validate={isRequired}>
           <option />
           {
             ARMOR.map(({ label }) => {

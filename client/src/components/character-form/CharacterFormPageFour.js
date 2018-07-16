@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { WEAPON_SKILLS } from '../characters/Skills';
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
+import {isNumber, isRequired} from "./validation";
 
 
 class CharacterFormPageFour extends Component {
@@ -20,7 +21,7 @@ class CharacterFormPageFour extends Component {
     return (
       <FormGroup controlId="formControlsSelect">
         <ControlLabel>Select weapon category</ControlLabel>
-        <Field name={`${member}.skill`} component={ReduxFormSelect} placeholder="select">
+        <Field name={`${member}.skill`} component={ReduxFormSelect} placeholder="select" validate={isRequired}>
           <option />
           {
             WEAPON_SKILLS.map(({ label, group }) => {
@@ -32,7 +33,7 @@ class CharacterFormPageFour extends Component {
     );
   }
   
-  renderSkillFields({ fields, meta: { error, submitFailed } }) {
+  renderSkillFields({ fields }) {
     return (<div>
       <label>Skillbonuses</label>
       <ListGroup>
@@ -51,10 +52,10 @@ class CharacterFormPageFour extends Component {
               </Row>
               <Row>  
                 <Col xs={4} md={4}>
-                  <ReduxFormGroup name={`${member}.attack`} label="Attack skill" />
+                  <ReduxFormGroup name={`${member}.attack`} label="Attack skill" validate={[isRequired, isNumber]} />
                 </Col>
                 <Col xs={4} md={4}>
-                  <ReduxFormGroup name={`${member}.parry`} label="Parry skill" />
+                  <ReduxFormGroup name={`${member}.parry`} label="Parry skill" validate={[isRequired, isNumber]} />
                 </Col>
                 <Col xs={4} md={4}>
                   <ReduxFormGroup name={`${member}.xp`} label="XP" />
@@ -74,7 +75,7 @@ class CharacterFormPageFour extends Component {
     );
   }
 
-  renderWeaponFields({ fields, meta: { error, submitFailed } }) {
+  renderWeaponFields({ fields }) {
     return (<div>
       <label>Select weapons</label>
       <ListGroup>
@@ -88,7 +89,7 @@ class CharacterFormPageFour extends Component {
               </Row>  
               <Row>
                 <Col xs={4} md={3} lg={3}>  
-                  <ReduxFormGroup name={`${member}.weapon`} label="Weapon in use" />
+                  <ReduxFormGroup name={`${member}.weapon`} label="Weapon in use" validate={ isRequired } />
                 </Col>  
                 <Col xs={4} md={3} lg={3}>
                   <ReduxFormGroup name={`${member}.sr`} label="Strike rank" />
@@ -119,7 +120,6 @@ class CharacterFormPageFour extends Component {
     </div>
     );
   }
-
 
   render() {
     const { handleSubmit, reset } = this.props

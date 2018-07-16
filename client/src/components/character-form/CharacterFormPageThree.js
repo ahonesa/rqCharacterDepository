@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { SKILLS } from '../characters/Skills';
 import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
+import { isNumber, isRequired } from "./validation";
 
 
 class CharacterFormPageThree extends Component {
@@ -20,7 +21,7 @@ class CharacterFormPageThree extends Component {
     return (
       <FormGroup controlId="formControlsSelect">
         <ControlLabel>Select</ControlLabel>
-        <Field name={`${member}.skill`} component={ReduxFormSelect} placeholder="select">
+        <Field name={`${member}.skill`} component={ReduxFormSelect} placeholder="select" validate={isRequired}>
           <option />
           {
             SKILLS.map(({ label, group }) => (
@@ -32,7 +33,7 @@ class CharacterFormPageThree extends Component {
     );
   }
 
-  renderSkillFields({ fields, meta: { error, submitFailed } }) {
+  renderSkillFields({ fields }) {
     return (<div>
       <label>Skillbonuses</label>
       <ListGroup>
@@ -54,7 +55,7 @@ class CharacterFormPageThree extends Component {
                   {this.renderSkillSelect(member)}
                 </Col>
                 <Col xs={4} md={4}>
-                  <ReduxFormGroup name={`${member}.value`} label="Skill" />
+                  <ReduxFormGroup name={`${member}.value`} label="Skill" validate={[isRequired, isNumber]}/>
                 </Col>
                 <Col xs={4} md={4}>
                   <ReduxFormGroup name={`${member}.xp`} label="XP" />
