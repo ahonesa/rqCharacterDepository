@@ -35,8 +35,8 @@ export const powXpRoll = (characterId) => async dispatch => {
   await dispatch({ type: POW_XP_ROLL, payload: res.data });
 };
 
-export const weaponXpRoll = (characterId, skill, type) => async dispatch => {
-  const res = await axios.post("/api/chars/" + characterId + "/xp_weapon/" + skill + "/" + type);
+export const weaponXpRoll = (characterId, skill) => async dispatch => {
+  const res = await axios.post("/api/chars/" + characterId + "/xp_weapon/" + skill );
   await dispatch({ type: WEAPON_XP_ROLL, payload: res.data });
 };
 

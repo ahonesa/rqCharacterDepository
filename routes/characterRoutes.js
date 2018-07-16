@@ -30,7 +30,7 @@ module.exports = (app) => {
     res.send(character)
   });
 
-  app.post("/api/chars/:id/xp_weapon/:weaponskill/:type", async (req, res) => {
+  app.post("/api/chars/:id/xp_weapon/:weaponskill", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
     const char = _.get(character, 'character')
     const weaponskills = _.get(character, 'character.weaponskills');
@@ -40,23 +40,14 @@ module.exports = (app) => {
       const bonuses = statBonuses(char.characteristics)
       const roll = Math.floor((Math.random() * 100) + 1);
       const increase = Math.floor((Math.random() * 6) + 1);
-      var success = false
-      if (req.params.type === 'attack') {
-        var skillInt = parseInt(skill.attack || '5')
-        const skillCap = (skillInt + bonuses.bonuses.manipulationModifier) > 100 ? (100 - bonuses.bonuses.manipulationModifier) : skillInt
-        if (roll > skillCap) {
+      let success = false
+
+      let skillInt = parseInt(skill.value || '5')
+      const skillCap = (skillInt + bonuses.bonuses.manipulationModifier) > 100 ? (100 - bonuses.bonuses.manipulationModifier) : skillInt
+      if (roll > skillCap) {
           skillInt += increase
-          skill.attack = skillInt.toString()
+          skill.value = skillInt.toString()
           success = true
-        }
-      } else if (req.params.type === 'parry') {
-        var skillInt = parseInt(skill.parry || '5')
-        const skillCap = (skillInt + bonuses.bonuses.agilityModifier) > 100 ? (100 - bonuses.bonuses.agilityModifier) : skillInt
-        if (roll > skillCap) {
-          skillInt += increase
-          skill.parry = skillInt.toString()
-          success = true
-        }
       }
 
       if(skill.xp > 0) skill.xp--; else character.character.xp--;

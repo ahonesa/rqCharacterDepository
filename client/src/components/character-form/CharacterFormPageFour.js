@@ -37,8 +37,7 @@ class CharacterFormPageFour extends Component {
     return (<div>
       <label>Skillbonuses</label>
       <ListGroup>
-        <ListGroupItem>Attack Bonus: {_.get(this.props, "character.bonuses.manipulationModifier", 0)}</ListGroupItem>
-        <ListGroupItem>Defense Bonus: {_.get(this.props, "character.bonuses.agilityModifier", 0)}</ListGroupItem>
+        <ListGroupItem>Skill category modifier: {_.get(this.props, "character.bonuses.manipulationModifier", 0)}</ListGroupItem>
       </ListGroup>
       <label>Select weapon skills</label>
       <ListGroup>
@@ -52,10 +51,7 @@ class CharacterFormPageFour extends Component {
               </Row>
               <Row>  
                 <Col xs={4} md={4}>
-                  <ReduxFormGroup name={`${member}.attack`} label="Attack skill" validate={[isRequired, isNumber]} />
-                </Col>
-                <Col xs={4} md={4}>
-                  <ReduxFormGroup name={`${member}.parry`} label="Parry skill" validate={[isRequired, isNumber]} />
+                  <ReduxFormGroup name={`${member}.value`} label="Skill" validate={[isRequired, isNumber]} />
                 </Col>
                 <Col xs={4} md={4}>
                   <ReduxFormGroup name={`${member}.xp`} label="XP" />
