@@ -1,10 +1,9 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
-import { ReduxFormControl, ReduxFormGroup, ReduxRadio } from '../fields/Fields';
-import { Link } from 'react-router-dom';
-import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, Label } from "react-bootstrap";
-
+import { ReduxFormGroup, ReduxRadio } from '../fields/Fields';
+import { FormGroup, Button, Row, Col, Label } from "react-bootstrap";
+import { isRequired, isString } from "./validation";
 
 const ADDITIONAL_FIELDS = [
   { label: "Species", name: "species", type: "text" },
@@ -34,7 +33,7 @@ class CharacterFormPageOne extends Component {
         <h2 style={{ marginBottom: 30}}><Label>Basic information</Label></h2>
         <Col>
           <form onSubmit={handleSubmit}>
-            <ReduxFormGroup label="Character Name" name="name" />
+            <ReduxFormGroup label="Character Name" name="name" validate={[isRequired, isString]}/>
             <FormGroup>
               <label>Sex</label>
               <Field name="info.sex" component={ReduxRadio} type="radio" label="male" value="male" />

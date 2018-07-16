@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
 import { ARMOR } from '../characters/Skills';
-import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect, ReduxCheckbox } from '../fields/Fields'
+import { ReduxFormGroup, ReduxFormControl, ReduxRadio, InputSelect, ReduxCheckbox } from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
 import {isNumber, isRequired, isString} from "./validation";
 
@@ -53,7 +53,7 @@ class CharacterFormPageSix extends Component {
     return (
       <FormGroup controlId="formControlsSelect">
         <ControlLabel>Select armor type</ControlLabel>
-        <Field name={`${member}.armorType`} component={ReduxFormSelect} placeholder="select" validate={isRequired}>
+        <Field name={`${member}.armorType`} component={InputSelect} placeholder="select" validate={isRequired}>
           <option />
           {
             ARMOR.map(({ label }) => {

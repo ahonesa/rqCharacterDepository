@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { reduxForm, Field, FieldArray } from "redux-form";
 import { Link } from 'react-router-dom';
 import { SKILLS } from '../characters/Skills';
-import { ReduxFormGroup, ReduxFormControl, ReduxRadio, ReduxFormSelect } from '../fields/Fields'
+import {ReduxFormGroup, ReduxFormControl, ReduxRadio, InputSelect} from '../fields/Fields'
 import { Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, ListGroup, ListGroupItem, Label } from "react-bootstrap";
 import { isNumber, isRequired } from "./validation";
 
@@ -21,7 +21,7 @@ class CharacterFormPageThree extends Component {
     return (
       <FormGroup controlId="formControlsSelect">
         <ControlLabel>Select</ControlLabel>
-        <Field name={`${member}.skill`} component={ReduxFormSelect} placeholder="select" validate={isRequired}>
+        <Field name={`${member}.skill`} component={InputSelect} placeholder="select" validate={isRequired}>
           <option />
           {
             SKILLS.map(({ label, group }) => (
