@@ -3,11 +3,11 @@ import React from 'react';
 import * as actions from "../../actions";
 import { connect } from 'react-redux';
 import { Button, Table, Panel, Badge } from 'react-bootstrap';
-
+import './Skills.css';
 
 const SkillRows = (skills, props, bonus) => skills.map(skill => {
   const hasXp = props.hasXp || skill.xp > 0
-  return <tr key={skill.skill}><td>{skill.skill.split(".")[1] || ""}</td><td>{parseInt(skill.value) + bonus} {xpBadge(skill.xp)}</td><td>
+  return <tr key={skill.skill}><td>{skill.skill.split(".")[1] || ""}</td><td className="skillValueColumn">{parseInt(skill.value) + bonus} {xpBadge(skill.xp)}</td><td className="xpColumn">
     <Button disabled={!props.owner || !hasXp} bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
 }
 )
@@ -26,7 +26,7 @@ const SkillGroups = (group, props, bonus) => {
       <Panel.Body>
         <Table condensed responsive>
           <thead>
-            <tr><th>{group}</th><th>{bonus > 0? "+": ""}{bonus}</th></tr>
+            <tr><th>{group}</th><th className="skillValueColumn">{bonus > 0? "+": ""}{bonus}</th><th className="xpColumn"></th></tr>
           </thead>
           <tbody>
             {SkillRows(filtered, props, bonus)}
