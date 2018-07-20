@@ -123,12 +123,12 @@ module.exports = (app) => {
     const character = await Character.findOne({ characterId: req.params.id })
 
     console.log(character)
-    const xp = _.get(character, 'character.xp', 0)
     const pow = _.get(character, 'character.characteristics.pow', NaN);
     const pow_max = _.get(character, 'character.characteristics.pow_max', NaN);
     const maxPowForGain = _.get(character, 'character.characteristics.maxPowForGain', NaN);
+    const powXpRolls = _.get(character, 'character.characteristics.powXpRolls', NaN);
 
-    if (maxPowForGain && pow && pow_max && xp > 2 && pow < pow_max) {
+    if (maxPowForGain && pow && pow_max && powXpRolls > 0 && pow < pow_max) {
 
       const roll = Math.floor((Math.random() * 100) + 1);   
       const rollCap = (maxPowForGain - pow) * 5
@@ -137,7 +137,7 @@ module.exports = (app) => {
         _.set(character, "character.characteristics.pow", pow+1)
       }
 
-      _.set(character, "character.xp", xp-3);
+      _.set(character, "character.characteristics.powXpRolls", powXpRolls-1);
 
       const result = await Character(character).save()
       res.send(result);

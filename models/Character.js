@@ -40,7 +40,8 @@ const characterSchema = new Schema({
             dex_org: Number,
             pow_org: Number,
             cha_org: Number,
-            maxPowForGain: Number
+            maxPowForGain: Number,
+            powXpRolls: Number
         },
         skills: [
             { 

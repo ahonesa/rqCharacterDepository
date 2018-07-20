@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import * as actions from "../../actions";
 import { connect } from 'react-redux';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Badge } from 'react-bootstrap';
 
 const mapStateToProps = ({ selectedChar }) => {
   if (selectedChar) {
@@ -10,14 +10,18 @@ const mapStateToProps = ({ selectedChar }) => {
   } else return {};
 }
 
-export const Characteristics = connect(mapStateToProps, actions)((props) => {
+const xpBadge = (skillXp) => {
+    if(skillXp < 1) return;
+    else return <Badge>{skillXp}</Badge>;
+}
 
-  const hasXpForPowGain = props.xp > 2
+export const Characteristics = connect(mapStateToProps, actions)((props) => {
   if (props.characteristics && props.selectedChar) {
     const selectedChar = props.selectedChar;
     const characteristics = props.characteristics;
     const canInc = characteristics.pow < characteristics.pow_max
-    const powXpEnabled = canInc && props.owner && hasXpForPowGain && props.xpRollsAllowed
+    const powXpRolls = _.get(characteristics, "powXpRolls", 0)
+    const powXpEnabled = canInc && props.owner && powXpRolls > 0 && props.xpRollsAllowed
 
     return (<Table condensed responsive>
       <thead>
@@ -58,6 +62,7 @@ export const Characteristics = connect(mapStateToProps, actions)((props) => {
           <td>{characteristics.pow_org}</td>
           <td>{characteristics.pow}</td>
           <td>{characteristics.pow_max}
+              {xpBadge(powXpRolls)}
           <Button disabled={!powXpEnabled} bsSize="xsmall" onClick={() => props.powXpRoll(selectedChar.characterId)}>XP</Button></td>
         </tr>
         <tr>
