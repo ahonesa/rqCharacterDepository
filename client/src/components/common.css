@@ -14,3 +14,11 @@
 a {
     color: #333;
 }
+
+a:focus {
+    outline: none !important;
+}
+
+.btn:focus {
+    outline: none !important;
+}
