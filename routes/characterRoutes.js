@@ -3,11 +3,33 @@ const mongoose = require("mongoose");
 const statBonuses = require("../services/StatBonuses")
 
 const Character = mongoose.model("characters");
+const Params = mongoose.model("params");
+
 
 module.exports = (app) => {
   app.get("/api/chars", async (req, res) => {
     const characters = await Character.find();
     res.send(characters)
+  });
+
+  app.get("/api/params", async (req, res) => {
+    const p = await Params.findOne();
+    if(p) {
+      res.send(p)
+    } else {
+      res.status(400).end("NOK");
+    }
+  });
+
+  app.get("/api/params/:param/toggle", async (req, res) => {
+      const p = await Params.findOne();
+      if(p) {
+        p[req.params.param] = !p[req.params.param]
+        const saved = await Params(p).save()
+        res.send(saved)
+      } else {
+        res.status(400).end("NOK");
+      }
   });
 
   app.post("/api/chars", async (req, res) => {
