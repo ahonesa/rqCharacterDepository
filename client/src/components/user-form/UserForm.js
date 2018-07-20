@@ -4,29 +4,37 @@ import * as actions from "../../actions";
 import { connect } from "react-redux";
 import { loadavg } from "os";
 import { Grid, FormGroup, Button, FormControl, ControlLabel, Row, Col } from "react-bootstrap";
+import { ReduxFormGroup } from '../fields/Fields'
 
-const ReduxFormControl = ({input, meta, ...props}) => {
-  return <FormControl {...props} {...input} />
-};
 
 class UserForm extends Component {
+  componentDidMount() {
+      this.props.fetchParams()
+  }
+
   render() {
-    const onSubmit = (values) => {
-      this.props.updateUser(values.userName)
-    };
+
+    const authorizationLevel = this.props.auth && this.props.auth.authorizationLevel
+    const xpRollsAllowed = this.props.params && this.props.params.xpRollsAllowed
+    console.log(xpRollsAllowed)
+
     const { handleSubmit, reset } = this.props
+
+      const onSubmit = (values) => {
+          this.props.updateUser(values.userName)
+      };
+
     return (
       <Grid>
         <Row className="show-grid">
           <Col xs={6} md={4} lg={12}>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <FormGroup>
-                <ControlLabel>Username:</ControlLabel>
-                <Field component={ReduxFormControl} type="text" name="userName" />
-              </FormGroup>
+              <ReduxFormGroup name="userName" label="Username:" />
               <Button type="reset" href="/" onClick={reset}>Cancel</Button>
               <Button type="submit">Submit</Button>
             </form>
+            <p>XP Rolls Allowed = {xpRollsAllowed ? "yes" : "nope"}</p>
+            <Button disabled={ authorizationLevel === 1 ? false : true } onClick={() => this.props.toggleXpRollsAllowed()}>Toggle XP Rolls Allowed</Button>
           </Col>
         </Row>
       </Grid>
@@ -34,8 +42,8 @@ class UserForm extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
-  return { initialValues: auth }
+function mapStateToProps({ auth, params }) {
+  return { initialValues: auth, params, auth }
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({

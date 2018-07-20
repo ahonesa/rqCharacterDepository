@@ -21,7 +21,7 @@ module.exports = (app) => {
     }
   });
 
-  app.get("/api/params/:param/toggle", async (req, res) => {
+  app.post("/api/params/:param/toggle", async (req, res) => {
       const p = await Params.findOne();
       if(p) {
         p[req.params.param] = !p[req.params.param]
