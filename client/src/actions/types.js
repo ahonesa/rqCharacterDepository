@@ -6,3 +6,4 @@ export const CREATE_CHAR = 'create_char';
 export const SKILL_XP_ROLL = 'skill_xp_roll';
 export const WEAPON_XP_ROLL = 'weapon_xp_roll';
 export const POW_XP_ROLL = 'pow_xp_roll';
+export const FETCH_PARAMS = 'fetch_params';

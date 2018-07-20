@@ -12,6 +12,7 @@ import UserForm from './user-form/UserForm'
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchParams();
   }
 
   render() {
