@@ -8,7 +8,7 @@ import CharacterNotes from './CharacterNotes';
 import Landing from './Landing';
 import { Row, Col, Grid, ListGroup, ListGroupItem, Button, Tabs, Tab, Panel } from 'react-bootstrap';
 import CharacterStuff from './CharacterStuff';
-
+import './common.css';
 
 class CharacterDetailsView extends Component {
 
