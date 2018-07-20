@@ -9,7 +9,7 @@ import { WeaponsPanel } from './character-details/Weapons';
 import calculateModifiers from './characters/StatBonuses'
 import './common.css';
 
-const CharacterDetails = ({ char, auth }) => {
+const CharacterDetails = ({ char, auth, params }) => {
   switch (char) {
     case null:
       return (<div>
@@ -26,7 +26,8 @@ const CharacterDetails = ({ char, auth }) => {
       const authorizationLevel = auth && auth.authorizationLevel
       const userId = auth && auth.googleId
       const isOwner = ownerId === userId 
-      const hasXp = c.xp > 0  
+      const hasXp = c.xp > 0
+      const xpRollsAllowed = params && params.xpRollsAllowed;
 
       console.log(bonuses)
 
@@ -86,7 +87,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel className="shadowPanel" bsSize="small">
                   <Panel.Heading>Characteristics</Panel.Heading>
                   <Panel.Body>
-                    <Characteristics characteristics={characteristics} owner={isOwner} xp={c.xp}/>
+                    <Characteristics characteristics={characteristics} owner={isOwner} xp={c.xp} xpRollsAllowed={xpRollsAllowed} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -96,7 +97,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel className="shadowPanel">
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} />
+                    <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -104,7 +105,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel className="shadowPanel">
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelTwo skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} />
+                    <SkillsPanelTwo skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -112,7 +113,7 @@ const CharacterDetails = ({ char, auth }) => {
                 <Panel className="shadowPanel">
                   <Panel.Heading>Weapons</Panel.Heading>
                   <Panel.Body>
-                    <WeaponsPanel weapons={weapons} weaponskills={weaponskills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} />
+                    <WeaponsPanel weapons={weapons} weaponskills={weaponskills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed} />
                   </Panel.Body>
                 </Panel>
               </Col>

@@ -42,7 +42,7 @@ class CharacterDetailsView extends Component {
               <Col xs={12} md={10} lg={10}>
                 <Tabs defaultActiveKey={1} id="tabsMenu">
                   <Tab eventKey={1} title="Details">
-                    <CharacterDetails char={this.props.selectedChar} auth={this.props.auth} />
+                    <CharacterDetails char={this.props.selectedChar} auth={this.props.auth} params={this.props.params} />
                   </Tab>
                   <Tab eventKey={2} title="Stuff">
                     <CharacterStuff char={this.props.selectedChar} auth={this.props.auth} />
@@ -59,8 +59,8 @@ class CharacterDetailsView extends Component {
   }
 }
 
-function mapStateToProps({ selectedChar, characters, auth }) {
-  return { selectedChar, characters, auth }
+function mapStateToProps({ selectedChar, characters, auth, params }) {
+  return { selectedChar, characters, auth, params }
 }
 
 export default connect(mapStateToProps, actions)(CharacterDetailsView);

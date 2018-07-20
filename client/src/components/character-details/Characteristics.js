@@ -17,6 +17,8 @@ export const Characteristics = connect(mapStateToProps, actions)((props) => {
     const selectedChar = props.selectedChar;
     const characteristics = props.characteristics;
     const canInc = characteristics.pow < characteristics.pow_max
+    const powXpEnabled = canInc && props.owner && hasXpForPowGain && props.xpRollsAllowed
+
     return (<Table condensed responsive>
       <thead>
         <tr>
@@ -56,7 +58,7 @@ export const Characteristics = connect(mapStateToProps, actions)((props) => {
           <td>{characteristics.pow_org}</td>
           <td>{characteristics.pow}</td>
           <td>{characteristics.pow_max}
-          <Button disabled={!canInc || !props.owner || !hasXpForPowGain} bsSize="xsmall" onClick={() => props.powXpRoll(selectedChar.characterId)}>XP</Button></td>
+          <Button disabled={!powXpEnabled} bsSize="xsmall" onClick={() => props.powXpRoll(selectedChar.characterId)}>XP</Button></td>
         </tr>
         <tr>
           <td>DEX</td>

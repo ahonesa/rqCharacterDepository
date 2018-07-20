@@ -6,11 +6,10 @@ import { Button, Table, Panel, Badge } from 'react-bootstrap';
 import './Skills.css';
 
 const SkillRows = (skills, props, bonus) => skills.map(skill => {
-  const hasXp = props.hasXp || skill.xp > 0
+  const xpEnabled = props.owner && (props.hasXp || skill.xp > 0) && props.xpRollsAllowed
   return <tr key={skill.skill}><td>{skill.skill.split(".")[1] || ""}</td><td className="skillValueColumn">{parseInt(skill.value) + bonus} {xpBadge(skill.xp)}</td><td className="xpColumn">
-    <Button disabled={!props.owner || !hasXp} bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
-}
-)
+    <Button disabled={!xpEnabled} bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
+})
 
 const xpBadge = (skillXp) => { 
   if(skillXp < 1) return;

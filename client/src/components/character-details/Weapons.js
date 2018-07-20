@@ -16,7 +16,7 @@ const WeaponGroups = (skills, weapons, props, bonuses) => {
     const skill = _.find(skills, { 'skill': weapon.skill });
     const xp = _.get(skill, "xp", 0)
     const value = _.get(skill, "value", null)
-    const hasXp = props.hasXp || xp > 0
+    const xpEnabled = value && props.owner && (props.hasXp || xp > 0) && props.xpRollsAllowed
 
     return (<Panel key={weapon.skill}>
       <Panel.Body>
@@ -25,7 +25,7 @@ const WeaponGroups = (skills, weapons, props, bonuses) => {
             <tr><th>{weapon.skill.split(".")[1]} {xpBadge(xp)}</th><th>{bonuses.manipulationModifier > 0? "+": ""}{bonuses.manipulationModifier}</th><th className="xpColumn"></th></tr>
           </thead>
           <tbody>
-          <tr><td>skill:</td><td>{value && (parseInt(value) + bonuses.manipulationModifier)}</td><td className="xpColumn"><Button disabled={!value || !props.owner || !hasXp} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
+          <tr><td>skill:</td><td>{value && (parseInt(value) + bonuses.manipulationModifier)}</td><td className="xpColumn"><Button disabled={!xpEnabled} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
           <tr><td>weapon:</td><td>{weapon.weapon}</td><td className="xpColumn"></td></tr>
           <tr><td>damage:</td><td>{weapon.damage}</td><td className="xpColumn"></td></tr>
             <tr><td>sr:</td><td>{weapon.sr}</td><td className="xpColumn"></td></tr>
