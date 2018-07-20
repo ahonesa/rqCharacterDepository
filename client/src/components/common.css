@@ -6,3 +6,11 @@
 .nav-tabs {
     border-bottom: 0px;
 }
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #f5f5f5;
+}
+
+a {
+    color: #333;
+}
