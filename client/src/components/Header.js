@@ -33,7 +33,7 @@ class Header extends Component {
         <Navbar.Header>
           <Navbar.Brand>
             <Link to={this.props.auth ? "/chars" : "/"} >
-              RQ Character Deposit
+              RQG Character Deposit
             </Link>
           </Navbar.Brand>
         </Navbar.Header>  

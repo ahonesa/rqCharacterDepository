@@ -14,9 +14,9 @@ module.exports = (app) => {
     const existingCharacter = await Character.findOne({ characterId: req.body.name });
     if (existingCharacter) {
       existingCharacter.character = req.body
-      const char = await Character(existingCharacter).save();
+      await Character(existingCharacter).save();
     } else {
-      const char = await Character({
+      await Character({
         characterId: req.body.name.trim(),
         ownerId: req.user.googleId,
         character: req.body
@@ -53,6 +53,7 @@ module.exports = (app) => {
       if(skill.xp > 0) skill.xp--; else character.character.xp--;
       _.remove(character.character.weaponskills, { 'skill': req.params.weaponskill })
       character.character.weaponskills.push(skill)
+      character.character.weaponskills.sort()
       const result = await Character(character).save()
       res.send(result);
 
@@ -88,6 +89,7 @@ module.exports = (app) => {
       _.remove(character.character.skills, { 'skill': req.params.skill })      
       if(skill.xp > 0) skill.xp--; else character.character.xp--;
       character.character.skills.push(skill)
+      character.character.skills.sort()
       const result = await Character(character).save()
       res.send(result);
 

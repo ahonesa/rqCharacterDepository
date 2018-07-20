@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
 import * as actions from "../actions";
 import { connect } from "react-redux";
 import { loadavg } from "os";
-import { Grid, FormGroup, Button, FormControl, ControlLabel, Row, Col, Panel, Table } from "react-bootstrap";
+import { Row, Col, Panel, Table } from "react-bootstrap";
 import calculateBonuses from './characters/StatBonuses'
 import { ARMOR } from './characters/Skills';
+import './common.css';
 
 class CharacterStuff extends Component {
 
@@ -24,13 +24,13 @@ class CharacterStuff extends Component {
       console.log(armor)
       return (<tr key={item._id}>
         <td>{item.armorType}</td>
-        <td>{(item.head == "true") && armor.value || "-"}</td>
-        <td>{(item.chest == "true") && armor.value || "-"}</td>
-        <td>{(item.stomach == "true") && armor.value || "-"}</td>
-        <td>{(item.rh == "true") && armor.value || "-"}</td>
-        <td>{(item.lh == "true") && armor.value || "-"}</td>
-        <td>{(item.rl == "true") && armor.value || "-"}</td>
-        <td>{(item.ll == "true") && armor.value || "-"}</td>
+        <td>{(item.head === "true") && armor.value || "-"}</td>
+        <td>{(item.chest === "true") && armor.value || "-"}</td>
+        <td>{(item.stomach === "true") && armor.value || "-"}</td>
+        <td>{(item.rh === "true") && armor.value || "-"}</td>
+        <td>{(item.lh === "true") && armor.value || "-"}</td>
+        <td>{(item.rl === "true") && armor.value || "-"}</td>
+        <td>{(item.ll === "true") && armor.value || "-"}</td>
         <td>?</td></tr>);
     }));
   }
@@ -58,11 +58,11 @@ class CharacterStuff extends Component {
 
     return (
       <Panel bsSize="small">
-        <Panel.Heading componentClass="h4">{char && char.characterId}</Panel.Heading>
+        <Panel.Heading componentClass="h4" style={{ marginTop: "0px" }}>{char && char.characterId}</Panel.Heading>
         <Panel.Body>
           <Row>
             <Col xs={12} md={4} lg={4}>
-              <Panel>
+              <Panel className="shadowPanel">
                 <Panel.Heading>Items</Panel.Heading>
                 <Panel.Body>
                   <Table condensed responsive>
@@ -77,7 +77,7 @@ class CharacterStuff extends Component {
               </Panel>
             </Col>
             <Col xs={12} md={8} lg={8}>
-              <Panel>
+              <Panel className="shadowPanel">
                 <Panel.Heading>Armor layers</Panel.Heading>
                 <Panel.Body>
                   <Table condensed responsive>

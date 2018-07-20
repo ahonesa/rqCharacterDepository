@@ -3,6 +3,7 @@ import React from 'react';
 import * as actions from "../../actions";
 import { connect } from 'react-redux';
 import { Table, Panel, Button, Badge } from 'react-bootstrap';
+import './Weapons.css';
 
 const xpBadge = (skillXp) => { 
   if(skillXp < 1) return;
@@ -21,15 +22,15 @@ const WeaponGroups = (skills, weapons, props, bonuses) => {
       <Panel.Body>
         <Table condensed responsive>
           <thead>
-            <tr><th>{weapon.skill.split(".")[1]} {xpBadge(xp)}</th><th>A: {bonuses.manipulationModifier > 0? "+": ""}{bonuses.manipulationModifier}</th><th>P: {bonuses.agilityModifier > 0? "+": ""}{bonuses.agilityModifier}</th></tr>
+            <tr><th>{weapon.skill.split(".")[1]} {xpBadge(xp)}</th><th>{bonuses.manipulationModifier > 0? "+": ""}{bonuses.manipulationModifier}</th><th className="xpColumn"></th></tr>
           </thead>
           <tbody>
-            <tr><td>skill:</td><td>{value && (parseInt(value) + bonuses.manipulationModifier)}</td><td><Button disabled={!value || !props.owner || !hasXp} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
-            <tr><td>weapon:</td><td>{weapon.weapon}</td></tr>
-            <tr><td>damage:</td><td>{weapon.damage}</td></tr>
-            <tr><td>sr:</td><td>{weapon.sr}</td></tr>
-            <tr><td>armor:</td><td>{weapon.armor}</td></tr>
-            <tr><td>type:</td><td>{weapon.weaponType}</td></tr>
+          <tr><td>skill:</td><td>{value && (parseInt(value) + bonuses.manipulationModifier)}</td><td className="xpColumn"><Button disabled={!value || !props.owner || !hasXp} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
+          <tr><td>weapon:</td><td>{weapon.weapon}</td><td className="xpColumn"></td></tr>
+          <tr><td>damage:</td><td>{weapon.damage}</td><td className="xpColumn"></td></tr>
+            <tr><td>sr:</td><td>{weapon.sr}</td><td className="xpColumn"></td></tr>
+            <tr><td>armor:</td><td>{weapon.armor}</td><td className="xpColumn"></td></tr>
+            <tr><td>type:</td><td>{weapon.weaponType}</td><td className="xpColumn"></td></tr>
           </tbody>
         </Table>
       </Panel.Body>

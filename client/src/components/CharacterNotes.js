@@ -19,7 +19,7 @@ class CharacterNotes extends Component {
     console.log(selectedChar)
     return (
       <Panel bsSize="small">
-        <Panel.Heading componentClass="h4">{selectedChar && selectedChar.characterId}</Panel.Heading>
+        <Panel.Heading componentClass="h4" style={{ marginTop: "0px" }}>{selectedChar && selectedChar.characterId}</Panel.Heading>
         <Panel.Body>
           <Row>
             <Col xs={8} md={8} lg={8}>

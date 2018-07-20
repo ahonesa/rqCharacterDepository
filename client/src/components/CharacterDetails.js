@@ -7,6 +7,7 @@ import { Characteristics } from './character-details/Characteristics';
 import { SkillsPanelOne, SkillsPanelTwo } from './character-details/Skills';
 import { WeaponsPanel } from './character-details/Weapons';
 import calculateModifiers from './characters/StatBonuses'
+import './common.css';
 
 const CharacterDetails = ({ char, auth }) => {
   switch (char) {
@@ -31,11 +32,11 @@ const CharacterDetails = ({ char, auth }) => {
 
       return (
         <Panel bsSize="small">
-          <Panel.Heading componentClass="h4">{char.characterId} <Badge>{c.xp}</Badge></Panel.Heading>
+          <Panel.Heading componentClass="h4" style={{ marginTop: "0px" }}>{char.characterId} <Badge>{c.xp}</Badge></Panel.Heading>
           <Panel.Body>
             <Row>
               <Col xs={12} md={4} lg={4}>
-                <Panel bsSize="small">
+                <Panel className="shadowPanel" bsSize="small">
                   <Panel.Heading>Basic info</Panel.Heading>
                   <Panel.Body>
                     <Table condensed responsive>
@@ -54,7 +55,7 @@ const CharacterDetails = ({ char, auth }) => {
                 </Panel>
               </Col>
               <Col xs={12} md={4} lg={4}>
-                <Panel bsSize="small">
+                <Panel className="shadowPanel" bsSize="small">
                   <Panel.Heading>Stats</Panel.Heading>
                   <Panel.Body>
                     <Table condensed responsive>
@@ -82,7 +83,7 @@ const CharacterDetails = ({ char, auth }) => {
                 </Panel>
               </Col>
               <Col xs={12} md={4} lg={4}>
-                <Panel>
+                <Panel className="shadowPanel" bsSize="small">
                   <Panel.Heading>Characteristics</Panel.Heading>
                   <Panel.Body>
                     <Characteristics characteristics={characteristics} owner={isOwner} xp={c.xp}/>
@@ -92,7 +93,7 @@ const CharacterDetails = ({ char, auth }) => {
             </Row>
             <Row>
               <Col xs={12} md={4} lg={4}>
-                <Panel>
+                <Panel className="shadowPanel">
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
                     <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} />
@@ -100,7 +101,7 @@ const CharacterDetails = ({ char, auth }) => {
                 </Panel>
               </Col>
               <Col xs={12} md={4} lg={4}>
-                <Panel>
+                <Panel className="shadowPanel">
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
                     <SkillsPanelTwo skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} />
@@ -108,7 +109,7 @@ const CharacterDetails = ({ char, auth }) => {
                 </Panel>
               </Col>
               <Col xs={12} md={4} lg={4}>
-                <Panel>
+                <Panel className="shadowPanel">
                   <Panel.Heading>Weapons</Panel.Heading>
                   <Panel.Body>
                     <WeaponsPanel weapons={weapons} weaponskills={weaponskills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} />
