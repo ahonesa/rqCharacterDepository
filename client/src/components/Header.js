@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import * as actions from "../actions";
+import styles from "./common.css";
 
 class Header extends Component {
   renderContent() {
@@ -17,10 +19,14 @@ class Header extends Component {
       default:
         return (
         <Nav pullRight>
-          <NavItem eventKey={1} href="/chars">Characters</NavItem> 
-          <NavItem eventKey={2} href="/diceroom">Diceroom</NavItem>  
-          <NavItem eventKey={3} href="/user">User</NavItem>
-          <NavItem eventKey={4} href="/api/logout">Logout</NavItem>
+          <LinkContainer to="/chars" activeHref="active">
+            <NavItem eventKey={2}>Characters</NavItem>
+          </LinkContainer>
+          <NavItem eventKey={3}>Diceroom</NavItem>
+          <LinkContainer to="/user" activeHref="active">
+            <NavItem eventKey={4}>User</NavItem>
+          </LinkContainer>
+          <NavItem onClick={this.props.logout} eventKey={4}>Logout</NavItem>
         </Nav>
         );
     }
@@ -32,9 +38,9 @@ class Header extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={this.props.auth ? "/chars" : "/"} >
-              RQG Character Deposit
-            </Link>
+            <LinkContainer to={this.props.auth ? "/chars" : "/"} >
+              <a href="#">RQG Character Deposit</a>
+            </LinkContainer>
           </Navbar.Brand>
         </Navbar.Header>  
         {this.renderContent()}
@@ -47,4 +53,4 @@ function mapStateToProps({auth}) {
   return { auth }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions, null, { pure: false })(Header);

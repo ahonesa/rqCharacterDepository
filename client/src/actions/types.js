@@ -8,3 +8,4 @@ export const WEAPON_XP_ROLL = 'weapon_xp_roll';
 export const POW_XP_ROLL = 'pow_xp_roll';
 export const FETCH_PARAMS = 'fetch_params';
 export const TOGGLE_XP_ROLLS_ALLOWED = 'toggle_xp_rolls_allowed';
+export const LOGOUT = 'logout';

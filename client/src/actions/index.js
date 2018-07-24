@@ -1,6 +1,6 @@
 import axios from "axios";
 import {reset} from "redux-form";
-import { FETCH_USER, GET_ALL_CHARS, GET_ONE_CHAR, UPDATE_USER, CREATE_CHAR, SKILL_XP_ROLL, WEAPON_XP_ROLL, POW_XP_ROLL, FETCH_PARAMS, TOGGLE_XP_ROLLS_ALLOWED } from "./types";
+import { LOGOUT, FETCH_USER, GET_ALL_CHARS, GET_ONE_CHAR, UPDATE_USER, CREATE_CHAR, SKILL_XP_ROLL, WEAPON_XP_ROLL, POW_XP_ROLL, FETCH_PARAMS, TOGGLE_XP_ROLLS_ALLOWED } from "./types";
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/current_user");
@@ -58,4 +58,9 @@ export const getAllChars = () => async dispatch => {
 export const getOneChar = (characterId) => async dispatch => {
   const res = await axios.get("/api/chars/" + characterId);
   dispatch({ type: GET_ONE_CHAR, payload: res.data });
+};
+
+export const logout = () => async dispatch => {
+    const res = await axios.get("/api/logout");
+    dispatch({ type: LOGOUT, payload: res.data });
 };

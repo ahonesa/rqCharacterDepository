@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import * as actions from "../actions";
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import CharacterListView from './CharacterListView';
 import CharacterDetails from './CharacterDetails';
 import CharacterNotes from './CharacterNotes';
 import Landing from './Landing';
-import { Row, Col, Grid, ListGroup, ListGroupItem, Button, Tabs, Tab, Panel } from 'react-bootstrap';
+import { Row, Col, Grid, ListGroup, ListGroupItem, Button, Tabs, Tab } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import CharacterStuff from './CharacterStuff';
 import './common.css';
 
@@ -18,10 +17,11 @@ class CharacterDetailsView extends Component {
   }
 
   rivit = () => this.props.characters && this.props.characters.map(char =>
-    <ListGroupItem key={char.characterId} href={"/chars/" + char.characterId}>
-      {char.characterId}
-    </ListGroupItem>
-  )
+      <LinkContainer key={char.characterId} to={"/chars/" + char.characterId}>
+        <ListGroupItem onClick={() => this.props.getOneChar(char.characterId)} active={this.props.selectedChar && char.characterId===this.props.selectedChar.characterId} >
+          {char.characterId}
+        </ListGroupItem>
+      </LinkContainer>);
 
   render() {
     switch(this.props.auth) {
@@ -40,7 +40,7 @@ class CharacterDetailsView extends Component {
                 <Button href="/new_char">Create new character</Button>
               </Col>
               <Col xs={12} md={10} lg={10}>
-                <Tabs defaultActiveKey={1} id="tabsMenu">
+                <Tabs defaultActiveKey={1} id="tabsMenu" animation={false}>
                   <Tab eventKey={1} title="Details">
                     <CharacterDetails char={this.props.selectedChar} auth={this.props.auth} params={this.props.params} />
                   </Tab>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import * as actions from "../actions";
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import Landing from './Landing';
-import { Panel, Button, ListGroup, ListGroupItem, Grid } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem, Grid } from 'react-bootstrap';
+
 
 class CharacterListView extends Component {
   componentDidMount() {
@@ -11,10 +12,10 @@ class CharacterListView extends Component {
   }
 
   rivit = () => this.props.characters && this.props.characters.map(char => {
-    return <ListGroupItem key={char.characterId} href={"/chars/" + char.characterId}>
-      {char.characterId}
-  </ListGroupItem> }
-  )
+    return (<LinkContainer key={char.characterId} to={"/chars/" + char.characterId}>
+              <ListGroupItem>{char.characterId}</ListGroupItem>
+            </LinkContainer>);
+  })
 
   render() {
     switch(this.props.auth) {
@@ -35,8 +36,8 @@ class CharacterListView extends Component {
   }
 }
 
-function mapStateToProps({ characters, auth }) {
-  return { characters, auth }
+function mapStateToProps({ characters, auth, selectedChar }) {
+  return { characters, auth, selectedChar }
 }
 
 export default connect(mapStateToProps, actions)(CharacterListView);
