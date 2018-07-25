@@ -15,6 +15,20 @@ const xpBadge = (skillXp) => {
     else return <Badge>{skillXp}</Badge>;
 }
 
+const xpButton = (characterId, powXpRolls, props) => {
+
+    console.log(props)
+
+    const xpEnabled = props.owner && (props.hasXp || powXpRolls > 0) && props.xpRollsAllowed
+    const xpAwardEnabled = props.isGM && !props.xpRollsAllowed && (powXpRolls < 1 || !powXpRolls)
+
+    if(xpEnabled)
+        return <Button bsSize="xsmall" onClick={() => props.powXpRoll(characterId)}>XP</Button>;
+    else if(xpAwardEnabled)
+        return <Button bsSize="xsmall" onClick={() => props.powXpAward(characterId)}>+1</Button>;
+    else return;
+}
+
 export const Characteristics = connect(mapStateToProps, actions)((props) => {
   if (props.characteristics && props.selectedChar) {
     const selectedChar = props.selectedChar;
@@ -63,7 +77,7 @@ export const Characteristics = connect(mapStateToProps, actions)((props) => {
           <td>{characteristics.pow}</td>
           <td>{characteristics.pow_max}
               {xpBadge(powXpRolls)}
-          <Button disabled={!powXpEnabled} bsSize="xsmall" onClick={() => props.powXpRoll(selectedChar.characterId)}>XP</Button></td>
+              {xpButton(selectedChar.characterId, powXpRolls, props)}</td>
         </tr>
         <tr>
           <td>DEX</td>

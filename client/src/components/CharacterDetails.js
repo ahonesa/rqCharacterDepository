@@ -25,7 +25,8 @@ const CharacterDetails = ({ char, auth, params }) => {
       const weaponskills = _.get(char, "character.weaponskills", {})
       const authorizationLevel = auth && auth.authorizationLevel
       const userId = auth && auth.googleId
-      const isOwner = ownerId === userId 
+      const isOwner = ownerId === userId
+      const isGM = authorizationLevel === 1
       const hasXp = c.xp > 0
       const xpRollsAllowed = params && params.xpRollsAllowed;
 
@@ -87,7 +88,7 @@ const CharacterDetails = ({ char, auth, params }) => {
                 <Panel className="shadowPanel" bsSize="small">
                   <Panel.Heading>Characteristics</Panel.Heading>
                   <Panel.Body>
-                    <Characteristics characteristics={characteristics} owner={isOwner} xp={c.xp} xpRollsAllowed={xpRollsAllowed} />
+                    <Characteristics characteristics={characteristics} owner={isOwner} xp={c.xp} xpRollsAllowed={xpRollsAllowed} isGM={isGM} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -97,7 +98,7 @@ const CharacterDetails = ({ char, auth, params }) => {
                 <Panel className="shadowPanel">
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed} />
+                    <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed} isGM={isGM} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -105,7 +106,7 @@ const CharacterDetails = ({ char, auth, params }) => {
                 <Panel className="shadowPanel">
                   <Panel.Heading>Skills</Panel.Heading>
                   <Panel.Body>
-                    <SkillsPanelTwo skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed} />
+                    <SkillsPanelTwo skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed} isGM={isGM} />
                   </Panel.Body>
                 </Panel>
               </Col>
@@ -113,7 +114,7 @@ const CharacterDetails = ({ char, auth, params }) => {
                 <Panel className="shadowPanel">
                   <Panel.Heading>Weapons</Panel.Heading>
                   <Panel.Body>
-                    <WeaponsPanel weapons={weapons} weaponskills={weaponskills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed} />
+                    <WeaponsPanel weapons={weapons} weaponskills={weaponskills} bonuses={bonuses} owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed} isGM={isGM}/>
                   </Panel.Body>
                 </Panel>
               </Col>

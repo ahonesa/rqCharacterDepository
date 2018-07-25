@@ -6,10 +6,26 @@ import { Button, Table, Panel, Badge } from 'react-bootstrap';
 import './Skills.css';
 
 const SkillRows = (skills, props, bonus) => skills.map(skill => {
-  const xpEnabled = props.owner && (props.hasXp || skill.xp > 0) && props.xpRollsAllowed
-  return <tr key={skill.skill}><td>{skill.skill.split(".")[1] || ""}</td><td className="skillValueColumn">{parseInt(skill.value) + bonus} {xpBadge(skill.xp)}</td><td className="xpColumn">
-    <Button disabled={!xpEnabled} bsSize="xsmall" onClick={() => props.skillXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
+  return (<tr key={skill.skill}>
+            <td>{skill.skill.split(".")[1] || ""}</td>
+            <td className="skillValueColumn">{parseInt(skill.value) + bonus} {xpBadge(skill.xp)}</td>
+            <td className="xpColumn">{xpButton(props.selectedChar.characterId, skill, props)}</td>
+          </tr>)
 })
+
+const xpButton = (characterId, skill, props) => {
+
+    console.log(props, skill)
+
+    const xpEnabled = props.owner && (props.hasXp || skill.xp > 0) && props.xpRollsAllowed
+    const xpAwardEnabled = props.isGM && !props.xpRollsAllowed && (skill.xp < 1 || !skill.xp)
+        
+    if(xpEnabled)
+        return <Button bsSize="xsmall" onClick={() => props.skillXpRoll(characterId, skill.skill)}>XP</Button>;
+    else if(xpAwardEnabled)
+        return <Button bsSize="xsmall" onClick={() => props.skillXpAward(characterId, skill.skill)}>+1</Button>;
+    else return;
+}
 
 const xpBadge = (skillXp) => { 
   if(skillXp < 1) return;
@@ -17,6 +33,7 @@ const xpBadge = (skillXp) => {
 }
 
 const SkillGroups = (group, props, bonus) => {
+  
   const filtered = props.skills.filter(skill => {
     return (skill.skill.split(".")[0] === group)
   })

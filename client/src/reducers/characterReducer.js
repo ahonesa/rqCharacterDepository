@@ -1,4 +1,4 @@
-import { GET_ALL_CHARS, GET_ONE_CHAR, SKILL_XP_ROLL, WEAPON_XP_ROLL, POW_XP_ROLL } from '../actions/types';
+import { GET_ALL_CHARS, GET_ONE_CHAR, SKILL_XP_ROLL, SKILL_XP_AWARD, WEAPON_XP_ROLL, WEAPON_XP_AWARD, POW_XP_ROLL, POW_XP_AWARD } from '../actions/types';
 
 export function allCharsReducer(state = null, action) {
   switch (action.type) {
@@ -14,11 +14,17 @@ export function oneCharReducer(state = null, action) {
     case GET_ONE_CHAR: 
       return action.payload || false;
     case SKILL_XP_ROLL: 
-      return action.payload || false;      
-    case WEAPON_XP_ROLL: 
-      return action.payload || false;     
-    case POW_XP_ROLL: 
-      return action.payload || false;        
+      return action.payload || false;
+    case SKILL_XP_AWARD:
+      return action.payload || false;
+    case WEAPON_XP_ROLL:
+      return action.payload || false;
+    case WEAPON_XP_AWARD:
+     return action.payload || false;
+    case POW_XP_ROLL:
+      return action.payload || false;
+    case POW_XP_AWARD:
+      return action.payload || false;
     default:
       return state;
   }

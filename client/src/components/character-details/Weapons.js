@@ -10,6 +10,21 @@ const xpBadge = (skillXp) => {
   else return <Badge>{skillXp}</Badge>;
 }
 
+const xpButton = (characterId, skill, props) => {
+
+    console.log(props, skill)
+
+    const xpEnabled = props.owner && (props.hasXp || skill.xp > 0) && props.xpRollsAllowed
+    const xpAwardEnabled = props.isGM && !props.xpRollsAllowed && (skill.xp < 1 || !skill.xp)
+
+    if(xpEnabled)
+        return <Button bsSize="xsmall" onClick={() => props.weaponXpRoll(characterId, skill.skill)}>XP</Button>;
+    else if(xpAwardEnabled)
+        return <Button bsSize="xsmall" onClick={() => props.weaponXpAward(characterId, skill.skill)}>+1</Button>;
+    else return;
+}
+
+
 const WeaponGroups = (skills, weapons, props, bonuses) => {
 
   return weapons.map(weapon => {
@@ -25,7 +40,7 @@ const WeaponGroups = (skills, weapons, props, bonuses) => {
             <tr><th>{weapon.skill.split(".")[1]} {xpBadge(xp)}</th><th>{bonuses.manipulationModifier > 0? "+": ""}{bonuses.manipulationModifier}</th><th className="xpColumn"></th></tr>
           </thead>
           <tbody>
-          <tr><td>skill:</td><td>{value && (parseInt(value) + bonuses.manipulationModifier)}</td><td className="xpColumn"><Button disabled={!xpEnabled} bsSize="xsmall" onClick={() => props.weaponXpRoll(props.selectedChar.characterId, skill.skill)}>XP</Button></td></tr>
+          <tr><td>skill:</td><td>{value && (parseInt(value) + bonuses.manipulationModifier)}</td><td className="xpColumn">{xpButton(props.selectedChar.characterId, skill, props)}</td></tr>
           <tr><td>weapon:</td><td>{weapon.weapon}</td><td className="xpColumn"></td></tr>
           <tr><td>damage:</td><td>{weapon.damage}</td><td className="xpColumn"></td></tr>
             <tr><td>sr:</td><td>{weapon.sr}</td><td className="xpColumn"></td></tr>

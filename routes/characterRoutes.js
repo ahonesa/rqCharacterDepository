@@ -82,6 +82,20 @@ module.exports = (app) => {
     } else res.status(400).end("NOK");
   });
 
+  app.post("/api/chars/:id/xp_weapon_award/:weaponskill", async (req, res) => {
+      const character = await Character.findOne({ characterId: req.params.id })
+      const weaponskills = _.get(character, 'character.weaponskills');
+      const skill = _.find(weaponskills, { 'skill': req.params.weaponskill });
+
+      if (skill && (skill.xp < 1 || !skill.xp)) {
+          _.remove(character.character.weaponskills, { 'skill': req.params.weaponskill })
+          skill.xp = 1
+          character.character.weaponskills.push(skill)
+          character.character.weaponskills.sort()
+          const result = await Character(character).save()
+          res.send(result);
+      } else res.status(400).end("NOK");
+  });
   
   app.post("/api/chars/:id/xp_skill/:skill", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
@@ -94,8 +108,8 @@ module.exports = (app) => {
       const roll = Math.floor((Math.random() * 100) + 1);
       const increase = Math.floor((Math.random() * 6) + 1);
       
-      var success = false
-      var skillInt = parseInt(skill.value || '5')
+      let success = false
+      let skillInt = parseInt(skill.value || '5')
       
       const skillGroup = skill.skill.split('.')[0] + 'Bonus'
       const statBonus = _.get(bonuses.bonuses, skillGroup, 0)     
@@ -118,6 +132,21 @@ module.exports = (app) => {
     } else res.status(400).end("NOK");
   });
 
+  app.post("/api/chars/:id/xp_skill_award/:skill", async (req, res) => {
+    const character = await Character.findOne({ characterId: req.params.id })
+    const char = _.get(character, 'character')
+    const skills = _.get(character, 'character.skills');
+    const skill = _.find(skills, { 'skill': req.params.skill });
+
+    if (char && skills && skill && (skill.xp < 1 || !skill.xp)) {
+        _.remove(character.character.skills, { 'skill': skill.skill })
+        skill.xp = 1
+        character.character.skills.push(skill)
+        character.character.skills.sort()
+        const result = await Character(character).save()
+        res.send(result);
+    } else res.status(400).end("NOK");
+  });
 
   app.post("/api/chars/:id/pow_gain", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
@@ -144,4 +173,20 @@ module.exports = (app) => {
 
     } else res.status(400).end("NOK");
   });
+
+    app.post("/api/chars/:id/pow_award", async (req, res) => {
+        const character = await Character.findOne({ characterId: req.params.id })
+
+        console.log(character)
+        const pow = _.get(character, 'character.characteristics.pow', NaN);
+        const pow_max = _.get(character, 'character.characteristics.pow_max', NaN);
+        const powXpRolls = _.get(character, 'character.characteristics.powXpRolls', NaN);
+
+        if (pow && pow_max && powXpRolls < 1 && pow < pow_max) {
+            _.set(character, "character.characteristics.powXpRolls", 1);
+            const result = await Character(character).save()
+            res.send(result);
+        } else res.status(400).end("NOK");
+    });
+
 };
