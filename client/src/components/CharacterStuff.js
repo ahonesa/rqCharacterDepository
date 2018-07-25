@@ -45,6 +45,7 @@ class CharacterStuff extends Component {
     const c = _.get(char, "character", {})
     const ownerId = _.get(char, "ownerId", {})
     const characteristics = _.get(char, "character.characteristics", {})
+    const spells = _.get(char, "character.spells", [])
     const bonuses = characteristics && calculateBonuses(characteristics)
     const stuff = _.get(char, "character.stuff", [])
     const armor = _.get(char, "character.armor", [])
@@ -92,11 +93,79 @@ class CharacterStuff extends Component {
               </Panel>
             </Col>
           </Row>
+          <Row>
+            <Col xs={12} md={4} lg={4}>
+              <Panel className="shadowPanel">
+                <Panel.Heading>Spells</Panel.Heading>
+                <Panel.Body>
+                   <SpellsPanel spells={spells} bonuses={bonuses} owner={isOwner} />
+                </Panel.Body>
+              </Panel>
+            </Col>
+          </Row>
         </Panel.Body>
       </Panel>
     );
   }
 }
+
+export const SpellsPanel = connect(mapStateToProps, actions)((props) => {
+    const bonuses = _.get(props, "bonuses.bonuses", {})
+    if (props.spells && props.bonuses) {
+        return (<div>
+            {SpellGroups("rune", props, bonuses.magicModifier)}
+            {SpellGroups("spirit", props, bonuses.magicModifier)}
+            {SpellGroups("sorcery", props, bonuses.magicModifier)}
+        </div>);
+    } else {
+        return <div />;
+    }
+});
+
+const SpellGroups = (group, props, bonus) => {
+    const filtered = props.spells.filter(spell => {
+        return (spell.spelltype === group)
+    })
+
+    let grText = "";
+    switch(group) {
+        case "spirit":
+          grText = "Spirit magic"
+          break;
+        case "rune":
+          grText = "Rune magic"
+          break;
+        case "sorcery":
+          grText = "Sorcery"
+          break;
+        default: grText = group;
+    }
+
+    console.log(grText)
+
+    return (
+        <Panel>
+            <Panel.Body>
+                <Table condensed responsive>
+                    <thead>
+                    <tr><th>{grText}</th><th></th><th className="skillValueColumn">{bonus > 0? "+": ""}{bonus}</th></tr>
+                    </thead>
+                    <tbody>
+                    {SpellRows(filtered, bonus)}
+                    </tbody>
+                </Table>
+            </Panel.Body>
+        </Panel>
+    );
+}
+
+
+const SpellRows = (spells, bonus) => {
+    return (spells.map(spell => {
+        return <tr key={spell._id}><td>{spell.spell || ""}</td><td>{spell.rank || ""}</td><td>{parseInt(spell.value) + bonus || ""}</td></tr>
+    }));
+}
+
 
 function mapStateToProps({ selectedChar }) {
   if (selectedChar) {
