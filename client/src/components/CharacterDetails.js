@@ -12,7 +12,7 @@ import * as actions from "../actions"
 
 const HpButtons = (props) => {
     console.log(props)
-    if(!props.isGM) return;
+    if(!props.isGM) return <div></div>;
     return (<div>
       <Button bsSize="xsmall" onClick={() => props.hpUpdate(props.characterId, props.loc, -1)}>-1</Button>
       <Button bsSize="xsmall" onClick={() => props.hpUpdate(props.characterId, props.loc, +1)}>+1</Button>
