@@ -26,7 +26,7 @@ class CharacterStuff extends Component {
         <td>{item.armorType}</td>
         <td>{(item.head === "true") && armor.value || "-"}</td>
         <td>{(item.chest === "true") && armor.value || "-"}</td>
-        <td>{(item.stomach === "true") && armor.value || "-"}</td>
+        <td>{(item.abdomen === "true") && armor.value || "-"}</td>
         <td>{(item.rh === "true") && armor.value || "-"}</td>
         <td>{(item.lh === "true") && armor.value || "-"}</td>
         <td>{(item.rl === "true") && armor.value || "-"}</td>

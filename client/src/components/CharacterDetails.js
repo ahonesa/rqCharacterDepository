@@ -69,16 +69,15 @@ const CharacterDetails = ({ char, auth, params }) => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr><td>Hit points:</td><td>{bonuses.hitPoints.base}</td><td>{bonuses.hitPoints.current}</td></tr>
-                        <tr><td>Magic points:</td><td>{bonuses.magicPoints.base}</td><td>{bonuses.magicPoints.current}</td></tr> 
-                        <tr><td>Fatigue points:</td><td>{bonuses.fatiguePoints.base}</td><td>{bonuses.fatiguePoints.current}</td></tr>                           
-                      </tbody>
-                    </Table>
-                    <Table condensed responsive>
-                      <tbody>                         
-                        <tr><td>Damage modifier:</td><td>{bonuses.damageModifier}</td></tr>
-                        <tr><td>Strike rank:</td><td></td></tr>
-                        <tr><td>Movement:</td><td></td></tr>
+                        <tr><td>Hit points:</td><td>{bonuses.hitPoints.base}</td><td></td></tr>
+                        <tr><td>Magic points:</td><td>{bonuses.magicPoints.base}</td><td></td></tr>
+                        <tr><td>Head:</td><td>{bonuses.hitPoints.head}</td><td></td></tr>
+                        <tr><td>Right arm:</td><td>{bonuses.hitPoints.ra}</td><td></td></tr>
+                        <tr><td>Left arm:</td><td>{bonuses.hitPoints.la}</td><td></td></tr>
+                        <tr><td>Chest:</td><td>{bonuses.hitPoints.chest}</td><td></td></tr>
+                        <tr><td>Abdomen:</td><td>{bonuses.hitPoints.abdomen}</td><td></td></tr>
+                        <tr><td>Right leg:</td><td>{bonuses.hitPoints.rl}</td><td></td></tr>
+                        <tr><td>Left leg:</td><td>{bonuses.hitPoints.ll}</td><td></td></tr>
                       </tbody>
                     </Table>
                   </Panel.Body>

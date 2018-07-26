@@ -17,10 +17,6 @@ class CharacterFormPageSix extends Component {
 
   renderStuffFields({ fields }) {
     return (<div>
-      <label>Fatigue</label>
-      <ListGroup>
-        <ListGroupItem>Fatigue points: {_.get(this.props, "character.fatiguePoints.base", 0)}</ListGroupItem>
-      </ListGroup>
       <label>Select stuff</label>
       <ListGroup>
         {fields.map((member, index) => {
@@ -79,7 +75,7 @@ class CharacterFormPageSix extends Component {
                     <label>Locations</label>
                     <Field name={`${member}.head`} component={ReduxCheckbox} type="checkbox" label="Head" value="head" />
                     <Field name={`${member}.chest`} component={ReduxCheckbox} type="checkbox" label="Chest" value="chest" />
-                    <Field name={`${member}.stomach`} component={ReduxCheckbox} type="checkbox" label="Stomach" value="stomach" />
+                    <Field name={`${member}.abdomen`} component={ReduxCheckbox} type="checkbox" label="Stomach" value="stomach" />
                     <Field name={`${member}.lh`} component={ReduxCheckbox} type="checkbox" label="Left hand" value="lh" />
                     <Field name={`${member}.rh`} component={ReduxCheckbox} type="checkbox" label="Right hand" value="rh" />
                     <Field name={`${member}.ll`} component={ReduxCheckbox} type="checkbox" label="Left leg" value="ll" />

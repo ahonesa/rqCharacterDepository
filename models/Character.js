@@ -76,7 +76,7 @@ const characterSchema = new Schema({
             armorType: String,
             head: String,
             chest: String, 
-            stomach: String,
+            abdomen: String,
             rh: String,
             lh: String,
             rl: String, 

@@ -10,21 +10,57 @@ export default ({str, str_max, str_org, con, con_org, con_max, siz, siz_org, siz
     CHA: { original: parseInt(cha_org, 0) || 10, current: parseInt(cha, 0) || 10, max: parseInt(cha_max, 0) || 10 }
   }
 
+  const calculateSizModifier = (siz) => {
+    if (siz < 5) return -2
+    else if (siz < 9) return -1
+    else if (siz < 13) return 0
+    else if (siz < 17) return 1
+    else if (siz < 21) return 2
+    else {
+        return (2 + Math.floor((siz - 20) / 4) * 1);
+    }
+  }
+
+  const calculatePowModifier = (pow) => {
+    if (pow < 5) return -1
+    else if (pow < 9) return 0
+    else if (pow < 13) return 0
+    else if (pow < 17) return 0
+    else if (pow < 21) return 1
+    else {
+        return (1 + Math.floor((pow - 20) / 4) * 1);
+    }
+  }
+
+  const calculateHitLocation = (base, adj) => {
+    if (base < 7) return 1 + adj;
+    else if (base < 10) return 2 + adj;
+    else if (base < 13) return 3 + adj;
+    else if (base < 16) return 4 + adj;
+    else if (base < 19) return 5 + adj;
+    else if (base < 22) return 6 + adj;
+    else {
+        return (6 + adj + Math.floor((base - 21) / 3) * 1);
+    }
+  }
+
+  const baseHitpoints = characteristics.CON.current + calculateSizModifier(characteristics.SIZ.current) + calculatePowModifier(characteristics.POW.current)
+
   const hitPoints = {
-    base: Math.ceil( (characteristics.CON.current + characteristics.SIZ.current) / 2, 0 ),
-    current: Math.ceil( (characteristics.CON.current + characteristics.SIZ.current) / 2, 0 )
+    base: baseHitpoints,
+    head: calculateHitLocation(baseHitpoints, 1),
+    chest: calculateHitLocation(baseHitpoints, 2),
+    abdomen: calculateHitLocation(baseHitpoints, 1),
+    ra: calculateHitLocation(baseHitpoints, 0),
+    la: calculateHitLocation(baseHitpoints, 0),
+    rl: calculateHitLocation(baseHitpoints, 1),
+    ll: calculateHitLocation(baseHitpoints, 1)
   }
 
   const magicPoints = {
     base: characteristics.POW.current,
-    current: characteristics.POW.current
   }
 
-  const fatiguePoints = {
-    base: characteristics.STR.current + characteristics.CON.current,
-    current: characteristics.STR.current + characteristics.CON.current
-  }
-    
   const agilityModifier       = calculateModifier(characteristics.DEX.current, 10, characteristics.STR.current, characteristics.POW.current, characteristics.SIZ.current, 10)
   const communicationModifier = calculateModifier(characteristics.CHA.current, 10, characteristics.POW.current, characteristics.INT.current, 10, 10)
   const knowledgeModifier     = calculateModifier(characteristics.INT.current, 10, characteristics.POW.current, 10, 10, 10)
@@ -50,7 +86,6 @@ export default ({str, str_max, str_org, con, con_org, con_max, siz, siz_org, siz
     bonuses,
     hitPoints,
     magicPoints,
-    fatiguePoints,
     damageModifier
   } );
 }
