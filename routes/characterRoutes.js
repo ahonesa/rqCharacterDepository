@@ -189,4 +189,33 @@ module.exports = (app) => {
         } else res.status(400).end("NOK");
     });
 
+
+    app.post("/api/chars/:id/hp", async (req, res) => {
+        const character = await Character.findOne({characterId: req.params.id})
+
+        console.log(req.body.loc)
+
+        const char = _.get(character, 'character')
+        const currentHitpoints = _.get(char, 'hitpoints', {})
+        const bonuses = statBonuses(_.get(char, 'characteristics', {}))
+
+        console.log(_.get(currentHitpoints, req.body.loc))
+
+        if(typeof _.get(currentHitpoints, req.body.loc) === "number") {
+            console.log("testi")
+            currentHitpoints[req.body.loc] += req.body.adj
+            if (currentHitpoints[req.body.loc] > bonuses.hitPoints[req.body.loc]) currentHitpoints[req.body.loc] = bonuses.hitPoints[req.body.loc]
+        } else {
+            currentHitpoints[req.body.loc] = bonuses.hitPoints[req.body.loc] + req.body.adj
+        }
+
+        console.log(currentHitpoints)
+
+        _.set(character, "character.hitpoints", currentHitpoints)
+
+        const result = await Character(character).save()
+        res.send(result);
+
+    });
+
 };

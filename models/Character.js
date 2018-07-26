@@ -86,7 +86,17 @@ const characterSchema = new Schema({
             item: String,
             weight: String,
             special: String
-        }]
+        }],
+        hitpoints: {
+            base: Number,
+            head: Number,
+            chest: Number,
+            abdomen: Number,
+            rarm: Number,
+            larm: Number,
+            rleg: Number,
+            lleg: Number
+        }
     }
 });
 

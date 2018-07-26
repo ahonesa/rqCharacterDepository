@@ -76,8 +76,8 @@ class CharacterFormPageSix extends Component {
                     <Field name={`${member}.head`} component={ReduxCheckbox} type="checkbox" label="Head" value="head" />
                     <Field name={`${member}.chest`} component={ReduxCheckbox} type="checkbox" label="Chest" value="chest" />
                     <Field name={`${member}.abdomen`} component={ReduxCheckbox} type="checkbox" label="Stomach" value="stomach" />
-                    <Field name={`${member}.lh`} component={ReduxCheckbox} type="checkbox" label="Left hand" value="lh" />
-                    <Field name={`${member}.rh`} component={ReduxCheckbox} type="checkbox" label="Right hand" value="rh" />
+                    <Field name={`${member}.lh`} component={ReduxCheckbox} type="checkbox" label="Left arm" value="lh" />
+                    <Field name={`${member}.rh`} component={ReduxCheckbox} type="checkbox" label="Right arm" value="rh" />
                     <Field name={`${member}.ll`} component={ReduxCheckbox} type="checkbox" label="Left leg" value="ll" />
                     <Field name={`${member}.rl`} component={ReduxCheckbox} type="checkbox" label="Right leg" value="rl" />
                   </FormGroup>

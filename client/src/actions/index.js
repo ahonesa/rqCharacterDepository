@@ -14,7 +14,8 @@ import {
     POW_XP_ROLL,
     POW_XP_AWARD,
     FETCH_PARAMS,
-    TOGGLE_XP_ROLLS_ALLOWED
+    TOGGLE_XP_ROLLS_ALLOWED,
+    HP_UPDATE
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -63,6 +64,11 @@ export const skillXpAward = (characterId, skill) => async dispatch => {
 export const powXpRoll = (characterId) => async dispatch => {
   const res = await axios.post("/api/chars/" + characterId + "/pow_gain");
   await dispatch({ type: POW_XP_ROLL, payload: res.data });
+};
+
+export const hpUpdate = (characterId, loc, adj) => async dispatch => {
+  const res = await axios.post("/api/chars/" + characterId + "/hp", { loc: loc, adj: adj });
+  await dispatch({ type: HP_UPDATE, payload: res.data });
 };
 
 export const powXpAward = (characterId) => async dispatch => {

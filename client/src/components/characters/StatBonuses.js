@@ -51,10 +51,10 @@ export default ({str, str_max, str_org, con, con_org, con_max, siz, siz_org, siz
     head: calculateHitLocation(baseHitpoints, 1),
     chest: calculateHitLocation(baseHitpoints, 2),
     abdomen: calculateHitLocation(baseHitpoints, 1),
-    ra: calculateHitLocation(baseHitpoints, 0),
-    la: calculateHitLocation(baseHitpoints, 0),
-    rl: calculateHitLocation(baseHitpoints, 1),
-    ll: calculateHitLocation(baseHitpoints, 1)
+    rarm: calculateHitLocation(baseHitpoints, 0),
+    larm: calculateHitLocation(baseHitpoints, 0),
+    rleg: calculateHitLocation(baseHitpoints, 1),
+    lleg: calculateHitLocation(baseHitpoints, 1)
   }
 
   const magicPoints = {

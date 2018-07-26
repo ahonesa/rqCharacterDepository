@@ -8,8 +8,19 @@ import { SkillsPanelOne, SkillsPanelTwo } from './character-details/Skills';
 import { WeaponsPanel } from './character-details/Weapons';
 import calculateModifiers from './characters/StatBonuses'
 import './common.css';
+import * as actions from "../actions"
 
-const CharacterDetails = ({ char, auth, params }) => {
+const HpButtons = (props) => {
+    console.log(props)
+    if(!props.isGM) return;
+    return (<div>
+      <Button bsSize="xsmall" onClick={() => props.hpUpdate(props.characterId, props.loc, -1)}>-1</Button>
+      <Button bsSize="xsmall" onClick={() => props.hpUpdate(props.characterId, props.loc, +1)}>+1</Button>
+    </div>);
+}
+
+const CharacterDetails = (props) => {
+  const { char, auth, params } = props
   switch (char) {
     case null:
       return (<div>
@@ -22,6 +33,7 @@ const CharacterDetails = ({ char, auth, params }) => {
       const bonuses = characteristics && calculateModifiers(characteristics)
       const skills = _.get(char, "character.skills", {})
       const weapons = _.get(char, "character.weapons", {})
+      const hitPoints = _.get(char, "character.hitpoints", {})
       const weaponskills = _.get(char, "character.weaponskills", {})
       const authorizationLevel = auth && auth.authorizationLevel
       const userId = auth && auth.googleId
@@ -65,19 +77,19 @@ const CharacterDetails = ({ char, auth, params }) => {
                         <tr>
                           <th>Stat</th>
                           <th>Base</th>
-                          <th>Current</th>
+                          <th>Curr</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr><td>Hit points:</td><td>{bonuses.hitPoints.base}</td><td></td></tr>
+                        <tr><td>Hit points:</td><td>{bonuses.hitPoints.base}</td><td>{hitPoints.base}</td><td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="base" base={bonuses.hitPoints} hitpoints={hitPoints}/></td></tr>
                         <tr><td>Magic points:</td><td>{bonuses.magicPoints.base}</td><td></td></tr>
-                        <tr><td>Head:</td><td>{bonuses.hitPoints.head}</td><td></td></tr>
-                        <tr><td>Right arm:</td><td>{bonuses.hitPoints.ra}</td><td></td></tr>
-                        <tr><td>Left arm:</td><td>{bonuses.hitPoints.la}</td><td></td></tr>
-                        <tr><td>Chest:</td><td>{bonuses.hitPoints.chest}</td><td></td></tr>
-                        <tr><td>Abdomen:</td><td>{bonuses.hitPoints.abdomen}</td><td></td></tr>
-                        <tr><td>Right leg:</td><td>{bonuses.hitPoints.rl}</td><td></td></tr>
-                        <tr><td>Left leg:</td><td>{bonuses.hitPoints.ll}</td><td></td></tr>
+                        <tr><td>Head:</td><td>{bonuses.hitPoints.head}</td><td>{hitPoints.head}</td><td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="head" base={bonuses.hitPoints} hitpoints={hitPoints}/></td></tr>
+                        <tr><td>Right arm:</td><td>{bonuses.hitPoints.rarm}</td><td>{hitPoints.rarm}</td><td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rarm" base={bonuses.hitPoints} hitpoints={hitPoints}/></td></tr>
+                        <tr><td>Left arm:</td><td>{bonuses.hitPoints.larm}</td><td>{hitPoints.larm}</td><td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="larm" base={bonuses.hitPoints} hitpoints={hitPoints}/></td></tr>
+                        <tr><td>Chest:</td><td>{bonuses.hitPoints.chest}</td><td>{hitPoints.chest}</td><td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="chest" base={bonuses.hitPoints} hitpoints={hitPoints}/></td></tr>
+                        <tr><td>Abdomen:</td><td>{bonuses.hitPoints.abdomen}</td><td>{hitPoints.abdomen}</td><td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="abdomen" base={bonuses.hitPoints} hitpoints={hitPoints}/></td></tr>
+                        <tr><td>Right leg:</td><td>{bonuses.hitPoints.rleg}</td><td>{hitPoints.rleg}</td><td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rleg" base={bonuses.hitPoints} hitpoints={hitPoints}/></td></tr>
+                        <tr><td>Left leg:</td><td>{bonuses.hitPoints.lleg}</td><td>{hitPoints.lleg}</td><td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="lleg" base={bonuses.hitPoints} hitpoints={hitPoints}/></td></tr>
                       </tbody>
                     </Table>
                   </Panel.Body>
@@ -133,4 +145,4 @@ const CharacterDetails = ({ char, auth, params }) => {
   }
 }
 
-export default CharacterDetails
+export default connect(null, actions)(CharacterDetails);

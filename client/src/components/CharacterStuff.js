@@ -141,8 +141,6 @@ const SpellGroups = (group, props, bonus) => {
         default: grText = group;
     }
 
-    console.log(grText)
-
     return (
         <Panel>
             <Panel.Body>
