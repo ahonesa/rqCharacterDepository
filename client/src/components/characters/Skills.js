@@ -109,7 +109,10 @@ export const SKILLS = [
   { label: "Stasis", group: "rune" },
   { label: "Movement", group: "rune" },
   { label: "Man", group: "rune" },
-  { label: "Beast", group: "rune" }
+  { label: "Beast", group: "rune" },
+  { label: "Speak River Speech", group: "communication" },
+  { label: "Honor", group: "passion" },
+  { label: "Fly", group: "dexterity" }
 ]
 
 export const WEAPON_SKILLS = [
