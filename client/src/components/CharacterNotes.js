@@ -16,7 +16,7 @@ class CharacterNotes extends Component {
       this.props.createChar(values)
     };
     const { handleSubmit, reset, selectedChar } = this.props
-    console.log(selectedChar)
+    console.log(this.props)
     return (
       <Panel bsSize="small">
         <Panel.Heading componentClass="h4" style={{ marginTop: "0px" }}>{selectedChar && selectedChar.characterId}</Panel.Heading>
@@ -40,10 +40,9 @@ class CharacterNotes extends Component {
 }
 
 function mapStateToProps({ selectedChar }) {
-
   if (selectedChar) {
     return { initialValues: selectedChar.character, selectedChar: selectedChar }
-  } else return {};
+  } else return { selectedChar };
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({

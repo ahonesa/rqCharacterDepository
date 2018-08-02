@@ -48,7 +48,7 @@ class CharacterDetailsView extends Component {
                     <CharacterStuff char={this.props.selectedChar} auth={this.props.auth} />
                   </Tab>
                   <Tab eventKey={3} title="Notes">
-                    <CharacterNotes char={this.props.selectedChar} auth={this.props.auth} />
+                    <CharacterNotes char={this.props.selectedChar} auth={this.props.auth} enableReinitialize />
                   </Tab>
                 </Tabs>
               </Col>
