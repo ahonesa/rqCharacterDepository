@@ -6,6 +6,7 @@ export const SKILLS = [
   { label: "Jump", group: "dexterity" },
   { label: "Ride", group: "dexterity" },
   { label: "Swim", group: "dexterity" },
+  { label: "Fly", group: "dexterity" },
   { label: "Act", group: "communication" },
   { label: "Art", group: "communication" },
   { label: "Bargain", group: "communication" },
@@ -71,6 +72,13 @@ export const SKILLS = [
   { label: "Play Instrument (Primary)", group: "manipulation" },
   { label: "Play Instrument (Seconday)", group: "manipulation" },
   { label: "Sleight", group: "manipulation" },
+  { label: "Craft Bowmaking", group: "manipulation" },
+  { label: "Craft Carpentry", group: "manipulation" },
+  { label: "Craft Leatherworking", group: "manipulation" },
+  { label: "Craft Masonry", group: "manipulation" },
+  { label: "Craft Redsmithing", group: "manipulation" },
+  { label: "Craft Weaving", group: "manipulation" },
+  { label: "Craft Pottery", group: "manipulation" },
   { label: "Insight (Own Species)", group: "perception" },
   { label: "Insight (Other)", group: "perception" },
   { label: "Listen", group: "perception" },
@@ -133,7 +141,10 @@ export const SKILLS = [
   { label: "Beast", group: "rune" },
   { label: "Speak River Speech", group: "communication" },
   { label: "Honor", group: "passion" },
-  { label: "Fly", group: "dexterity" }
+  { label: "Hate Chaos", group: "passion" },
+  { label: "Love Eriana", group: "passion" },
+  { label: "Loyalty Own Group/ Wyter", group: "passion" },
+  { label: "Loyalty Orlmarth Clan", group: "passion" }
 ]
 
 export const WEAPON_SKILLS = [
