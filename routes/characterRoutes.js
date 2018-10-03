@@ -7,21 +7,21 @@ const Params = mongoose.model("params");
 
 
 module.exports = (app) => {
-  app.get("/api/chars", async (req, res) => {
-    const characters = await Character.find();
-    res.send(characters)
-  });
+    app.get("/api/chars", async (req, res) => {
+        const characters = await Character.find();
+        res.send(characters)
+    });
 
-  app.get("/api/params", async (req, res) => {
+    app.get("/api/params", async (req, res) => {
     const p = await Params.findOne();
     if(p) {
       res.send(p)
     } else {
       res.status(400).end("NOK");
     }
-  });
+    });
 
-  app.post("/api/params/:param/toggle", async (req, res) => {
+    app.post("/api/params/:param/toggle", async (req, res) => {
       const p = await Params.findOne();
       if(p) {
         p[req.params.param] = !p[req.params.param]
@@ -30,9 +30,9 @@ module.exports = (app) => {
       } else {
         res.status(400).end("NOK");
       }
-  });
+    });
 
-  app.post("/api/chars", async (req, res) => {
+    app.post("/api/chars", async (req, res) => {
     const existingCharacter = await Character.findOne({ characterId: req.body.name });
     if (existingCharacter) {
       existingCharacter.character = req.body
@@ -45,14 +45,14 @@ module.exports = (app) => {
       }).save();
     }
     res.end("OK");
-  });
+    });
 
-  app.get("/api/chars/:id", async (req, res) => {
+    app.get("/api/chars/:id", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
     res.send(character)
-  });
+    });
 
-  app.post("/api/chars/:id/xp_weapon/:weaponskill", async (req, res) => {
+    app.post("/api/chars/:id/xp_weapon/:weaponskill", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
     const char = _.get(character, 'character')
     const weaponskills = _.get(character, 'character.weaponskills');
@@ -61,12 +61,13 @@ module.exports = (app) => {
     if (char && weaponskills && skill && (skill.xp > 0 || char.xp > 0)) {
       const bonuses = statBonuses(char.characteristics)
       const roll = Math.floor((Math.random() * 100) + 1);
+      const reRoll = Math.floor((Math.random() * 100) + 1);
       const increase = Math.floor((Math.random() * 6) + 1);
       let success = false
 
       let skillInt = parseInt(skill.value || '5')
       const skillCap = (skillInt + bonuses.bonuses.manipulationModifier) > 100 ? (100 - bonuses.bonuses.manipulationModifier) : skillInt
-      if (roll > skillCap) {
+      if (roll > skillCap || reRoll > skillCap) {
           skillInt += increase
           skill.value = skillInt.toString()
           success = true
@@ -80,9 +81,9 @@ module.exports = (app) => {
       res.send(result);
 
     } else res.status(400).end("NOK");
-  });
+    });
 
-  app.post("/api/chars/:id/xp_weapon_award/:weaponskill", async (req, res) => {
+    app.post("/api/chars/:id/xp_weapon_award/:weaponskill", async (req, res) => {
       const character = await Character.findOne({ characterId: req.params.id })
       const weaponskills = _.get(character, 'character.weaponskills');
       const skill = _.find(weaponskills, { 'skill': req.params.weaponskill });
@@ -95,9 +96,9 @@ module.exports = (app) => {
           const result = await Character(character).save()
           res.send(result);
       } else res.status(400).end("NOK");
-  });
+    });
   
-  app.post("/api/chars/:id/xp_skill/:skill", async (req, res) => {
+    app.post("/api/chars/:id/xp_skill/:skill", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
     const char = _.get(character, 'character')
     const skills = _.get(character, 'character.skills');
@@ -106,23 +107,24 @@ module.exports = (app) => {
     if (char && skills && skill && (skill.xp > 0 || char.xp > 0)) {
       const bonuses = statBonuses(char.characteristics)
       const roll = Math.floor((Math.random() * 100) + 1);
+      const reRoll = Math.floor((Math.random() * 100) + 1);
       const increase = Math.floor((Math.random() * 6) + 1);
-      
+
       let success = false
       let skillInt = parseInt(skill.value || '5')
-      
+
       const skillGroup = skill.skill.split('.')[0] + 'Bonus'
-      const statBonus = _.get(bonuses.bonuses, skillGroup, 0)     
+      const statBonus = _.get(bonuses.bonuses, skillGroup, 0)
 
       const skillCap = (skillInt + statBonus) > 100 ? (100 - statBonus) : skillInt
 
-      if (roll > skillCap) {
+      if (roll > skillCap || reRoll > skillCap) {
         skillInt += increase
         skill.value = skillInt.toString()
         success = true
       }
 
-      _.remove(character.character.skills, { 'skill': req.params.skill })      
+      _.remove(character.character.skills, { 'skill': req.params.skill })
       if(skill.xp > 0) skill.xp--; else character.character.xp--;
       character.character.skills.push(skill)
       character.character.skills.sort()
@@ -130,9 +132,9 @@ module.exports = (app) => {
       res.send(result);
 
     } else res.status(400).end("NOK");
-  });
+    });
 
-  app.post("/api/chars/:id/xp_skill_award/:skill", async (req, res) => {
+    app.post("/api/chars/:id/xp_skill_award/:skill", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
     const char = _.get(character, 'character')
     const skills = _.get(character, 'character.skills');
@@ -146,9 +148,9 @@ module.exports = (app) => {
         const result = await Character(character).save()
         res.send(result);
     } else res.status(400).end("NOK");
-  });
+    });
 
-  app.post("/api/chars/:id/pow_gain", async (req, res) => {
+    app.post("/api/chars/:id/pow_gain", async (req, res) => {
     const character = await Character.findOne({ characterId: req.params.id })
 
     console.log(character)
@@ -159,10 +161,12 @@ module.exports = (app) => {
 
     if (maxPowForGain && pow && pow_max && powXpRolls > 0 && pow < pow_max) {
 
-      const roll = Math.floor((Math.random() * 100) + 1);   
+      const roll = Math.floor((Math.random() * 100) + 1);
+      const reRoll = Math.floor((Math.random() * 100) + 1);
+
       const rollCap = (maxPowForGain - pow) * 5
 
-      if (roll <= rollCap) {
+      if (roll <= rollCap || reRoll <= rollCap) {
         _.set(character, "character.characteristics.pow", pow+1)
       }
 
@@ -172,7 +176,7 @@ module.exports = (app) => {
       res.send(result);
 
     } else res.status(400).end("NOK");
-  });
+    });
 
     app.post("/api/chars/:id/pow_award", async (req, res) => {
         const character = await Character.findOne({ characterId: req.params.id })
