@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const mongoose = require('mongoose')
+const {Schema} = mongoose
 
 const characterSchema = new Schema({
     characterId: String,
@@ -16,7 +16,8 @@ const characterSchema = new Schema({
             culture: String,
             religion: String,
             parent: String,
-            occupation: String
+            occupation: String,
+            reputation: Number
         },
         characteristics: {
             str: Number,
@@ -41,23 +42,30 @@ const characterSchema = new Schema({
             pow_org: Number,
             cha_org: Number,
             maxPowForGain: Number,
-            powXpRolls: Number
+            powXpRolls: Number,
+            rp1Current: Number,
+            rp1Total: Number,
+            rp2Current: Number,
+            rp2Total: Number,
+            rp3Current: Number,
+            rp3Total: Number,
+            heroPoints: Number
         },
         skills: [
-            { 
+            {
                 skill: String,
                 value: String,
                 xp: Number
-            }        
+            }
         ],
         weaponskills: [{
-                skill: String, 
-                value: String,
-                xp: Number
+            skill: String,
+            value: String,
+            xp: Number
         }],
         weapons: [
             {
-                skill: String, 
+                skill: String,
                 weapon: String,
                 sr: String,
                 damage: String,
@@ -67,19 +75,19 @@ const characterSchema = new Schema({
         ],
         freeint: String,
         spells: [{
-                spelltype: String,
-                spell: String,
-                rank: String,
-                value: String
+            spelltype: String,
+            spell: String,
+            rank: String,
+            value: String
         }],
         armor: [{
             armorType: String,
             head: String,
-            chest: String, 
+            chest: String,
             abdomen: String,
             rh: String,
             lh: String,
-            rl: String, 
+            rl: String,
             ll: String
         }],
         stuff: [{
@@ -96,8 +104,11 @@ const characterSchema = new Schema({
             larm: Number,
             rleg: Number,
             lleg: Number
-        }
+        },
+        hidesOfLand: Number,
+        flocksOfHerd: Number,
+        money: Number
     }
-});
+})
 
 mongoose.model("characters", characterSchema)
