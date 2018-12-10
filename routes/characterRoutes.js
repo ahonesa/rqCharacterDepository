@@ -162,19 +162,10 @@ module.exports = (app) => {
         const char = _.get(character, 'character')
         const skills = _.get(character, 'character.skills')
         const skill = _.find(skills, {'skill': req.params.skill})
-        const opposed = _.find(OpposedSkills, {'skill': skill.skill})
-        const opposedSkillLabel = _.get(opposed, 'opposed')
-        const opposedSkill = _.find(skills, {'skill': opposedSkillLabel })
 
         if (char && skills && skill && (skill.xp < 1 || !skill.xp)) {
             _.remove(character.character.skills, {'skill': skill.skill})
             skill.xp = 1
-
-            if(opposedSkill && opposedSkill.xp > 0) {
-                _.remove(character.character.skills, {'skill': opposedSkill.skill})
-                opposedSkill.xp--;
-                character.character.skills.push(opposedSkill)
-            }
             character.character.skills.push(skill)
             character.character.skills.sort()
             const result = await Character(character).save()
