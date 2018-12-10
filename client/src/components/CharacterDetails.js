@@ -134,7 +134,7 @@ const CharacterDetails = (props) => {
               <Col >
               <Panel>
                 <Panel.Body>
-                <Button disabled={ authorizationLevel === 1 ? false : true  } href={"/chars/" + char.characterId + "/update/"}>Update character</Button>
+                <Button disabled={ authorizationLevel !== 1  } href={"/chars/" + char.characterId + "/update/"}>Update character</Button>
                 </Panel.Body>
               </Panel>
               </Col>

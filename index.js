@@ -9,7 +9,7 @@ require("./models/Character");
 require("./models/Params");
 require("./services/passport");
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 const app = express();
 
