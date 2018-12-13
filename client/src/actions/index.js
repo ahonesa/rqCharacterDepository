@@ -15,7 +15,8 @@ import {
     POW_XP_AWARD,
     FETCH_PARAMS,
     TOGGLE_XP_ROLLS_ALLOWED,
-    HP_UPDATE
+    HP_UPDATE,
+    RP_UPDATE
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -69,6 +70,11 @@ export const powXpRoll = (characterId) => async dispatch => {
 export const hpUpdate = (characterId, loc, adj) => async dispatch => {
   const res = await axios.post("/api/chars/" + characterId + "/hp", { loc: loc, adj: adj });
   await dispatch({ type: HP_UPDATE, payload: res.data });
+};
+
+export const rpUpdate = (characterId, pool, adj) => async dispatch => {
+    const res = await axios.post("/api/chars/" + characterId + "/rp", { pool: pool, adj: adj });
+    await dispatch({ type: RP_UPDATE, payload: res.data });
 };
 
 export const powXpAward = (characterId) => async dispatch => {

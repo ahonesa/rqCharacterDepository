@@ -11,7 +11,6 @@ import './common.css'
 import * as actions from "../actions"
 
 const HpButtons = (props) => {
-    console.log(props)
     if (!props.isGM) return <div></div>
     return (<div>
         <Button bsSize="xsmall" onClick={() => props.hpUpdate(props.characterId, props.loc, -1)}>-1</Button>
@@ -19,6 +18,23 @@ const HpButtons = (props) => {
     </div>)
 }
 
+const RpButtons = (props) => {
+    if (!props.isGM) return <div></div>
+    return (<div>
+        <Button bsSize="xsmall" onClick={() => props.rpUpdate(props.characterId, props.pool, -1)}>-1</Button>
+        <Button bsSize="xsmall" onClick={() => props.rpUpdate(props.characterId, props.pool, +1)}>+1</Button>
+    </div>)
+}
+
+const RunePool = (props) => {
+    if(!props.rptotal || props.rptotal < 1) return <div/>
+    return(<tr>
+        <td>Rune Pool {props.pool}:</td>
+        <td>{props.rptotal}</td>
+        <td>{props.rpcurrent}</td>
+        <td><RpButtons {...props} pool={"rp"+props.pool} /></td>
+    </tr>)
+}
 
 const CharacterDetails = (props) => {
     const {char, auth, params} = props
@@ -115,78 +131,58 @@ const CharacterDetails = (props) => {
                                                 <td>Hit points:</td>
                                                 <td>{bonuses.hitPoints.base}</td>
                                                 <td>{hitPoints.base}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="base"
-                                                               base={bonuses.hitPoints} hitpoints={hitPoints}/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="base"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Head:</td>
                                                 <td>{bonuses.hitPoints.head}</td>
                                                 <td>{hitPoints.head}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="head"
-                                                               base={bonuses.hitPoints} hitpoints={hitPoints}/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="head"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Right arm:</td>
                                                 <td>{bonuses.hitPoints.rarm}</td>
                                                 <td>{hitPoints.rarm}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rarm"
-                                                               base={bonuses.hitPoints} hitpoints={hitPoints}/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rarm"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Left arm:</td>
                                                 <td>{bonuses.hitPoints.larm}</td>
                                                 <td>{hitPoints.larm}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="larm"
-                                                               base={bonuses.hitPoints} hitpoints={hitPoints}/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="larm"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Chest:</td>
                                                 <td>{bonuses.hitPoints.chest}</td>
                                                 <td>{hitPoints.chest}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="chest"
-                                                               base={bonuses.hitPoints} hitpoints={hitPoints}/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="chest"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Abdomen:</td>
                                                 <td>{bonuses.hitPoints.abdomen}</td>
                                                 <td>{hitPoints.abdomen}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="abdomen"
-                                                               base={bonuses.hitPoints} hitpoints={hitPoints}/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="abdomen"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Right leg:</td>
                                                 <td>{bonuses.hitPoints.rleg}</td>
                                                 <td>{hitPoints.rleg}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rleg"
-                                                               base={bonuses.hitPoints} hitpoints={hitPoints}/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rleg"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Left leg:</td>
                                                 <td>{bonuses.hitPoints.lleg}</td>
                                                 <td>{hitPoints.lleg}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="lleg"
-                                                               base={bonuses.hitPoints} hitpoints={hitPoints}/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="lleg"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Magic points:</td>
                                                 <td>{bonuses.magicPoints.base}</td>
                                                 <td></td>
                                             </tr>
-                                            <tr>
-                                                <td>Rune Pool 1:</td>
-                                                <td>{characteristics.rp1Total}</td>
-                                                <td>{characteristics.rp1Current}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Rune Pool 2:</td>
-                                                <td>{characteristics.rp2Total}</td>
-                                                <td>{characteristics.rp2Current}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Rune Pool 3:</td>
-                                                <td>{characteristics.rp3Total}</td>
-                                                <td>{characteristics.rp3Current}</td>
-                                            </tr>
+                                            <RunePool {...props} pool="1" characterId={c.name} isGM={isGM} rptotal={characteristics.rp1Total} rpcurrent={characteristics.rp1Current} />
+                                            <RunePool {...props} pool="2" characterId={c.name} isGM={isGM} rptotal={characteristics.rp2Total} rpcurrent={characteristics.rp2Current} />
+                                            <RunePool {...props} pool="3" characterId={c.name} isGM={isGM} rptotal={characteristics.rp3Total} rpcurrent={characteristics.rp3Current} />
                                             <tr>
                                                 <td>Hero Points:</td>
                                                 <td></td>

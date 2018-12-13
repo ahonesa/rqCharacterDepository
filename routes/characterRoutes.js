@@ -245,4 +245,28 @@ module.exports = (app) => {
 
     })
 
+
+    app.post("/api/chars/:id/rp", async (req, res) => {
+        const character = await Character.findOne({characterId: req.params.id})
+
+        console.log(req.body.pool)
+
+        const char = _.get(character, 'character')
+        const characteristics = _.get(char, 'characteristics', {})
+        let currentRunepoints = _.get(characteristics, req.body.pool+"Current", {})
+        const totalRunepoints = _.get(characteristics, req.body.pool+"Total", {})
+
+        currentRunepoints = currentRunepoints + req.body.adj
+
+        console.log(currentRunepoints)
+
+        if(currentRunepoints >= 0 && currentRunepoints <= totalRunepoints) {
+            _.set(character, "character.characteristics." + req.body.pool + "Current", currentRunepoints)
+        }
+
+        const result = await Character(character).save()
+        res.send(result)
+
+    })
+
 }

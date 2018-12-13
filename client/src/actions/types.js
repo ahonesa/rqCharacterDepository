@@ -12,4 +12,5 @@ export const POW_XP_AWARD = 'pow_xp_award';
 export const FETCH_PARAMS = 'fetch_params';
 export const TOGGLE_XP_ROLLS_ALLOWED = 'toggle_xp_rolls_allowed';
 export const HP_UPDATE = 'hp_update';
+export const RP_UPDATE = 'rp_update';
 export const LOGOUT = 'logout';
