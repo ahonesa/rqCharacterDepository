@@ -18,7 +18,8 @@ import {
     HP_UPDATE,
     RP_UPDATE,
     POST_MESSAGE,
-    FETCH_MESSAGES
+    FETCH_MESSAGES,
+    CLEAR_MESSAGES
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -58,9 +59,14 @@ export const postMessage = (messageBody, diceRoll) => async dispatch => {
         messageBody,
         diceRoll
     }
-    const res = await axios.post( "/api/message", payload)
-    await dispatch({ type: POST_MESSAGE, payload: res.data });
-}
+    const res = await axios.post("/api/message", payload)
+    await dispatch({type: POST_MESSAGE, payload: res.data});
+};
+
+export const clearMessages = () => async dispatch => {
+    const res = await axios.get("/api/room/clear");
+    dispatch({ type: CLEAR_MESSAGES, payload: res.data });
+};
 
 export const createChar = (character) => async dispatch => {
   const res = await axios.post("/api/chars", character);

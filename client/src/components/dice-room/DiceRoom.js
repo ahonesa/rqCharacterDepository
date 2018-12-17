@@ -42,7 +42,9 @@ class DiceRoom extends Component {
                 <Row className="show-grid">
                     <Col xs={12} md={12} lg={12}>
                         <Panel className="shadowPanel">
-                            <Panel.Heading>They see me rolling</Panel.Heading>
+                            <Panel.Heading>They see me rolling
+                                <Button bsSize="small" className="pull-right" disabled={ authorizationLevel === 1 ? false : true } onClick={() => this.props.clearMessages()}>Clear all</Button>
+                            </Panel.Heading>
                             <Panel.Body>
                                 <Table condensed responsive>
                                     <tbody>

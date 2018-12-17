@@ -15,6 +15,15 @@ module.exports = (app) => {
         })
     })
 
+    app.get("/api/room/clear", async (req, res) => {
+        const existingRoom = await Room.findOne({name : "diceroom"})
+        if (existingRoom) {
+            existingRoom.messages = []
+            await Room(existingRoom).save()
+        }
+        res.send(await Room.findOne({name: "diceroom"}))
+    })
+
     app.post("/api/message", async (req, res) => {
         const existingRoom = await Room.findOne({name : "diceroom"})
         if (existingRoom) {

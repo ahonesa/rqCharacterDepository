@@ -16,3 +16,4 @@ export const RP_UPDATE = 'rp_update';
 export const LOGOUT = 'logout';
 export const POST_MESSAGE = 'post_message';
 export const FETCH_MESSAGES = 'fetch_messages';
+export const CLEAR_MESSAGES = 'clear_messages';
