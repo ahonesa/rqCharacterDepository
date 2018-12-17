@@ -16,7 +16,9 @@ import {
     FETCH_PARAMS,
     TOGGLE_XP_ROLLS_ALLOWED,
     HP_UPDATE,
-    RP_UPDATE
+    RP_UPDATE,
+    POST_MESSAGE,
+    FETCH_MESSAGES
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -45,6 +47,20 @@ export const updateUser = (userName) => async dispatch => {
 
   dispatch({ type: UPDATE_USER, payload: res.data });
 };
+
+export const fetchMessages = () => async dispatch => {
+    const res = await axios.get("/api/room");
+    dispatch({ type: FETCH_MESSAGES, payload: res.data });
+};
+
+export const postMessage = (messageBody, diceRoll) => async dispatch => {
+    const payload = {
+        messageBody,
+        diceRoll
+    }
+    const res = await axios.post( "/api/message", payload)
+    await dispatch({ type: POST_MESSAGE, payload: res.data });
+}
 
 export const createChar = (character) => async dispatch => {
   const res = await axios.post("/api/chars", character);

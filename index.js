@@ -5,6 +5,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
 require("./models/User");
+require("./models/Room");
 require("./models/Character");
 require("./models/Params");
 require("./services/passport");
@@ -28,6 +29,7 @@ app.use(parser.json());
 
 require("./routes/authRoutes")(app);
 require("./routes/characterRoutes")(app);
+require("./routes/diceRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

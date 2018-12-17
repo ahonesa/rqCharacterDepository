@@ -14,3 +14,5 @@ export const TOGGLE_XP_ROLLS_ALLOWED = 'toggle_xp_rolls_allowed';
 export const HP_UPDATE = 'hp_update';
 export const RP_UPDATE = 'rp_update';
 export const LOGOUT = 'logout';
+export const POST_MESSAGE = 'post_message';
+export const FETCH_MESSAGES = 'fetch_messages';
