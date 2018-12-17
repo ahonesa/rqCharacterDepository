@@ -14,6 +14,11 @@ class CharacterDetailsView extends Component {
   componentDidMount() {
     this.props.getOneChar(this.props.match.params.characterId);
     this.props.getAllChars();
+    this.interval = setInterval(() => this.props.selectedChar && this.props.getOneChar(this.props.selectedChar.characterId), 10000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   rivit = () => this.props.characters && this.props.characters.map(char =>

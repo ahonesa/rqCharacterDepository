@@ -25,6 +25,11 @@ const MessageRows = (messages) => {
 class DiceRoom extends Component {
     componentDidMount() {
         this.props.fetchMessages()
+        this.interval = setInterval(() => this.props.fetchMessages(), 10000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     render() {
