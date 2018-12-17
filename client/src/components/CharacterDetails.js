@@ -27,7 +27,7 @@ const RpButtons = (props) => {
 }
 
 const RunePool = (props) => {
-    if(!props.rptotal || props.rptotal < 1) return <div/>
+    if(!props.rptotal || props.rptotal < 1) return null;
     return(<tr>
         <td>Rune Pool {props.pool}:</td>
         <td>{props.rptotal}</td>

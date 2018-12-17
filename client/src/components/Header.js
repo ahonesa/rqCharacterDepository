@@ -7,6 +7,10 @@ import styles from "./common.css"
 
 class Header extends Component {
     renderContent() {
+        console.log("HEADER PROPS: " + this.props.selectedChar)
+
+        const char = this.props.selectedChar ? "/chars/"+this.props.selectedChar.characterId : "/chars"
+
         switch (this.props.auth) {
             case null:
                 return
@@ -19,7 +23,7 @@ class Header extends Component {
             default:
                 return (
                     <Nav pullRight>
-                        <LinkContainer to="/chars" activeHref="active">
+                        <LinkContainer to={char} activeHref="active">
                             <NavItem eventKey={2}>Characters</NavItem>
                         </LinkContainer>
                         <LinkContainer to="/diceroom" activeHref="active">
@@ -51,8 +55,8 @@ class Header extends Component {
     }
 }
 
-function mapStateToProps({auth}) {
-    return {auth}
+function mapStateToProps({auth, selectedChar}) {
+    return {auth, selectedChar}
 }
 
 export default connect(mapStateToProps, actions, null, {pure: false})(Header)
