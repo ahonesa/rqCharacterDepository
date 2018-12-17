@@ -19,7 +19,7 @@ module.exports = (app) => {
         const existingRoom = await Room.findOne({name : "diceroom"})
         if (existingRoom) {
             const roller = new dice.DiceRoller();
-            const result = req.body.diceRoll ? roller.roll(req.body.diceRoll.str.replace(/\s/g, "").toLowerCase()).toString() : "n/a"
+            const result = req.body.diceRoll ? roller.roll(req.body.diceRoll.replace(/\s/g, "").toLowerCase()).toString() : "n/a"
             existingRoom.messages.push(Message({
                 user: req.user,
                 diceRoll: req.body.diceRoll || "n/a",
