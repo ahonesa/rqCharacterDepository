@@ -12,7 +12,6 @@ class CharacterStuff extends Component {
 
     ItemRows = (stuff) => {
         return (stuff.map(item => {
-            console.log(item)
             return <tr key={item._id}>
                 <td>{item.item || ""}</td>
                 <td>{item.weight || ""}</td>
@@ -22,7 +21,6 @@ class CharacterStuff extends Component {
 
     ArmorRows = (armor) => {
         return (armor.map(item => {
-            console.log(item)
             const armor = _.find(ARMOR, {'label': item.armorType})
             console.log(armor)
             return (<tr key={item._id}>
@@ -41,7 +39,6 @@ class CharacterStuff extends Component {
 
     render() {
         const onSubmit = (values) => {
-            console.log(values)
             this.props.createChar(values)
         }
         const {char, auth} = this.props

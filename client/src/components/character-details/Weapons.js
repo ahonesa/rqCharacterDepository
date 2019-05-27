@@ -31,7 +31,7 @@ const WeaponGroups = (skills, weapons, props, bonuses) => {
     const value = _.get(skill, "value", null)
     const xpEnabled = value && props.owner && (props.hasXp || xp > 0) && props.xpRollsAllowed
 
-    return (<Panel key={weapon.skill}>
+    return (<Panel key={weapon._id}>
       <Panel.Body>
         <Table condensed responsive>
           <thead>
