@@ -5,6 +5,8 @@ export const SKILLS = [
     {label: "Drive", group: "dexterity"},
     {label: "Jump", group: "dexterity"},
     {label: "Ride", group: "dexterity"},
+    {label: "Ride (Triceratops)", group: "dexterity"},
+    {label: "Ride (Boar)", group: "dexterity"},
     {label: "Swim", group: "dexterity"},
     {label: "Fly", group: "dexterity"},
     {label: "Ski", group: "dexterity"},
@@ -52,6 +54,7 @@ export const SKILLS = [
     {label: "Cult Lore (Orlanth)", group: "knowledge"},
     {label: "Cult Lore (Ernalda)", group: "knowledge"},
     {label: "Cult Lore (Engizi)", group: "knowledge"},
+    {label: "Cult Lore (Eurmal)", group: "knowledge"},
     {label: "Cult Lore (Lhankor Mhy)", group: "knowledge"},
     {label: "Cult Lore (Humakt)", group: "knowledge"},
     {label: "Cult Lore (Yelmalio)", group: "knowledge"},
@@ -65,6 +68,7 @@ export const SKILLS = [
     {label: "Customs Newtling", group: "knowledge"},
     {label: "Customs Lunar Heartlands", group: "knowledge"},
     {label: "Customs Telmori", group: "knowledge"},
+    {label: "Draconic Lore", group: "knowledge"},
     {label: "Elder Races Lore", group: "knowledge"},
     {label: "Evaluate", group: "knowledge"},
     {label: "Farm", group: "knowledge"},
@@ -115,6 +119,7 @@ export const SKILLS = [
     {label: "Understand Herd Beast", group: "magic"},
     {label: "Worship (Own)", group: "magic"},
     {label: "Worship (Engizi)", group: "magic"},
+    {label: "Worship (Eurmal)", group: "magic"},
     {label: "Worship (Other)", group: "magic"},
     {label: "Worship (Yinkin)", group: "magic"},
     {label: "Worship (Telmor)", group: "magic"},
@@ -173,6 +178,7 @@ export const SKILLS = [
     {label: "Loyalty (Tribe)", group: "passion"},
     {label: "Loyalty (Deity)", group: "passion"},
     {label: "Loyalty (Other)", group: "passion"},
+    {label: "Hate Authority", group: "passion"},
     {label: "Hate (Primary)", group: "passion"},
     {label: "Hate (Secondary)", group: "passion"},
     {label: "Hate (Other)", group: "passion"},
@@ -273,6 +279,7 @@ export const SKILLS = [
     {label: "Disorder", group: "rune"},
     {label: "Truth", group: "rune"},
     {label: "Illusion", group: "rune"},
+    {label: "Illumination", group: "rune"},
     {label: "Sartar", group: "rune"},
     {label: "Spirit", group: "rune"},
     {label: "Stasis", group: "rune"},
@@ -306,6 +313,7 @@ export const WEAPON_SKILLS = [
     {label: "Grapple", group: "weapon"},
     {label: "Kick", group: "weapon"}
 ]
+
 
 export const ARMOR = [
     {label: "Soft leather", value: 1, weight: [3.0, 4.0, 5.0, 6.0]},
