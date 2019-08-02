@@ -121,7 +121,7 @@ const calculatePrimary = (primary) => {
     else if (primary < 17) return 5
     else if (primary < 21) return 10
     else {
-        return (10 + Math.floor((primary - 20) / 4) * 5);
+        return (15 + Math.floor((primary - 20) / 4) * 5);
     }
 }
 
@@ -150,7 +150,7 @@ const calculatePriNegative = (negative) => {
     else if (negative < 17) return -5
     else if (negative < 21) return -10
     else {
-        return (-10 - Math.floor((negative - 20) / 4) * 5);
+        return (-15 - Math.floor((negative - 20) / 4) * 5);
     }
 }
 
