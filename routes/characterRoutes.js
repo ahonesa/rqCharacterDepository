@@ -73,12 +73,16 @@ module.exports = (app) => {
         if (char && weaponskills && skill && (skill.xp > 0 || char.xp > 0)) {
             const bonuses = statBonuses(char.characteristics)
             const roll = Math.floor((Math.random() * 100) + 1)
-            const reRoll = Math.floor((Math.random() * 100) + 1)
+            let reRoll = Math.floor((Math.random() * 100) + 1)
             const increase = Math.floor((Math.random() * 6) + 1)
             let success = false
 
             let skillInt = parseInt(skill.value || '5')
             const skillCap = (skillInt + bonuses.bonuses.manipulationModifier) > 100 ? (100 - bonuses.bonuses.manipulationModifier) : skillInt
+
+            if((skillInt + bonuses.bonuses.manipulationModifier) > 130) {
+                reRoll = 0
+            }
             if (roll > skillCap || reRoll > skillCap) {
                 skillInt += increase
                 skill.value = skillInt.toString()
@@ -122,7 +126,7 @@ module.exports = (app) => {
         if (char && skills && skill && (skill.xp > 0 || char.xp > 0)) {
             const bonuses = statBonuses(char.characteristics)
             const roll = Math.floor((Math.random() * 100) + 1)
-            const reRoll = Math.floor((Math.random() * 100) + 1)
+            let reRoll = Math.floor((Math.random() * 100) + 1)
             const increase = Math.floor((Math.random() * 6) + 1)
 
             let success = false
@@ -133,6 +137,9 @@ module.exports = (app) => {
 
             const skillCap = (skillInt + statBonus) > 100 ? (100 - statBonus) : skillInt
 
+            if((skillInt + statBonus) > 130) {
+               reRoll = 0
+            }
             if (roll > skillCap || reRoll > skillCap) {
                 skillInt += increase
                 skill.value = skillInt.toString()
