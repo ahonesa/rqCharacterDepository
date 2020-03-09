@@ -80,7 +80,7 @@ module.exports = (app) => {
             let skillInt = parseInt(skill.value || '5')
             const skillCap = (skillInt + bonuses.bonuses.manipulationModifier) > 100 ? (100 - bonuses.bonuses.manipulationModifier) : skillInt
 
-            if((skillInt + bonuses.bonuses.manipulationModifier) > 130) {
+            if((skillInt + bonuses.bonuses.manipulationModifier) > 110) {
                 reRoll = 0
             }
             if (roll > skillCap || reRoll > skillCap) {
@@ -137,7 +137,7 @@ module.exports = (app) => {
 
             const skillCap = (skillInt + statBonus) > 100 ? (100 - statBonus) : skillInt
 
-            if((skillInt + statBonus) > 130) {
+            if((skillInt + statBonus) > 110) {
                reRoll = 0
             }
             if (roll > skillCap || reRoll > skillCap) {
