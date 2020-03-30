@@ -73,17 +73,13 @@ module.exports = (app) => {
         if (char && weaponskills && skill && (skill.xp > 0 || char.xp > 0)) {
             const bonuses = statBonuses(char.characteristics)
             const roll = Math.floor((Math.random() * 100) + 1)
-            let reRoll = Math.floor((Math.random() * 100) + 1)
             const increase = Math.floor((Math.random() * 6) + 1)
             let success = false
 
             let skillInt = parseInt(skill.value || '5')
-            const skillCap = (skillInt + bonuses.bonuses.manipulationModifier) > 100 ? (100 - bonuses.bonuses.manipulationModifier) : skillInt
+            let skillCap = (skillInt + bonuses.bonuses.manipulationModifier) > 100 ? (100 - bonuses.bonuses.manipulationModifier) : skillInt
 
-            if((skillInt + bonuses.bonuses.manipulationModifier) > 110) {
-                reRoll = 0
-            }
-            if (roll > skillCap || reRoll > skillCap) {
+            if (roll > skillCap) {
                 skillInt += increase
                 skill.value = skillInt.toString()
                 success = true
@@ -126,7 +122,6 @@ module.exports = (app) => {
         if (char && skills && skill && (skill.xp > 0 || char.xp > 0)) {
             const bonuses = statBonuses(char.characteristics)
             const roll = Math.floor((Math.random() * 100) + 1)
-            let reRoll = Math.floor((Math.random() * 100) + 1)
             const increase = Math.floor((Math.random() * 6) + 1)
 
             let success = false
@@ -137,10 +132,7 @@ module.exports = (app) => {
 
             const skillCap = (skillInt + statBonus) > 100 ? (100 - statBonus) : skillInt
 
-            if((skillInt + statBonus) > 110) {
-               reRoll = 0
-            }
-            if (roll > skillCap || reRoll > skillCap) {
+            if (roll > skillCap) {
                 skillInt += increase
                 skill.value = skillInt.toString()
                 success = true
@@ -192,11 +184,10 @@ module.exports = (app) => {
         if (maxPowForGain && pow && pow_max && powXpRolls > 0 && pow < pow_max) {
 
             const roll = Math.floor((Math.random() * 100) + 1)
-            const reRoll = Math.floor((Math.random() * 100) + 1)
 
             const rollCap = (maxPowForGain - pow) * 5
 
-            if (roll <= rollCap || reRoll <= rollCap) {
+            if (roll <= rollCap) {
                 _.set(character, "character.characteristics.pow", pow + 1)
             }
 
