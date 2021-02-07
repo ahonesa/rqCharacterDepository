@@ -289,7 +289,6 @@ export const SKILLS = [
     {label: "Loyalty Jonstown City", group: "passion"},
     {label: "Loyalty Isidilian", group: "passion"},
     {label: "Loyalty Culbrea Tribe", group: "passion"},
-    {label: "Loyalty Gold-Gotti", group: "passion"},
     {label: "Loyalty Culbri Clan", group: "passion"},
     {label: "Loyalty Underwillow Clan", group: "passion"},
     {label: "Loyalty Frithan Clan", group: "passion"},

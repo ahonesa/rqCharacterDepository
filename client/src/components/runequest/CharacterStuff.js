@@ -1,12 +1,11 @@
 import _ from 'lodash'
 import React, {Component} from "react"
-import * as actions from "../actions"
+import * as actions from "../../actions"
 import {connect} from "react-redux"
-import {loadavg} from "os"
-import {Row, Col, Panel, Table} from "react-bootstrap"
+import {Col, Panel, Row, Table} from "react-bootstrap"
 import calculateBonuses from './characters/StatBonuses'
 import {ARMOR} from './characters/Skills'
-import './common.css'
+import '../common.css'
 
 class CharacterStuff extends Component {
 

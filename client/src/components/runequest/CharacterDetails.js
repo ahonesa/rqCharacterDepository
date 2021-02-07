@@ -1,14 +1,13 @@
 import _ from 'lodash'
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {Row, Col, Panel, Button, Table, Badge} from 'react-bootstrap'
+import {Badge, Button, Col, Panel, Row, Table} from 'react-bootstrap'
 import {Characteristics} from './character-details/Characteristics'
 import {SkillsPanelOne, SkillsPanelTwo} from './character-details/Skills'
 import {WeaponsPanel} from './character-details/Weapons'
 import calculateModifiers from './characters/StatBonuses'
-import './common.css'
-import * as actions from "../actions"
+import '../common.css'
+import * as actions from "../../actions"
 
 const HpButtons = (props) => {
     if (!props.isGM) return <div></div>
@@ -27,12 +26,12 @@ const RpButtons = (props) => {
 }
 
 const RunePool = (props) => {
-    if(!props.rptotal || props.rptotal < 1) return null;
-    return(<tr>
+    if (!props.rptotal || props.rptotal < 1) return null;
+    return (<tr>
         <td>Rune Pool {props.pool}:</td>
         <td>{props.rptotal}</td>
         <td>{props.rpcurrent}</td>
-        <td><RpButtons {...props} pool={"rp"+props.pool} /></td>
+        <td><RpButtons {...props} pool={"rp" + props.pool}/></td>
     </tr>)
 }
 
@@ -131,58 +130,72 @@ const CharacterDetails = (props) => {
                                                 <td>Hit points:</td>
                                                 <td>{bonuses.hitPoints.base}</td>
                                                 <td>{hitPoints.base}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="base"/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="base"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Head:</td>
                                                 <td>{bonuses.hitPoints.head}</td>
                                                 <td>{hitPoints.head}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="head"/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="head"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Right arm:</td>
                                                 <td>{bonuses.hitPoints.rarm}</td>
                                                 <td>{hitPoints.rarm}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rarm"/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rarm"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Left arm:</td>
                                                 <td>{bonuses.hitPoints.larm}</td>
                                                 <td>{hitPoints.larm}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="larm"/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="larm"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Chest:</td>
                                                 <td>{bonuses.hitPoints.chest}</td>
                                                 <td>{hitPoints.chest}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="chest"/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="chest"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Abdomen:</td>
                                                 <td>{bonuses.hitPoints.abdomen}</td>
                                                 <td>{hitPoints.abdomen}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="abdomen"/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM}
+                                                               loc="abdomen"/></td>
                                             </tr>
                                             <tr>
                                                 <td>Right leg:</td>
                                                 <td>{bonuses.hitPoints.rleg}</td>
                                                 <td>{hitPoints.rleg}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rleg"/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rleg"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Left leg:</td>
                                                 <td>{bonuses.hitPoints.lleg}</td>
                                                 <td>{hitPoints.lleg}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="lleg"/></td>
+                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="lleg"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Magic points:</td>
                                                 <td>{bonuses.magicPoints.base}</td>
                                                 <td></td>
                                             </tr>
-                                            <RunePool {...props} pool="1" characterId={c.name} isGM={isGM} rptotal={characteristics.rp1Total} rpcurrent={characteristics.rp1Current} />
-                                            <RunePool {...props} pool="2" characterId={c.name} isGM={isGM} rptotal={characteristics.rp2Total} rpcurrent={characteristics.rp2Current} />
-                                            <RunePool {...props} pool="3" characterId={c.name} isGM={isGM} rptotal={characteristics.rp3Total} rpcurrent={characteristics.rp3Current} />
+                                            <RunePool {...props} pool="1" characterId={c.name} isGM={isGM}
+                                                      rptotal={characteristics.rp1Total}
+                                                      rpcurrent={characteristics.rp1Current}/>
+                                            <RunePool {...props} pool="2" characterId={c.name} isGM={isGM}
+                                                      rptotal={characteristics.rp2Total}
+                                                      rpcurrent={characteristics.rp2Current}/>
+                                            <RunePool {...props} pool="3" characterId={c.name} isGM={isGM}
+                                                      rptotal={characteristics.rp3Total}
+                                                      rpcurrent={characteristics.rp3Current}/>
                                             <tr>
                                                 <td>Hero Points:</td>
                                                 <td></td>
