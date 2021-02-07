@@ -1,9 +1,8 @@
 import _ from "lodash"
 import React, {Component} from "react"
-import {reduxForm, Field} from "redux-form"
-import {Link} from 'react-router-dom'
-import {ReduxFormGroup, ReduxFormControl, ReduxRadio} from '../fields/Fields'
-import {Grid, FormGroup, Radio, Button, FormControl, ControlLabel, Row, Col, Label} from "react-bootstrap"
+import {reduxForm} from "redux-form"
+import {ReduxFormGroup} from '../../fields/Fields'
+import {Button, Col, Label, Row} from "react-bootstrap"
 
 const CHARACTERISTICS_FIELDS = [
     {label: "STR", name: "str"},
@@ -87,7 +86,7 @@ class CharacterFormPageTwo extends Component {
 }
 
 export default reduxForm({
-    form: "characterForm",
+    form: "cthulhuCharacterForm",
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true
 })(CharacterFormPageTwo)

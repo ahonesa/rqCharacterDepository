@@ -1,7 +1,7 @@
 import _ from "lodash"
 import React, {Component} from "react"
 import {reduxForm, Field} from "redux-form"
-import {ReduxFormGroup, ReduxRadio} from '../fields/Fields'
+import {ReduxFormGroup, ReduxRadio} from '../../fields/Fields'
 import {FormGroup, Button, Row, Col, Label} from "react-bootstrap"
 import {isRequired, isString} from "./validation"
 
@@ -52,7 +52,7 @@ class CharacterFormPageOne extends Component {
 
 // <Field key="name" component={TextField} type="text" label="Character Name" name="name" />
 export default reduxForm({
-    form: "characterForm",
+    form: "cthulhuCharacterForm",
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true
 })(CharacterFormPageOne)

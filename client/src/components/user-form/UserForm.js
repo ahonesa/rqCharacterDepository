@@ -15,6 +15,7 @@ class UserForm extends Component {
 
         const authorizationLevel = this.props.auth && this.props.auth.authorizationLevel
         const xpRollsAllowed = this.props.params && this.props.params.xpRollsAllowed
+        const cthulhuXpRollsAllowed = this.props.params && this.props.params.cthulhuXpRollsAllowed
         console.log(xpRollsAllowed)
 
         const {handleSubmit, reset} = this.props
@@ -32,9 +33,12 @@ class UserForm extends Component {
                             <Button type="reset" href="/" onClick={reset}>Cancel</Button>
                             <Button type="submit">Submit</Button>
                         </form>
-                        <p>XP Rolls Allowed = {xpRollsAllowed ? "yes" : "nope"}</p>
+                        <p>RuneQuest XP Rolls Allowed = {xpRollsAllowed ? "yes" : "nope"}</p>
+                        <p>Cthulhu XP Rolls Allowed = {cthulhuXpRollsAllowed ? "yes" : "nope"}</p>
                         <Button disabled={authorizationLevel === 1 ? false : true}
-                                onClick={() => this.props.toggleXpRollsAllowed()}>Toggle XP Rolls Allowed</Button>
+                                onClick={() => this.props.toggleXpRollsAllowed()}>Toggle Runequest XP Rolls Allowed</Button>
+                        <Button disabled={authorizationLevel === 10 ? false : true}
+                                onClick={() => this.props.cthulhuToggleXpRollsAllowed()}>Toggle Cthulhu XP Rolls Allowed</Button>
                     </Col>
                 </Row>
             </Grid>

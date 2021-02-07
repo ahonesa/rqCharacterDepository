@@ -19,7 +19,12 @@ import {
     RP_UPDATE,
     POST_MESSAGE,
     FETCH_MESSAGES,
-    CLEAR_MESSAGES
+    CLEAR_MESSAGES,
+    CTHULHU_SKILL_XP_AWARD,
+    CTHULHU_SKILL_XP_ROLL,
+    CTHULHU_CREATE_CHAR,
+    CTHULHU_GET_ONE_CHAR,
+    CTHULHU_GET_ALL_CHARS
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -34,6 +39,11 @@ export const fetchParams = () => async dispatch => {
 
 export const toggleXpRollsAllowed = () => async dispatch => {
     const res = await axios.post("/api/params/xpRollsAllowed/toggle");
+    await dispatch({ type: TOGGLE_XP_ROLLS_ALLOWED, payload: res.data });
+};
+
+export const toggleCthulhuXpRollsAllowed = () => async dispatch => {
+    const res = await axios.post("/api/params/cthulhuXpRollsAllowed/toggle");
     await dispatch({ type: TOGGLE_XP_ROLLS_ALLOWED, payload: res.data });
 };
 
@@ -123,6 +133,33 @@ export const getOneChar = (characterId) => async dispatch => {
   const res = await axios.get("/api/chars/" + characterId);
   dispatch({ type: GET_ONE_CHAR, payload: res.data });
 };
+
+export const cthulhuGetAllChars = () => async dispatch => {
+    const res = await axios.get("/api/cthulhu/chars");
+    dispatch({ type: CTHULHU_GET_ALL_CHARS, payload: res.data });
+};
+
+export const cthulhuGetOneChar = (characterId) => async dispatch => {
+    const res = await axios.get("/api/cthulhu/chars/" + characterId);
+    dispatch({ type: CTHULHU_GET_ONE_CHAR, payload: res.data });
+};
+
+export const cthulhuCreateChar = (character) => async dispatch => {
+    const res = await axios.post("/api/cthulhu/chars", character);
+    const a = await dispatch({ type: CTHULHU_CREATE_CHAR, payload: res.data });
+    dispatch(reset("characterForm"));
+};
+
+export const cthulhuSkillXpRoll = (characterId, skill) => async dispatch => {
+    const res = await axios.post("/api/cthulhu/chars/" + characterId + "/xp_skill/" + skill);
+    await dispatch({ type: CTHULHU_SKILL_XP_ROLL, payload: res.data });
+};
+
+export const cthulhuSkillXpAward = (characterId, skill) => async dispatch => {
+    const res = await axios.post("/api/cthulhu/chars/" + characterId + "/xp_skill_award/" + skill);
+    await dispatch({ type: CTHULHU_SKILL_XP_AWARD, payload: res.data });
+};
+
 
 export const logout = () => async dispatch => {
     const res = await axios.get("/api/logout");
