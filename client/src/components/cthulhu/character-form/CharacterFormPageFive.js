@@ -11,22 +11,6 @@ class CharacterFormPageFive extends Component {
         super(props)
         this.previousPage = props.previousPage.bind(this)
         this.renderSpellFields = this.renderSpellFields.bind(this)
-        this.renderSpellSelect = this.renderSpellSelect.bind(this)
-    }
-
-
-    renderSpellSelect(member) {
-        return (
-            <FormGroup controlId="formControlsSelect">
-                <ControlLabel>Select</ControlLabel>
-                <Field name={`${member}.spelltype`} component={InputSelect} placeholder="select" validate={isRequired}>
-                    <option/>
-                    <option key="spirit" value="spirit">Spirit magic</option>
-                    <option key="rune" value="rune">Rune magic</option>
-                    <option key="sorcery" value="sorcery">Sorcery</option>
-                </Field>
-            </FormGroup>
-        );
     }
 
     renderSpellFields({fields, meta: {error, submitFailed}}) {
@@ -43,18 +27,15 @@ class CharacterFormPageFive extends Component {
                             <ListGroupItem key={index}>
                                 <Row>
                                     <Col xs={6} md={3}>
-                                        {this.renderSpellSelect(member)}
-                                    </Col>
-                                    <Col xs={6} md={3}>
                                         <ReduxFormGroup name={`${member}.spell`} label="Spell Name"
                                                         validate={[isRequired, isString]}/>
                                     </Col>
                                     <Col xs={6} md={3}>
-                                        <ReduxFormGroup name={`${member}.rank`} label="Spell rank"
-                                                        validate={[isRequired, isNumber]}/>
+                                        <ReduxFormGroup name={`${member}.cost`} label="Spell cost"
+                                                        validate={[isRequired, isString]}/>
                                     </Col>
                                     <Col xs={6} md={3}>
-                                        <ReduxFormGroup name={`${member}.value`} label="Skill (only sorceries)"/>
+                                        <ReduxFormGroup name={`${member}.cast_time`} label="Cast time"/>
                                     </Col>
                                     <Col xs={6} md={3}>
                                         <Button type="button" onClick={() => fields.remove(index)}>Remove</Button>
@@ -77,7 +58,7 @@ class CharacterFormPageFive extends Component {
                 <form onSubmit={handleSubmit}>
                     <ReduxFormGroup name="freeint" label="Free INT"/>
                     <FieldArray name="spells" component={this.renderSpellFields}/>
-                    <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
+                    <Button type="reset" href="/cthulhu/chars" onClick={reset}>Cancel</Button>
                     <Button type="button" onClick={this.previousPage}>Previous</Button>
                     <Button type="submit">Next</Button>
                 </form>

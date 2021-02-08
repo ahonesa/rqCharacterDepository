@@ -9,12 +9,12 @@ const cthulhuSchema = new Schema({
         notes: String,
         info: {
             sex: String,
-            age: String,
             occupation: String,
             residence: String,
             birthplace: String
         },
         characteristics: {
+            age: Number,
             str: Number,
             dex: Number,
             int: Number,
@@ -37,15 +37,59 @@ const cthulhuSchema = new Schema({
             sanity_org: Number,
             hit_points: Number,
             magic_points: Number,
-            major_wound: Number,
-            temp_insane: Number,
-            indef_insane: Number
+            major_wound: Boolean,
+            temp_insane: Boolean,
+            indef_insane: Boolean
         },
-        skills: [
+        skills: {
+            accounting: Number,
+            anthropology: Number,
+            appraise: Number,
+            archaeology: Number,
+            charm: Number,
+            climb: Number,
+            credit_rating: Number,
+            cthulhu_mythos: Number,
+            disguise: Number,
+            dodge: Number,
+            drive_auto: Number,
+            electrical_repair: Number,
+            fast_talk: Number,
+            fighting_brawl: Number,
+            firearms_handgun: Number,
+            firearms_rifle_shotgun: Number,
+            first_aid: Number,
+            history: Number,
+            intimidate: Number,
+            jump: Number,
+            language_own: Number,
+            law: Number,
+            library_use: Number,
+            listen: Number,
+            locksmith: Number,
+            mechanical_repair: Number,
+            medicine: Number,
+            natural_world: Number,
+            navigate: Number,
+            occult: Number,
+            operate_hv_machinery: Number,
+            persuade: Number,
+            psychology: Number,
+            psychoanalysis: Number,
+            ride: Number,
+            science: Number,
+            sleight_of_hand: Number,
+            spot_hidden: Number,
+            stealth: Number,
+            survival: Number,
+            swim: Number,
+            throw: Number,
+            track: Number
+        },
+        additional_skills: [
             {
                 skill: String,
                 value: Number,
-                base: Number,
                 xp: Number
             }
         ],
@@ -64,16 +108,6 @@ const cthulhuSchema = new Schema({
             spell: String,
             cost: String,
             cast_time: String
-        }],
-        armor: [{
-            armorType: String,
-            head: String,
-            chest: String,
-            abdomen: String,
-            rh: String,
-            lh: String,
-            rl: String,
-            ll: String
         }],
         encounters: [{
             entity: String,

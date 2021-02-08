@@ -4,7 +4,6 @@ import * as actions from "../../actions"
 import {connect} from "react-redux"
 import {Col, Panel, Row, Table} from "react-bootstrap"
 import calculateBonuses from './characters/StatBonuses'
-import {ARMOR} from './characters/Skills'
 import '../common.css'
 
 class CharacterStuff extends Component {
@@ -15,24 +14,6 @@ class CharacterStuff extends Component {
                 <td>{item.item || ""}</td>
                 <td>{item.weight || ""}</td>
             </tr>
-        }))
-    }
-
-    ArmorRows = (armor) => {
-        return (armor.map(item => {
-            const armor = _.find(ARMOR, {'label': item.armorType})
-            console.log(armor)
-            return (<tr key={item._id}>
-                <td>{item.armorType}</td>
-                <td>{(item.head === "true") && armor.value || "-"}</td>
-                <td>{(item.chest === "true") && armor.value || "-"}</td>
-                <td>{(item.abdomen === "true") && armor.value || "-"}</td>
-                <td>{(item.rh === "true") && armor.value || "-"}</td>
-                <td>{(item.lh === "true") && armor.value || "-"}</td>
-                <td>{(item.rl === "true") && armor.value || "-"}</td>
-                <td>{(item.ll === "true") && armor.value || "-"}</td>
-                <td>?</td>
-            </tr>)
         }))
     }
 
@@ -104,29 +85,6 @@ class CharacterStuff extends Component {
                                             <td>Flocks of Herd:</td>
                                             <td>{c.flocksOfHerd || ""}</td>
                                         </tr>
-                                        </tbody>
-                                    </Table>
-                                </Panel.Body>
-                            </Panel>
-                            <Panel className="shadowPanel">
-                                <Panel.Heading>Armor layers</Panel.Heading>
-                                <Panel.Body>
-                                    <Table condensed responsive>
-                                        <thead>
-                                        <tr>
-                                            <th>Armor type</th>
-                                            <th>H</th>
-                                            <th>C</th>
-                                            <th>S</th>
-                                            <th>RH</th>
-                                            <th>LH</th>
-                                            <th>RL</th>
-                                            <th>LL</th>
-                                            <th>Weight</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {this.ArmorRows(armor)}
                                         </tbody>
                                     </Table>
                                 </Panel.Body>

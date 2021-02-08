@@ -6,12 +6,13 @@ import {Button, Col, Label, Row} from "react-bootstrap"
 
 const CHARACTERISTICS_FIELDS = [
     {label: "STR", name: "str"},
-    {label: "CON", name: "con"},
-    {label: "SIZ", name: "siz"},
-    {label: "INT", name: "int"},
     {label: "DEX", name: "dex"},
+    {label: "INT", name: "int"},
+    {label: "CON", name: "con"},
+    {label: "APP", name: "app"},
     {label: "POW", name: "pow"},
-    {label: "CHA", name: "cha"}
+    {label: "SIZ", name: "siz"},
+    {label: "EDU", name: "edu"}
 ]
 
 const CharacteristicField = ({name, label}) => {
@@ -23,10 +24,6 @@ const CharacteristicField = ({name, label}) => {
             </Col>
             <Col xs={4} md={3}>
                 <ReduxFormGroup type="number" key={name} label={label} name={"characteristics." + name}/>
-            </Col>
-            <Col xs={4} md={3}>
-                <ReduxFormGroup type="number" key={name + "_max"} label={label + " max"}
-                                name={"characteristics." + name + "_max"} type="number"/>
             </Col>
         </Row>
     )
@@ -54,30 +51,22 @@ class CharacterFormPageTwo extends Component {
                     {this.renderFields()}
                     <Row>
                         <Col xs={4} md={3}>
-                            <ReduxFormGroup type="number" label="XP points" name="xp"/>
+                            <ReduxFormGroup type="number" label="Luck"
+                                            name="characteristics.luck"/>
+                            <ReduxFormGroup type="number" label="Luck (original)"
+                                            name="characteristics.luck_org"/>
+
+                            <ReduxFormGroup type="number" label="Sanity"
+                                            name="characteristics.sanity"/>
+                            <ReduxFormGroup type="number" label="Sanity (original)"
+                                            name="characteristics.sanity_org"/>
+                            <ReduxFormGroup type="number" label="Hit Points"
+                                            name="characteristics.hit_points"/>
+                            <ReduxFormGroup type="number" label="Magic Points"
+                                            name="characteristics.magic_points"/>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col xs={4} md={3}>
-                            <ReduxFormGroup type="number" label="Max POW for gain roll"
-                                            name="characteristics.maxPowForGain"/>
-                            <ReduxFormGroup type="number" label="POW XP rolls" name="characteristics.powXpRolls"/>
-                            <ReduxFormGroup type="number" label="Current Rune Points Pool 1"
-                                            name="characteristics.rp1Current"/>
-                            <ReduxFormGroup type="number" label="Total Rune Points Pool 1"
-                                            name="characteristics.rp1Total"/>
-                            <ReduxFormGroup type="number" label="Current Rune Points Pool 2"
-                                            name="characteristics.rp2Current"/>
-                            <ReduxFormGroup type="number" label="Total Rune Points Pool 2"
-                                            name="characteristics.rp2Total"/>
-                            <ReduxFormGroup type="number" label="Current Rune Points Pool 3"
-                                            name="characteristics.rp3Current"/>
-                            <ReduxFormGroup type="number" label="Total Rune Points Pool 3"
-                                            name="characteristics.rp3Total"/>
-                            <ReduxFormGroup type="number" label="Hero Points" name="characteristics.heroPoints"/>
-                        </Col>
-                    </Row>
-                    <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
+                    <Button type="reset" href="/cthulhu/chars" onClick={reset}>Cancel</Button>
                     <Button type="button" onClick={this.previousPage}>Previous</Button>
                     <Button type="submit">Next</Button>
                 </form>

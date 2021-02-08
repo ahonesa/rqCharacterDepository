@@ -6,14 +6,9 @@ import {FormGroup, Button, Row, Col, Label} from "react-bootstrap"
 import {isRequired, isString} from "./validation"
 
 const ADDITIONAL_FIELDS = [
-    {label: "Species", name: "species", type: "text"},
-    {label: "Homeland/Clan", name: "clan", type: "text"},
-    {label: "Age", name: "age", type: "number"},
-    {label: "Culture", name: "culture", type: "text"},
-    {label: "Religion", name: "religion", type: "text"},
-    {label: "Parent Occupation", name: "parent", type: "text"},
-    {label: "Adventurer Occupation", name: "occupation", type: "text"},
-    {label: "Reputation", name: "reputation", type: "number"}
+    {label: "Occupation", name: "occupation", type: "text"},
+    {label: "Residence", name: "residence", type: "text"},
+    {label: "Birthplace", name: "birthplace", type: "text"}
 ]
 
 class CharacterFormPageOne extends Component {
@@ -41,7 +36,7 @@ class CharacterFormPageOne extends Component {
                             <Field name="info.sex" component={ReduxRadio} type="radio" label="female" value="female"/>
                         </FormGroup>
                         {this.renderAdditionalFields()}
-                        <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
+                        <Button type="reset" href="/cthulhu/chars" onClick={reset}>Cancel</Button>
                         <Button type="submit">Next</Button>
                     </form>
                 </Col>

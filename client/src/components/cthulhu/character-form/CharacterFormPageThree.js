@@ -1,8 +1,8 @@
 import _ from "lodash";
 import React, {Component} from "react";
 import {Field, FieldArray, reduxForm} from "redux-form";
-import {SKILLS} from '../characters/Skills';
-import {InputSelect, ReduxFormGroup} from '../../fields/Fields'
+import {BASE_SKILLS} from '../characters/Skills';
+import {Input, ReduxFormGroup} from '../../fields/Fields'
 import {Button, Col, ControlLabel, FormGroup, Label, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 import {isNumber, isRequired} from "./validation";
 
@@ -11,54 +11,22 @@ class CharacterFormPageThree extends Component {
     constructor(props) {
         super(props)
         this.previousPage = props.previousPage.bind(this)
-        this.renderSkillFields = this.renderSkillFields.bind(this)
-        this.renderSkillSelect = this.renderSkillSelect.bind(this)
+        this.renderBaseSkillFields = this.renderBaseSkillFields.bind(this)
+        this.renderAdditionalSkillFields = this.renderAdditionalSkillFields.bind(this)
+        this.props.initialize
     }
 
-
-    renderSkillSelect(member) {
-        return (
-            <FormGroup controlId="formControlsSelect">
-                <ControlLabel>Select</ControlLabel>
-                <Field name={`${member}.skill`} component={InputSelect} placeholder="select" validate={isRequired}>
-                    <option/>
-                    {
-                        SKILLS.map(({label, group}) => (
-                            <option key={group + "." + label} value={group + "." + label}>{label} ({group})</option>
-                        ))
-                    }
-                </Field>
-            </FormGroup>
-        );
-    }
-
-    renderSkillFields({fields}) {
+    renderAdditionalSkillFields({fields}) {
         return (<div>
-                <label>Skillbonuses</label>
-                <ListGroup>
-                    <ListGroupItem>Agility skill category
-                        modifier: {_.get(this.props, "character.bonuses.agilityModifier", 0)}</ListGroupItem>
-                    <ListGroupItem>Communication skill category
-                        modifier: {_.get(this.props, "character.bonuses.communicationModifier", 0)}</ListGroupItem>
-                    <ListGroupItem>Knowledge skill category
-                        modifier: {_.get(this.props, "character.bonuses.knowledgeModifier", 0)}</ListGroupItem>
-                    <ListGroupItem>Magic skill category
-                        modifier: {_.get(this.props, "character.bonuses.magicModifier", 0)}</ListGroupItem>
-                    <ListGroupItem>Manipulation skill category
-                        modifier: {_.get(this.props, "character.bonuses.manipulationModifier", 0)}</ListGroupItem>
-                    <ListGroupItem>Perception skill category
-                        modifier: {_.get(this.props, "character.bonuses.perceptionModifier", 0)}</ListGroupItem>
-                    <ListGroupItem>Stealth skill category
-                        modifier: {_.get(this.props, "character.bonuses.stealthModifier", 0)}</ListGroupItem>
-                </ListGroup>
-                <label>Select skills</label>
+                <label>Additional skills</label>
                 <ListGroup>
                     {fields.map((member, index) => {
                         return (
                             <ListGroupItem key={index}>
                                 <Row>
                                     <Col xs={4} md={4}>
-                                        {this.renderSkillSelect(member)}
+                                        <ReduxFormGroup name={`${member}.skill`} label="Skill"
+                                                        validate={[isRequired]}/>
                                     </Col>
                                     <Col xs={4} md={4}>
                                         <ReduxFormGroup name={`${member}.value`} label="Skill"
@@ -83,20 +51,32 @@ class CharacterFormPageThree extends Component {
         );
     }
 
+    renderBaseSkillFields() {
+        return _.map(BASE_SKILLS, ({name, label, base}) => {
+            console.log("Base: " + base)
+            return <FormGroup bsSize="small">
+                <ControlLabel>{label + " (" + base + ")"}:</ControlLabel>
+                <Field key={"skills." + name} component={Input} type="number" name={"skills." + name} validate={[isNumber]} />
+            </FormGroup>
+        })
+    }
+
     render() {
         const {handleSubmit, reset} = this.props
         return (
             <Row>
                 <h2 style={{marginBottom: 30}}><Label>Skills</Label></h2>
                 <form onSubmit={handleSubmit}>
-                    <FieldArray name="skills" component={this.renderSkillFields}/>
-                    <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
+                    {this.renderBaseSkillFields()}
+                    <FieldArray name="additional_skills" component={this.renderAdditionalSkillFields}/>
+                    <Button type="reset" href="/cthulhu/chars" onClick={reset}>Cancel</Button>
                     <Button type="button" onClick={this.previousPage}>Previous</Button>
                     <Button type="submit">Next</Button>
                 </form>
             </Row>);
     }
 }
+
 
 export default reduxForm({
     form: "cthulhuCharacterForm",

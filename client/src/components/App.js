@@ -12,6 +12,8 @@ import CthulhuCharacterDetailsView from "./cthulhu/CharacterDetailsView";
 import CthulhuCharacterForm from './cthulhu/character-form/CharacterForm';
 import UserForm from './user-form/UserForm';
 import DiceRoom from './dice-room/DiceRoom';
+import ErrorBoundary from "./ErrorBoundary";
+
 
 class App extends Component {
   componentDidMount() {
@@ -21,6 +23,7 @@ class App extends Component {
 
   render() {
     return (
+        <ErrorBoundary>
         <BrowserRouter>
           <div>
             <Header />
@@ -37,6 +40,7 @@ class App extends Component {
             <Route exact path="/diceroom" component={DiceRoom} />
           </div>
         </BrowserRouter>
+        </ErrorBoundary>
     );
   }
 }
