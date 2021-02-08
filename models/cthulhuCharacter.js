@@ -3,8 +3,8 @@ const {Schema} = mongoose
 
 const cthulhuSchema = new Schema({
     ownerId: String,
+    characterId: String,
     character: {
-        characterId: String,
         name: String,
         notes: String,
         info: {
@@ -42,49 +42,178 @@ const cthulhuSchema = new Schema({
             indef_insane: Boolean
         },
         skills: {
-            accounting: Number,
-            anthropology: Number,
-            appraise: Number,
-            archaeology: Number,
-            charm: Number,
-            climb: Number,
-            credit_rating: Number,
-            cthulhu_mythos: Number,
-            disguise: Number,
-            dodge: Number,
-            drive_auto: Number,
-            electrical_repair: Number,
-            fast_talk: Number,
-            fighting_brawl: Number,
-            firearms_handgun: Number,
-            firearms_rifle_shotgun: Number,
-            first_aid: Number,
-            history: Number,
-            intimidate: Number,
-            jump: Number,
-            language_own: Number,
-            law: Number,
-            library_use: Number,
-            listen: Number,
-            locksmith: Number,
-            mechanical_repair: Number,
-            medicine: Number,
-            natural_world: Number,
-            navigate: Number,
-            occult: Number,
-            operate_hv_machinery: Number,
-            persuade: Number,
-            psychology: Number,
-            psychoanalysis: Number,
-            ride: Number,
-            science: Number,
-            sleight_of_hand: Number,
-            spot_hidden: Number,
-            stealth: Number,
-            survival: Number,
-            swim: Number,
-            throw: Number,
-            track: Number
+            accounting: {
+                value: Number,
+                xp: Number
+            },
+            anthropology: {
+                value: Number,
+                xp: Number
+            },
+            appraise: {
+                value: Number,
+                xp: Number
+            },
+            archaeology: {
+                value: Number,
+                xp: Number
+            },
+            charm: {
+                value: Number,
+                xp: Number
+            },
+            climb: {
+                value: Number,
+                xp: Number
+            },
+            credit_rating: {
+                value: Number,
+                xp: Number
+            },
+            cthulhu_mythos: {
+                value: Number,
+                xp: Number
+            },
+            disguise: {
+                value: Number,
+                xp: Number
+            },
+            dodge: {
+                value: Number,
+                xp: Number
+            },
+            drive_auto: {
+                value: Number,
+                xp: Number
+            },
+            electrical_repair: {
+                value: Number,
+                xp: Number
+            },
+            fast_talk: {
+                value: Number,
+                xp: Number
+            },
+            fighting_brawl: {
+                value: Number,
+                xp: Number
+            },
+            firearms_handgun: {
+                value: Number,
+                xp: Number
+            },
+            firearms_rifle_shotgun: {
+                value: Number,
+                xp: Number
+            },
+            first_aid: {
+                value: Number,
+                xp: Number
+            },
+            history: {
+                value: Number,
+                xp: Number
+            },
+            intimidate: {
+                value: Number,
+                xp: Number
+            },
+            jump: {
+                value: Number,
+                xp: Number
+            },
+            language_own: {
+                value: Number,
+                xp: Number
+            },
+            law: {
+                value: Number,
+                xp: Number
+            },
+            library_use: {
+                value: Number,
+                xp: Number
+            },
+            listen: {
+                value: Number,
+                xp: Number
+            },
+            locksmith: {
+                value: Number,
+                xp: Number
+            },
+            mechanical_repair: {
+                value: Number,
+                xp: Number
+            },
+            medicine: {
+                value: Number,
+                xp: Number
+            },
+            natural_world: {
+                value: Number,
+                xp: Number
+            },
+            navigate: {
+                value: Number,
+                xp: Number
+            },
+            occult: {
+                value: Number,
+                xp: Number
+            },
+            operate_hv_machinery: {
+                value: Number,
+                xp: Number
+            },
+            persuade: {
+                value: Number,
+                xp: Number
+            },
+            psychology: {
+                value: Number,
+                xp: Number
+            },
+            psychoanalysis: {
+                value: Number,
+                xp: Number
+            },
+            ride: {
+                value: Number,
+                xp: Number
+            },
+            science: {
+                value: Number,
+                xp: Number
+            },
+            sleight_of_hand: {
+                value: Number,
+                xp: Number
+            },
+            spot_hidden: {
+                value: Number,
+                xp: Number
+            },
+            stealth: {
+                value: Number,
+                xp: Number
+            },
+            survival: {
+                value: Number,
+                xp: Number
+            },
+            swim: {
+                value: Number,
+                xp: Number
+            },
+            throw: {
+                value: Number,
+                xp: Number
+            },
+            track: {
+                value: Number,
+                xp: Number
+            },
         },
         additional_skills: [
             {

@@ -11,9 +11,10 @@ class CharacterListView extends Component {
         this.props.cthulhuGetAllChars();
     }
 
-    rivit = () => this.props.characters && this.props.characters.map(char => {
+    rivit = () => this.props.cthulhuCharacters && this.props.cthulhuCharacters.map(char => {
+        console.log(this.props.cthulhuCharacters)
         return (<LinkContainer key={char.characterId} to={"/cthulhu/chars/" + char.characterId}>
-            <ListGroupItem>{char.characterId}</ListGroupItem>
+            <ListGroupItem>{char.character.name}</ListGroupItem>
         </LinkContainer>);
     })
 
@@ -36,8 +37,8 @@ class CharacterListView extends Component {
     }
 }
 
-function mapStateToProps({characters, auth, selectedChar}) {
-    return {characters, auth, selectedChar}
+function mapStateToProps({cthulhuCharacters, auth, selectedCthulhuChar}) {
+    return {cthulhuCharacters, auth, selectedCthulhuChar}
 }
 
 export default connect(mapStateToProps, actions)(CharacterListView);

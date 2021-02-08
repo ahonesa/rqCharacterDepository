@@ -12,6 +12,9 @@ class Header extends Component {
 
         const char = this.props.selectedChar ? "/chars/" + this.props.selectedChar.characterId : "/chars"
 
+        console.log("CTHULHU: " + cthulhu)
+        console.log("CHAR: " + char)
+
         switch (this.props.auth) {
             case null:
                 return

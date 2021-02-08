@@ -56,7 +56,7 @@ class CharacterFormPageThree extends Component {
             console.log("Base: " + base)
             return <FormGroup bsSize="small">
                 <ControlLabel>{label + " (" + base + ")"}:</ControlLabel>
-                <Field key={"skills." + name} component={Input} type="number" name={"skills." + name} validate={[isNumber]} />
+                <Field key={"skills." + name} component={Input} type="number" name={"skills." + name + ".value"} validate={[isNumber]} />
             </FormGroup>
         })
     }

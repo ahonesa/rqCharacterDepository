@@ -1,8 +1,4 @@
 import {
-    CTHULHU_GET_ALL_CHARS,
-    CTHULHU_GET_ONE_CHAR,
-    CTHULHU_SKILL_XP_AWARD,
-    CTHULHU_SKILL_XP_ROLL,
     GET_ALL_CHARS,
     GET_ONE_CHAR,
     HP_UPDATE,
@@ -17,8 +13,6 @@ import {
 
 export function allCharsReducer(state = null, action) {
     switch (action.type) {
-        case CTHULHU_GET_ALL_CHARS:
-            return action.payload || false
         case GET_ALL_CHARS:
             return action.payload || false
         default:
@@ -28,12 +22,6 @@ export function allCharsReducer(state = null, action) {
 
 export function oneCharReducer(state = null, action) {
     switch (action.type) {
-        case CTHULHU_GET_ONE_CHAR:
-            return action.payload || false
-        case CTHULHU_SKILL_XP_ROLL:
-            return action.payload || false
-        case CTHULHU_SKILL_XP_AWARD:
-            return action.payload || false
         case GET_ONE_CHAR:
             return action.payload || false
         case SKILL_XP_ROLL:

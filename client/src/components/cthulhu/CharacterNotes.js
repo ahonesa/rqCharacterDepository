@@ -12,14 +12,14 @@ class CharacterNotes extends Component {
     render() {
         const onSubmit = (values) => {
             console.log(values)
-            this.props.createChar(values)
+            this.props.createCthulhuChar(values)
         };
-        const {handleSubmit, reset, selectedChar} = this.props
+        const {handleSubmit, reset, selectedCthulhuChar} = this.props
         console.log(this.props)
         return (
             <Panel bsSize="small">
                 <Panel.Heading componentClass="h4"
-                               style={{marginTop: "0px"}}>{selectedChar && selectedChar.characterId}</Panel.Heading>
+                               style={{marginTop: "0px"}}>{selectedCthulhuChar && selectedCthulhuChar.characterId}</Panel.Heading>
                 <Panel.Body>
                     <Row>
                         <Col xs={8} md={8} lg={8}>
@@ -39,10 +39,10 @@ class CharacterNotes extends Component {
     }
 }
 
-function mapStateToProps({selectedChar}) {
-    if (selectedChar) {
-        return {initialValues: selectedChar.character, selectedChar: selectedChar}
-    } else return {selectedChar};
+function mapStateToProps({selectedCthulhuChar}) {
+    if (selectedCthulhuChar) {
+        return {initialValues: selectedCthulhuChar.character, selectedCthulhuChar: selectedCthulhuChar}
+    } else return {selectedCthulhuChar};
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({

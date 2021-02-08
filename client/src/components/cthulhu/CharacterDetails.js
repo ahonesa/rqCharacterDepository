@@ -3,7 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Badge, Button, Col, Panel, Row, Table} from 'react-bootstrap'
 import {Characteristics} from './character-details/Characteristics'
-import {SkillsPanelOne, SkillsPanelTwo} from './character-details/Skills'
+import {SkillsPanelOne} from './character-details/Skills'
 import {WeaponsPanel} from './character-details/Weapons'
 import calculateModifiers from './characters/StatBonuses'
 import '../common.css'
@@ -15,24 +15,6 @@ const HpButtons = (props) => {
         <Button bsSize="xsmall" onClick={() => props.hpUpdate(props.characterId, props.loc, -1)}>-1</Button>
         <Button bsSize="xsmall" onClick={() => props.hpUpdate(props.characterId, props.loc, +1)}>+1</Button>
     </div>)
-}
-
-const RpButtons = (props) => {
-    if (!props.isGM) return <div></div>
-    return (<div>
-        <Button bsSize="xsmall" onClick={() => props.rpUpdate(props.characterId, props.pool, -1)}>-1</Button>
-        <Button bsSize="xsmall" onClick={() => props.rpUpdate(props.characterId, props.pool, +1)}>+1</Button>
-    </div>)
-}
-
-const RunePool = (props) => {
-    if (!props.rptotal || props.rptotal < 1) return null;
-    return (<tr>
-        <td>Rune Pool {props.pool}:</td>
-        <td>{props.rptotal}</td>
-        <td>{props.rpcurrent}</td>
-        <td><RpButtons {...props} pool={"rp" + props.pool}/></td>
-    </tr>)
 }
 
 const CharacterDetails = (props) => {
@@ -49,15 +31,15 @@ const CharacterDetails = (props) => {
             const bonuses = characteristics && calculateModifiers(characteristics)
             const skills = _.get(char, "character.skills", {})
             const weapons = _.get(char, "character.weapons", {})
-            const hitPoints = _.get(char, "character.hitpoints", {})
-            const weaponskills = _.get(char, "character.weaponskills", {})
+            const hitPoints = _.get(characteristics, "hit_points", 0)
+            const magicPoints = _.get(characteristics, "magic_points", 0)
             const authorizationLevel = auth && auth.authorizationLevel
             const userId = auth && auth.googleId
             const isOwner = ownerId === userId
-            const isGM = authorizationLevel === 1
-            const hasXp = c.xp > 0
-            const xpRollsAllowed = params && params.xpRollsAllowed
+            const isGM = authorizationLevel === 10
+            const xpRollsAllowed = params && params.cthulhuXpRollsAllowed
 
+            console.log(char)
             console.log(bonuses)
 
             return (
@@ -74,39 +56,23 @@ const CharacterDetails = (props) => {
                                             <tbody>
                                             <tr>
                                                 <td>Age:</td>
-                                                <td>{c.info.age}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Clan:</td>
-                                                <td>{c.info.clan}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Culture:</td>
-                                                <td>{c.info.culture}</td>
+                                                <td>{characteristics.age}</td>
                                             </tr>
                                             <tr>
                                                 <td>Occupation:</td>
                                                 <td>{c.info.occupation}</td>
                                             </tr>
                                             <tr>
-                                                <td>Parents:</td>
-                                                <td>{c.info.parent}</td>
+                                                <td>Residence:</td>
+                                                <td>{c.info.residence}</td>
                                             </tr>
                                             <tr>
-                                                <td>Religion:</td>
-                                                <td>{c.info.religion}</td>
+                                                <td>Birthplace:</td>
+                                                <td>{c.info.birthplace}</td>
                                             </tr>
                                             <tr>
                                                 <td>Sex:</td>
                                                 <td>{c.info.sex}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Species:</td>
-                                                <td>{c.info.species}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Reputation:</td>
-                                                <td>{c.info.reputation}</td>
                                             </tr>
                                             </tbody>
                                         </Table>
@@ -128,78 +94,16 @@ const CharacterDetails = (props) => {
                                             <tbody>
                                             <tr>
                                                 <td>Hit points:</td>
-                                                <td>{bonuses.hitPoints.base}</td>
-                                                <td>{hitPoints.base}</td>
+                                                <td>{bonuses.hitPoints}</td>
+                                                <td>{hitPoints}</td>
                                                 <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="base"/>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Head:</td>
-                                                <td>{bonuses.hitPoints.head}</td>
-                                                <td>{hitPoints.head}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="head"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Right arm:</td>
-                                                <td>{bonuses.hitPoints.rarm}</td>
-                                                <td>{hitPoints.rarm}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rarm"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Left arm:</td>
-                                                <td>{bonuses.hitPoints.larm}</td>
-                                                <td>{hitPoints.larm}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="larm"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Chest:</td>
-                                                <td>{bonuses.hitPoints.chest}</td>
-                                                <td>{hitPoints.chest}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="chest"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Abdomen:</td>
-                                                <td>{bonuses.hitPoints.abdomen}</td>
-                                                <td>{hitPoints.abdomen}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM}
-                                                               loc="abdomen"/></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Right leg:</td>
-                                                <td>{bonuses.hitPoints.rleg}</td>
-                                                <td>{hitPoints.rleg}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="rleg"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Left leg:</td>
-                                                <td>{bonuses.hitPoints.lleg}</td>
-                                                <td>{hitPoints.lleg}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="lleg"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td>Magic points:</td>
-                                                <td>{bonuses.magicPoints.base}</td>
+                                                <td>{bonuses.magicPoints}</td>
+                                                <td>{magicPoints}</td>
                                                 <td></td>
-                                            </tr>
-                                            <RunePool {...props} pool="1" characterId={c.name} isGM={isGM}
-                                                      rptotal={characteristics.rp1Total}
-                                                      rpcurrent={characteristics.rp1Current}/>
-                                            <RunePool {...props} pool="2" characterId={c.name} isGM={isGM}
-                                                      rptotal={characteristics.rp2Total}
-                                                      rpcurrent={characteristics.rp2Current}/>
-                                            <RunePool {...props} pool="3" characterId={c.name} isGM={isGM}
-                                                      rptotal={characteristics.rp3Total}
-                                                      rpcurrent={characteristics.rp3Current}/>
-                                            <tr>
-                                                <td>Hero Points:</td>
-                                                <td></td>
-                                                <td>{characteristics.heroPoints}</td>
                                             </tr>
                                             </tbody>
                                         </Table>
@@ -210,7 +114,7 @@ const CharacterDetails = (props) => {
                                 <Panel className="shadowPanel" bsSize="small">
                                     <Panel.Heading>Characteristics</Panel.Heading>
                                     <Panel.Body>
-                                        <Characteristics characteristics={characteristics} owner={isOwner} xp={c.xp}
+                                        <Characteristics characteristics={characteristics} bonuses={bonuses} owner={isOwner}
                                                          xpRollsAllowed={xpRollsAllowed} isGM={isGM}/>
                                     </Panel.Body>
                                 </Panel>
@@ -221,7 +125,7 @@ const CharacterDetails = (props) => {
                                 <Panel className="shadowPanel">
                                     <Panel.Heading>Skills</Panel.Heading>
                                     <Panel.Body>
-                                        <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp}
+                                        <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner}
                                                         xpRollsAllowed={xpRollsAllowed} isGM={isGM}/>
                                     </Panel.Body>
                                 </Panel>
@@ -230,8 +134,7 @@ const CharacterDetails = (props) => {
                                 <Panel className="shadowPanel">
                                     <Panel.Heading>Skills</Panel.Heading>
                                     <Panel.Body>
-                                        <SkillsPanelTwo skills={skills} bonuses={bonuses} owner={isOwner} hasXp={hasXp}
-                                                        xpRollsAllowed={xpRollsAllowed} isGM={isGM}/>
+
                                     </Panel.Body>
                                 </Panel>
                             </Col>
@@ -239,8 +142,8 @@ const CharacterDetails = (props) => {
                                 <Panel className="shadowPanel">
                                     <Panel.Heading>Weapons</Panel.Heading>
                                     <Panel.Body>
-                                        <WeaponsPanel weapons={weapons} weaponskills={weaponskills} bonuses={bonuses}
-                                                      owner={isOwner} hasXp={hasXp} xpRollsAllowed={xpRollsAllowed}
+                                        <WeaponsPanel weapons={weapons} bonuses={bonuses}
+                                                      owner={isOwner} xpRollsAllowed={xpRollsAllowed}
                                                       isGM={isGM}/>
                                     </Panel.Body>
                                 </Panel>
@@ -250,8 +153,8 @@ const CharacterDetails = (props) => {
                             <Col>
                                 <Panel>
                                     <Panel.Body>
-                                        <Button disabled={authorizationLevel !== 1}
-                                                href={"/chars/" + char.characterId + "/update/"}>Update
+                                        <Button disabled={authorizationLevel !== 10}
+                                                href={"/cthulhu/chars/" + char.characterId + "/update/"}>Update
                                             character</Button>
                                     </Panel.Body>
                                 </Panel>

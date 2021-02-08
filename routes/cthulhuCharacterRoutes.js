@@ -1,5 +1,6 @@
 const _ = require("lodash")
 const mongoose = require("mongoose")
+const { v4: uuidv4 } = require('uuid');
 
 const Character = mongoose.model("cthulhu-characters")
 
@@ -17,7 +18,7 @@ module.exports = (app) => {
             await Character(existingCharacter).save()
         } else {
             await Character({
-                characterId: req.body.name.trim(),
+                characterId: uuidv4(),
                 ownerId: req.user.googleId,
                 character: req.body
             }).save()
@@ -27,6 +28,7 @@ module.exports = (app) => {
 
     app.get("/api/cthulhu/chars/:id", async (req, res) => {
         const character = await Character.findOne({characterId: req.params.id})
+        console.log(character)
         res.send(character)
     })
 

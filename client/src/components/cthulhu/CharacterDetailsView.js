@@ -12,19 +12,19 @@ import '../common.css';
 class CharacterDetailsView extends Component {
 
     componentDidMount() {
-        this.props.getOneChar(this.props.match.params.characterId);
-        this.props.getAllChars();
-        this.interval = setInterval(() => this.props.selectedChar && this.props.getOneChar(this.props.selectedChar.characterId), 10000);
+        this.props.cthulhuGetOneChar(this.props.match.params.characterId);
+        this.props.cthulhuGetAllChars();
+        this.interval = setInterval(() => this.props.selectedCthulhuChar && this.props.cthulhuGetOneChar(this.props.selectedCthulhuChar.characterId), 10000);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval)
     }
 
-    rivit = () => this.props.characters && this.props.characters.map(char =>
-        <LinkContainer key={char.characterId} to={"/chars/" + char.characterId}>
+    rivit = () => this.props.cthulhuCharacters && this.props.cthulhuCharacters.map(char =>
+        <LinkContainer key={char.characterId} to={"/cthulhu/chars/" + char.characterId}>
             <ListGroupItem onClick={() => this.props.getOneChar(char.characterId)}
-                           active={this.props.selectedChar && char.characterId === this.props.selectedChar.characterId}>
+                           active={this.props.selectedCthulhuChar && char.characterId === this.props.selectedCthulhuChar.characterId}>
                 {char.characterId}
             </ListGroupItem>
         </LinkContainer>);
@@ -43,19 +43,19 @@ class CharacterDetailsView extends Component {
                                 <ListGroup>
                                     {this.rivit()}
                                 </ListGroup>
-                                <Button href="/new_char">Create new character</Button>
+                                <Button href="/cthulhu/new_char">Create new character</Button>
                             </Col>
                             <Col xs={12} md={10} lg={10}>
                                 <Tabs defaultActiveKey={1} id="tabsMenu" animation={false}>
                                     <Tab eventKey={1} title="Details">
-                                        <CharacterDetails char={this.props.selectedChar} auth={this.props.auth}
+                                        <CharacterDetails char={this.props.selectedCthulhuChar} auth={this.props.auth}
                                                           params={this.props.params}/>
                                     </Tab>
                                     <Tab eventKey={2} title="Stuff">
-                                        <CharacterStuff char={this.props.selectedChar} auth={this.props.auth}/>
+                                        <CharacterStuff char={this.props.selectedCthulhuChar} auth={this.props.auth}/>
                                     </Tab>
                                     <Tab eventKey={3} title="Notes">
-                                        <CharacterNotes char={this.props.selectedChar} auth={this.props.auth}
+                                        <CharacterNotes char={this.props.selectedCthulhuChar} auth={this.props.auth}
                                                         enableReinitialize/>
                                     </Tab>
                                 </Tabs>
@@ -67,8 +67,8 @@ class CharacterDetailsView extends Component {
     }
 }
 
-function mapStateToProps({selectedChar, characters, auth, params}) {
-    return {selectedChar, characters, auth, params}
+function mapStateToProps({selectedCthulhuChar, cthulhuCharacters, auth, params}) {
+    return {selectedCthulhuChar, cthulhuCharacters, auth, params}
 }
 
 export default connect(mapStateToProps, actions)(CharacterDetailsView);

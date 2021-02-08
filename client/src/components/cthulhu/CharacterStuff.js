@@ -172,9 +172,9 @@ const SpellRows = (spells, bonus) => {
 }
 
 
-function mapStateToProps({selectedChar}) {
-    if (selectedChar) {
-        return {selectedChar: selectedChar}
+function mapStateToProps({selectedCthulhuChar}) {
+    if (selectedCthulhuChar) {
+        return {selectedCthulhuChar: selectedCthulhuChar}
     } else return {}
 }
 
