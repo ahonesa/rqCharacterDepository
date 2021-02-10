@@ -77,27 +77,24 @@ module.exports = (app) => {
         } else res.status(400).end("NOK")
     })
 
-    app.post("/api/cthulhu/chars/:id/rp", async (req, res) => {
+    app.post("/api/cthulhu/chars/:id/:counter", async (req, res) => {
         const character = await Character.findOne({'character.characterId': req.params.id})
-
-        console.log(req.body.pool)
-
+        console.log(character)
         const char = _.get(character, 'character')
         const characteristics = _.get(char, 'characteristics', {})
-        let currentRunepoints = _.get(characteristics, req.body.pool+"Current", {})
-        const totalRunepoints = _.get(characteristics, req.body.pool+"Total", {})
 
-        currentRunepoints = currentRunepoints + req.body.adj
-
-        console.log(currentRunepoints)
-
-        if(currentRunepoints >= 0 && currentRunepoints <= totalRunepoints) {
-            _.set(character, "character.characteristics." + req.body.pool + "Current", currentRunepoints)
+        console.log(req.params)
+        if(characteristics.hasOwnProperty(req.params.counter) && Number.isInteger(characteristics[req.params.counter])) {
+            characteristics[req.params.counter] += req.body.adj
+        } else {
+            characteristics[req.params.counter] = 0;
         }
+
+        console.log(characteristics)
+        _.set(character, "character.characteristics", characteristics)
 
         const result = await Character(character).save()
         res.send(result)
-
     })
 
 }

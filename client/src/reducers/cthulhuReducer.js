@@ -1,4 +1,5 @@
 import {
+    CTHULHU_COUNTER_UPDATE,
     CTHULHU_GET_ALL_CHARS,
     CTHULHU_GET_ONE_CHAR,
     CTHULHU_SKILL_XP_AWARD,
@@ -22,6 +23,8 @@ export function oneCthulhuCharReducer(state = null, action) {
         case CTHULHU_SKILL_XP_ROLL:
             return action.payload || false
         case CTHULHU_SKILL_XP_AWARD:
+            return action.payload || false
+        case CTHULHU_COUNTER_UPDATE:
             return action.payload || false
         default:
             return state

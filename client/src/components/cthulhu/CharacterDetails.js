@@ -9,11 +9,11 @@ import calculateModifiers from './characters/StatBonuses'
 import '../common.css'
 import * as actions from "../../actions"
 
-const HpButtons = (props) => {
+const CounterAdjButtons = (props) => {
     if (!props.isGM) return <div></div>
     return (<div>
-        <Button bsSize="xsmall" onClick={() => props.hpUpdate(props.characterId, props.loc, -1)}>-1</Button>
-        <Button bsSize="xsmall" onClick={() => props.hpUpdate(props.characterId, props.loc, +1)}>+1</Button>
+        <Button bsSize="xsmall" onClick={() => props.cthulhuCounterUpdate(props.characterId, props.counter, -1)}>-1</Button>
+        <Button bsSize="xsmall" onClick={() => props.cthulhuCounterUpdate(props.characterId, props.counter, +1)}>+1</Button>
     </div>)
 }
 
@@ -94,43 +94,67 @@ const CharacterDetails = (props) => {
                                                 <td>Hit points:</td>
                                                 <td>{bonuses.hitPoints}</td>
                                                 <td>{hitPoints}</td>
-                                                <td><HpButtons {...props} characterId={c.name} isGM={isGM} loc="base"/>
+                                                <td><CounterAdjButtons {...props} characterId={c.characterId} isGM={isGM} counter="hit_points"/>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Magic points:</td>
                                                 <td>{bonuses.magicPoints}</td>
                                                 <td>{magicPoints}</td>
-                                                <td></td>
+                                                <td><CounterAdjButtons {...props} characterId={c.characterId} isGM={isGM} counter="magic_points"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Luck:</td>
                                                 <td>{characteristics.luck_org}</td>
                                                 <td>{characteristics.luck}</td>
-                                                <td/>
+                                                <td><CounterAdjButtons {...props} characterId={c.characterId} isGM={isGM} counter="luck"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Sanity:</td>
                                                 <td>{characteristics.sanity_org}</td>
                                                 <td>{characteristics.sanity}</td>
-                                                <td/>
+                                                <td><CounterAdjButtons {...props} characterId={c.characterId} isGM={isGM} counter="sanity"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Major wound:</td>
                                                 <td></td>
                                                 <td>{characteristics.major_wound}</td>
-                                                <td/>
+                                                <td><CounterAdjButtons {...props} characterId={c.characterId} isGM={isGM} counter="major_wound"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Temporarily insane:</td>
                                                 <td></td>
                                                 <td>{characteristics.temp_insane}</td>
-                                                <td/>
+                                                <td><CounterAdjButtons {...props} characterId={c.characterId} isGM={isGM} counter="temp_insane"/>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Indefinitely insane:</td>
                                                 <td></td>
                                                 <td>{characteristics.indef_insane}</td>
+                                                <td><CounterAdjButtons {...props} characterId={c.characterId} isGM={isGM} counter="indef_insane"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Movement rate:</td>
+                                                <td></td>
+                                                <td>{bonuses.movementRate}</td>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                                <td>Build:</td>
+                                                <td></td>
+                                                <td>{bonuses.build}</td>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                                <td>Damage modifier:</td>
+                                                <td></td>
+                                                <td>{bonuses.damageModifier}</td>
                                                 <td/>
                                             </tr>
                                             </tbody>
@@ -178,7 +202,7 @@ const CharacterDetails = (props) => {
                                 <Panel className="shadowPanel">
                                     <Panel.Heading>Weapons</Panel.Heading>
                                     <Panel.Body>
-                                        <WeaponsPanel weapons={weapons} bonuses={bonuses}
+                                        <WeaponsPanel weapons={weapons} skills={skills} additionalSkills={additionalSkills} bonuses={bonuses}
                                                       owner={isOwner} xpRollsAllowed={xpRollsAllowed}
                                                       isGM={isGM}/>
                                     </Panel.Body>

@@ -23,27 +23,26 @@ const xpButton = (characterId, skill, props) => {
 }
 
 
-const WeaponGroups = (skills, weapons, props, bonuses) => {
+const WeaponGroups = (weapons, props, bonuses) => {
 
   return weapons.map(weapon => {
-    const skill = _.find(skills, { 'skill': weapon.skill });
-    const xp = _.get(skill, "xp", 0)
+    const skill = _.find(props.skills, { 'skill': weapon.skill });
     const value = _.get(skill, "value", null)
-    const xpEnabled = value && props.owner && (props.hasXp || xp > 0) && props.xpRollsAllowed
 
     return (<Panel key={weapon._id}>
       <Panel.Body>
         <Table condensed responsive>
           <thead>
-            <tr><th>{weapon.skill.split(".")[1]} {xpBadge(xp)}</th><th>{bonuses.manipulationModifier > 0? "+": ""}{bonuses.manipulationModifier}</th><th className="xpColumn"></th></tr>
+            <tr><th>{weapon.weapon}</th><th/><th className="xpColumn"/></tr>
           </thead>
           <tbody>
-          <tr><td>skill:</td><td>{value && (parseInt(value) + bonuses.manipulationModifier)}</td><td className="xpColumn">{xpButton(props.selectedChar.characterId, skill, props)}</td></tr>
-          <tr><td>weapon:</td><td>{weapon.weapon}</td><td className="xpColumn"></td></tr>
-          <tr><td>damage:</td><td>{weapon.damage}</td><td className="xpColumn"></td></tr>
-            <tr><td>sr:</td><td>{weapon.sr}</td><td className="xpColumn"></td></tr>
-            <tr><td>armor:</td><td>{weapon.armor}</td><td className="xpColumn"></td></tr>
-            <tr><td>type:</td><td>{weapon.weaponType}</td><td className="xpColumn"></td></tr>
+          <tr><td>skill:</td><td/><td className="xpColumn"></td></tr>
+          <tr><td>weapon :</td><td>{weapon.weapon}</td><td className="xpColumn"></td></tr>
+          <tr><td>damage :</td><td>{weapon.damage}</td><td className="xpColumn"></td></tr>
+          <tr><td>range  :</td><td>{weapon.range}</td><td className="xpColumn"></td></tr>
+          <tr><td>attacks:</td><td>{weapon.attacks}</td><td className="xpColumn"></td></tr>
+          <tr><td>ammo   :</td><td>{weapon.ammo}</td><td className="xpColumn"></td></tr>
+          <tr><td>malfunc:</td><td>{weapon.malfunction}</td><td className="xpColumn"></td></tr>
           </tbody>
         </Table>
       </Panel.Body>
@@ -59,11 +58,10 @@ const mapStateToProps = ({ selectedChar }) => {
 
 export const WeaponsPanel = connect(mapStateToProps, actions)((props) => {
   const bonuses = _.get(props, "bonuses.bonuses", {})
-  if (props.weaponskills && props.weapons) {
-    const weaponskills = props.weaponskills;
+  if (props.weapons) {
     const weapons = props.weapons;
     return (<div>
-      {WeaponGroups(weaponskills, weapons, props, bonuses)}
+      {WeaponGroups(weapons, props, bonuses)}
     </div>);
   } else {
     return <div />;

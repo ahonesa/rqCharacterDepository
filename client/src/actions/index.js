@@ -24,7 +24,8 @@ import {
     CTHULHU_SKILL_XP_ROLL,
     CTHULHU_CREATE_CHAR,
     CTHULHU_GET_ONE_CHAR,
-    CTHULHU_GET_ALL_CHARS
+    CTHULHU_GET_ALL_CHARS,
+    CTHULHU_COUNTER_UPDATE
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -160,6 +161,10 @@ export const cthulhuSkillXpAward = (characterId, skill) => async dispatch => {
     await dispatch({ type: CTHULHU_SKILL_XP_AWARD, payload: res.data });
 };
 
+export const cthulhuCounterUpdate = (characterId, counter, adj) => async dispatch => {
+    const res = await axios.post("/api/cthulhu/chars/" + characterId + "/" + counter, { adj: adj });
+    await dispatch({ type: CTHULHU_COUNTER_UPDATE, payload: res.data });
+};
 
 export const logout = () => async dispatch => {
     const res = await axios.get("/api/logout");

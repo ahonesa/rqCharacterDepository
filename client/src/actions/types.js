@@ -24,3 +24,4 @@ export const CTHULHU_GET_ONE_CHAR = 'cthulhu_get_one_char';
 export const CTHULHU_CREATE_CHAR = 'cthulhu_create_char';
 export const CTHULHU_SKILL_XP_ROLL = 'cthulhu_skill_xp_roll';
 export const CTHULHU_SKILL_XP_AWARD = 'cthulhu_skill_xp_award';
+export const CTHULHU_COUNTER_UPDATE = 'cthulhu_counter_update';

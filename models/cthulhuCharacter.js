@@ -37,9 +37,9 @@ const cthulhuSchema = new Schema({
             sanity_org: Number,
             hit_points: Number,
             magic_points: Number,
-            major_wound: Boolean,
-            temp_insane: Boolean,
-            indef_insane: Boolean
+            major_wound: Number,
+            temp_insane: Number,
+            indef_insane: Number
         },
         skills: {
             accounting: {
