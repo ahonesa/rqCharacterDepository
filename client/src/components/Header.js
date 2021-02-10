@@ -6,14 +6,8 @@ import * as actions from "../actions"
 
 class Header extends Component {
     renderContent() {
-        console.log("HEADER PROPS: " + this.props.selectedChar)
-
         const cthulhu = this.props.selectedCthulhuChar ? "/cthulhu/chars/" + this.props.selectedCthulhuChar.characterId : "/cthulhu/chars"
-
         const char = this.props.selectedChar ? "/chars/" + this.props.selectedChar.characterId : "/chars"
-
-        console.log("CTHULHU: " + cthulhu)
-        console.log("CHAR: " + char)
 
         switch (this.props.auth) {
             case null:

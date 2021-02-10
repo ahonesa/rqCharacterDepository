@@ -3,7 +3,7 @@ import React, {Component} from "react"
 import {reduxForm, Field} from "redux-form"
 import {ReduxFormGroup, ReduxRadio} from '../../fields/Fields'
 import {FormGroup, Button, Row, Col, Label} from "react-bootstrap"
-import {isRequired, isString} from "./validation"
+import {isRequired, isString, isNumber} from "./validation"
 
 const ADDITIONAL_FIELDS = [
     {label: "Occupation", name: "occupation", type: "text"},
@@ -30,6 +30,8 @@ class CharacterFormPageOne extends Component {
                 <Col>
                     <form onSubmit={handleSubmit}>
                         <ReduxFormGroup label="Character Name" name="name" validate={[isRequired, isString]}/>
+                        <ReduxFormGroup label="Character Id" name="characterId" validate={[isString]}/>
+                        <ReduxFormGroup type="number"  label="Age" name="characteristics.ages"/>
                         <FormGroup>
                             <label>Sex</label>
                             <Field name="info.sex" component={ReduxRadio} type="radio" label="male" value="male"/>

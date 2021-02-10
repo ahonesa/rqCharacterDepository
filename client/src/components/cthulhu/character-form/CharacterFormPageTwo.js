@@ -3,6 +3,7 @@ import React, {Component} from "react"
 import {reduxForm} from "redux-form"
 import {ReduxFormGroup} from '../../fields/Fields'
 import {Button, Col, Label, Row} from "react-bootstrap"
+import {isNumber, isRequired} from "./validation";
 
 const CHARACTERISTICS_FIELDS = [
     {label: "STR", name: "str"},

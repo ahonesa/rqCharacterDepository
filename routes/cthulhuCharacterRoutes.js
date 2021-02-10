@@ -12,13 +12,14 @@ module.exports = (app) => {
     })
 
     app.post("/api/cthulhu/chars", async (req, res) => {
-        const existingCharacter = await Character.findOne({characterId: req.body.characterId})
+        const existingCharacter = await Character.findOne({'character.characterId': req.body.characterId})
+        console.log(req.body)
         if (existingCharacter) {
             existingCharacter.character = req.body
             await Character(existingCharacter).save()
         } else {
+            character.characterId = uuidv4()
             await Character({
-                characterId: uuidv4(),
                 ownerId: req.user.googleId,
                 character: req.body
             }).save()
@@ -27,13 +28,12 @@ module.exports = (app) => {
     })
 
     app.get("/api/cthulhu/chars/:id", async (req, res) => {
-        const character = await Character.findOne({characterId: req.params.id})
-        console.log(character)
+        const character = await Character.findOne({'character.characterId': req.params.id})
         res.send(character)
     })
 
     app.post("/api/cthulhu/chars/:id/xp_skill/:skill", async (req, res) => {
-        const character = await Character.findOne({characterId: req.params.id})
+        const character = await Character.findOne({'character.characterId': req.params.id})
         const char = _.get(character, 'character')
         const skills = _.get(character, 'character.skills')
         const skill = _.find(skills, {'skill': req.params.skill})
@@ -62,7 +62,7 @@ module.exports = (app) => {
     })
 
     app.post("/api/cthulhu/chars/:id/xp_skill_award/:skill", async (req, res) => {
-        const character = await Character.findOne({characterId: req.params.id})
+        const character = await Character.findOne({'character.characterId': req.params.id})
         const char = _.get(character, 'character')
         const skills = _.get(character, 'character.skills')
         const skill = _.find(skills, {'skill': req.params.skill})
@@ -78,7 +78,7 @@ module.exports = (app) => {
     })
 
     app.post("/api/cthulhu/chars/:id/rp", async (req, res) => {
-        const character = await Character.findOne({characterId: req.params.id})
+        const character = await Character.findOne({'character.characterId': req.params.id})
 
         console.log(req.body.pool)
 

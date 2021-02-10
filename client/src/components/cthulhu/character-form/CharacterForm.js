@@ -21,7 +21,7 @@ class CharacterForm extends Component {
             page: 1
         }
         const vara = _.get(this.props, 'match.params.characterId', "")
-        vara && this.props.cthulhuGetOneChar(this.props.match.params.characterId);
+        vara && this.props.cthulhuGetOneChar(vara);
     }
 
     nextPage(values) {
@@ -35,6 +35,8 @@ class CharacterForm extends Component {
 
     render() {
         const onSubmit = (values) => {
+            const vara = _.get(this.props, 'match.params.characterId', "")
+            values.characterId = vara
             this.props.cthulhuCreateChar(values)
             this.props.history.push('/cthulhu/chars');
         };
@@ -100,9 +102,9 @@ class CharacterForm extends Component {
     }
 }
 
-function mapStateToProps({selectedChar, auth}) {
-    if (selectedChar) {
-        return {initialValues: selectedChar.character, auth: auth}
+function mapStateToProps({selectedCthulhuChar, auth}) {
+    if (selectedCthulhuChar) {
+        return {initialValues: selectedCthulhuChar.character, auth: auth}
     } else return {auth: auth};
 }
 

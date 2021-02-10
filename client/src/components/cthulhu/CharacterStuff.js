@@ -33,10 +33,6 @@ class CharacterStuff extends Component {
         const authorizationLevel = auth && auth.authorizationLevel
         const userId = auth && auth.googleId
         const isOwner = ownerId === userId
-        const hasXp = c.xp > 0
-
-        console.log(stuff)
-        console.log(armor)
 
         return (
             <Panel bsSize="small">

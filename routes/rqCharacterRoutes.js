@@ -174,8 +174,6 @@ module.exports = (app) => {
 
     app.post("/api/chars/:id/pow_gain", async (req, res) => {
         const character = await Character.findOne({characterId: req.params.id})
-
-        console.log(character)
         const pow = _.get(character, 'character.characteristics.pow', NaN)
         const pow_max = _.get(character, 'character.characteristics.pow_max', NaN)
         const maxPowForGain = _.get(character, 'character.characteristics.maxPowForGain', NaN)
@@ -227,7 +225,6 @@ module.exports = (app) => {
         console.log(_.get(currentHitpoints, req.body.loc))
 
         if (typeof _.get(currentHitpoints, req.body.loc) === "number") {
-            console.log("testi")
             currentHitpoints[req.body.loc] += req.body.adj
             if (currentHitpoints[req.body.loc] > bonuses.hitPoints[req.body.loc]) currentHitpoints[req.body.loc] = bonuses.hitPoints[req.body.loc]
         } else {
@@ -247,16 +244,12 @@ module.exports = (app) => {
     app.post("/api/chars/:id/rp", async (req, res) => {
         const character = await Character.findOne({characterId: req.params.id})
 
-        console.log(req.body.pool)
-
         const char = _.get(character, 'character')
         const characteristics = _.get(char, 'characteristics', {})
         let currentRunepoints = _.get(characteristics, req.body.pool+"Current", {})
         const totalRunepoints = _.get(characteristics, req.body.pool+"Total", {})
 
         currentRunepoints = currentRunepoints + req.body.adj
-
-        console.log(currentRunepoints)
 
         if(currentRunepoints >= 0 && currentRunepoints <= totalRunepoints) {
             _.set(character, "character.characteristics." + req.body.pool + "Current", currentRunepoints)

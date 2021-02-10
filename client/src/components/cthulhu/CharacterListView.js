@@ -12,8 +12,7 @@ class CharacterListView extends Component {
     }
 
     rivit = () => this.props.cthulhuCharacters && this.props.cthulhuCharacters.map(char => {
-        console.log(this.props.cthulhuCharacters)
-        return (<LinkContainer key={char.characterId} to={"/cthulhu/chars/" + char.characterId}>
+        return (<LinkContainer key={char.character.characterId} to={"/cthulhu/chars/" + char.character.characterId}>
             <ListGroupItem>{char.character.name}</ListGroupItem>
         </LinkContainer>);
     })

@@ -39,12 +39,9 @@ const CharacterDetails = (props) => {
             const isGM = authorizationLevel === 10
             const xpRollsAllowed = params && params.cthulhuXpRollsAllowed
 
-            console.log(char)
-            console.log(bonuses)
-
             return (
                 <Panel bsSize="small">
-                    <Panel.Heading componentClass="h4" style={{marginTop: "0px"}}>{char.characterId}
+                    <Panel.Heading componentClass="h4" style={{marginTop: "0px"}}>{char.character.name}
                         <Badge>{c.xp}</Badge></Panel.Heading>
                     <Panel.Body>
                         <Row>
@@ -56,7 +53,7 @@ const CharacterDetails = (props) => {
                                             <tbody>
                                             <tr>
                                                 <td>Age:</td>
-                                                <td>{characteristics.age}</td>
+                                                <td>{characteristics.ages}</td>
                                             </tr>
                                             <tr>
                                                 <td>Occupation:</td>
@@ -104,6 +101,36 @@ const CharacterDetails = (props) => {
                                                 <td>{bonuses.magicPoints}</td>
                                                 <td>{magicPoints}</td>
                                                 <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Luck:</td>
+                                                <td>{characteristics.luck_org}</td>
+                                                <td>{characteristics.luck}</td>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                                <td>Sanity:</td>
+                                                <td>{characteristics.sanity_org}</td>
+                                                <td>{characteristics.sanity}</td>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                                <td>Major wound:</td>
+                                                <td></td>
+                                                <td>{characteristics.major_wound}</td>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                                <td>Temporarily insane:</td>
+                                                <td></td>
+                                                <td>{characteristics.temp_insane}</td>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                                <td>Indefinitely insane:</td>
+                                                <td></td>
+                                                <td>{characteristics.indef_insane}</td>
+                                                <td/>
                                             </tr>
                                             </tbody>
                                         </Table>
@@ -154,7 +181,7 @@ const CharacterDetails = (props) => {
                                 <Panel>
                                     <Panel.Body>
                                         <Button disabled={authorizationLevel !== 10}
-                                                href={"/cthulhu/chars/" + char.characterId + "/update/"}>Update
+                                                href={"/cthulhu/chars/" + char.character.characterId + "/update/"}>Update
                                             character</Button>
                                     </Panel.Body>
                                 </Panel>

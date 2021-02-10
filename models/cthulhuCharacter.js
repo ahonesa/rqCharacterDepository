@@ -3,8 +3,8 @@ const {Schema} = mongoose
 
 const cthulhuSchema = new Schema({
     ownerId: String,
-    characterId: String,
     character: {
+        characterId: String,
         name: String,
         notes: String,
         info: {
@@ -14,7 +14,7 @@ const cthulhuSchema = new Schema({
             birthplace: String
         },
         characteristics: {
-            age: Number,
+            ages: Number,
             str: Number,
             dex: Number,
             int: Number,

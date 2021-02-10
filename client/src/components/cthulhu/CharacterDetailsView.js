@@ -14,7 +14,7 @@ class CharacterDetailsView extends Component {
     componentDidMount() {
         this.props.cthulhuGetOneChar(this.props.match.params.characterId);
         this.props.cthulhuGetAllChars();
-        this.interval = setInterval(() => this.props.selectedCthulhuChar && this.props.cthulhuGetOneChar(this.props.selectedCthulhuChar.characterId), 10000);
+        this.interval = setInterval(() => this.props.selectedCthulhuChar && this.props.cthulhuGetOneChar(this.props.selectedCthulhuChar.character.characterId), 10000);
     }
 
     componentWillUnmount() {
@@ -25,7 +25,7 @@ class CharacterDetailsView extends Component {
         <LinkContainer key={char.characterId} to={"/cthulhu/chars/" + char.characterId}>
             <ListGroupItem onClick={() => this.props.getOneChar(char.characterId)}
                            active={this.props.selectedCthulhuChar && char.characterId === this.props.selectedCthulhuChar.characterId}>
-                {char.characterId}
+                {char.character.name}
             </ListGroupItem>
         </LinkContainer>);
 
