@@ -3,7 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Badge, Button, Col, Panel, Row, Table} from 'react-bootstrap'
 import {Characteristics} from './character-details/Characteristics'
-import {SkillsPanelOne} from './character-details/Skills'
+import {SkillsPanel, AdditionalSkillsPanel} from './character-details/Skills'
 import {WeaponsPanel} from './character-details/Weapons'
 import calculateModifiers from './characters/StatBonuses'
 import '../common.css'
@@ -30,6 +30,7 @@ const CharacterDetails = (props) => {
             const characteristics = _.get(char, "character.characteristics", {})
             const bonuses = characteristics && calculateModifiers(characteristics)
             const skills = _.get(char, "character.skills", {})
+            const additionalSkills = _.get(char, "character.additional_skills", {})
             const weapons = _.get(char, "character.weapons", {})
             const hitPoints = _.get(characteristics, "hit_points", 0)
             const magicPoints = _.get(characteristics, "magic_points", 0)
@@ -152,8 +153,8 @@ const CharacterDetails = (props) => {
                                 <Panel className="shadowPanel">
                                     <Panel.Heading>Skills</Panel.Heading>
                                     <Panel.Body>
-                                        <SkillsPanelOne skills={skills} bonuses={bonuses} owner={isOwner}
-                                                        xpRollsAllowed={xpRollsAllowed} isGM={isGM}/>
+                                        <SkillsPanel skills={skills} bonuses={bonuses} owner={isOwner}
+                                                        xpRollsAllowed={xpRollsAllowed} isGM={isGM} panelNbr={1} />
                                     </Panel.Body>
                                 </Panel>
                             </Col>
@@ -161,7 +162,15 @@ const CharacterDetails = (props) => {
                                 <Panel className="shadowPanel">
                                     <Panel.Heading>Skills</Panel.Heading>
                                     <Panel.Body>
-
+                                        <SkillsPanel skills={skills} bonuses={bonuses} owner={isOwner}
+                                                     xpRollsAllowed={xpRollsAllowed} isGM={isGM} panelNbr={2} />
+                                    </Panel.Body>
+                                </Panel>
+                                <Panel className="shadowPanel">
+                                    <Panel.Heading>Additional Skills</Panel.Heading>
+                                    <Panel.Body>
+                                        <AdditionalSkillsPanel additionalSkills={additionalSkills} bonuses={bonuses} owner={isOwner}
+                                                     xpRollsAllowed={xpRollsAllowed} isGM={isGM} panelNbr={2} />
                                     </Panel.Body>
                                 </Panel>
                             </Col>

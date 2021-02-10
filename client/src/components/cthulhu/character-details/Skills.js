@@ -4,14 +4,39 @@ import * as actions from "../../../actions";
 import { connect } from 'react-redux';
 import { Button, Table, Panel, Badge } from 'react-bootstrap';
 import './Skills.css';
+import {BASE_SKILLS} from '../characters/Skills';
 
-const SkillRows = (props, bonus) => {
-    console.log(props.skills)
-    Object.keys(props.skills).map(skill => {
+const skillRows = (props) => {
+
+    console.log(props)
+
+    if(props.panelNbr === 1) {
+        return Object.keys(props.skills).slice(0, 25).map(skill => {
+            const base = _.find(BASE_SKILLS, {'name': skill})
+            return (<tr key={skill}>
+                <td>{base.label}</td>
+                <td className="skillValueColumn">{props.skills[skill].value} {xpBadge(props.skills[skill].xp)}</td>
+                <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill, props)}</td>
+            </tr>)
+        })
+    } else {
+        return Object.keys(props.skills).slice(25).map(skill => {
+            const base = _.find(BASE_SKILLS, {'name': skill})
+            return (<tr key={skill}>
+                <td>{base.label}</td>
+                <td className="skillValueColumn">{props.skills[skill].value} {xpBadge(props.skills[skill].xp)}</td>
+                <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill, props)}</td>
+            </tr>)
+        })
+    }
+}
+
+const additionalSkillRows = (props) => {
+    return props.additionalSkills.map(skill => {
         return (<tr key={skill}>
-            <td>skill</td>
-            <td className="skillValueColumn">{props.skills.value} {xpBadge(props.skills.xp)}</td>
-            <td className="xpColumn">{xpButton(props.selectedCthulhuChar.characterId, skill, props)}</td>
+            <td>{skill.label}</td>
+            <td className="skillValueColumn">{skill.value} {xpBadge(skill.xp)}</td>
+            <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill.name, props)}</td>
         </tr>)
     })
 }
@@ -32,7 +57,7 @@ const xpBadge = (skillXp) => {
   if(skillXp && skillXp > 0) return <Badge>{skillXp}</Badge>;
 }
 
-const SkillGroups = (props, bonus) => {
+const SkillPanel = (props) => {
   return (
     <Panel>
       <Panel.Body>
@@ -41,7 +66,7 @@ const SkillGroups = (props, bonus) => {
             <tr><th>Skills</th><th className="skillValueColumn"></th><th className="xpColumn"></th></tr>
           </thead>
           <tbody>
-            {SkillRows(props, bonus)}
+            {skillRows(props)}
           </tbody>
         </Table>
       </Panel.Body>
@@ -49,20 +74,46 @@ const SkillGroups = (props, bonus) => {
   );
 }
 
-const mapStateToProps = ({ selectedCthulhuChar }) => {
-  if (selectedCthulhuChar) {
-    return { selectedCthulhuChar }
-  } else return {};
+const AdditionalSkillPanel = (props) => {
+    return (
+        <Panel>
+            <Panel.Body>
+                <Table condensed responsive>
+                    <thead>
+                    <tr><th>Skills</th><th className="skillValueColumn"></th><th className="xpColumn"></th></tr>
+                    </thead>
+                    <tbody>
+                    {additionalSkillRows(props)}
+                    </tbody>
+                </Table>
+            </Panel.Body>
+        </Panel>
+    );
 }
 
-export const SkillsPanelOne = connect(mapStateToProps, actions)((props) => {
-  const bonuses = _.get(props, "bonuses.bonuses", {})
-  if (props.skills && props.bonuses) {
+const mapStateToProps = ({ selectedCthulhuChar }) => {
+    if (selectedCthulhuChar) {
+        return { selectedCthulhuChar }
+    } else return {};
+}
+
+export const SkillsPanel = connect(mapStateToProps, actions)((props) => {
+  if (props.skills) {
     return (<div>
-      {SkillGroups(props, 0)}
+      {SkillPanel(props)}
     </div>);
   } else {
     return <div />;
   }
+});
+
+export const AdditionalSkillsPanel = connect(mapStateToProps, actions)((props) => {
+    if (props.additionalSkills) {
+        return (<div>
+            {AdditionalSkillPanel(props)}
+        </div>);
+    } else {
+        return <div />;
+    }
 });
 

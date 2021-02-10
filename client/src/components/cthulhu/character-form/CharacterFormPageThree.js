@@ -25,11 +25,15 @@ class CharacterFormPageThree extends Component {
                             <ListGroupItem key={index}>
                                 <Row>
                                     <Col xs={4} md={4}>
-                                        <ReduxFormGroup name={`${member}.skill`} label="Skill"
+                                        <ReduxFormGroup name={`${member}.name`} label="Skill"
                                                         validate={[isRequired]}/>
                                     </Col>
                                     <Col xs={4} md={4}>
-                                        <ReduxFormGroup name={`${member}.value`} label="Skill"
+                                        <ReduxFormGroup name={`${member}.label`} label="Label"
+                                                        validate={[isRequired]}/>
+                                    </Col>
+                                    <Col xs={4} md={4}>
+                                        <ReduxFormGroup name={`${member}.value`} label="Value"
                                                         validate={[isRequired, isNumber]}/>
                                     </Col>
                                     <Col xs={4} md={4}>

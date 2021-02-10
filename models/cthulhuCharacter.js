@@ -217,7 +217,8 @@ const cthulhuSchema = new Schema({
         },
         additional_skills: [
             {
-                skill: String,
+                name: String,
+                label: String,
                 value: Number,
                 xp: Number
             }
