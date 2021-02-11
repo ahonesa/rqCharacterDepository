@@ -36,17 +36,28 @@ module.exports = (app) => {
         const character = await Character.findOne({'character.characterId': req.params.id})
         const char = _.get(character, 'character')
         const skills = _.get(character, 'character.skills')
+        const additionalSkills = _.get(character, 'character.additional_skills')
         const skill = req.params.skill
+        const addSkill = _.find(additionalSkills, {'name': skill})
 
         const roll = Math.floor((Math.random() * 100) + 1)
         const increase = Math.floor((Math.random() * 10) + 1)
 
-        if (char && skills && skill && (skills[skill].xp > 0)) {
+        if (char && skills && skill && skills.hasOwnProperty(skill) && (skills[skill].xp > 0)) {
             if (roll > skills[skill].value) {
                 character.character.skills[skill].value += increase
-
             }
             character.character.skills[skill].xp--
+            const result = await Character(character).save()
+            res.send(result)
+        } else if (char && additionalSkills && addSkill && (addSkill.xp > 0 || !addSkill.xp)) {
+            _.remove(character.character.additional_skills, {'name': addSkill.name})
+            if (roll > addSkill.value) {
+                addSkill.value += increase
+            }
+            addSkill.xp--
+            character.character.additional_skills.push(addSkill)
+            character.character.additional_skills.sort()
             const result = await Character(character).save()
             res.send(result)
         } else res.status(400).end("NOK")
@@ -57,9 +68,18 @@ module.exports = (app) => {
         const char = _.get(character, 'character')
         const skills = _.get(character, 'character.skills')
         const skill = req.params.skill
+        const additionalSkills = _.get(character, 'character.additional_skills')
+        const addSkill = _.find(additionalSkills, {'name': skill})
 
         if (char && skills && skills.hasOwnProperty(skill) && (!skills[skill].xp || skills[skill].xp < 1)) {
             character.character.skills[skill].xp = 1
+            const result = await Character(character).save()
+            res.send(result)
+        } else if (char && additionalSkills && addSkill && (!addSkill.xp || addSkill.xp < 1)) {
+            _.remove(character.character.additional_skills, {'name': addSkill.name})
+            addSkill.xp = 1
+            character.character.additional_skills.push(addSkill)
+            character.character.additional_skills.sort()
             const result = await Character(character).save()
             res.send(result)
         } else res.status(400).end("NOK")
@@ -67,18 +87,15 @@ module.exports = (app) => {
 
     app.post("/api/cthulhu/chars/:id/:counter", async (req, res) => {
         const character = await Character.findOne({'character.characterId': req.params.id})
-        console.log(character)
         const char = _.get(character, 'character')
         const characteristics = _.get(char, 'characteristics', {})
 
-        console.log(req.params)
         if(characteristics.hasOwnProperty(req.params.counter) && Number.isInteger(characteristics[req.params.counter])) {
             characteristics[req.params.counter] += req.body.adj
         } else {
             characteristics[req.params.counter] = 0;
         }
 
-        console.log(characteristics)
         _.set(character, "character.characteristics", characteristics)
 
         const result = await Character(character).save()

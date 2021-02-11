@@ -3,9 +3,9 @@ import * as actions from "../../../actions";
 import {connect} from 'react-redux';
 import {Badge, Button, Table} from 'react-bootstrap';
 
-const mapStateToProps = ({selectedChar}) => {
-    if (selectedChar) {
-        return {selectedChar}
+const mapStateToProps = ({selectedCthulhuChar}) => {
+    if (selectedCthulhuChar) {
+        return {selectedCthulhuChar}
     } else return {};
 }
 

@@ -6,7 +6,7 @@ import * as actions from "../actions"
 
 class Header extends Component {
     renderContent() {
-        const cthulhu = this.props.selectedCthulhuChar ? "/cthulhu/chars/" + this.props.selectedCthulhuChar.characterId : "/cthulhu/chars"
+        const cthulhu = this.props.selectedCthulhuChar ? "/cthulhu/chars/" + this.props.selectedCthulhuChar.character.characterId : "/cthulhu/chars"
         const char = this.props.selectedChar ? "/chars/" + this.props.selectedChar.characterId : "/chars"
 
         switch (this.props.auth) {
@@ -56,8 +56,8 @@ class Header extends Component {
     }
 }
 
-function mapStateToProps({auth, selectedChar}) {
-    return {auth, selectedChar}
+function mapStateToProps({auth, selectedChar, selectedCthulhuChar}) {
+    return {auth, selectedChar, selectedCthulhuChar}
 }
 
 export default connect(mapStateToProps, actions, null, {pure: false})(Header)
