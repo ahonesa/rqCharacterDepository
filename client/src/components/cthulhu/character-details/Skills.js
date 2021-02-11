@@ -7,25 +7,24 @@ import './Skills.css';
 import {BASE_SKILLS} from '../characters/Skills';
 
 const skillRows = (props) => {
-
-    console.log(props)
-
     if(props.panelNbr === 1) {
         return Object.keys(props.skills).slice(0, 25).map(skill => {
             const base = _.find(BASE_SKILLS, {'name': skill})
+            const xp = props.skills[skill].xp || 0
             return (<tr key={skill}>
                 <td>{base.label}</td>
-                <td className="skillValueColumn">{props.skills[skill].value} {xpBadge(props.skills[skill].xp)}</td>
-                <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill, props)}</td>
+                <td className="skillValueColumn">{props.skills[skill].value} {xpBadge(xp)}</td>
+                <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill, xp, props)}</td>
             </tr>)
         })
     } else {
         return Object.keys(props.skills).slice(25).map(skill => {
             const base = _.find(BASE_SKILLS, {'name': skill})
+            const xp = props.skills[skill].xp || 0
             return (<tr key={skill}>
                 <td>{base.label}</td>
-                <td className="skillValueColumn">{props.skills[skill].value} {xpBadge(props.skills[skill].xp)}</td>
-                <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill, props)}</td>
+                <td className="skillValueColumn">{props.skills[skill].value} {xpBadge(xp)}</td>
+                <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill, xp, props)}</td>
             </tr>)
         })
     }
@@ -36,20 +35,24 @@ const additionalSkillRows = (props) => {
         return (<tr key={skill}>
             <td>{skill.label}</td>
             <td className="skillValueColumn">{skill.value} {xpBadge(skill.xp)}</td>
-            <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill.name, props)}</td>
+            <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill.name, skill.xp, props)}</td>
         </tr>)
     })
 }
 
-const xpButton = (characterId, skill, props) => {
+const xpButton = (characterId, skill, xp, props) => {
 
-    const xpEnabled = props.owner && (props.hasXp || skill.xp > 0) && props.xpRollsAllowed
-    const xpAwardEnabled = props.isGM && !props.xpRollsAllowed && (skill.xp < 1 || !skill.xp)
-        
+    console.log(skill)
+
+    const xpEnabled = props.owner && xp > 0 && props.xpRollsAllowed
+    const xpAwardEnabled = props.isGM && !props.xpRollsAllowed && xp < 1
+
+    console.log(xpEnabled)
+
     if(xpEnabled)
-        return <Button bsSize="xsmall" onClick={() => props.skillXpRoll(characterId, skill.skill)}>XP</Button>;
+        return <Button bsSize="xsmall" onClick={() => props.cthulhuSkillXpRoll(characterId, skill)}>XP</Button>;
     else if(xpAwardEnabled)
-        return <Button bsSize="xsmall" onClick={() => props.skillXpAward(characterId, skill.skill)}>+1</Button>;
+        return <Button bsSize="xsmall" onClick={() => props.cthulhuSkillXpAward(characterId, skill)}>+1</Button>;
     else return;
 }
 

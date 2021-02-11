@@ -36,26 +36,17 @@ module.exports = (app) => {
         const character = await Character.findOne({'character.characterId': req.params.id})
         const char = _.get(character, 'character')
         const skills = _.get(character, 'character.skills')
-        const skill = _.find(skills, {'skill': req.params.skill})
+        const skill = req.params.skill
 
-        if (char && skills && skill && (skill.xp > 0)) {
+        const roll = Math.floor((Math.random() * 100) + 1)
+        const increase = Math.floor((Math.random() * 10) + 1)
 
-            const roll = Math.floor((Math.random() * 100) + 1)
-            const increase = Math.floor((Math.random() * 10) + 1)
+        if (char && skills && skill && (skills[skill].xp > 0)) {
+            if (roll > skills[skill].value) {
+                character.character.skills[skill].value += increase
 
-            let success = false
-            let skillInt = parseInt(skill.value || skill.base)
-
-            if (roll > skillInt) {
-                skillInt += increase
-                skill.value = skillInt
-                success = true
             }
-            skill.xp--
-
-            _.remove(character.character.skills, {'skill': req.params.skill})
-            character.character.skills.push(skill)
-            character.character.skills.sort()
+            character.character.skills[skill].xp--
             const result = await Character(character).save()
             res.send(result)
         } else res.status(400).end("NOK")
@@ -65,13 +56,10 @@ module.exports = (app) => {
         const character = await Character.findOne({'character.characterId': req.params.id})
         const char = _.get(character, 'character')
         const skills = _.get(character, 'character.skills')
-        const skill = _.find(skills, {'skill': req.params.skill})
+        const skill = req.params.skill
 
-        if (char && skills && skill && (skill.xp < 1 || !skill.xp)) {
-            _.remove(character.character.skills, {'skill': skill.skill})
-            skill.xp = 1
-            character.character.skills.push(skill)
-            character.character.skills.sort()
+        if (char && skills && skills.hasOwnProperty(skill) && (!skills[skill].xp || skills[skill].xp < 1)) {
+            character.character.skills[skill].xp = 1
             const result = await Character(character).save()
             res.send(result)
         } else res.status(400).end("NOK")

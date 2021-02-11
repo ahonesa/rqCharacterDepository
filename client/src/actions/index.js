@@ -43,7 +43,7 @@ export const toggleXpRollsAllowed = () => async dispatch => {
     await dispatch({ type: TOGGLE_XP_ROLLS_ALLOWED, payload: res.data });
 };
 
-export const toggleCthulhuXpRollsAllowed = () => async dispatch => {
+export const cthulhuToggleXpRollsAllowed = () => async dispatch => {
     const res = await axios.post("/api/params/cthulhuXpRollsAllowed/toggle");
     await dispatch({ type: TOGGLE_XP_ROLLS_ALLOWED, payload: res.data });
 };
