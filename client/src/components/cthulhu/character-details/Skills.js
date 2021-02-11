@@ -32,7 +32,7 @@ const skillRows = (props) => {
 
 const additionalSkillRows = (props) => {
     return props.additionalSkills.map(skill => {
-        return (<tr key={skill}>
+        return (<tr key={skill.name}>
             <td>{skill.label}</td>
             <td className="skillValueColumn">{skill.value} {xpBadge(skill.xp)}</td>
             <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill.name, skill.xp, props)}</td>

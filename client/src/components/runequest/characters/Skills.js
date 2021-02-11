@@ -330,7 +330,6 @@ export const SKILLS = [
     {label: "Hate Phargentes GrinningScar", group: "passion"},
     {label: "Hate Pinfeather", group: "passion"},
     {label: "Hate Praxians", group: "passion"},
-    {label: "Hate Sambari Tribe", group: "passion"},
     {label: "Hate Telmori", group: "passion"},
     {label: "Hate Trolls", group: "passion"},
     {label: "Hate Tusk Riders", group: "passion"},

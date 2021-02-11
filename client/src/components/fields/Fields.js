@@ -30,8 +30,6 @@ export const ReduxFormGroup = ({ name, label, type, validate }) => {
 
 export class Input extends Component {
     render () {
-        console.log(this.props)
-
         const {
             feedbackIcon,
             input,
@@ -63,8 +61,6 @@ export class Input extends Component {
 
 export class InputSelect extends Component {
     render () {
-        console.log(this.props)
-
         const {
             feedbackIcon,
             input,
