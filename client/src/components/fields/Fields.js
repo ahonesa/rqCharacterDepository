@@ -80,7 +80,7 @@ export class InputSelect extends Component {
         return (
             <FormGroup validationState={ validationState }>
                 <ControlLabel>{ label }</ControlLabel>
-                <FormControl componentClass="input"
+                <FormControl componentClass="select"
                              { ...input }
                              type={ type }
                              { ...props } />
