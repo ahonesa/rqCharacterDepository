@@ -30,7 +30,7 @@ class CharacterFormPageOne extends Component {
                 <Col>
                     <form onSubmit={handleSubmit}>
                         <ReduxFormGroup label="Character Name" name="name" validate={[isRequired, isString]}/>
-                        <ReduxFormGroup label="Character Id" name="characterId" validate={[isString]}/>
+                        <ReduxFormGroup label="Character Id" name="characterId" />
                         <ReduxFormGroup type="number"  label="Age" name="characteristics.ages"/>
                         <FormGroup>
                             <label>Sex</label>

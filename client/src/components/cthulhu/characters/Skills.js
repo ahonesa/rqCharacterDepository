@@ -43,3 +43,9 @@ export const BASE_SKILLS = [
     {name: "throw", label: "Throw", base: 20},
     {name: "track", label: "Track", base: 10}
 ]
+
+export const WEAPON_SKILLS = [
+    {name: "fighting_brawl", label: "Fighting (Brawl)", base: 25},
+    {name: "firearms_handgun", label: "Firearms (Handgun)", base: 20},
+    {name: "firearms_rifle_shotgun)", label: "Firearms (Rifle/Shotgun)", base: 25}
+]

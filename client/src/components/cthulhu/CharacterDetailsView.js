@@ -22,9 +22,9 @@ class CharacterDetailsView extends Component {
     }
 
     rivit = () => this.props.cthulhuCharacters && this.props.cthulhuCharacters.map(char =>
-        <LinkContainer key={char.characterId} to={"/cthulhu/chars/" + char.characterId}>
-            <ListGroupItem onClick={() => this.props.getOneChar(char.characterId)}
-                           active={this.props.selectedCthulhuChar && char.characterId === this.props.selectedCthulhuChar.characterId}>
+        <LinkContainer key={char.character.characterId} to={"/cthulhu/chars/" + char.character.characterId}>
+            <ListGroupItem onClick={() => this.props.cthulhuGetOneChar(char.character.characterId)}
+                           active={this.props.selectedCthulhuChar && char.character.characterId === this.props.selectedCthulhuChar.character.characterId}>
                 {char.character.name}
             </ListGroupItem>
         </LinkContainer>);

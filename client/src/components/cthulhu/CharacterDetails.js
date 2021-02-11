@@ -34,6 +34,7 @@ const CharacterDetails = (props) => {
             const weapons = _.get(char, "character.weapons", {})
             const hitPoints = _.get(characteristics, "hit_points", 0)
             const magicPoints = _.get(characteristics, "magic_points", 0)
+            const info = _.get(c, "info", {})
             const authorizationLevel = auth && auth.authorizationLevel
             const userId = auth && auth.googleId
             const isOwner = ownerId === userId
@@ -58,19 +59,19 @@ const CharacterDetails = (props) => {
                                             </tr>
                                             <tr>
                                                 <td>Occupation:</td>
-                                                <td>{c.info.occupation}</td>
+                                                <td>{info.occupation || ""}</td>
                                             </tr>
                                             <tr>
                                                 <td>Residence:</td>
-                                                <td>{c.info.residence}</td>
+                                                <td>{info.residence || ""}</td>
                                             </tr>
                                             <tr>
                                                 <td>Birthplace:</td>
-                                                <td>{c.info.birthplace}</td>
+                                                <td>{info.birthplace || ""}</td>
                                             </tr>
                                             <tr>
                                                 <td>Sex:</td>
-                                                <td>{c.info.sex}</td>
+                                                <td>{info.sex || ""}</td>
                                             </tr>
                                             </tbody>
                                         </Table>

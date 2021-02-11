@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {Field, FieldArray, reduxForm} from "redux-form";
-import {ReduxFormGroup, ReduxRadio} from '../../fields/Fields'
-import {Button, Col, FormGroup, Label, ListGroup, ListGroupItem, Row} from "react-bootstrap";
+import {InputSelect, ReduxFormGroup, ReduxRadio} from '../../fields/Fields'
+import {Button, Col, ControlLabel, FormGroup, Label, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 import {isRequired} from "./validation";
+import {WEAPON_SKILLS} from "../characters/Skills";
 
 
 class CharacterFormPageFour extends Component {
@@ -10,6 +11,23 @@ class CharacterFormPageFour extends Component {
         super(props)
         this.previousPage = props.previousPage.bind(this)
         this.renderWeaponFields = this.renderWeaponFields.bind(this)
+        this.renderWeaponSkillSelect = this.renderWeaponSkillSelect.bind(this)
+    }
+
+    renderWeaponSkillSelect(member) {
+        return (
+            <FormGroup controlId="formControlsSelect">
+                <ControlLabel>Select weapon skill</ControlLabel>
+                <Field name={`${member}.skill`} component={InputSelect} placeholder="select" validate={isRequired}>
+                    <option/>
+                    {
+                        WEAPON_SKILLS.map(({label, name}) => {
+                            return <option key={label} value={name}>{label}</option>;
+                        })
+                    }
+                </Field>
+            </FormGroup>
+        );
     }
 
     renderWeaponFields({fields}) {
@@ -21,8 +39,7 @@ class CharacterFormPageFour extends Component {
                             <ListGroupItem key={index}>
                                 <Row>
                                     <Col xs={4} md={3} lg={3}>
-                                        <ReduxFormGroup name={`${member}.skill`} label="Skill"
-                                                        validate={isRequired}/>
+                                        {this.renderWeaponSkillSelect(member)}
                                     </Col>
                                 </Row>
                                 <Row>

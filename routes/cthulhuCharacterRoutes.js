@@ -18,10 +18,11 @@ module.exports = (app) => {
             existingCharacter.character = req.body
             await Character(existingCharacter).save()
         } else {
+            const character = req.body
             character.characterId = uuidv4()
             await Character({
                 ownerId: req.user.googleId,
-                character: req.body
+                character: character
             }).save()
         }
         res.end("OK")

@@ -42,12 +42,8 @@ const additionalSkillRows = (props) => {
 
 const xpButton = (characterId, skill, xp, props) => {
 
-    console.log(skill)
-
     const xpEnabled = props.owner && xp > 0 && props.xpRollsAllowed
     const xpAwardEnabled = props.isGM && !props.xpRollsAllowed && xp < 1
-
-    console.log(xpEnabled)
 
     if(xpEnabled)
         return <Button bsSize="xsmall" onClick={() => props.cthulhuSkillXpRoll(characterId, skill)}>XP</Button>;

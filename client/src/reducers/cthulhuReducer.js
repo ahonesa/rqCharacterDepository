@@ -16,7 +16,6 @@ export function allCthulhuCharsReducer(state = null, action) {
 }
 
 export function oneCthulhuCharReducer(state = null, action) {
-    console.log(action)
     switch (action.type) {
         case CTHULHU_GET_ONE_CHAR:
             return action.payload || false
