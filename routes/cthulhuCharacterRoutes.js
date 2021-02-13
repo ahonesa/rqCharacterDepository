@@ -13,7 +13,7 @@ module.exports = (app) => {
 
     app.post("/api/cthulhu/chars", async (req, res) => {
         const existingCharacter = await Character.findOne({'character.characterId': req.body.characterId})
-        console.log(req.body)
+
         if (existingCharacter) {
             existingCharacter.character = req.body
             await Character(existingCharacter).save()
@@ -78,8 +78,6 @@ module.exports = (app) => {
         const skill = req.params.skill
         const additionalSkills = _.get(character, 'character.additional_skills')
         const addSkill = _.find(additionalSkills, {'name': skill})
-
-        console.log(char)
 
         if(char && skill === "luck" && (!char.characteristics.luck_xp || char.characteristics.luck_xp < 1)) {
             character.character.characteristics.luck_xp = 1

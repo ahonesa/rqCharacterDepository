@@ -16,9 +16,6 @@ const xpBadge = (skillXp) => {
 }
 
 const xpButton = (characterId, powXpRolls, props) => {
-
-    console.log(props)
-
     const xpEnabled = props.owner && (props.hasXp || powXpRolls > 0) && props.xpRollsAllowed
     const xpAwardEnabled = props.isGM && !props.xpRollsAllowed && (powXpRolls < 1 || !powXpRolls)
 

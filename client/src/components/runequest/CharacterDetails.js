@@ -58,8 +58,6 @@ const CharacterDetails = (props) => {
             const hasXp = c.xp > 0
             const xpRollsAllowed = params && params.xpRollsAllowed
 
-            console.log(bonuses)
-
             return (
                 <Panel bsSize="small">
                     <Panel.Heading componentClass="h4" style={{marginTop: "0px"}}>{char.characterId}

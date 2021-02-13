@@ -16,7 +16,6 @@ class UserForm extends Component {
         const authorizationLevel = this.props.auth && this.props.auth.authorizationLevel
         const xpRollsAllowed = this.props.params && this.props.params.xpRollsAllowed
         const cthulhuXpRollsAllowed = this.props.params && this.props.params.cthulhuXpRollsAllowed
-        console.log(xpRollsAllowed)
 
         const {handleSubmit, reset} = this.props
 

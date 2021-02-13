@@ -11,11 +11,9 @@ const ReduxFormControl = ({input, meta, ...props}) => {
 class CharacterNotes extends Component {
     render() {
         const onSubmit = (values) => {
-            console.log(values)
             this.props.createChar(values)
         };
         const {handleSubmit, reset, selectedChar} = this.props
-        console.log(this.props)
         return (
             <Panel bsSize="small">
                 <Panel.Heading componentClass="h4"

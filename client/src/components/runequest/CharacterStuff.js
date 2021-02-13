@@ -21,7 +21,6 @@ class CharacterStuff extends Component {
     ArmorRows = (armor) => {
         return (armor.map(item => {
             const armor = _.find(ARMOR, {'label': item.armorType})
-            console.log(armor)
             return (<tr key={item._id}>
                 <td>{item.armorType}</td>
                 <td>{(item.head === "true") && armor.value || "-"}</td>
@@ -37,9 +36,6 @@ class CharacterStuff extends Component {
     }
 
     render() {
-        const onSubmit = (values) => {
-            this.props.createChar(values)
-        }
         const {char, auth} = this.props
 
         const c = _.get(char, "character", {})
@@ -49,13 +45,8 @@ class CharacterStuff extends Component {
         const bonuses = characteristics && calculateBonuses(characteristics)
         const stuff = _.get(char, "character.stuff", [])
         const armor = _.get(char, "character.armor", [])
-        const authorizationLevel = auth && auth.authorizationLevel
         const userId = auth && auth.googleId
         const isOwner = ownerId === userId
-        const hasXp = c.xp > 0
-
-        console.log(stuff)
-        console.log(armor)
 
         return (
             <Panel bsSize="small">
