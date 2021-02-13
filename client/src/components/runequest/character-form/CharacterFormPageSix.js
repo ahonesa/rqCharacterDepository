@@ -1,22 +1,8 @@
-import _ from "lodash"
 import React, {Component} from "react"
-import {reduxForm, Field, FieldArray} from "redux-form"
-import {Link} from 'react-router-dom'
+import {Field, FieldArray, reduxForm} from "redux-form"
 import {ARMOR} from '../characters/Skills'
-import {ReduxFormGroup, ReduxFormControl, ReduxRadio, InputSelect, ReduxCheckbox} from '../fields/Fields'
-import {
-    Grid,
-    FormGroup,
-    Radio,
-    Button,
-    FormControl,
-    ControlLabel,
-    Row,
-    Col,
-    ListGroup,
-    ListGroupItem,
-    Label
-} from "react-bootstrap"
+import {InputSelect, ReduxCheckbox, ReduxFormGroup} from '../../fields/Fields'
+import {Button, Col, ControlLabel, FormGroup, Label, ListGroup, ListGroupItem, Row} from "react-bootstrap"
 import {isNumber, isRequired, isString} from "./validation"
 
 class CharacterFormPageSix extends Component {

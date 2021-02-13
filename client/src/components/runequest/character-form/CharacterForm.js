@@ -8,7 +8,7 @@ import CharacterFormPageFive from './CharacterFormPageFive'
 import CharacterFormPageSix from './CharacterFormPageSix'
 import calculateBonuses from '../characters/StatBonuses'
 import { connect } from "react-redux";
-import * as actions from "../../actions";
+import * as actions from "../../../actions";
 import { Grid } from 'react-bootstrap';
 import { reduxForm, Field } from "redux-form";
 

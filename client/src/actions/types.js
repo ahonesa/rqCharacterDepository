@@ -17,3 +17,15 @@ export const LOGOUT = 'logout';
 export const POST_MESSAGE = 'post_message';
 export const FETCH_MESSAGES = 'fetch_messages';
 export const CLEAR_MESSAGES = 'clear_messages';
+
+export const CTHULHU_TOGGLE_XP_ROLLS_ALLOWED = 'cthulhu_toggle_xp_rolls_allowed';
+export const CTHULHU_GET_ALL_CHARS = 'cthulhu_get_all_chars';
+export const CTHULHU_GET_ONE_CHAR = 'cthulhu_get_one_char';
+export const CTHULHU_CREATE_CHAR = 'cthulhu_create_char';
+export const CTHULHU_SKILL_XP_ROLL = 'cthulhu_skill_xp_roll';
+export const CTHULHU_SKILL_XP_AWARD = 'cthulhu_skill_xp_award';
+export const CTHULHU_COUNTER_UPDATE = 'cthulhu_counter_update';
+
+export const CTHULHU_POST_MESSAGE = 'cthulhu_post_message';
+export const CTHULHU_FETCH_MESSAGES = 'cthulhu_fetch_messages';
+export const CTHULHU_CLEAR_MESSAGES = 'cthulhu_clear_messages';

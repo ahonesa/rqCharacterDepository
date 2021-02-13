@@ -1,8 +1,8 @@
 import _ from "lodash"
 import React, {Component} from "react"
-import {reduxForm, Field} from "redux-form"
-import {ReduxFormGroup, ReduxRadio} from '../fields/Fields'
-import {FormGroup, Button, Row, Col, Label} from "react-bootstrap"
+import {Field, reduxForm} from "redux-form"
+import {ReduxFormGroup, ReduxRadio} from '../../fields/Fields'
+import {Button, Col, FormGroup, Label, Row} from "react-bootstrap"
 import {isRequired, isString} from "./validation"
 
 const ADDITIONAL_FIELDS = [

@@ -4,11 +4,16 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import Header from "./Header";
 import Landing from "./Landing";
-import CharacterListView from "./CharacterListView";
-import CharacterDetailsView from "./CharacterDetailsView";
-import CharacterForm from './character-form/CharacterForm';
+import CharacterListView from "./runequest/CharacterListView";
+import CharacterDetailsView from "./runequest/CharacterDetailsView";
+import CharacterForm from './runequest/character-form/CharacterForm';
+import CthulhuCharacterListView from "./cthulhu/CharacterListView";
+import CthulhuCharacterDetailsView from "./cthulhu/CharacterDetailsView";
+import CthulhuCharacterForm from './cthulhu/character-form/CharacterForm';
 import UserForm from './user-form/UserForm';
 import DiceRoom from './dice-room/DiceRoom';
+import ErrorBoundary from "./ErrorBoundary";
+
 
 class App extends Component {
   componentDidMount() {
@@ -18,10 +23,15 @@ class App extends Component {
 
   render() {
     return (
+        <ErrorBoundary>
         <BrowserRouter>
           <div>
             <Header />
             <Route exact path="/" component={Landing} />
+            <Route exact path="/cthulhu/chars" component={CthulhuCharacterListView} />
+            <Route exact path="/cthulhu/chars/:characterId" component={CthulhuCharacterDetailsView} />
+            <Route exact path="/cthulhu/chars/:characterId/update" component={AddPropsToRoute(CthulhuCharacterForm, { oper: "update"})} />
+            <Route exact path="/cthulhu/new_char" component={AddPropsToRoute(CthulhuCharacterForm, { oper: "create"})} />
             <Route exact path="/chars" component={CharacterListView} />
             <Route exact path="/chars/:characterId" component={CharacterDetailsView} />
             <Route exact path="/chars/:characterId/update" component={AddPropsToRoute(CharacterForm, { oper: "update"})} />
@@ -30,6 +40,7 @@ class App extends Component {
             <Route exact path="/diceroom" component={DiceRoom} />
           </div>
         </BrowserRouter>
+        </ErrorBoundary>
     );
   }
 }

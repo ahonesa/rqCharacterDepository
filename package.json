@@ -25,6 +25,7 @@
     "multer-gridfs-storage": "^3.0.1",
     "nodemon": "^1.18.3",
     "passport": "^0.4.0",
-    "passport-google-oauth": "^2.0.0"
+    "passport-google-oauth": "^2.0.0",
+    "uuid": "^8.3.2"
   }
 }
