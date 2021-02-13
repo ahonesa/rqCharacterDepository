@@ -61,10 +61,6 @@ class CharacterFormPageTwo extends Component {
                                             name="characteristics.sanity"/>
                             <ReduxFormGroup type="number" label="Sanity (original)"
                                             name="characteristics.sanity_org"/>
-                            <ReduxFormGroup type="number" label="Hit Points"
-                                            name="characteristics.hit_points"/>
-                            <ReduxFormGroup type="number" label="Magic Points"
-                                            name="characteristics.magic_points"/>
                         </Col>
                     </Row>
                     <Button type="reset" href="/cthulhu/chars" onClick={reset}>Cancel</Button>

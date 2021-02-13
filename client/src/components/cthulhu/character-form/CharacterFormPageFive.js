@@ -15,11 +15,6 @@ class CharacterFormPageFive extends Component {
 
     renderSpellFields({fields, meta: {error, submitFailed}}) {
         return (<div>
-                <label>Skillbonuses</label>
-                <ListGroup>
-                    <ListGroupItem>Magic skill category
-                        modifier: {_.get(this.props, "character.bonuses.magicModifier", 0)}</ListGroupItem>
-                </ListGroup>
                 <label>Select spells</label>
                 <ListGroup>
                     {fields.map((member, index) => {
@@ -56,7 +51,6 @@ class CharacterFormPageFive extends Component {
             <Row>
                 <h2 style={{marginBottom: 30}}><Label>Spells</Label></h2>
                 <form onSubmit={handleSubmit}>
-                    <ReduxFormGroup name="freeint" label="Free INT"/>
                     <FieldArray name="spells" component={this.renderSpellFields}/>
                     <Button type="reset" href="/cthulhu/chars" onClick={reset}>Cancel</Button>
                     <Button type="button" onClick={this.previousPage}>Previous</Button>

@@ -57,8 +57,7 @@ class CharacterFormPageThree extends Component {
 
     renderBaseSkillFields() {
         return _.map(BASE_SKILLS, ({name, label, base}) => {
-            console.log("Base: " + base)
-            return <FormGroup bsSize="small">
+            return <FormGroup key={name} bsSize="small">
                 <ControlLabel>{label + " (" + base + ")"}:</ControlLabel>
                 <Field key={"skills." + name} component={Input} type="number" name={"skills." + name + ".value"} validate={[isNumber]} />
             </FormGroup>

@@ -17,10 +17,27 @@ class CharacterStuff extends Component {
         }))
     }
 
+    EncounterRows = (encounters) => {
+        return (encounters.map(item => {
+            return <tr key={item._id}>
+                <td>{item.entity || ""}</td>
+                <td>{item.sanity_loss || ""}</td>
+                <td>{item.total || ""}</td>
+            </tr>
+        }))
+    }
+
+    SpellRows = (spells) => {
+        return (spells.map(item => {
+            return <tr key={item._id}>
+                <td>{item.spell || ""}</td>
+                <td>{item.cost || ""}</td>
+                <td>{item.cast_time || ""}</td>
+            </tr>
+        }))
+    }
+
     render() {
-        const onSubmit = (values) => {
-            this.props.createChar(values)
-        }
         const {char, auth} = this.props
 
         const c = _.get(char, "character", {})
@@ -29,8 +46,7 @@ class CharacterStuff extends Component {
         const spells = _.get(char, "character.spells", [])
         const bonuses = characteristics && calculateBonuses(characteristics)
         const stuff = _.get(char, "character.stuff", [])
-        const armor = _.get(char, "character.armor", [])
-        const authorizationLevel = auth && auth.authorizationLevel
+        const encounters = _.get(char, "character.encounters", [])
         const userId = auth && auth.googleId
         const isOwner = ownerId === userId
 
@@ -39,7 +55,7 @@ class CharacterStuff extends Component {
                 <Panel.Heading componentClass="h4" style={{marginTop: "0px"}}>{char && char.characterId}</Panel.Heading>
                 <Panel.Body>
                     <Row>
-                        <Col xs={12} md={4} lg={4}>
+                        <Col xs={12} md={6} lg={6}>
                             <Panel className="shadowPanel">
                                 <Panel.Heading>Items</Panel.Heading>
                                 <Panel.Body>
@@ -57,7 +73,7 @@ class CharacterStuff extends Component {
                                 </Panel.Body>
                             </Panel>
                         </Col>
-                        <Col xs={12} md={8} lg={8}>
+                        <Col xs={12} md={6} lg={6}>
                             <Panel className="shadowPanel">
                                 <Panel.Heading>Other Stuff</Panel.Heading>
                                 <Panel.Body>
@@ -74,12 +90,8 @@ class CharacterStuff extends Component {
                                             <td>{c.money || ""}</td>
                                         </tr>
                                         <tr>
-                                            <td>Hides of Land:</td>
-                                            <td>{c.hidesOfLand || ""}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Flocks of Herd:</td>
-                                            <td>{c.flocksOfHerd || ""}</td>
+                                            <td>Spending level:</td>
+                                            <td>{c.spending_level || ""}</td>
                                         </tr>
                                         </tbody>
                                     </Table>
@@ -88,11 +100,41 @@ class CharacterStuff extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={12} md={4} lg={4}>
+                        <Col xs={12} md={6} lg={6}>
+                            <Panel className="shadowPanel">
+                                <Panel.Heading>Encounters</Panel.Heading>
+                                <Panel.Body>
+                                    <Table condensed responsive>
+                                        <thead>
+                                        <tr>
+                                            <th>Encounter</th>
+                                            <th>Sanity Loss</th>
+                                            <th>Total</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {this.EncounterRows(encounters)}
+                                        </tbody>
+                                    </Table>
+                                </Panel.Body>
+                            </Panel>
+                        </Col>
+                        <Col xs={12} md={6} lg={6}>
                             <Panel className="shadowPanel">
                                 <Panel.Heading>Spells</Panel.Heading>
                                 <Panel.Body>
-                                    <SpellsPanel spells={spells} bonuses={bonuses} owner={isOwner}/>
+                                    <Table condensed responsive>
+                                        <thead>
+                                        <tr>
+                                            <th>Spell</th>
+                                            <th>Cost</th>
+                                            <th>Cast Time</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {this.EncounterRows(encounters)}
+                                        </tbody>
+                                    </Table>
                                 </Panel.Body>
                             </Panel>
                         </Col>
@@ -104,37 +146,18 @@ class CharacterStuff extends Component {
 }
 
 export const SpellsPanel = connect(mapStateToProps, actions)((props) => {
-    const bonuses = _.get(props, "bonuses.bonuses", {})
     if (props.spells && props.bonuses) {
         return (<div>
-            {SpellGroups("rune", props, bonuses.magicModifier)}
-            {SpellGroups("spirit", props, bonuses.magicModifier)}
-            {SpellGroups("sorcery", props, bonuses.magicModifier)}
+            {SpellGroups(props)}
         </div>)
     } else {
         return <div/>
     }
 })
 
-const SpellGroups = (group, props, bonus) => {
-    const filtered = props.spells.filter(spell => {
-        return (spell.spelltype === group)
-    })
+const SpellGroups = (props) => {
 
     let grText = ""
-    switch (group) {
-        case "spirit":
-            grText = "Spirit magic"
-            break
-        case "rune":
-            grText = "Rune magic"
-            break
-        case "sorcery":
-            grText = "Sorcery"
-            break
-        default:
-            grText = group
-    }
 
     return (
         <Panel>
@@ -144,11 +167,11 @@ const SpellGroups = (group, props, bonus) => {
                     <tr>
                         <th>{grText}</th>
                         <th></th>
-                        <th className="skillValueColumn">{bonus > 0 ? "+" : ""}{bonus}</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    {SpellRows(filtered, bonus)}
+                    {SpellRows(props.spells)}
                     </tbody>
                 </Table>
             </Panel.Body>
@@ -161,8 +184,8 @@ const SpellRows = (spells, bonus) => {
     return (spells.map(spell => {
         return <tr key={spell._id}>
             <td>{spell.spell || ""}</td>
-            <td>{spell.rank || ""}</td>
-            <td>{parseInt(spell.value) + bonus || ""}</td>
+            <td>{spell.cost || ""}</td>
+            <td>{spell.cast_time || ""}</td>
         </tr>
     }))
 }

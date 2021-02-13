@@ -8,7 +8,7 @@ import {BASE_SKILLS} from '../characters/Skills';
 
 const skillRows = (props) => {
     if(props.panelNbr === 1) {
-        return Object.keys(props.skills).slice(0, 25).map(skill => {
+        return Object.keys(props.skills).slice(0, 20).map(skill => {
             const base = _.find(BASE_SKILLS, {'name': skill})
             const xp = props.skills[skill].xp || 0
             return (<tr key={skill}>
@@ -18,7 +18,7 @@ const skillRows = (props) => {
             </tr>)
         })
     } else {
-        return Object.keys(props.skills).slice(25).map(skill => {
+        return Object.keys(props.skills).slice(20).map(skill => {
             const base = _.find(BASE_SKILLS, {'name': skill})
             const xp = props.skills[skill].xp || 0
             return (<tr key={skill}>

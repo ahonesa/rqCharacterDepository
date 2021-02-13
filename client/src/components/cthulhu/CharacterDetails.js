@@ -17,6 +17,21 @@ const CounterAdjButtons = (props) => {
     </div>)
 }
 
+const xpButton = (characterId, skill, xp, isGM, isOwner, xpRollsAllowed, props) => {
+
+    const xpEnabled = isOwner && xpRollsAllowed && xp && xp > 0
+    const xpAwardEnabled = isGM && !xpRollsAllowed && (!xp || xp < 1)
+
+    if(xpEnabled)
+        return <Button bsSize="xsmall" onClick={() => props.cthulhuSkillXpRoll(characterId, skill)}>XP</Button>;
+    else if(xpAwardEnabled)
+        return <Button bsSize="xsmall" onClick={() => props.cthulhuSkillXpAward(characterId, skill)}>+1</Button>;
+}
+
+const xpBadge = (skillXp) => {
+    if(skillXp && skillXp > 0) return <Badge>{skillXp}</Badge>;
+}
+
 const CharacterDetails = (props) => {
     const {char, auth, params} = props
     switch (char) {
@@ -88,6 +103,7 @@ const CharacterDetails = (props) => {
                                                 <th>Stat</th>
                                                 <th>Base</th>
                                                 <th>Curr</th>
+                                                <th></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -108,9 +124,9 @@ const CharacterDetails = (props) => {
                                             <tr>
                                                 <td>Luck:</td>
                                                 <td>{characteristics.luck_org}</td>
-                                                <td>{characteristics.luck}</td>
-                                                <td><CounterAdjButtons {...props} characterId={c.characterId} isGM={isGM} counter="luck"/>
-                                                </td>
+                                                <td>{characteristics.luck} {xpBadge(characteristics.luck_xp || 0)}</td>
+                                                <td><CounterAdjButtons {...props} characterId={c.characterId} isGM={isGM} counter="luck"/></td>
+                                                <td>{xpButton(c.characterId, "luck", characteristics.luck_xp, isGM, isOwner, xpRollsAllowed, props)}</td>
                                             </tr>
                                             <tr>
                                                 <td>Sanity:</td>
@@ -191,15 +207,15 @@ const CharacterDetails = (props) => {
                                                      xpRollsAllowed={xpRollsAllowed} isGM={isGM} panelNbr={2} />
                                     </Panel.Body>
                                 </Panel>
+                            </Col>
+                            <Col xs={12} md={4} lg={4}>
                                 <Panel className="shadowPanel">
                                     <Panel.Heading>Additional Skills</Panel.Heading>
                                     <Panel.Body>
                                         <AdditionalSkillsPanel additionalSkills={additionalSkills} bonuses={bonuses} owner={isOwner}
-                                                     xpRollsAllowed={xpRollsAllowed} isGM={isGM} panelNbr={2} />
+                                                               xpRollsAllowed={xpRollsAllowed} isGM={isGM} panelNbr={2} />
                                     </Panel.Body>
                                 </Panel>
-                            </Col>
-                            <Col xs={12} md={4} lg={4}>
                                 <Panel className="shadowPanel">
                                     <Panel.Heading>Weapons</Panel.Heading>
                                     <Panel.Body>

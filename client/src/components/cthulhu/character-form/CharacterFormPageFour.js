@@ -62,17 +62,6 @@ class CharacterFormPageFour extends Component {
                                     <Col xs={4} md={3} lg={3}>
                                         <ReduxFormGroup name={`${member}.malfunction`} label="Malfunction"/>
                                     </Col>
-                                    <Col xs={4} md={3} lg={3}>
-                                        <FormGroup>
-                                            <label>Weapon type</label>
-                                            <Field name={`${member}.weaponType`} component={ReduxRadio} type="radio"
-                                                   label="crushing" value="crushing"/>
-                                            <Field name={`${member}.weaponType`} component={ReduxRadio} type="radio"
-                                                   label="slashing" value="slashing"/>
-                                            <Field name={`${member}.weaponType`} component={ReduxRadio} type="radio"
-                                                   label="piercing" value="piercing"/>
-                                        </FormGroup>
-                                    </Col>
                                     <Col xs={6} md={4}>
                                         <Button type="button" style={{marginTop: 25}}
                                                 onClick={() => fields.remove(index)}>Remove</Button>

@@ -44,7 +44,14 @@ module.exports = (app) => {
         const roll = Math.floor((Math.random() * 100) + 1)
         const increase = Math.floor((Math.random() * 10) + 1)
 
-        if (char && skills && skill && skills.hasOwnProperty(skill) && (skills[skill].xp > 0)) {
+        if(char && skill === "luck" && char.characteristics.luck_xp && char.characteristics.luck_xp > 0) {
+            if (roll > character.character.characteristics.luck) {
+                character.character.characteristics.luck += increase
+            }
+            character.character.characteristics.luck_xp = 0
+            const result = await Character(character).save()
+            res.send(result)
+        } else if (char && skills && skill && skills.hasOwnProperty(skill) && (skills[skill].xp > 0)) {
             if (roll > skills[skill].value) {
                 character.character.skills[skill].value += increase
             }
@@ -72,7 +79,13 @@ module.exports = (app) => {
         const additionalSkills = _.get(character, 'character.additional_skills')
         const addSkill = _.find(additionalSkills, {'name': skill})
 
-        if (char && skills && skills.hasOwnProperty(skill) && (!skills[skill].xp || skills[skill].xp < 1)) {
+        console.log(char)
+
+        if(char && skill === "luck" && (!char.characteristics.luck_xp || char.characteristics.luck_xp < 1)) {
+            character.character.characteristics.luck_xp = 1
+            const result = await Character(character).save()
+            res.send(result)
+        } else if (char && skills && skills.hasOwnProperty(skill) && (!skills[skill].xp || skills[skill].xp < 1)) {
             character.character.skills[skill].xp = 1
             const result = await Character(character).save()
             res.send(result)

@@ -33,6 +33,7 @@ const cthulhuSchema = new Schema({
             edu_org: Number,
             luck: Number,
             luck_org: Number,
+            luck_xp: Number,
             sanity: Number,
             sanity_org: Number,
             hit_points: Number,

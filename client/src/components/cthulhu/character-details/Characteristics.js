@@ -9,25 +9,6 @@ const mapStateToProps = ({selectedCthulhuChar}) => {
     } else return {};
 }
 
-const xpBadge = (skillXp) => {
-    if (skillXp < 1) return;
-    else return <Badge>{skillXp}</Badge>;
-}
-
-const xpButton = (characterId, powXpRolls, props) => {
-
-    console.log(props)
-
-    const xpEnabled = props.owner && (props.hasXp || powXpRolls > 0) && props.xpRollsAllowed
-    const xpAwardEnabled = props.isGM && !props.xpRollsAllowed && (powXpRolls < 1 || !powXpRolls)
-
-    if (xpEnabled)
-        return <Button bsSize="xsmall" onClick={() => props.powXpRoll(characterId)}>XP</Button>;
-    else if (xpAwardEnabled)
-        return <Button bsSize="xsmall" onClick={() => props.powXpAward(characterId)}>+1</Button>;
-    else return;
-}
-
 export const Characteristics = connect(mapStateToProps, actions)((props) => {
     if (props.bonuses && props.bonuses.characteristics) {
         const characteristics = props.bonuses.characteristics
