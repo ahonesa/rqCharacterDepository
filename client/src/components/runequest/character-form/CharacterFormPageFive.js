@@ -12,6 +12,7 @@ class CharacterFormPageFive extends Component {
         this.previousPage = props.previousPage.bind(this)
         this.renderSpellFields = this.renderSpellFields.bind(this)
         this.renderSpellSelect = this.renderSpellSelect.bind(this)
+        this.renderSpiritFields = this.renderSpiritFields.bind(this)
     }
 
 
@@ -69,6 +70,47 @@ class CharacterFormPageFive extends Component {
         );
     }
 
+    renderSpiritFields({fields, meta: {error, submitFailed}}) {
+        return (<div>
+                <label>Select spirits</label>
+                <ListGroup>
+                    {fields.map((member, index) => {
+                        return (
+                            <ListGroupItem key={index}>
+                                <Row>
+                                    <Col xs={6} md={3}>
+                                        <ReduxFormGroup name={`${member}.name`} label="Spirit Name"
+                                                        validate={[isRequired, isString]}/>
+                                    </Col>
+                                    <Col xs={6} md={3}>
+                                        <ReduxFormGroup name={`${member}.species`} label="Species"
+                                                        validate={[isRequired, isString]}/>
+                                    </Col>
+                                    <Col xs={6} md={3}>
+                                        <ReduxFormGroup name={`${member}.stats`} label="Characteristics"
+                                                        validate={[isRequired, isString]}/>
+                                    </Col>
+                                    <Col xs={6} md={3}>
+                                        <ReduxFormGroup name={`${member}.spells`} label="Spells"
+                                                        validate={[isRequired, isString]}/>
+                                    </Col>
+                                    <Col xs={6} md={3}>
+                                        <ReduxFormGroup name={`${member}.notes`} label="Notes"
+                                                        validate={[isRequired, isString]}/>
+                                    </Col>
+                                    <Col xs={6} md={3}>
+                                        <Button type="button" onClick={() => fields.remove(index)}>Remove</Button>
+                                    </Col>
+                                </Row>
+                            </ListGroupItem>
+                        );
+                    })}
+                    <Button type="button" onClick={() => fields.push({})}>Add</Button>
+                </ListGroup>
+            </div>
+        );
+    }
+
     render() {
         const {handleSubmit, reset} = this.props
         return (
@@ -77,6 +119,7 @@ class CharacterFormPageFive extends Component {
                 <form onSubmit={handleSubmit}>
                     <ReduxFormGroup name="freeint" label="Free INT"/>
                     <FieldArray name="spells" component={this.renderSpellFields}/>
+                    <FieldArray name="spirits" component={this.renderSpiritFields}/>
                     <Button type="reset" href="/chars" onClick={reset}>Cancel</Button>
                     <Button type="button" onClick={this.previousPage}>Previous</Button>
                     <Button type="submit">Next</Button>

@@ -64,16 +64,28 @@ class CharacterFormPageTwo extends Component {
                             <ReduxFormGroup type="number" label="POW XP rolls" name="characteristics.powXpRolls"/>
                             <ReduxFormGroup type="number" label="Current Rune Points Pool 1"
                                             name="characteristics.rp1Current"/>
+                            <ReduxFormGroup label="Rune Points Pool 1 Name"
+                                            name="characteristics.rp1Name"/>
                             <ReduxFormGroup type="number" label="Total Rune Points Pool 1"
                                             name="characteristics.rp1Total"/>
                             <ReduxFormGroup type="number" label="Current Rune Points Pool 2"
                                             name="characteristics.rp2Current"/>
+                            <ReduxFormGroup label="Rune Points Pool 2 Name"
+                                            name="characteristics.rp2Name"/>
                             <ReduxFormGroup type="number" label="Total Rune Points Pool 2"
                                             name="characteristics.rp2Total"/>
                             <ReduxFormGroup type="number" label="Current Rune Points Pool 3"
                                             name="characteristics.rp3Current"/>
+                            <ReduxFormGroup label="Rune Points Pool 3 Name"
+                                            name="characteristics.rp3Name"/>
                             <ReduxFormGroup type="number" label="Total Rune Points Pool 3"
                                             name="characteristics.rp3Total"/>
+                            <ReduxFormGroup type="number" label="Current Rune Points Pool 4"
+                                            name="characteristics.rp4Current"/>
+                            <ReduxFormGroup label="Rune Points Pool 4 Name"
+                                            name="characteristics.rp4Name"/>
+                            <ReduxFormGroup type="number" label="Total Rune Points Pool 4"
+                                            name="characteristics.rp4Total"/>
                             <ReduxFormGroup type="number" label="Hero Points" name="characteristics.heroPoints"/>
                         </Col>
                     </Row>

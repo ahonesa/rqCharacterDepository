@@ -35,6 +35,28 @@ class CharacterStuff extends Component {
         }))
     }
 
+
+    SpiritsPanel = (spirits) => {
+        return spirits.map(spirit => {
+            return (<Panel key={spirit._id}>
+                <Panel.Body>
+                    <Table responsive condensed>
+                        <thead>
+                        <tr><th/><th/></tr>
+                        </thead>
+                        <tbody>
+                        <tr><td>name:</td><td>{spirit.name}</td></tr>
+                        <tr><td>species:</td><td>{spirit.species}</td></tr>
+                        <tr><td>stats:</td><td>{spirit.stats}</td></tr>
+                        <tr><td>spells:</td><td>{spirit.spells}</td></tr>
+                        <tr><td>notes:</td><td>{spirit.notes}</td></tr>
+                        </tbody>
+                    </Table>
+                </Panel.Body>
+            </Panel>);
+        })
+    }
+
     render() {
         const {char, auth} = this.props
 
@@ -42,6 +64,7 @@ class CharacterStuff extends Component {
         const ownerId = _.get(char, "ownerId", {})
         const characteristics = _.get(char, "character.characteristics", {})
         const spells = _.get(char, "character.spells", [])
+        const spirits = _.get(char, "character.spirits", [])
         const bonuses = characteristics && calculateBonuses(characteristics)
         const stuff = _.get(char, "character.stuff", [])
         const armor = _.get(char, "character.armor", [])
@@ -130,6 +153,14 @@ class CharacterStuff extends Component {
                                 <Panel.Heading>Spells</Panel.Heading>
                                 <Panel.Body>
                                     <SpellsPanel spells={spells} bonuses={bonuses} owner={isOwner}/>
+                                </Panel.Body>
+                            </Panel>
+                        </Col>
+                        <Col xs={12} md={8} lg={8}>
+                            <Panel className="shadowPanel">
+                                <Panel.Heading>Spirits</Panel.Heading>
+                                <Panel.Body>
+                                    {this.SpiritsPanel(spirits)}
                                 </Panel.Body>
                             </Panel>
                         </Col>

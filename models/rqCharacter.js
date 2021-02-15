@@ -44,11 +44,17 @@ const characterSchema = new Schema({
             maxPowForGain: Number,
             powXpRolls: Number,
             rp1Current: Number,
+            rp1Name: String,
             rp1Total: Number,
             rp2Current: Number,
+            rp2Name: String,
             rp2Total: Number,
             rp3Current: Number,
+            rp3Name: String,
             rp3Total: Number,
+            rp4Current: Number,
+            rp4Name: String,
+            rp4Total: Number,
             heroPoints: Number
         },
         skills: [
@@ -56,6 +62,15 @@ const characterSchema = new Schema({
                 skill: String,
                 value: String,
                 xp: Number
+            }
+        ],
+        spirits: [
+            {
+                name: String,
+                species: String,
+                stats: String,
+                spells: String,
+                notes: String
             }
         ],
         weaponskills: [{

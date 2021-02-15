@@ -28,7 +28,7 @@ const RpButtons = (props) => {
 const RunePool = (props) => {
     if (!props.rptotal || props.rptotal < 1) return null;
     return (<tr>
-        <td>Rune Pool {props.pool}:</td>
+        <td>Rune Pool ({props.rpname}):</td>
         <td>{props.rptotal}</td>
         <td>{props.rpcurrent}</td>
         <td><RpButtons {...props} pool={"rp" + props.pool}/></td>
@@ -64,7 +64,7 @@ const CharacterDetails = (props) => {
                         <Badge>{c.xp}</Badge></Panel.Heading>
                     <Panel.Body>
                         <Row>
-                            <Col xs={12} md={4} lg={4}>
+                            <Col xs={12} md={6} lg={6}>
                                 <Panel className="shadowPanel" bsSize="small">
                                     <Panel.Heading>Basic info</Panel.Heading>
                                     <Panel.Body>
@@ -110,8 +110,15 @@ const CharacterDetails = (props) => {
                                         </Table>
                                     </Panel.Body>
                                 </Panel>
+                                <Panel className="shadowPanel" bsSize="small">
+                                    <Panel.Heading>Characteristics</Panel.Heading>
+                                    <Panel.Body>
+                                        <Characteristics characteristics={characteristics} owner={isOwner} xp={c.xp}
+                                                         xpRollsAllowed={xpRollsAllowed} isGM={isGM}/>
+                                    </Panel.Body>
+                                </Panel>
                             </Col>
-                            <Col xs={12} md={4} lg={4}>
+                            <Col xs={12} md={6} lg={6}>
                                 <Panel className="shadowPanel" bsSize="small">
                                     <Panel.Heading>Stats</Panel.Heading>
                                     <Panel.Body>
@@ -185,15 +192,43 @@ const CharacterDetails = (props) => {
                                                 <td>{bonuses.magicPoints.base}</td>
                                                 <td></td>
                                             </tr>
+
+                                            <tr>
+                                                <td>Damage modifier:</td>
+                                                <td>{bonuses.damageModifier}</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Spirit combat damage:</td>
+                                                <td>{bonuses.spiritCombatDamage}</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>DEX strike rank:</td>
+                                                <td>{bonuses.dexStrikeRank}</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>SIZ strike rank:</td>
+                                                <td>{bonuses.sizStrikeRank}</td>
+                                                <td></td>
+                                            </tr>
                                             <RunePool {...props} pool="1" characterId={c.name} isGM={isGM}
+                                                      rpname={characteristics.rp1Name}
                                                       rptotal={characteristics.rp1Total}
                                                       rpcurrent={characteristics.rp1Current}/>
                                             <RunePool {...props} pool="2" characterId={c.name} isGM={isGM}
+                                                      rpname={characteristics.rp2Name}
                                                       rptotal={characteristics.rp2Total}
                                                       rpcurrent={characteristics.rp2Current}/>
                                             <RunePool {...props} pool="3" characterId={c.name} isGM={isGM}
+                                                      rpname={characteristics.rp3Name}
                                                       rptotal={characteristics.rp3Total}
                                                       rpcurrent={characteristics.rp3Current}/>
+                                            <RunePool {...props} pool="4" characterId={c.name} isGM={isGM}
+                                                      rpname={characteristics.rp4Name}
+                                                      rptotal={characteristics.rp4Total}
+                                                      rpcurrent={characteristics.rp4Current}/>
                                             <tr>
                                                 <td>Hero Points:</td>
                                                 <td></td>
@@ -201,15 +236,6 @@ const CharacterDetails = (props) => {
                                             </tr>
                                             </tbody>
                                         </Table>
-                                    </Panel.Body>
-                                </Panel>
-                            </Col>
-                            <Col xs={12} md={4} lg={4}>
-                                <Panel className="shadowPanel" bsSize="small">
-                                    <Panel.Heading>Characteristics</Panel.Heading>
-                                    <Panel.Body>
-                                        <Characteristics characteristics={characteristics} owner={isOwner} xp={c.xp}
-                                                         xpRollsAllowed={xpRollsAllowed} isGM={isGM}/>
                                     </Panel.Body>
                                 </Panel>
                             </Col>
