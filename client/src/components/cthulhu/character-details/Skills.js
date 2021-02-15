@@ -12,8 +12,10 @@ const skillRows = (props) => {
             const base = _.find(BASE_SKILLS, {'name': skill})
             const xp = props.skills[skill].xp || 0
             return (<tr key={skill}>
-                <td>{base.label}</td>
-                <td className="skillValueColumn">{props.skills[skill].value} {xpBadge(xp)}</td>
+                <td>{base.label} {xpBadge(xp)}</td>
+                <td className="skillValueColumn">{props.skills[skill].value}</td>
+                <td className="skillValueColumn">{ Math.floor((props.skills[skill].value || 0) / 2) }</td>
+                <td className="skillValueColumn">{ Math.floor((props.skills[skill].value || 0) / 5) }</td>
                 <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill, xp, props)}</td>
             </tr>)
         })
@@ -22,8 +24,10 @@ const skillRows = (props) => {
             const base = _.find(BASE_SKILLS, {'name': skill})
             const xp = props.skills[skill].xp || 0
             return (<tr key={skill}>
-                <td>{base.label}</td>
-                <td className="skillValueColumn">{props.skills[skill].value} {xpBadge(xp)}</td>
+                <td>{base.label} {xpBadge(xp)}</td>
+                <td className="skillValueColumn">{props.skills[skill].value}</td>
+                <td className="skillValueColumn">{ Math.floor((props.skills[skill].value || 0) / 2) }</td>
+                <td className="skillValueColumn">{ Math.floor((props.skills[skill].value || 0) / 5) }</td>
                 <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill, xp, props)}</td>
             </tr>)
         })
@@ -33,8 +37,10 @@ const skillRows = (props) => {
 const additionalSkillRows = (props) => {
     return props.additionalSkills.map(skill => {
         return (<tr key={skill.name}>
-            <td>{skill.label}</td>
-            <td className="skillValueColumn">{skill.value} {xpBadge(skill.xp)}</td>
+            <td>{skill.label} {xpBadge(skill.xp)}</td>
+            <td className="skillValueColumn">{skill.value}</td>
+            <td className="skillValueColumn">{ Math.floor((skill.value || 0) / 2) }</td>
+            <td className="skillValueColumn">{ Math.floor((skill.value || 0) / 5) }</td>
             <td className="xpColumn">{xpButton(props.selectedCthulhuChar.character.characterId, skill.name, skill.xp, props)}</td>
         </tr>)
     })
@@ -62,7 +68,7 @@ const SkillPanel = (props) => {
       <Panel.Body>
         <Table condensed responsive>
           <thead>
-            <tr><th>Skills</th><th className="skillValueColumn"></th><th className="xpColumn"></th></tr>
+            <tr><th>Skills</th><th className="skillValueColumn">Org</th><th className="skillValueColumn">Half</th><th className="skillValueColumn">Fifth</th><th className="xpColumn"></th></tr>
           </thead>
           <tbody>
             {skillRows(props)}
@@ -79,7 +85,7 @@ const AdditionalSkillPanel = (props) => {
             <Panel.Body>
                 <Table condensed responsive>
                     <thead>
-                    <tr><th>Skills</th><th className="skillValueColumn"></th><th className="xpColumn"></th></tr>
+                    <tr><th>Skills</th><th className="skillValueColumn">Org</th><th className="skillValueColumn">Half</th><th className="skillValueColumn">Fifth</th><th className="xpColumn"></th></tr>
                     </thead>
                     <tbody>
                     {additionalSkillRows(props)}
