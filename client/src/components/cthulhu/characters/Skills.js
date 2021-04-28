@@ -14,7 +14,7 @@ export const BASE_SKILLS = [
     {name: "fast_talk", label: "Fast Talk", base: 5},
     {name: "fighting_brawl", label: "Fighting (Brawl)", base: 25},
     {name: "firearms_handgun", label: "Firearms (Handgun)", base: 20},
-    {name: "firearms_rifle_shotgun)", label: "Firearms (Rifle/Shotgun)", base: 25},
+    {name: "firearms_rifle_shotgun", label: "Firearms (Rifle/Shotgun)", base: 25},
     {name: "first_aid", label: "First Aid", base: 30},
     {name: "history", label: "History", base: 5},
     {name: "intimidate", label: "Intimidate", base: 15},
