@@ -1,50 +1,63 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Navbar, Nav, NavItem} from 'react-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap'
+import * as actions from "../actions"
 
 class Header extends Component {
-  renderContent() {
-    switch(this.props.auth) {
-      case null:
-        return;
-      case false:
-        return (
-          <Nav pullRight>
-            <NavItem eventKey={5} href="/auth/google">Login with Google</NavItem>
-          </Nav>
-        );
-      default:
-        return (
-        <Nav pullRight>
-          <NavItem eventKey={1} href="/chars">Characters</NavItem> 
-          <NavItem eventKey={2} href="/diceroom">Diceroom</NavItem>  
-          <NavItem eventKey={3} href="/user">User</NavItem>
-          <NavItem eventKey={4} href="/api/logout">Logout</NavItem>
-        </Nav>
-        );
+    renderContent() {
+        const cthulhu = this.props.selectedCthulhuChar ? "/cthulhu/chars/" + this.props.selectedCthulhuChar.character.characterId : "/cthulhu/chars"
+        const char = this.props.selectedChar ? "/chars/" + this.props.selectedChar.characterId : "/chars"
+
+        switch (this.props.auth) {
+            case null:
+                return
+            case false:
+                return (
+                    <Nav pullRight>
+                        <NavItem eventKey={6} href="/auth/google">Login with Google</NavItem>
+                    </Nav>
+                )
+            default:
+                return (
+                    <Nav pullRight>
+                        <LinkContainer to={cthulhu} activeHref="active">
+                            <NavItem eventKey={2}>Cthulhu</NavItem>
+                        </LinkContainer>
+                        <LinkContainer to={char} activeHref="active">
+                            <NavItem eventKey={3}>RuneQuest</NavItem>
+                        </LinkContainer>
+                        <LinkContainer to="/diceroom" activeHref="active">
+                            <NavItem eventKey={4}>Dice Room</NavItem>
+                        </LinkContainer>
+                        <LinkContainer to="/user" activeHref="active">
+                            <NavItem eventKey={5}>User</NavItem>
+                        </LinkContainer>
+                        <NavItem onClick={this.props.logout} eventKey={6}>Logout</NavItem>
+                    </Nav>
+                )
+        }
+
     }
 
-  }
-
-  render() {
-    return(
-      <Navbar>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to={this.props.auth ? "/chars" : "/"} >
-              RQ Character Deposit
-            </Link>
-          </Navbar.Brand>
-        </Navbar.Header>  
-        {this.renderContent()}
-      </Navbar>  
-    )
-  }
+    render() {
+        return (
+            <Navbar>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <LinkContainer to={this.props.auth ? "/chars" : "/"}>
+                            <a href="#">Character Deposit</a>
+                        </LinkContainer>
+                    </Navbar.Brand>
+                </Navbar.Header>
+                {this.renderContent()}
+            </Navbar>
+        )
+    }
 }
 
-function mapStateToProps({auth}) {
-  return { auth }
+function mapStateToProps({auth, selectedChar, selectedCthulhuChar}) {
+    return {auth, selectedChar, selectedCthulhuChar}
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions, null, {pure: false})(Header)
