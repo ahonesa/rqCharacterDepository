@@ -1,0 +1,36 @@
+.shadowPanel {
+    -webkit-box-shadow: 0px 0px 1px 0px rgba(71,71,71,0.65);
+    box-shadow: 0px 0px 1px 0px rgba(71,71,71,0.65);
+}
+
+.nav-tabs {
+    border-bottom: 0px;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #f5f5f5;
+}
+
+a {
+    color: #333;
+}
+
+a:focus {
+    outline: none !important;
+}
+
+.btn:focus {
+    outline: none !important;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+    background-color: #e7e7e7;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    background: #e7e7e7;
+    color: #333;
+    borde: none;
+    text-shadow: none;
+}

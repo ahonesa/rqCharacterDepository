@@ -4,9 +4,8 @@ const Landing = () => {
   return (
     <div style={{ textAlign: 'center' }}>
       <h1>
-        RuneQuest
-      </h1>  
-      Character deposit
+          Character deposit
+      </h1>
     </div>
   );
 }

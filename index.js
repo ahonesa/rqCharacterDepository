@@ -5,10 +5,13 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
 require("./models/User");
-require("./models/Character");
+require("./models/Room");
+require("./models/rqCharacter");
+require("./models/cthulhuCharacter");
+require("./models/Params");
 require("./services/passport");
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 const app = express();
 
@@ -26,7 +29,9 @@ app.use(parser.urlencoded({ extended: false }));
 app.use(parser.json());
 
 require("./routes/authRoutes")(app);
-require("./routes/characterRoutes")(app);
+require("./routes/rqCharacterRoutes")(app);
+require("./routes/cthulhuCharacterRoutes")(app);
+require("./routes/diceRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
