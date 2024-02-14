@@ -23,7 +23,14 @@ class CharacterFormPageThree extends Component {
                 <Field name={`${member}.skill`} component={InputSelect} placeholder="select" validate={isRequired}>
                     <option/>
                     {
-                        SKILLS.map(({label, group}) => (
+                        SKILLS.sort((a, b) => {
+                            if (a.group < b.group) return -1;
+                            if (a.group > b.group) return 1;
+                            // Now that the groups are equal, compare by label
+                            if (a.label < b.label) return -1;
+                            if (a.label > b.label) return 1;
+                            return 0;
+                        }).map(({label, group}) => (
                             <option key={group + "." + label} value={group + "." + label}>{label} ({group})</option>
                         ))
                     }

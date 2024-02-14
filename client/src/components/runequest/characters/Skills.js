@@ -227,6 +227,7 @@ export const SKILLS = [
     {label: "Play Instrument (Primary)", group: "manipulation"},
     {label: "Play Instrument (Seconday)", group: "manipulation"},
     {label: "Devise", group: "manipulation"},
+    {label: "Fishing", group: "manipulation"},
     {label: "Foil Restraints", group: "manipulation"},
     {label: "Sleight", group: "manipulation"},
     {label: "Insight (Own Species)", group: "perception"},
@@ -430,8 +431,23 @@ export const SKILLS = [
     {label: "Spirit", group: "rune"},
     {label: "Stasis", group: "rune"},
     {label: "Truth", group: "rune"},
-    {label: "Water", group: "rune"}
+    {label: "Water", group: "rune"},
+    {label: "Speak Own Language (Tanyen)", group: "communication"},
+    {label: "Customs (Haragalan commonwealth)", group: "knowledge"},
+    {label: "Homeland Lore (Haragalan Islands)", group: "knowledge"}, 
+    {label: "Homeland Lore (Korolan Islands)", group: "knowledge"},
+    {label: "Cult Lore (Finzalvo)", group: "knowledge"},
+    {label: "Cult Lore (Karkal)", group: "knowledge"},
+    {label: "Cult Lore (Irvata)", group: "knowledge"},
+    {label: "Cult Lore (Mingemelor)", group: "knowledge"},
+    {label: "Worship (Finzalvo)", group: "magic"},
+    {label: "Worship (Karkal)", group: "magic"},
+    {label: "Worship (Irvata)", group: "magic"},
+    {label: "Worship (Mingemelor)", group: "magic"},
+    {label: "Cult Lore (Enevar)", group: "knowledge"},
+    {label: "Worship (Enevar)", group: "magic"}
 ]
+
 export const WEAPON_SKILLS = [
     {label: "1h Axe", group: "weapon"},
     {label: "1h Mace", group: "weapon"},
@@ -463,6 +479,7 @@ export const WEAPON_SKILLS = [
     {label: "Sling", group: "weapon"},
     {label: "Throwing Axe", group: "weapon"},
     {label: "Throwing Dagger", group: "weapon"},
+    {label: "Throwing Net", group: "weapon"},
     {label: "Arbalest", group: "weapon"},
     {label: "Ballista", group: "weapon"},
     {label: "Cannon", group: "weapon"},
@@ -478,6 +495,7 @@ export const WEAPON_SKILLS = [
     {label: "Small Axe", group: "weapon"},
     {label: "Head Butt", group: "weapon"}
 ]
+
 export const ARMOR = [
     {label: "Soft leather", value: 1, weight: [3.0, 4.0, 5.0, 6.0]},
     {label: "Bezainted", value: 4, weight: [6.0, 7.5, 9.0, 10.5]},
